@@ -65,15 +65,15 @@
         .content {
             position: relative;
             z-index: 10;
-            max-width: 600px;
+            max-width: 550px;
         }
 
         .logo {
             font-family: 'Solway', serif;
-            font-size: 42px;
+            font-size: 36px;
             font-weight: 700;
             color: white;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
         }
 
         .logo span {
@@ -82,11 +82,11 @@
 
         .headline {
             font-family: 'Solway', serif;
-            font-size: 56px;
+            font-size: 52px;
             font-weight: 700;
             color: white;
             line-height: 1.1;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .headline .gradient {
@@ -98,128 +98,89 @@
 
         .tagline {
             font-family: 'Inter', sans-serif;
-            font-size: 24px;
+            font-size: 20px;
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.5;
+            margin-bottom: 28px;
         }
 
-        .features {
-            display: flex;
-            gap: 24px;
-            margin-top: 32px;
-        }
-
-        .feature {
-            display: flex;
+        .cta-badge {
+            display: inline-flex;
             align-items: center;
             gap: 8px;
+            padding: 12px 20px;
+            background: rgba(0, 153, 255, 0.15);
+            border: 1px solid rgba(0, 153, 255, 0.3);
+            border-radius: 8px;
             font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .feature-dot {
-            width: 8px;
-            height: 8px;
-            background: #28c840;
-            border-radius: 50%;
+            font-size: 14px;
+            color: #0099ff;
         }
 
         .visual {
             position: relative;
             z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .app-window {
+        .example-card {
             width: 420px;
-            background: rgba(28, 28, 36, 0.9);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .app-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
             padding: 16px 20px;
-            background: rgba(38, 38, 48, 0.8);
-        }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .dot.red { background: #ff5f57; }
-        .dot.yellow { background: #febc2e; }
-        .dot.green { background: #28c840; }
-
-        .app-title {
-            margin-left: auto;
+            border-radius: 12px;
             font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.5);
         }
 
-        .app-body {
-            padding: 24px;
+        .example-card.private {
+            background: rgba(40, 200, 64, 0.1);
+            border: 1px solid rgba(40, 200, 64, 0.3);
         }
 
-        .message {
-            margin-bottom: 16px;
+        .example-card.cloud {
+            background: rgba(0, 153, 255, 0.1);
+            border: 1px solid rgba(0, 153, 255, 0.3);
         }
 
-        .message.user {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .bubble {
-            padding: 14px 18px;
-            border-radius: 16px;
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
-            line-height: 1.5;
-            max-width: 85%;
-        }
-
-        .message.user .bubble {
-            background: #0099ff;
-            color: white;
-            border-radius: 16px 16px 4px 16px;
-        }
-
-        .message.assistant .bubble {
-            background: rgba(50, 50, 60, 0.8);
-            color: rgba(255, 255, 255, 0.9);
-            border-radius: 16px 16px 16px 4px;
-        }
-
-        .privacy-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 16px;
-            padding: 8px 14px;
-            background: rgba(40, 200, 64, 0.15);
-            border-radius: 20px;
-            font-family: 'Inter', sans-serif;
-            font-size: 12px;
+        .example-label {
+            font-size: 11px;
             font-weight: 600;
-            color: #28c840;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-bottom: 6px;
         }
 
-        .privacy-badge::before {
-            content: "";
-            width: 6px;
-            height: 6px;
-            background: #28c840;
-            border-radius: 50%;
+        .example-card.private .example-label {
+            color: #28c840;
+        }
+
+        .example-card.cloud .example-label {
+            color: #0099ff;
+        }
+
+        .example-content {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .example-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .example-badge.local {
+            background: rgba(40, 200, 64, 0.2);
+            color: #28c840;
+        }
+
+        .example-badge.cloud-badge {
+            background: rgba(0, 153, 255, 0.2);
+            color: #0099ff;
         }
     </style>
 </head>
@@ -232,43 +193,30 @@
         <div class="content">
             <div class="logo">Jo<span>Local</span></div>
             <h1 class="headline">
-                Your AI,<br>
-                <span class="gradient">Your Choice</span>
+                Would you say this<br>
+                <span class="gradient">to a stranger?</span>
             </h1>
-            <p class="tagline">Go private with local AI, or tap into ChatGPT,<br>Claude, Gemini & Grok. You decide.</p>
-            <div class="features">
-                <div class="feature">
-                    <span class="feature-dot"></span>
-                    <span>Local + Cloud</span>
-                </div>
-                <div class="feature">
-                    <span class="feature-dot"></span>
-                    <span>You Control</span>
-                </div>
-                <div class="feature">
-                    <span class="feature-dot"></span>
-                    <span>All AIs, One App</span>
-                </div>
+            <p class="tagline">Keep sensitive conversations on device.<br>Financial info, health questions, personal matters—<br>they never leave your computer.</p>
+            <div class="cta-badge">
+                <span>Free for Mac M-series</span>
             </div>
         </div>
 
         <div class="visual">
-            <div class="app-window">
-                <div class="app-header">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
-                    <span class="app-title">Jo Local</span>
-                </div>
-                <div class="app-body">
-                    <div class="message user">
-                        <div class="bubble">Help me write a professional email</div>
-                    </div>
-                    <div class="message assistant">
-                        <div class="bubble">I'd be happy to help! What's the context and who are you writing to?</div>
-                    </div>
-                    <div class="privacy-badge">Running Locally</div>
-                </div>
+            <div class="example-card private">
+                <div class="example-label">Keep Private</div>
+                <div class="example-content">"My salary is $85k, should I ask for a raise?"</div>
+                <span class="example-badge local">Stays on your device</span>
+            </div>
+            <div class="example-card private">
+                <div class="example-label">Keep Private</div>
+                <div class="example-content">"I think I have symptoms of anxiety..."</div>
+                <span class="example-badge local">Stays on your device</span>
+            </div>
+            <div class="example-card cloud">
+                <div class="example-label">Send to Cloud</div>
+                <div class="example-content">"Write me a poem about autumn"</div>
+                <span class="example-badge cloud-badge">GPT-4 · $0.02</span>
             </div>
         </div>
     </div>
