@@ -458,6 +458,36 @@ a:hover {
     content: "\\2022";
 }
 
+.model-switcher {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.model-label {
+    font-size: 12px;
+    color: rgb(121, 124, 131);
+}
+
+.model-option {
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-pill);
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.model-option:hover {
+    background: rgba(0, 153, 255, 0.2);
+    color: var(--accent-cyan);
+}
+
 /* Features Section */
 .features {
     padding: var(--space-4xl) 0;

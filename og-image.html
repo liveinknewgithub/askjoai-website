@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Solway:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1200px;
+            height: 630px;
+            overflow: hidden;
+        }
+
+        .og-container {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, rgb(18, 18, 24) 0%, rgb(28, 28, 40) 50%, rgb(18, 18, 24) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Gradient orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(0, 153, 255, 0.4);
+            top: -100px;
+            right: 100px;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: rgba(159, 117, 255, 0.4);
+            bottom: -50px;
+            left: 200px;
+        }
+
+        .orb-3 {
+            width: 200px;
+            height: 200px;
+            background: rgba(0, 153, 255, 0.3);
+            bottom: 100px;
+            right: 300px;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+        }
+
+        .logo {
+            font-family: 'Solway', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .logo span {
+            color: #0099ff;
+        }
+
+        .headline {
+            font-family: 'Solway', serif;
+            font-size: 56px;
+            font-weight: 700;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .headline .gradient {
+            background: linear-gradient(135deg, #0099ff 0%, rgb(159, 117, 255) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+        }
+
+        .features {
+            display: flex;
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .feature-dot {
+            width: 8px;
+            height: 8px;
+            background: #28c840;
+            border-radius: 50%;
+        }
+
+        .visual {
+            position: relative;
+            z-index: 10;
+        }
+
+        .app-window {
+            width: 420px;
+            background: rgba(28, 28, 36, 0.9);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .app-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 20px;
+            background: rgba(38, 38, 48, 0.8);
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background: #ff5f57; }
+        .dot.yellow { background: #febc2e; }
+        .dot.green { background: #28c840; }
+
+        .app-title {
+            margin-left: auto;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .app-body {
+            padding: 24px;
+        }
+
+        .message {
+            margin-bottom: 16px;
+        }
+
+        .message.user {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .bubble {
+            padding: 14px 18px;
+            border-radius: 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            line-height: 1.5;
+            max-width: 85%;
+        }
+
+        .message.user .bubble {
+            background: #0099ff;
+            color: white;
+            border-radius: 16px 16px 4px 16px;
+        }
+
+        .message.assistant .bubble {
+            background: rgba(50, 50, 60, 0.8);
+            color: rgba(255, 255, 255, 0.9);
+            border-radius: 16px 16px 16px 4px;
+        }
+
+        .privacy-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 16px;
+            padding: 8px 14px;
+            background: rgba(40, 200, 64, 0.15);
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            color: #28c840;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .privacy-badge::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: #28c840;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="og-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+
+        <div class="content">
+            <div class="logo">Jo<span>Local</span></div>
+            <h1 class="headline">
+                Your AI,<br>
+                <span class="gradient">Your Choice</span>
+            </h1>
+            <p class="tagline">Go private with local AI, or tap into ChatGPT,<br>Claude, Gemini & Grok. You decide.</p>
+            <div class="features">
+                <div class="feature">
+                    <span class="feature-dot"></span>
+                    <span>Local + Cloud</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-dot"></span>
+                    <span>You Control</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-dot"></span>
+                    <span>All AIs, One App</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="visual">
+            <div class="app-window">
+                <div class="app-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="app-title">Jo Local</span>
+                </div>
+                <div class="app-body">
+                    <div class="message user">
+                        <div class="bubble">Help me write a professional email</div>
+                    </div>
+                    <div class="message assistant">
+                        <div class="bubble">I'd be happy to help! What's the context and who are you writing to?</div>
+                    </div>
+                    <div class="privacy-badge">Running Locally</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
