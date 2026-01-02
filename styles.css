@@ -590,9 +590,45 @@ a:hover {
     font-weight: 500;
 }
 
+/* Why Jo is Different Section */
+.difference-section {
+    padding: var(--space-4xl) 0;
+}
+
+.difference-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.difference-card {
+    background: var(--bg-secondary);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    text-align: left;
+}
+
+.difference-icon {
+    font-size: 32px;
+    margin-bottom: var(--space-md);
+}
+
+.difference-card h3 {
+    font-size: 20px;
+    margin-bottom: var(--space-sm);
+}
+
+.difference-card p {
+    font-size: 15px;
+    line-height: 1.6;
+}
+
 /* How It Works Section */
 .how-it-works-section {
     padding: var(--space-4xl) 0;
+    background: var(--bg-secondary);
 }
 
 .how-steps {
@@ -1221,6 +1257,32 @@ a:hover {
         font-size: 15px;
         margin-top: var(--space-lg);
         padding: 0 var(--space-sm);
+    }
+
+    /* Why Jo is Different Section */
+    .difference-section {
+        padding: var(--space-2xl) 0;
+    }
+
+    .difference-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .difference-card {
+        padding: var(--space-lg);
+    }
+
+    .difference-icon {
+        font-size: 28px;
+    }
+
+    .difference-card h3 {
+        font-size: 18px;
+    }
+
+    .difference-card p {
+        font-size: 14px;
     }
 
     /* How It Works Section */
