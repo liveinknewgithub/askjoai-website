@@ -585,66 +585,46 @@ a:hover {
     font-weight: 500;
 }
 
-/* Solution Section */
-.solution-section {
+/* How It Works Section */
+.how-it-works-section {
     padding: var(--space-4xl) 0;
 }
 
-.solution-comparison {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.how-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-xl);
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
-.solution-side {
-    flex: 1;
+.how-step {
     text-align: center;
-    padding: var(--space-2xl);
-    background: var(--bg-secondary);
-    border-radius: var(--radius-lg);
 }
 
-.solution-side h3 {
-    margin-bottom: var(--space-sm);
-}
-
-.solution-side p {
-    font-size: 15px;
+.step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--accent-gradient);
+    color: white;
+    font-family: var(--font-headline);
+    font-size: 22px;
+    font-weight: 700;
+    border-radius: 50%;
     margin-bottom: var(--space-md);
 }
 
-.solution-tag {
-    display: inline-block;
-    padding: 6px 16px;
-    border-radius: var(--radius-pill);
-    font-size: 13px;
-    font-weight: 600;
+.how-step h3 {
+    margin-bottom: var(--space-sm);
+    font-size: 20px;
 }
 
-.solution-tag.free {
-    background: var(--success-bg);
-    color: var(--success);
-}
-
-.solution-tag.paid {
-    background: rgba(0, 153, 255, 0.15);
-    color: var(--accent-cyan);
-}
-
-.solution-divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    background: var(--bg-tertiary);
-    border-radius: 50%;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-muted);
+.how-step p {
+    font-size: 15px;
+    line-height: 1.6;
 }
 
 /* Features Section */
@@ -1109,17 +1089,9 @@ a:hover {
     .pricing-grid,
     .pricing-dual,
     .faq-grid,
-    .problem-grid {
+    .problem-grid,
+    .how-steps {
         grid-template-columns: 1fr;
-    }
-
-    .solution-comparison {
-        flex-direction: column;
-    }
-
-    .solution-divider {
-        width: 40px;
-        height: 40px;
     }
 
     .comparison-grid {
