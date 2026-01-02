@@ -686,6 +686,20 @@ a:hover {
     margin: 0 auto var(--space-3xl);
 }
 
+.pricing-dual {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+    max-width: 800px;
+    margin: 0 auto var(--space-xl);
+}
+
+.pricing-footer {
+    text-align: center;
+    font-size: 15px;
+    color: var(--text-muted);
+}
+
 .pricing-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -978,6 +992,7 @@ a:hover {
     .features-grid,
     .use-cases-grid,
     .pricing-grid,
+    .pricing-dual,
     .faq-grid {
         grid-template-columns: 1fr;
     }
