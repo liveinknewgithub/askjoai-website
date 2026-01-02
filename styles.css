@@ -455,7 +455,7 @@ a:hover {
 }
 
 .privacy-badge::before {
-    content: "\\2022";
+    content: "\2022";
 }
 
 .model-switcher {
@@ -768,7 +768,7 @@ a:hover {
 }
 
 .pricing-features li::before {
-    content: "\\2713";
+    content: "\2713";
     position: absolute;
     left: 0;
     color: var(--success);
