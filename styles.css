@@ -310,7 +310,12 @@ a:hover {
 .hero-actions {
     display: flex;
     gap: var(--space-md);
-    margin-bottom: var(--space-2xl);
+    margin-bottom: var(--space-md);
+}
+
+.hero-requirement {
+    font-size: 13px;
+    color: var(--text-muted);
 }
 
 .hero-stats {
