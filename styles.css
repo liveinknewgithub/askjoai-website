@@ -551,42 +551,48 @@ a:hover {
     color: var(--accent-cyan);
 }
 
-/* Problem Section */
-.problem-section {
+/* Opportunity Section */
+.opportunity-section {
     padding: var(--space-4xl) 0;
     background: var(--bg-secondary);
 }
 
-.problem-grid {
+.opportunity-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-md);
 }
 
-.problem-card {
+.opportunity-card {
     background: var(--bg-primary);
     padding: var(--space-lg);
     border-radius: var(--radius-lg);
     text-align: center;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
-.problem-icon {
+.opportunity-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.opportunity-icon {
     font-size: 32px;
     display: block;
     margin-bottom: var(--space-sm);
 }
 
-.problem-card p {
+.opportunity-card p {
     font-size: 15px;
     color: var(--text-primary);
     font-style: italic;
 }
 
-.problem-footer {
+.opportunity-footer {
     text-align: center;
     margin-top: var(--space-xl);
     font-size: 18px;
-    color: var(--error);
+    color: var(--accent-cyan);
     font-weight: 500;
 }
 
@@ -1223,8 +1229,8 @@ a:hover {
         font-size: 11px;
     }
 
-    /* Problem Section */
-    .problem-section {
+    /* Opportunity Section */
+    .opportunity-section {
         padding: var(--space-2xl) 0;
     }
 
@@ -1236,24 +1242,24 @@ a:hover {
         font-size: clamp(24px, 6vw, 32px);
     }
 
-    .problem-grid {
+    .opportunity-grid {
         grid-template-columns: 1fr 1fr;
         gap: var(--space-sm);
     }
 
-    .problem-card {
+    .opportunity-card {
         padding: var(--space-md);
     }
 
-    .problem-icon {
+    .opportunity-icon {
         font-size: 24px;
     }
 
-    .problem-card p {
+    .opportunity-card p {
         font-size: 13px;
     }
 
-    .problem-footer {
+    .opportunity-footer {
         font-size: 15px;
         margin-top: var(--space-lg);
         padding: 0 var(--space-sm);
@@ -1377,11 +1383,11 @@ a:hover {
         font-size: 28px;
     }
 
-    .problem-grid {
+    .opportunity-grid {
         grid-template-columns: 1fr;
     }
 
-    .problem-card p {
+    .opportunity-card p {
         font-size: 14px;
     }
 
