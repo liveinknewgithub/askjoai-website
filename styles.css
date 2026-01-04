@@ -507,14 +507,17 @@ a:hover {
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
     border-left: 4px solid;
+    border-right: 4px solid;
 }
 
 .example-card.private {
     border-left-color: var(--success);
+    border-right-color: var(--success);
 }
 
 .example-card.cloud {
     border-left-color: var(--accent-cyan);
+    border-right-color: var(--accent-cyan);
 }
 
 .example-label {
