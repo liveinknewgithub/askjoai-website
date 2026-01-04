@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Solway:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1200px;
+            height: 630px;
+            overflow: hidden;
+        }
+
+        .og-container {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, rgb(18, 18, 24) 0%, rgb(28, 28, 40) 50%, rgb(18, 18, 24) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Gradient orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(0, 153, 255, 0.4);
+            top: -100px;
+            right: 100px;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: rgba(159, 117, 255, 0.4);
+            bottom: -50px;
+            left: 200px;
+        }
+
+        .orb-3 {
+            width: 200px;
+            height: 200px;
+            background: rgba(0, 153, 255, 0.3);
+            bottom: 100px;
+            right: 300px;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            max-width: 550px;
+        }
+
+        .logo {
+            font-family: 'Solway', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 24px;
+        }
+
+        .logo span {
+            color: #0099ff;
+        }
+
+        .headline {
+            font-family: 'Solway', serif;
+            font-size: 64px;
+            font-weight: 700;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .headline .gradient {
+            background: linear-gradient(135deg, #0099ff 0%, rgb(159, 117, 255) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+            margin-bottom: 28px;
+        }
+
+        .cta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: rgba(0, 153, 255, 0.15);
+            border: 1px solid rgba(0, 153, 255, 0.3);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #0099ff;
+        }
+
+        .visual {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .example-card {
+            width: 420px;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .example-card.private {
+            background: rgba(40, 200, 64, 0.1);
+            border: 1px solid rgba(40, 200, 64, 0.3);
+        }
+
+        .example-card.cloud {
+            background: rgba(0, 153, 255, 0.1);
+            border: 1px solid rgba(0, 153, 255, 0.3);
+        }
+
+        .example-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .example-card.private .example-label {
+            color: #28c840;
+        }
+
+        .example-card.cloud .example-label {
+            color: #0099ff;
+        }
+
+        .example-content {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .example-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .example-badge.local {
+            background: rgba(40, 200, 64, 0.2);
+            color: #28c840;
+        }
+
+        .example-badge.cloud-badge {
+            background: rgba(0, 153, 255, 0.2);
+            color: #0099ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="og-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+
+        <div class="content">
+            <div class="logo">jo</div>
+            <h1 class="headline">
+                <span class="gradient">AI for Busy Moms.</span>
+            </h1>
+            <p class="tagline">jo's a local AI sidekick on your Mac. When you ask a question, jo already has the context. Save hours of copy-pasting and re-explaining every conversation.</p>
+            <div class="cta-badge">
+                <span>Free for Mac M-series</span>
+            </div>
+        </div>
+
+        <div class="visual">
+            <div class="example-card private">
+                <div class="example-label">Ask jo</div>
+                <div class="example-content">"When is the pediatrician appointment?"</div>
+                <span class="example-badge local">jo knows your calendar</span>
+            </div>
+            <div class="example-card private">
+                <div class="example-label">Ask jo</div>
+                <div class="example-content">"What did the school email say about picture day?"</div>
+                <span class="example-badge local">jo knows your inbox</span>
+            </div>
+            <div class="example-card cloud">
+                <div class="example-label">Call for backup</div>
+                <div class="example-content">"Help me plan meals for the week"</div>
+                <span class="example-badge cloud-badge">GPT-5.2 · $0.02</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
