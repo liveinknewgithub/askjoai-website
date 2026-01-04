@@ -1401,6 +1401,75 @@ a:hover {
     }
 }
 
+/* Scroll Animations */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Slide from left */
+.animate-on-scroll.from-left {
+    transform: translateX(-60px);
+}
+
+.animate-on-scroll.from-left.animate-in {
+    transform: translateX(0);
+}
+
+/* Slide from right */
+.animate-on-scroll.from-right {
+    transform: translateX(60px);
+}
+
+.animate-on-scroll.from-right.animate-in {
+    transform: translateX(0);
+}
+
+/* Scale up */
+.animate-on-scroll.scale-up {
+    transform: scale(0.9);
+}
+
+.animate-on-scroll.scale-up.animate-in {
+    transform: scale(1);
+}
+
+/* Stagger children */
+.stagger-children > * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.stagger-children.animate-in > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Float animation for cards */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+    animation: float 4s ease-in-out infinite;
+}
+
+.float-animation:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.float-animation:nth-child(3) {
+    animation-delay: 1s;
+}
+
 /* Animation Keyframes */
 @keyframes fadeInUp {
     from {

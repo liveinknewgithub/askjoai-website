@@ -68,17 +68,17 @@
                 </div>
                 <div class="hero-visual">
                     <div class="example-cards">
-                        <div class="example-card private">
+                        <div class="example-card private float-animation">
                             <div class="example-label">Ask jo</div>
                             <div class="example-content">"What did Sarah email me about the project?"</div>
                             <div class="example-badge local">jo knows your inbox</div>
                         </div>
-                        <div class="example-card private">
+                        <div class="example-card private float-animation">
                             <div class="example-label">Ask jo</div>
                             <div class="example-content">"Find that React article I was reading"</div>
                             <div class="example-badge local">jo knows your browsing</div>
                         </div>
-                        <div class="example-card cloud">
+                        <div class="example-card cloud float-animation">
                             <div class="example-label">Call for backup</div>
                             <div class="example-content">"Help me write a technical blog post"</div>
                             <div class="example-badge cloud-badge">GPT-4 &middot; $0.02</div>
@@ -91,10 +91,10 @@
         <!-- Opportunity Section -->
         <section id="features" class="opportunity-section">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header animate-on-scroll">
                     <h2>jo's got your back</h2>
                 </div>
-                <div class="opportunity-grid">
+                <div class="opportunity-grid animate-on-scroll stagger-children">
                     <div class="opportunity-card">
                         <span class="opportunity-icon">📧</span>
                         <p>"Catch me up on my unread emails"</p>
@@ -120,17 +120,17 @@
                         <p>"Help me finish this doc"</p>
                     </div>
                 </div>
-                <p class="opportunity-footer">jo knows your files, emails, and browsing - because jo lives on your Mac.</p>
+                <p class="opportunity-footer animate-on-scroll">jo knows your files, emails, and browsing - because jo lives on your Mac.</p>
             </div>
         </section>
 
         <!-- Why jo Section -->
         <section class="difference-section">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header animate-on-scroll">
                     <h2>Why jo hits different</h2>
                 </div>
-                <div class="difference-grid">
+                <div class="difference-grid animate-on-scroll stagger-children">
                     <div class="difference-card">
                         <div class="difference-icon">🏠</div>
                         <h3>jo lives on your Mac</h3>
@@ -158,10 +158,10 @@
         <!-- How It Works Section -->
         <section id="how-it-works" class="how-it-works-section">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header animate-on-scroll">
                     <h2>Get started in 2 minutes</h2>
                 </div>
-                <div class="how-steps">
+                <div class="how-steps animate-on-scroll stagger-children">
                     <div class="how-step">
                         <div class="step-num">1</div>
                         <h3>Download jo</h3>
@@ -184,7 +184,7 @@
         <!-- CTA Section -->
         <section class="cta">
             <div class="container">
-                <div class="cta-content">
+                <div class="cta-content animate-on-scroll scale-up">
                     <h2>Get your sidekick</h2>
                     <div class="cta-actions">
                         <a href="#" class="btn btn-primary btn-large">Download jo Free</a>
@@ -208,5 +208,35 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Stagger children animations
+        document.querySelectorAll('.stagger-children').forEach(parent => {
+            const children = parent.children;
+            Array.from(children).forEach((child, index) => {
+                child.style.transitionDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
 </body>
 </html>
