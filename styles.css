@@ -1121,6 +1121,159 @@ a:hover {
     font-weight: 700;
 }
 
+/* Testimonials Section */
+.testimonials-section {
+    padding: var(--space-4xl) 0;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background: var(--bg-secondary);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--bg-tertiary);
+}
+
+.testimonial-quote {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+    font-style: italic;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.testimonial-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 15px;
+}
+
+.testimonial-role {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: var(--space-4xl) 0;
+    background: var(--bg-secondary);
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.faq-item h3 {
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+    color: var(--text-primary);
+}
+
+.faq-item p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+/* Mid-page CTA */
+.mid-cta {
+    padding: var(--space-3xl) 0;
+    background: var(--bg-tertiary);
+}
+
+.mid-cta-content {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.mid-cta h2 {
+    font-size: clamp(24px, 4vw, 32px);
+    margin-bottom: var(--space-sm);
+}
+
+.mid-cta p {
+    font-size: 18px;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+}
+
+.trust-note {
+    display: block;
+    margin-top: var(--space-md);
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* Trust Badges */
+.trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.trust-badge::before {
+    content: "\2713";
+    color: var(--success);
+    font-weight: 700;
+}
+
+.cta-trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+    margin-top: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.cta-trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.cta-trust-badge::before {
+    content: "\2713";
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 700;
+}
+
 /* CTA Section */
 .cta {
     padding: var(--space-4xl) 0;
@@ -1511,6 +1664,78 @@ a:hover {
 
     .comparison-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Testimonials Section */
+    .testimonials-section {
+        padding: var(--space-2xl) 0;
+    }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .testimonial-card {
+        padding: var(--space-lg);
+    }
+
+    .testimonial-quote {
+        font-size: 15px;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+        padding: var(--space-2xl) 0;
+    }
+
+    .faq-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+
+    .faq-item h3 {
+        font-size: 16px;
+    }
+
+    .faq-item p {
+        font-size: 14px;
+    }
+
+    /* Mid-page CTA */
+    .mid-cta {
+        padding: var(--space-2xl) 0;
+    }
+
+    .mid-cta h2 {
+        font-size: 24px;
+    }
+
+    .mid-cta p {
+        font-size: 16px;
+    }
+
+    .trust-note {
+        font-size: 13px;
+    }
+
+    /* Trust Badges */
+    .trust-badges {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .trust-badge {
+        font-size: 12px;
+    }
+
+    .cta-trust-badges {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .cta-trust-badge {
+        font-size: 13px;
     }
 
     /* CTA Section */
