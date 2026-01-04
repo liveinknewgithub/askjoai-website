@@ -631,6 +631,80 @@ a:hover {
     line-height: 1.6;
 }
 
+/* Hybrid Cloud Section */
+.hybrid-section {
+    padding: var(--space-4xl) 0;
+    background: var(--bg-secondary);
+}
+
+.hybrid-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xl);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.hybrid-local,
+.hybrid-cloud {
+    flex: 1;
+    background: var(--bg-tertiary);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+.hybrid-icon {
+    font-size: 48px;
+    margin-bottom: var(--space-md);
+}
+
+.hybrid-local h3,
+.hybrid-cloud h3 {
+    font-size: 20px;
+    margin-bottom: var(--space-sm);
+}
+
+.hybrid-local p,
+.hybrid-cloud p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.hybrid-arrow {
+    font-size: 32px;
+    color: var(--accent-cyan);
+    font-weight: bold;
+}
+
+.cloud-models {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    justify-content: center;
+    margin-top: var(--space-md);
+}
+
+.model-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(0, 153, 255, 0.15);
+    border: 1px solid rgba(0, 153, 255, 0.3);
+    border-radius: var(--radius-pill);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent-cyan);
+}
+
+.hybrid-footer {
+    text-align: center;
+    margin-top: var(--space-xl);
+    font-size: 16px;
+    color: var(--text-secondary);
+}
+
 /* How It Works Section */
 .how-it-works-section {
     padding: var(--space-4xl) 0;
@@ -1292,6 +1366,48 @@ a:hover {
     }
 
     .difference-card p {
+        font-size: 14px;
+    }
+
+    /* Hybrid Section */
+    .hybrid-section {
+        padding: var(--space-2xl) 0;
+    }
+
+    .hybrid-content {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .hybrid-arrow {
+        transform: rotate(90deg);
+    }
+
+    .hybrid-local,
+    .hybrid-cloud {
+        padding: var(--space-lg);
+    }
+
+    .hybrid-icon {
+        font-size: 36px;
+    }
+
+    .hybrid-local h3,
+    .hybrid-cloud h3 {
+        font-size: 18px;
+    }
+
+    .hybrid-local p,
+    .hybrid-cloud p {
+        font-size: 14px;
+    }
+
+    .model-badge {
+        font-size: 12px;
+        padding: 5px 12px;
+    }
+
+    .hybrid-footer {
         font-size: 14px;
     }
 
