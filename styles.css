@@ -1304,8 +1304,8 @@ a:hover {
     .hero-mobile-image {
         display: block;
         width: 100%;
-        max-width: 400px;
-        margin: var(--space-xl) auto;
+        max-width: 280px;
+        margin: var(--space-lg) auto;
         border-radius: var(--radius-lg);
     }
 
