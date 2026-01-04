@@ -1291,14 +1291,17 @@ a:hover {
         padding-top: calc(var(--space-2xl) + 70px);
         padding-bottom: var(--space-2xl);
         min-height: auto;
+        background: var(--bg-primary);
     }
 
-    .hero::before,
+    .hero::before {
+        display: none !important;
+        content: none !important;
+    }
+
     .hero::after {
-        content: none;
-        display: none;
-        opacity: 0;
-        visibility: hidden;
+        display: none !important;
+        content: none !important;
     }
 
     .hero-mobile-image {
