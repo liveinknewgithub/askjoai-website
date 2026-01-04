@@ -282,7 +282,7 @@ a:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(18, 18, 24, 0.6);
+    background: rgba(18, 18, 24, 0.4);
     z-index: 1;
 }
 
