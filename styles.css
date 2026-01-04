@@ -1295,7 +1295,10 @@ a:hover {
 
     .hero::before,
     .hero::after {
+        content: none;
         display: none;
+        opacity: 0;
+        visibility: hidden;
     }
 
     .hero-mobile-image {
