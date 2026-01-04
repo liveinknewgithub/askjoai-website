@@ -1034,13 +1034,17 @@ a:hover {
 
 .cta .btn-primary {
     background: white;
-    color: var(--text-primary);
+    color: #121218;
     border-color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
 }
 
 .cta .btn-primary:hover {
-    background: transparent;
-    color: white;
+    background: #f0f0f0;
+    color: #121218;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(255, 255, 255, 0.4);
 }
 
 .cta .btn-secondary {
