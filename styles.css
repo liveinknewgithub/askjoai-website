@@ -295,6 +295,10 @@ a:hover {
     }
 }
 
+.hero-mobile-image {
+    display: none;
+}
+
 .hero .container {
     position: relative;
     z-index: 2;
@@ -1287,6 +1291,19 @@ a:hover {
         padding-top: calc(var(--space-2xl) + 70px);
         padding-bottom: var(--space-2xl);
         min-height: auto;
+    }
+
+    .hero::before,
+    .hero::after {
+        display: none;
+    }
+
+    .hero-mobile-image {
+        display: block;
+        width: 100%;
+        max-width: 400px;
+        margin: var(--space-xl) auto;
+        border-radius: var(--radius-lg);
     }
 
     .hero .container {
