@@ -260,23 +260,21 @@ a:hover {
     overflow: hidden;
 }
 
-.hero::before {
-    content: '';
+.hero-video-bg {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('hero-bg.jpg');
-    background-size: cover;
-    background-position: center;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    z-index: 0;
     opacity: 0;
     animation: fadeInBg 1.5s ease-out 0.3s forwards;
-    z-index: 0;
 }
 
-.hero::after {
-    content: '';
+.hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -295,7 +293,7 @@ a:hover {
     }
 }
 
-.hero-mobile-image {
+.hero-mobile-video {
     display: none;
 }
 
@@ -1294,20 +1292,15 @@ a:hover {
         background: var(--bg-primary);
     }
 
-    .hero::before {
+    .hero-video-bg,
+    .hero-overlay {
         display: none !important;
-        content: none !important;
     }
 
-    .hero::after {
-        display: none !important;
-        content: none !important;
-    }
-
-    .hero-mobile-image {
+    .hero-mobile-video {
         display: block;
         width: 100%;
-        max-width: 280px;
+        max-width: 300px;
         margin: var(--space-lg) auto;
         border-radius: var(--radius-lg);
     }
