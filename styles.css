@@ -282,7 +282,7 @@ a:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(18, 18, 24, 0.75);
+    background: rgba(18, 18, 24, 0.6);
     z-index: 1;
 }
 
@@ -291,7 +291,7 @@ a:hover {
         opacity: 0;
     }
     to {
-        opacity: 0.4;
+        opacity: 1;
     }
 }
 
