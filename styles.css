@@ -1300,8 +1300,10 @@ a:hover {
     .hero-mobile-video {
         display: block;
         width: 100%;
-        max-width: 300px;
-        margin: var(--space-lg) auto;
+        max-width: 250px;
+        max-height: 200px;
+        object-fit: cover;
+        margin: var(--space-md) auto;
         border-radius: var(--radius-lg);
     }
 
