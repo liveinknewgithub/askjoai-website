@@ -808,6 +808,25 @@ a:hover {
     margin-bottom: var(--space-md);
 }
 
+.section-lead {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-sm);
+}
+
+.cta-subhead {
+    font-size: 18px;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .section-header.left {
     text-align: left;
     margin: 0 0 var(--space-xl);
