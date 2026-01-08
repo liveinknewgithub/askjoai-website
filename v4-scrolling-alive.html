@@ -168,8 +168,8 @@
         .narrative-step .char {
             display: inline-block;
             opacity: 0;
-            transform: translateY(20px) rotateX(-40deg);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: translateY(15px) rotateX(-30deg);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .narrative-step.active .char {
@@ -189,15 +189,14 @@
         }
 
         .time-accent.glitch {
-            animation: textGlitch 0.3s ease;
+            animation: textGlitch 0.6s ease;
         }
 
         @keyframes textGlitch {
             0%, 100% { transform: translate(0); filter: none; }
-            20% { transform: translate(-2px, 2px); filter: hue-rotate(90deg); }
-            40% { transform: translate(2px, -2px); filter: hue-rotate(-90deg); }
-            60% { transform: translate(-1px, -1px); filter: hue-rotate(45deg); }
-            80% { transform: translate(1px, 1px); filter: none; }
+            25% { transform: translate(-1px, 1px); filter: hue-rotate(45deg); }
+            50% { transform: translate(1px, -1px); filter: hue-rotate(-45deg); }
+            75% { transform: translate(-1px, 0); filter: none; }
         }
 
         .narrative-punchline {
@@ -250,7 +249,7 @@
         }
 
         .time-counter.pulse {
-            animation: timePulse 0.6s ease;
+            animation: timePulse 1.2s ease;
         }
 
         .time-counter.critical {
@@ -260,7 +259,7 @@
 
         @keyframes timePulse {
             0%, 100% { transform: translateY(-50%) scale(1); }
-            50% { transform: translateY(-50%) scale(1.15); }
+            50% { transform: translateY(-50%) scale(1.08); }
         }
 
         .time-counter-label {
@@ -711,7 +710,7 @@
                     const charSpan = document.createElement('span');
                     charSpan.className = 'char';
                     charSpan.textContent = char;
-                    charSpan.style.transitionDelay = `${(wordIndex * 5 + charIndex) * 0.02}s`;
+                    charSpan.style.transitionDelay = `${(wordIndex * 4 + charIndex) * 0.03}s`;
 
                     if (isTimeWord || (timeAccentText && word.match(/\d/) )) {
                         charSpan.classList.add('time-char');
@@ -788,9 +787,9 @@
         }
 
         // Text scramble effect for time values
-        function scrambleText(element, finalText, duration = 500) {
+        function scrambleText(element, finalText, duration = 800) {
             const chars = '0123456789';
-            const steps = 10;
+            const steps = 8;
             const stepDuration = duration / steps;
             let step = 0;
 
@@ -858,12 +857,12 @@
                 if (time !== lastTime) {
                     scrambleText(timeValue, time.toString());
                     timeCounter.classList.add('pulse');
-                    setTimeout(() => timeCounter.classList.remove('pulse'), 600);
+                    setTimeout(() => timeCounter.classList.remove('pulse'), 1200);
 
                     // Trigger glitch on time accents
                     document.querySelectorAll('.time-accent').forEach(el => {
                         el.classList.add('glitch');
-                        setTimeout(() => el.classList.remove('glitch'), 300);
+                        setTimeout(() => el.classList.remove('glitch'), 600);
                     });
 
                     lastTime = time;
