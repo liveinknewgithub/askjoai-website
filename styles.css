@@ -33,6 +33,7 @@
     --info-bg: rgba(34, 210, 237, 0.15);
 
     /* Typography - Distinctive choices */
+    --font-logo: 'DM Serif Display', serif;
     --font-headline: 'Fraunces', serif;
     --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-secondary: 'Sora', sans-serif;
@@ -231,9 +232,9 @@ a:hover {
 }
 
 .logo-text {
-    font-family: var(--font-headline);
+    font-family: var(--font-logo);
     font-size: 28px;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--text-primary);
 }
 

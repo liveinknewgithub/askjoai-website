@@ -26,7 +26,7 @@ Static marketing website for "jo" - a local AI assistant for Mac. Pure HTML/CSS/
 - `og-image.html`, `og-image-v3.html` - Templates for generating OG images
 
 ### Design System (styles.css)
-- **Fonts**: Fraunces (headlines), Outfit (body), Sora (secondary) via Google Fonts
+- **Fonts**: DM Serif Display (logo), Fraunces (headlines), Outfit (body), Sora (secondary) via Google Fonts
 - **Colors**: Cyan `#0099ff`, Purple `rgb(159, 117, 255)`, gradient combinations
 - **CSS Custom Properties**: `--space-*`, `--radius-*`, `--shadow-*`, `--font-*` for consistency
 - **Dark mode**: Full support via `@media (prefers-color-scheme: dark)`
