@@ -97,6 +97,20 @@
             background-color: #0d0a0f;
         }
 
+        /* Hero video background readability */
+        .hero .hero-requirement {
+            color: rgba(255, 255, 255, 0.85);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        .hero .trust-badge {
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        .hero .trust-badge::before {
+            color: #95b500;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
         body.temperature-cool {
             background-color: #080a0f;
         }
@@ -422,6 +436,10 @@
 
     <main>
         <section class="hero">
+            <video class="hero-video-bg" autoplay muted loop playsinline>
+                <source src="hero-bg-desktop.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
             <div class="container">
                 <div class="hero-content hero-centered">
                     <h1 class="hero-title">
@@ -436,6 +454,9 @@
                         <a href="#scroll-narrative" class="btn btn-secondary btn-large">See The Problem</a>
                     </div>
                     <p class="hero-requirement">Requires Mac with M-series chip + 16GB RAM</p>
+                    <video class="hero-mobile-video" autoplay muted loop playsinline>
+                        <source src="hero-bg-mobile.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
         </section>
