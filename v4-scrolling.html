@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<!-- v4-scrolling - Scroll-scrubbed text animation prototype -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jo - ChatGPT Has Amnesia. jo Doesn't.</title>
+    <meta name="description" content="Every AI has amnesia. jo remembers. Stop re-explaining your life to AI. Free for Mac M-series.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Solway:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Scroll-scrubbed section styles */
+        .scroll-narrative {
+            min-height: 300vh; /* Tall section for scroll room */
+            position: relative;
+        }
+
+        .scroll-narrative-pin {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .narrative-container {
+            max-width: 800px;
+            padding: 0 var(--space-lg);
+            text-align: center;
+        }
+
+        .narrative-step {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: none; /* GSAP handles this */
+        }
+
+        .narrative-step.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .narrative-step.faded {
+            opacity: 0.3;
+            transform: translateY(-10px);
+        }
+
+        .time-accent {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .narrative-punchline {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-family: var(--font-display);
+            font-weight: 700;
+            color: var(--text-primary);
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .narrative-punchline.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .narrative-tagline {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-top: var(--space-lg);
+            opacity: 0;
+        }
+
+        .narrative-tagline.active {
+            opacity: 1;
+        }
+
+        .time-counter {
+            position: fixed;
+            top: 50%;
+            right: var(--space-xl);
+            transform: translateY(-50%);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-family: var(--font-display);
+            font-weight: 700;
+            color: var(--accent-cyan);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .time-counter.visible {
+            opacity: 0.15;
+        }
+
+        .time-counter-label {
+            font-size: 0.3em;
+            display: block;
+            color: var(--text-tertiary);
+        }
+
+        /* Progress indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 50%;
+            left: var(--space-lg);
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 10;
+        }
+
+        .scroll-progress.visible {
+            opacity: 1;
+        }
+
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-tertiary);
+            opacity: 0.3;
+            transition: all 0.3s;
+        }
+
+        .progress-dot.active {
+            opacity: 1;
+            background: var(--accent-cyan);
+            transform: scale(1.5);
+        }
+
+        .progress-dot.passed {
+            opacity: 0.6;
+            background: var(--accent-cyan);
+        }
+
+        @media (max-width: 768px) {
+            .time-counter {
+                right: var(--space-md);
+                font-size: 3rem;
+            }
+
+            .scroll-progress {
+                left: var(--space-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-logo"><a href="/"><span class="logo-text">jo</span></a></div>
+            <div class="nav-links">
+                <a href="#solution">Why jo</a>
+                <a href="#how-it-works">How It Works</a>
+            </div>
+            <div class="nav-actions">
+                <a href="#download" class="btn btn-primary">Download Free</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content hero-centered">
+                    <h1 class="hero-title">
+                        ChatGPT has amnesia.<br>
+                        <span class="text-gradient">jo doesn't.</span>
+                    </h1>
+                    <p class="hero-description">
+                        Every conversation with AI starts from zero. You paste context. You re-explain your situation. You waste 10 minutes before you can ask a simple question. jo already knows. Your files, emails, browsing—indexed locally on your Mac. Just ask.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#download" class="btn btn-primary btn-large">Get jo Free</a>
+                        <a href="#scroll-narrative" class="btn btn-secondary btn-large">See The Problem</a>
+                    </div>
+                    <p class="hero-requirement">Requires Mac with M-series chip + 16GB RAM</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scroll-scrubbed narrative section -->
+        <section id="scroll-narrative" class="scroll-narrative">
+            <div class="scroll-narrative-pin">
+                <div class="narrative-container">
+                    <div class="narrative-step" data-step="0">You open ChatGPT.</div>
+                    <div class="narrative-step" data-step="1">You need a quick answer about that client project.</div>
+                    <div class="narrative-step" data-step="2">But first: find the email thread. <span class="time-accent">2 minutes.</span></div>
+                    <div class="narrative-step" data-step="3">Copy the relevant parts. <span class="time-accent">3 minutes.</span></div>
+                    <div class="narrative-step" data-step="4">Paste and format it. <span class="time-accent">4 minutes.</span></div>
+                    <div class="narrative-step" data-step="5">Explain who the client is. <span class="time-accent">5 minutes.</span></div>
+                    <div class="narrative-step" data-step="6">Explain what you're trying to do. <span class="time-accent">7 minutes.</span></div>
+                    <div class="narrative-step" data-step="7">Ask your actual question. <span class="time-accent">(finally)</span></div>
+                    <div class="narrative-punchline" data-step="8">7 minutes of setup.<br>For a 30-second answer.</div>
+                    <div class="narrative-tagline" data-step="9">Every AI conversation is a first date.<br>Over and over. Forever.</div>
+                </div>
+            </div>
+
+            <!-- Time counter on right side -->
+            <div class="time-counter">
+                <span class="time-value">0</span>
+                <span class="time-counter-label">minutes wasted</span>
+            </div>
+
+            <!-- Progress dots on left side -->
+            <div class="scroll-progress">
+                <div class="progress-dot" data-for="0"></div>
+                <div class="progress-dot" data-for="1"></div>
+                <div class="progress-dot" data-for="2"></div>
+                <div class="progress-dot" data-for="3"></div>
+                <div class="progress-dot" data-for="4"></div>
+                <div class="progress-dot" data-for="5"></div>
+                <div class="progress-dot" data-for="6"></div>
+                <div class="progress-dot" data-for="7"></div>
+                <div class="progress-dot" data-for="8"></div>
+                <div class="progress-dot" data-for="9"></div>
+            </div>
+        </section>
+
+        <section id="solution" class="difference-section">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <h2>What if AI actually knew you?</h2>
+                </div>
+                <div class="difference-grid animate-on-scroll stagger-children">
+                    <div class="difference-card">
+                        <div class="difference-icon">🏠</div>
+                        <h3>jo lives on your Mac</h3>
+                        <p>It indexes your files, emails, and browsing—locally, privately, continuously.</p>
+                    </div>
+                    <div class="difference-card">
+                        <div class="difference-icon">🧠</div>
+                        <h3>jo already knows</h3>
+                        <p>When you ask "What did I promise Jake I'd send him?"—jo knows who Jake is. jo knows the conversation. jo gives you the answer.</p>
+                    </div>
+                    <div class="difference-card">
+                        <div class="difference-icon">⚡</div>
+                        <h3>No copy-pasting</h3>
+                        <p>No context-setting. No re-explaining your entire life. Just ask.</p>
+                    </div>
+                    <div class="difference-card">
+                        <div class="difference-icon">☁️</div>
+                        <h3>Cloud when you need it</h3>
+                        <p>Call in GPT-5, Claude, or Gemini for any conversation. Pay per use, not per month.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works-section">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <h2>Two minutes to end the amnesia</h2>
+                </div>
+                <div class="how-steps animate-on-scroll stagger-children">
+                    <div class="how-step">
+                        <div class="step-num">1</div>
+                        <h3>Download jo</h3>
+                        <p>One click. jo lives on your Mac, powered by your M-series chip.</p>
+                    </div>
+                    <div class="how-step">
+                        <div class="step-num">2</div>
+                        <h3>jo learns your world</h3>
+                        <p>Files, emails, browsing history. All indexed locally. Nothing leaves your Mac.</p>
+                    </div>
+                    <div class="how-step">
+                        <div class="step-num">3</div>
+                        <h3>Just ask</h3>
+                        <p>"Catch me up on the accountant emails." "Where's that Stripe page I had open?" jo knows.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials-section">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <h2>They stopped repeating themselves</h2>
+                </div>
+                <div class="testimonials-grid animate-on-scroll stagger-children">
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">"I used to spend 20 minutes digging through emails before every meeting. Now I ask jo to catch me up. It's like having a perfect memory."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-info">
+                                <span class="testimonial-name">Sarah Chen</span>
+                                <span class="testimonial-role">Product Manager</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">"Finally, an AI that doesn't require me to explain my entire life story every single time."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-info">
+                                <span class="testimonial-name">Marcus Rivera</span>
+                                <span class="testimonial-role">Freelance Developer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">"The privacy angle sold me. Everything stays on my Mac, and I can still tap into GPT when I need it. Best of both worlds."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-info">
+                                <span class="testimonial-name">James Okonkwo</span>
+                                <span class="testimonial-role">Attorney</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <h2>Common questions</h2>
+                </div>
+                <div class="faq-grid animate-on-scroll stagger-children">
+                    <div class="faq-item">
+                        <h3>What data does jo access?</h3>
+                        <p>Your local files, emails (via IMAP), and browser history. You control exactly what jo sees. Everything stays on your Mac.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Is my data sent to the cloud?</h3>
+                        <p>Never, unless you choose to. jo runs entirely on your Mac. When you call a cloud model, only that specific conversation is sent—and you control what's included.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>How is this different from ChatGPT?</h3>
+                        <p>ChatGPT starts fresh every time. It has no idea who you are or what you talked about yesterday. jo knows your context because jo lives with your data.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Why does it require an M-series Mac?</h3>
+                        <p>Your M-series chip has a neural engine that makes local AI fast and efficient. jo uses the power you already paid for.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="download" class="cta">
+            <div class="container">
+                <div class="cta-content animate-on-scroll scale-up">
+                    <h2>Stop re-explaining yourself.</h2>
+                    <p>You've wasted enough time teaching AI who you are. jo already knows.</p>
+                    <div class="cta-actions">
+                        <a href="#" class="btn btn-primary btn-large">Get jo Free</a>
+                    </div>
+                    <p class="cta-note">Requires Mac with M-series chip and 16GB RAM</p>
+                    <div class="cta-trust-badges">
+                        <span class="cta-trust-badge">No account needed</span>
+                        <span class="cta-trust-badge">100% private</span>
+                        <span class="cta-trust-badge">Uninstall anytime</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-simple">
+                <span class="logo-text">jo</span>
+                <div class="footer-links-inline">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Contact</a>
+                </div>
+                <p>&copy; 2026 jo</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Scroll-scrubbed narrative animation
+        const narrativeSection = document.querySelector('.scroll-narrative');
+        const steps = document.querySelectorAll('.narrative-step');
+        const punchline = document.querySelector('.narrative-punchline');
+        const tagline = document.querySelector('.narrative-tagline');
+        const timeCounter = document.querySelector('.time-counter');
+        const timeValue = document.querySelector('.time-value');
+        const scrollProgress = document.querySelector('.scroll-progress');
+        const progressDots = document.querySelectorAll('.progress-dot');
+
+        const allElements = [...steps, punchline, tagline];
+        const timeValues = [0, 0, 2, 3, 4, 5, 7, 7, 7, 7]; // Minutes at each step
+
+        // Create the scroll-triggered timeline
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: narrativeSection,
+                start: 'top top',
+                end: 'bottom bottom',
+                scrub: 1,
+                onEnter: () => {
+                    timeCounter.classList.add('visible');
+                    scrollProgress.classList.add('visible');
+                },
+                onLeave: () => {
+                    timeCounter.classList.remove('visible');
+                    scrollProgress.classList.remove('visible');
+                },
+                onEnterBack: () => {
+                    timeCounter.classList.add('visible');
+                    scrollProgress.classList.add('visible');
+                },
+                onLeaveBack: () => {
+                    timeCounter.classList.remove('visible');
+                    scrollProgress.classList.remove('visible');
+                },
+                onUpdate: (self) => {
+                    // Calculate which step we're on based on progress
+                    const progress = self.progress;
+                    const totalSteps = allElements.length;
+                    const currentStep = Math.floor(progress * totalSteps);
+
+                    // Update time counter
+                    const time = timeValues[Math.min(currentStep, timeValues.length - 1)];
+                    timeValue.textContent = time;
+
+                    // Update progress dots
+                    progressDots.forEach((dot, i) => {
+                        dot.classList.remove('active', 'passed');
+                        if (i === currentStep) {
+                            dot.classList.add('active');
+                        } else if (i < currentStep) {
+                            dot.classList.add('passed');
+                        }
+                    });
+
+                    // Update step visibility
+                    allElements.forEach((el, i) => {
+                        el.classList.remove('active', 'faded');
+
+                        if (i === currentStep) {
+                            el.classList.add('active');
+                        } else if (i < currentStep && i >= currentStep - 2) {
+                            el.classList.add('faded');
+                        }
+                    });
+                }
+            }
+        });
+
+        // Animate each step
+        allElements.forEach((el, i) => {
+            const stepProgress = i / allElements.length;
+
+            tl.to(el, {
+                opacity: 1,
+                y: 0,
+                duration: 0.5,
+                ease: 'power2.out'
+            }, stepProgress);
+
+            // Fade out previous steps (except keep last few visible)
+            if (i > 0) {
+                tl.to(allElements[i - 1], {
+                    opacity: 0.3,
+                    y: -10,
+                    duration: 0.3
+                }, stepProgress);
+            }
+
+            // Fully hide older steps
+            if (i > 2) {
+                tl.to(allElements[i - 3], {
+                    opacity: 0,
+                    duration: 0.2
+                }, stepProgress);
+            }
+        });
+
+        // Standard scroll animations for other sections
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+        document.querySelectorAll('.stagger-children').forEach(parent => {
+            Array.from(parent.children).forEach((child, index) => {
+                child.style.transitionDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>
