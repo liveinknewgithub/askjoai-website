@@ -32,10 +32,10 @@
     --info: #22d2ed;
     --info-bg: rgba(34, 210, 237, 0.15);
 
-    /* Typography */
-    --font-headline: 'Solway', serif;
-    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-secondary: 'Source Sans 3', sans-serif;
+    /* Typography - Distinctive choices */
+    --font-headline: 'Fraunces', serif;
+    --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-secondary: 'Sora', sans-serif;
 
     /* Spacing */
     --space-xs: 4px;
@@ -69,12 +69,12 @@
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-primary: rgb(18, 18, 24);
-        --bg-secondary: rgb(28, 28, 36);
-        --bg-tertiary: rgb(38, 38, 48);
-        --text-primary: rgb(241, 242, 244);
-        --text-secondary: rgb(161, 164, 171);
-        --text-muted: rgb(121, 124, 131);
+        --bg-primary: rgb(12, 10, 18);
+        --bg-secondary: rgb(22, 20, 32);
+        --bg-tertiary: rgb(32, 28, 45);
+        --text-primary: rgb(245, 243, 250);
+        --text-secondary: rgb(168, 162, 180);
+        --text-muted: rgb(118, 112, 135);
     }
 }
 
@@ -87,10 +87,20 @@ body {
     font-size: 18px;
     line-height: 1.6;
     color: var(--text-primary);
-    background-color: var(--bg-primary);
-    letter-spacing: -0.04em;
+    background: var(--bg-primary);
+    letter-spacing: -0.02em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* Atmospheric background gradient */
+@media (prefers-color-scheme: dark) {
+    body {
+        background:
+            radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 153, 255, 0.08) 0%, transparent 50%),
+            radial-gradient(ellipse 60% 40% at 100% 50%, rgba(159, 117, 255, 0.06) 0%, transparent 50%),
+            var(--bg-primary);
+    }
 }
 
 /* Container */
@@ -157,14 +167,15 @@ a:hover {
 }
 
 .btn-primary {
-    background: var(--text-primary);
-    color: var(--bg-primary);
-    border-color: var(--text-primary);
+    background: var(--accent-gradient);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(0, 153, 255, 0.25);
 }
 
 .btn-primary:hover {
-    background: transparent;
-    color: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 153, 255, 0.35), 0 0 40px rgba(159, 117, 255, 0.2);
 }
 
 .btn-secondary {
@@ -658,6 +669,13 @@ a:hover {
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
     text-align: left;
+    border: 1px solid rgba(159, 117, 255, 0.1);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.difference-card:hover {
+    border-color: rgba(0, 153, 255, 0.25);
+    box-shadow: 0 0 30px rgba(0, 153, 255, 0.08);
 }
 
 .difference-icon {
@@ -1897,11 +1915,33 @@ a:hover {
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(24px);
+        transform: translateY(30px);
+        filter: blur(4px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(0, 153, 255, 0.15);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(0, 153, 255, 0.25), 0 0 60px rgba(159, 117, 255, 0.15);
     }
 }
 
@@ -1910,18 +1950,20 @@ a:hover {
 .feature-card,
 .solution-card,
 .pricing-card {
-    animation: fadeInUp 0.6s ease-out backwards;
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
-.hero-badge { animation-delay: 0.1s; }
-.hero-title { animation-delay: 0.2s; }
-.hero-description { animation-delay: 0.3s; }
-.hero-actions { animation-delay: 0.4s; }
-.hero-stats { animation-delay: 0.5s; }
+.hero-badge { animation-delay: 0.05s; }
+.hero-title { animation-delay: 0.15s; }
+.hero-description { animation-delay: 0.25s; }
+.hero-actions { animation-delay: 0.35s; }
+.hero-stats { animation-delay: 0.45s; }
+.hero-requirement { animation-delay: 0.5s; }
+.trust-badges { animation-delay: 0.55s; }
 
 .feature-card:nth-child(1) { animation-delay: 0.1s; }
-.feature-card:nth-child(2) { animation-delay: 0.15s; }
-.feature-card:nth-child(3) { animation-delay: 0.2s; }
-.feature-card:nth-child(4) { animation-delay: 0.25s; }
-.feature-card:nth-child(5) { animation-delay: 0.3s; }
-.feature-card:nth-child(6) { animation-delay: 0.35s; }
+.feature-card:nth-child(2) { animation-delay: 0.18s; }
+.feature-card:nth-child(3) { animation-delay: 0.26s; }
+.feature-card:nth-child(4) { animation-delay: 0.34s; }
+.feature-card:nth-child(5) { animation-delay: 0.42s; }
+.feature-card:nth-child(6) { animation-delay: 0.5s; }
