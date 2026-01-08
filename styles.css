@@ -34,7 +34,7 @@
 
     /* Typography - Distinctive choices */
     --font-logo: 'DM Serif Display', serif;
-    --font-headline: 'Fraunces', serif;
+    --font-headline: 'DM Serif Display', serif;
     --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-secondary: 'Sora', sans-serif;
 
@@ -115,7 +115,7 @@ body {
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-headline);
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1.1;
     color: var(--text-primary);
 }
