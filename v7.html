@@ -118,14 +118,56 @@
         .v7-hero .hero-title {
             font-size: clamp(44px, 9vw, 80px);
             line-height: 0.95;
+            margin-bottom: var(--space-lg);
+        }
+
+        /* Prominent tagline */
+        .hero-tagline {
+            font-family: var(--font-body);
+            font-size: clamp(20px, 3.5vw, 28px);
+            font-weight: 500;
+            line-height: 1.4;
             margin-bottom: var(--space-xl);
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .hero-tagline .highlight {
+            display: inline;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        .hero-tagline .divider {
+            display: inline-block;
+            width: 2px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 0 var(--space-md);
+            vertical-align: middle;
+            border-radius: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-tagline {
+                font-size: 18px;
+            }
+            .hero-tagline .divider {
+                display: block;
+                width: 40px;
+                height: 2px;
+                margin: var(--space-sm) auto;
+            }
         }
 
         .v7-hero .hero-description {
-            font-size: 21px;
+            font-size: 18px;
             line-height: 1.7;
-            max-width: 640px;
-            color: var(--text-secondary);
+            max-width: 540px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: var(--space-xl);
         }
 
         /* App window mockup for demo - styled for video background */
@@ -639,8 +681,11 @@
                         AI that actually belongs<br>
                         <span class="text-gradient">on your Mac.</span>
                     </h1>
+                    <p class="hero-tagline">
+                        <span class="highlight">Local</span> when you want privacy.<span class="divider"></span><span class="highlight">Cloud</span> when you need power.
+                    </p>
                     <p class="hero-description">
-                        jo runs locally on your Mac's Neural Engine—private, fast, and free. Need GPT-5.2 or Claude for something complex? One click away. Your files, your models, your rules.
+                        jo runs on your Mac's Neural Engine—fast, private, and free. Need GPT-5.2 or Claude? One click. No subscription. You choose.
                     </p>
                     <div class="hero-actions">
                         <a href="#download" class="btn btn-primary btn-large">Get Early Access</a>
