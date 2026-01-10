@@ -11,8 +11,602 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Fraunces:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* v7-specific styles for elegant design */
+
+        /* Hero enhancements with video background */
+        .v7-hero {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .v7-hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            opacity: 0;
+            animation: fadeInVideo 1.5s ease-out 0.3s forwards;
+        }
+
+        @keyframes fadeInVideo {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .v7-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse 100% 80% at 50% -20%, rgba(0, 153, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 80% 60% at 80% 50%, rgba(159, 117, 255, 0.1) 0%, transparent 50%),
+                rgba(12, 10, 18, 0.75);
+            z-index: 1;
+        }
+
+        .v7-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .v7-hero-mobile-video {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .v7-hero-video {
+                display: none;
+            }
+            .v7-hero-mobile-video {
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                min-width: 100%;
+                min-height: 100%;
+                width: auto;
+                height: auto;
+                transform: translate(-50%, -50%);
+                z-index: 0;
+                opacity: 0;
+                animation: fadeInVideo 1.5s ease-out 0.3s forwards;
+            }
+        }
+
+        /* Adjust text colors for video background */
+        .v7-hero .hero-title {
+            color: white;
+        }
+
+        .v7-hero .hero-description {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .v7-hero .hero-requirement {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .v7-hero .trust-badge {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .v7-hero .trust-badge::before {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .v7-hero .btn-secondary {
+            color: white;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .v7-hero .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .v7-hero .hero-title {
+            font-size: clamp(44px, 9vw, 80px);
+            line-height: 0.95;
+            margin-bottom: var(--space-xl);
+        }
+
+        .v7-hero .hero-description {
+            font-size: 21px;
+            line-height: 1.7;
+            max-width: 640px;
+            color: var(--text-secondary);
+        }
+
+        /* App window mockup for demo - styled for video background */
+        .demo-window {
+            margin-top: var(--space-3xl);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            background: rgba(28, 26, 36, 0.95);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow:
+                0 4px 6px rgba(0, 0, 0, 0.2),
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.08),
+                0 0 120px rgba(0, 153, 255, 0.15);
+            backdrop-filter: blur(20px);
+        }
+
+        .demo-titlebar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .demo-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .demo-dot.red { background: #ff5f57; }
+        .demo-dot.yellow { background: #febc2e; }
+        .demo-dot.green { background: #28c840; }
+
+        .demo-title {
+            flex: 1;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .demo-content {
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                linear-gradient(135deg, rgba(0, 153, 255, 0.03) 0%, rgba(159, 117, 255, 0.03) 100%);
+            position: relative;
+        }
+
+        .demo-placeholder {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .demo-placeholder-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-md);
+            opacity: 0.4;
+        }
+
+        .demo-placeholder-text {
+            font-size: 15px;
+            opacity: 0.6;
+        }
+
+        /* Problem/Solution cards */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+            max-width: 900px;
+            margin: 0 auto var(--space-xl);
+        }
+
+        .problem-card {
+            background: var(--bg-secondary);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .problem-card {
+                border-color: rgba(255, 255, 255, 0.05);
+            }
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--text-muted);
+            opacity: 0.3;
+        }
+
+        .problem-card .card-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-sm);
+        }
+
+        .problem-card h3 {
+            font-family: var(--font-body);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
+
+        .problem-card p {
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .solution-card {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.08) 0%, rgba(159, 117, 255, 0.08) 100%);
+            padding: var(--space-2xl);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(0, 153, 255, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .solution-card {
+                background: linear-gradient(135deg, rgba(0, 153, 255, 0.12) 0%, rgba(159, 117, 255, 0.12) 100%);
+            }
+        }
+
+        .solution-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-gradient);
+        }
+
+        .solution-card .card-icon {
+            font-size: 40px;
+            margin-bottom: var(--space-md);
+        }
+
+        .solution-card h3 {
+            font-family: var(--font-headline);
+            font-size: clamp(24px, 4vw, 32px);
+            margin-bottom: var(--space-lg);
+        }
+
+        .solution-card p {
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+        }
+
+        .solution-card .tagline {
+            display: inline-block;
+            margin-top: var(--space-lg);
+            padding: var(--space-sm) var(--space-lg);
+            background: var(--accent-gradient);
+            color: white;
+            font-weight: 600;
+            font-size: 15px;
+            border-radius: var(--radius-pill);
+        }
+
+        /* How it works - refined */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-xl);
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .steps-container::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 15%;
+            right: 15%;
+            height: 2px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                var(--accent-cyan) 20%,
+                var(--accent-purple) 80%,
+                transparent 100%
+            );
+            opacity: 0.3;
+        }
+
+        .step-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            font-family: var(--font-headline);
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 50%;
+            margin-bottom: var(--space-lg);
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-item h3 {
+            font-size: 20px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .step-item p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        /* Feature cards - refined */
+        .features-refined {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .feature-refined {
+            background: var(--bg-secondary);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .feature-refined {
+                border-color: rgba(255, 255, 255, 0.05);
+            }
+        }
+
+        .feature-refined:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 153, 255, 0.1);
+            border-color: rgba(0, 153, 255, 0.2);
+        }
+
+        .feature-icon-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1) 0%, rgba(159, 117, 255, 0.1) 100%);
+            border-radius: var(--radius-md);
+            font-size: 24px;
+            margin-bottom: var(--space-md);
+        }
+
+        .feature-refined h3 {
+            font-family: var(--font-body);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .feature-refined p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        /* Testimonials - refined */
+        .testimonials-refined {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .testimonial-refined {
+            background: var(--bg-secondary);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .testimonial-refined {
+                border-color: rgba(255, 255, 255, 0.05);
+            }
+        }
+
+        .testimonial-refined::before {
+            content: '"';
+            position: absolute;
+            top: var(--space-md);
+            left: var(--space-lg);
+            font-family: var(--font-headline);
+            font-size: 72px;
+            line-height: 1;
+            color: var(--accent-cyan);
+            opacity: 0.15;
+        }
+
+        .testimonial-refined blockquote {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author-refined {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .testimonial-author-refined {
+                border-top-color: rgba(255, 255, 255, 0.05);
+            }
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .author-info span {
+            display: block;
+        }
+
+        .author-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .author-role {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* FAQ - refined */
+        .faq-refined {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-item-refined {
+            background: var(--bg-primary);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+        }
+
+        .faq-item-refined h3 {
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        .faq-item-refined p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        /* CTA section - refined */
+        .cta-refined {
+            background:
+                radial-gradient(ellipse 80% 100% at 50% 100%, rgba(159, 117, 255, 0.3) 0%, transparent 50%),
+                var(--accent-gradient);
+        }
+
+        .cta-refined h2 {
+            font-size: clamp(28px, 5vw, 42px);
+            line-height: 1.2;
+        }
+
+        /* Mobile refinements */
+        @media (max-width: 768px) {
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-container {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .steps-container::before {
+                display: none;
+            }
+
+            .features-refined {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-refined {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-refined {
+                grid-template-columns: 1fr;
+            }
+
+            .v7-hero .hero-title {
+                font-size: clamp(36px, 10vw, 52px);
+            }
+
+            .v7-hero .hero-description {
+                font-size: 17px;
+            }
+
+            .demo-window {
+                margin-top: var(--space-xl);
+                border-radius: 12px;
+            }
+
+            .solution-card {
+                padding: var(--space-xl);
+            }
+
+            .solution-card h3 {
+                font-size: 22px;
+            }
+
+            .solution-card p {
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -29,7 +623,16 @@
     </header>
 
     <main>
-        <section class="hero">
+        <section class="hero v7-hero">
+            <!-- Video Background -->
+            <video class="v7-hero-video" autoplay muted loop playsinline>
+                <source src="hero-bg-desktop.mp4" type="video/mp4">
+            </video>
+            <video class="v7-hero-mobile-video" autoplay muted loop playsinline>
+                <source src="hero-bg-mobile.mp4" type="video/mp4">
+            </video>
+            <div class="v7-hero-overlay"></div>
+
             <div class="container">
                 <div class="hero-content hero-centered">
                     <h1 class="hero-title">
@@ -50,9 +653,21 @@
                         <span class="trust-badge">Your data stays local</span>
                     </div>
 
-                    <!-- Video Demo Placeholder -->
-                    <div class="video-placeholder" style="margin-top: var(--space-8); background: var(--bg-tertiary); border-radius: var(--radius-lg); aspect-ratio: 16/9; max-width: 800px; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-primary);">
-                        <span style="color: var(--text-secondary); font-size: 14px;">Demo video coming soon</span>
+                    <!-- Demo Window Mockup -->
+                    <div class="demo-window">
+                        <div class="demo-titlebar">
+                            <span class="demo-dot red"></span>
+                            <span class="demo-dot yellow"></span>
+                            <span class="demo-dot green"></span>
+                            <span class="demo-title">jo</span>
+                            <div style="width: 36px;"></div>
+                        </div>
+                        <div class="demo-content">
+                            <div class="demo-placeholder">
+                                <div class="demo-placeholder-icon">&#9658;</div>
+                                <div class="demo-placeholder-text">Demo video coming soon</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,24 +678,26 @@
                 <div class="section-header animate-on-scroll">
                     <h2>The problem with AI right now</h2>
                 </div>
-                <div class="difference-grid animate-on-scroll stagger-children">
-                    <div class="difference-card">
-                        <div class="difference-icon">☁️</div>
-                        <h3>Option A: Cloud AI</h3>
+
+                <div class="problem-grid animate-on-scroll stagger-children">
+                    <div class="problem-card">
+                        <span class="card-label">Option A</span>
+                        <h3>Cloud AI</h3>
                         <p>Pay $20/month for ChatGPT. Send your files, emails, and questions to someone else's servers. Start every conversation as a stranger—copy-pasting context like it's 2019.</p>
                     </div>
-                    <div class="difference-card">
-                        <div class="difference-icon">🔧</div>
-                        <h3>Option B: Local AI</h3>
+                    <div class="problem-card">
+                        <span class="card-label">Option B</span>
+                        <h3>Local AI (DIY)</h3>
                         <p>Download Ollama. Figure out which model to pull. Set up a frontend. Debug VRAM issues. Realize it can't see your files anyway. Give up and go back to ChatGPT.</p>
                     </div>
-                    <div class="difference-card" style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(159, 117, 255, 0.1)); border: 1px solid rgba(0, 153, 255, 0.3);">
-                        <div class="difference-icon">✨</div>
+
+                    <div class="solution-card">
+                        <div class="card-icon">&#10024;</div>
                         <h3>jo is the third option</h3>
-                        <p style="font-size: 17px; line-height: 1.7;">
-                            A native Mac app that runs AI locally on your Neural Engine. Indexes your files, emails, and browsing so it actually knows your context. And when you need more power—GPT-4, Claude, whatever—it's right there. One click. Pay per query, not per month.<br><br>
-                            <strong>Local when you want privacy. Cloud when you need power. You choose.</strong>
+                        <p>
+                            A native Mac app that runs AI locally on your Neural Engine. Indexes your files, emails, and browsing so it actually knows your context. And when you need more power—GPT-4, Claude, whatever—it's right there. One click. Pay per query, not per month.
                         </p>
+                        <span class="tagline">Local when you want privacy. Cloud when you need power.</span>
                     </div>
                 </div>
             </div>
@@ -91,19 +708,19 @@
                 <div class="section-header animate-on-scroll">
                     <h2>Up and running in 2 minutes</h2>
                 </div>
-                <div class="how-steps animate-on-scroll stagger-children">
-                    <div class="how-step">
-                        <div class="step-num">1</div>
+                <div class="steps-container animate-on-scroll stagger-children">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
                         <h3>Download jo</h3>
                         <p>One .dmg. Drag to Applications. jo lives in your menu bar—Command-Space away.</p>
                     </div>
-                    <div class="how-step">
-                        <div class="step-num">2</div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
                         <h3>jo learns your context</h3>
                         <p>Files, emails, browsing history—all indexed locally on your Mac. Nothing leaves your machine.</p>
                     </div>
-                    <div class="how-step">
-                        <div class="step-num">3</div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
                         <h3>Ask anything</h3>
                         <p>Questions about your files? Local AI handles it. Complex reasoning? Route to the cloud. You're always in control.</p>
                     </div>
@@ -114,26 +731,26 @@
         <section id="features" class="difference-section">
             <div class="container">
                 <div class="section-header animate-on-scroll">
-                    <h2>Built for people who care how software is made</h2>
+                    <h2>Built for people who care<br>how software is made</h2>
                 </div>
-                <div class="difference-grid animate-on-scroll stagger-children">
-                    <div class="difference-card">
-                        <div class="difference-icon">🍎</div>
+                <div class="features-refined animate-on-scroll stagger-children">
+                    <div class="feature-refined">
+                        <div class="feature-icon-wrapper">&#63743;</div>
                         <h3>Actually native</h3>
                         <p>SwiftUI. Menu bar app. Keyboard shortcuts that work. No Electron. No web wrapper. jo feels like it belongs on your Mac because it was built for your Mac.</p>
                     </div>
-                    <div class="difference-card">
-                        <div class="difference-icon">🔒</div>
+                    <div class="feature-refined">
+                        <div class="feature-icon-wrapper">&#128274;</div>
                         <h3>Local-first AI</h3>
                         <p>Runs models on your Neural Engine. More models coming. Your queries, your files, your data—all processed on your hardware.</p>
                     </div>
-                    <div class="difference-card">
-                        <div class="difference-icon">⚡</div>
+                    <div class="feature-refined">
+                        <div class="feature-icon-wrapper">&#9889;</div>
                         <h3>Cloud when you need it</h3>
                         <p>Sometimes you need GPT-4. Sometimes you need Claude. jo connects to both. Pay per query—typically pennies—instead of $20/month.</p>
                     </div>
-                    <div class="difference-card">
-                        <div class="difference-icon">🧠</div>
+                    <div class="feature-refined">
+                        <div class="feature-icon-wrapper">&#129504;</div>
                         <h3>Context that travels with you</h3>
                         <p>jo indexes your documents, emails, and browsing. Ask "what did I promise Sarah last week?" and get an actual answer. No copy-pasting.</p>
                     </div>
@@ -146,31 +763,34 @@
                 <div class="section-header animate-on-scroll">
                     <h2>What early users are saying</h2>
                 </div>
-                <div class="testimonials-grid animate-on-scroll stagger-children">
-                    <div class="testimonial-card">
-                        <p class="testimonial-quote">"I cancelled my ChatGPT Plus the same day I installed jo. Everything I actually use AI for—questions about my files, quick lookups, drafting emails—works better locally. And when I need GPT-4, it's still there."</p>
-                        <div class="testimonial-author">
-                            <div class="testimonial-info">
-                                <span class="testimonial-name">[Name]</span>
-                                <span class="testimonial-role">[Role]</span>
+                <div class="testimonials-refined animate-on-scroll stagger-children">
+                    <div class="testimonial-refined">
+                        <blockquote>"I cancelled my ChatGPT Plus the same day I installed jo. Everything I actually use AI for—questions about my files, quick lookups, drafting emails—works better locally."</blockquote>
+                        <div class="testimonial-author-refined">
+                            <div class="author-avatar">S</div>
+                            <div class="author-info">
+                                <span class="author-name">Early Beta User</span>
+                                <span class="author-role">Product Manager</span>
                             </div>
                         </div>
                     </div>
-                    <div class="testimonial-card">
-                        <p class="testimonial-quote">"Finally, an AI app that doesn't feel like a web page in disguise. Native keyboard shortcuts, instant response, and it actually respects that I'm on a Mac."</p>
-                        <div class="testimonial-author">
-                            <div class="testimonial-info">
-                                <span class="testimonial-name">[Name]</span>
-                                <span class="testimonial-role">[Role]</span>
+                    <div class="testimonial-refined">
+                        <blockquote>"Finally, an AI app that doesn't feel like a web page in disguise. Native keyboard shortcuts, instant response, and it actually respects that I'm on a Mac."</blockquote>
+                        <div class="testimonial-author-refined">
+                            <div class="author-avatar">M</div>
+                            <div class="author-info">
+                                <span class="author-name">Early Beta User</span>
+                                <span class="author-role">Software Engineer</span>
                             </div>
                         </div>
                     </div>
-                    <div class="testimonial-card">
-                        <p class="testimonial-quote">"I work with client data I can't send to the cloud. jo lets me use AI on sensitive files without worrying about where my data ends up."</p>
-                        <div class="testimonial-author">
-                            <div class="testimonial-info">
-                                <span class="testimonial-name">[Name]</span>
-                                <span class="testimonial-role">[Role]</span>
+                    <div class="testimonial-refined">
+                        <blockquote>"I work with client data I can't send to the cloud. jo lets me use AI on sensitive files without worrying about where my data ends up."</blockquote>
+                        <div class="testimonial-author-refined">
+                            <div class="author-avatar">J</div>
+                            <div class="author-info">
+                                <span class="author-name">Early Beta User</span>
+                                <span class="author-role">Attorney</span>
                             </div>
                         </div>
                     </div>
@@ -183,36 +803,36 @@
                 <div class="section-header animate-on-scroll">
                     <h2>Questions</h2>
                 </div>
-                <div class="faq-grid animate-on-scroll stagger-children">
-                    <div class="faq-item">
+                <div class="faq-refined animate-on-scroll stagger-children">
+                    <div class="faq-item-refined">
                         <h3>Is this actually native or just another Electron app?</h3>
                         <p>SwiftUI, top to bottom. We care about this as much as you do.</p>
                     </div>
-                    <div class="faq-item">
+                    <div class="faq-item-refined">
                         <h3>Will running AI slow down my Mac?</h3>
                         <p>jo uses the Neural Engine—dedicated hardware that's separate from your CPU and GPU. Your Mac won't break a sweat.</p>
                     </div>
-                    <div class="faq-item">
-                        <h3>How does local AI compare to GPT-4 or Claude?</h3>
-                        <p>For questions about your own files and context, local is often better—it has information cloud models don't. For complex reasoning or creative work, cloud models are more capable. That's why jo gives you both.</p>
+                    <div class="faq-item-refined">
+                        <h3>How does local AI compare to GPT-4?</h3>
+                        <p>For questions about your own files and context, local is often better—it has information cloud models don't. For complex reasoning, cloud models are more capable. That's why jo gives you both.</p>
                     </div>
-                    <div class="faq-item">
+                    <div class="faq-item-refined">
                         <h3>What's the catch? Why is this free?</h3>
-                        <p>Local features are free forever. We make money when you use cloud models—pennies per query, passed through at cost. No markup, no subscription.</p>
+                        <p>Local features are free forever. We make money when you use cloud models—pennies per query, passed through at cost.</p>
                     </div>
-                    <div class="faq-item">
+                    <div class="faq-item-refined">
                         <h3>What about privacy?</h3>
-                        <p>Local queries never leave your Mac. Period. Cloud queries go directly to the provider (OpenAI, Anthropic)—we don't store them or see them.</p>
+                        <p>Local queries never leave your Mac. Period. Cloud queries go directly to the provider—we don't store them.</p>
                     </div>
-                    <div class="faq-item">
+                    <div class="faq-item-refined">
                         <h3>What models are supported?</h3>
-                        <p>Local: qwen3-4b now, more coming soon. Cloud: GPT-4, GPT-4o, Claude 3.5 Sonnet, and others. You choose per-query.</p>
+                        <p>Local: qwen3-4b now, more coming. Cloud: GPT-4, Claude 3.5 Sonnet, and others. You choose per-query.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="download" class="cta">
+        <section id="download" class="cta cta-refined">
             <div class="container">
                 <div class="cta-content animate-on-scroll scale-up">
                     <h2>Your Mac already has the hardware.<br>jo puts it to work.</h2>
