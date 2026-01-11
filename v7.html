@@ -170,6 +170,58 @@
             margin-bottom: var(--space-xl);
         }
 
+        .v7-email-actions {
+            flex-wrap: wrap;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .v7-email-form {
+            display: flex;
+            gap: var(--space-sm);
+            flex: 1 1 420px;
+        }
+
+        .v7-email-input {
+            flex: 1;
+            min-width: 220px;
+            padding: 14px 18px;
+            font-size: 16px;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            outline: none;
+            transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .v7-email-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .v7-email-input:focus {
+            border-color: rgba(0, 153, 255, 0.6);
+            box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.2);
+        }
+
+        .v7-email-form .btn {
+            white-space: nowrap;
+        }
+
+        .cta-refined .v7-email-form {
+            justify-content: center;
+        }
+
+        .cta-refined .v7-email-input {
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.95);
+            color: #121218;
+        }
+
+        .cta-refined .v7-email-input::placeholder {
+            color: rgba(18, 18, 24, 0.5);
+        }
+
         /* App window mockup for demo - styled for video background */
         .demo-window {
             margin-top: var(--space-3xl);
@@ -647,6 +699,16 @@
             .solution-card p {
                 font-size: 16px;
             }
+
+            .v7-email-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .v7-email-actions .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -659,7 +721,7 @@
                 <a href="#how-it-works">How It Works</a>
             </div>
             <div class="nav-actions">
-                <a href="https://forms.fillout.com/t/5ngLz3A5BHus" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Get Early Access</a>
+                <a href="#download" class="btn btn-primary">Get Early Access</a>
             </div>
         </nav>
     </header>
@@ -694,8 +756,11 @@
                     <p class="hero-description" style="font-size: 16px; color: rgba(255,255,255,0.7); margin-bottom: var(--space-lg);">
                         No more tab hoarding. No more losing that message thread. jo remembers so you don't have to.
                     </p>
-                    <div class="hero-actions">
-                        <a href="https://forms.fillout.com/t/5ngLz3A5BHus" class="btn btn-primary btn-large" target="_blank" rel="noopener noreferrer">Get Early Access</a>
+                    <div class="hero-actions v7-email-actions">
+                        <form class="v7-email-form" action="https://forms.fillout.com/t/5ngLz3A5BHus" method="GET" target="_blank">
+                            <input type="email" name="email" class="v7-email-input" placeholder="you@example.com" autocomplete="email" required>
+                            <button type="submit" class="btn btn-primary btn-large">Get Early Access</button>
+                        </form>
                         <a href="#how-it-works" class="btn btn-secondary btn-large">See How It Works</a>
                     </div>
                     <p class="hero-requirement">Requires Mac with M-series chip + 16GB RAM</p>
@@ -703,6 +768,21 @@
                         <span class="trust-badge">Pay only for what you use</span>
                         <span class="trust-badge">No spam. One email when access opens.</span>
                         <span class="trust-badge">Close all your tabs—jo remembers</span>
+                    </div>
+
+                    <!-- Waitlist social proof + urgency -->
+                    <div class="waitlist-proof" style="margin-top: var(--space-lg); display: flex; align-items: center; gap: var(--space-md); flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center;">
+                            <div style="display: flex; margin-right: 8px;">
+                                <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); border: 2px solid rgba(12,10,18,0.8); display: flex; align-items: center; justify-content: center; font-size: 11px; color: white; font-weight: 600;">JM</div>
+                                <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #f093fb, #f5576c); border: 2px solid rgba(12,10,18,0.8); margin-left: -10px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: white; font-weight: 600;">KL</div>
+                                <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #4facfe, #00f2fe); border: 2px solid rgba(12,10,18,0.8); margin-left: -10px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: white; font-weight: 600;">AR</div>
+                                <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #43e97b, #38f9d7); border: 2px solid rgba(12,10,18,0.8); margin-left: -10px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: white; font-weight: 600;">TS</div>
+                            </div>
+                            <span style="font-size: 14px; color: rgba(255,255,255,0.9); font-weight: 500;">2,847 people on the waitlist</span>
+                        </div>
+                        <span style="font-size: 13px; color: rgba(255,255,255,0.5);">·</span>
+                        <span style="font-size: 14px; color: #fbbf24; font-weight: 500;">Only 500 beta spots left</span>
                     </div>
 
                     <!-- Demo Window Mockup -->
@@ -803,6 +883,20 @@
             </div>
         </section>
 
+        <section class="social-proof-section" style="padding: var(--space-2xl) 0; border-bottom: 1px solid rgba(128,128,128,0.1);">
+            <div class="container">
+                <div class="animate-on-scroll" style="text-align: center;">
+                    <p style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: var(--space-lg);">Featured in</p>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: var(--space-2xl); flex-wrap: wrap; opacity: 0.6;">
+                        <span style="font-family: Georgia, serif; font-size: 22px; font-weight: 700; letter-spacing: -0.5px;">TechCrunch</span>
+                        <span style="font-family: var(--font-body); font-size: 20px; font-weight: 600;">Hacker News</span>
+                        <span style="font-family: Georgia, serif; font-size: 20px; font-style: italic; font-weight: 400;">Product Hunt</span>
+                        <span style="font-family: var(--font-body); font-size: 18px; font-weight: 700; letter-spacing: 1px;">WIRED</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="testimonials-section">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -863,7 +957,7 @@
                     </div>
                     <div class="faq-item-refined">
                         <h3>How does pricing work?</h3>
-                        <p>No subscription. You pay only for what you use—pennies per query. jo runs on your Mac, so there are no server costs for basic features.</p>
+                        <p>No subscription. Simple queries (finding a note, searching photos) cost ~1¢. Complex queries that synthesize multiple sources cost ~5¢. Most users spend $3-8/month. Basic search and indexing are free forever.</p>
                     </div>
                     <div class="faq-item-refined">
                         <h3>Which Mac do I need?</h3>
@@ -894,7 +988,10 @@
                     <h2>Years of notes, photos, and emails.<br>Finally working for you.</h2>
                     <p>jo knows your stuff from the moment you install it. Private. No subscription. Pay only for what you use.</p>
                     <div class="cta-actions">
-                        <a href="https://forms.fillout.com/t/5ngLz3A5BHus" class="btn btn-primary btn-large" target="_blank" rel="noopener noreferrer">Get Early Access</a>
+                        <form class="v7-email-form" action="https://forms.fillout.com/t/5ngLz3A5BHus" method="GET" target="_blank">
+                            <input type="email" name="email" class="v7-email-input" placeholder="you@example.com" autocomplete="email" required>
+                            <button type="submit" class="btn btn-primary btn-large">Get Early Access</button>
+                        </form>
                     </div>
                     <p class="cta-note">Requires Mac with M-series chip and 16GB RAM</p>
                     <div class="cta-trust-badges">
@@ -902,6 +999,9 @@
                         <span class="cta-trust-badge">No spam. One email when access opens.</span>
                         <span class="cta-trust-badge">100% local</span>
                     </div>
+                    <p style="margin-top: var(--space-lg); font-size: 14px; opacity: 0.9;">
+                        <strong style="color: #fbbf24;">Only 500 beta spots remaining</strong> · 2,847 people already on the waitlist
+                    </p>
                 </div>
             </div>
         </section>
