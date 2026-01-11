@@ -27,9 +27,9 @@
             height: 630px;
             background: linear-gradient(135deg, rgb(12, 10, 18) 0%, rgb(24, 22, 32) 50%, rgb(12, 10, 18) 100%);
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 40px 60px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px;
             overflow: hidden;
         }
 
@@ -57,17 +57,18 @@
             left: 100px;
         }
 
-        .content {
+        .left-content {
             position: relative;
             z-index: 10;
+            max-width: 580px;
         }
 
         .logo {
             font-family: 'DM Serif Display', serif;
-            font-size: 40px;
+            font-size: 42px;
             font-weight: 400;
             color: white;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
         .headline {
@@ -76,7 +77,7 @@
             font-weight: 400;
             color: white;
             line-height: 1.05;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
         }
 
         .headline .gradient {
@@ -89,34 +90,9 @@
         .tagline {
             font-family: 'Outfit', sans-serif;
             font-size: 22px;
-            color: rgba(255, 255, 255, 0.75);
-            line-height: 1.4;
-            margin-bottom: 16px;
-            max-width: 1000px;
-        }
-
-        .app-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .app-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 15px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .app-badge img {
-            width: 18px;
-            height: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+            margin-bottom: 28px;
         }
 
         .cta-row {
@@ -128,24 +104,55 @@
         .cta-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 18px;
+            padding: 12px 20px;
             background: linear-gradient(135deg, #0099ff 0%, rgb(159, 117, 255) 100%);
             border-radius: 50px;
             font-family: 'Outfit', sans-serif;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             color: white;
         }
 
         .privacy-badge {
             font-family: 'Outfit', sans-serif;
-            font-size: 16px;
+            font-size: 17px;
             color: rgba(255, 255, 255, 0.7);
         }
 
         .privacy-badge strong {
             color: #28c840;
+        }
+
+        .right-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .badge-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .app-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 22px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .app-badge img {
+            width: 24px;
+            height: 24px;
         }
     </style>
 </head>
@@ -154,27 +161,32 @@
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
 
-        <div class="content">
+        <div class="left-content">
             <div class="logo">jo</div>
             <h1 class="headline">
                 Close your tabs.<br>
                 <span class="gradient">jo remembers.</span>
             </h1>
             <p class="tagline">jo is an AI sidekick for people drowning in tabs and apps. It learns your notes, photos, emails, and messages—so jo surfaces what matters.</p>
-
-            <div class="app-badges">
-                <span class="app-badge">📝 Notes</span>
-                <span class="app-badge">📸 Photos</span>
-                <span class="app-badge">✉️ Mail</span>
-                <span class="app-badge">💬 iMessage</span>
-                <span class="app-badge"><img src="whatsapp-icon.png" alt="WhatsApp"> WhatsApp</span>
-                <span class="app-badge"><img src="telegram-icon.png" alt="Telegram"> Telegram</span>
-                <span class="app-badge">📅 Calendar</span>
-            </div>
-
             <div class="cta-row">
                 <span class="cta-badge">No subscription · Pay only for what you use</span>
                 <span class="privacy-badge"><strong>100% private</strong> · Never leaves your Mac</span>
+            </div>
+        </div>
+
+        <div class="right-content">
+            <div class="badge-row">
+                <span class="app-badge">📝 Notes</span>
+                <span class="app-badge">📸 Photos</span>
+                <span class="app-badge">✉️ Mail</span>
+            </div>
+            <div class="badge-row">
+                <span class="app-badge">💬 iMessage</span>
+                <span class="app-badge"><img src="whatsapp-icon.png" alt="WhatsApp"> WhatsApp</span>
+                <span class="app-badge"><img src="telegram-icon.png" alt="Telegram"> Telegram</span>
+            </div>
+            <div class="badge-row">
+                <span class="app-badge">📅 Calendar</span>
             </div>
         </div>
     </div>
