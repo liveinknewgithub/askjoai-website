@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 1200px;
+            height: 630px;
+            overflow: hidden;
+            background: rgb(12, 10, 18);
+        }
+
+        .og-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, rgb(12, 10, 18) 0%, rgb(24, 22, 32) 50%, rgb(12, 10, 18) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 80px;
+            overflow: hidden;
+        }
+
+        /* Gradient orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.5;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: rgba(0, 153, 255, 0.35);
+            top: -150px;
+            right: -50px;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(159, 117, 255, 0.35);
+            bottom: -100px;
+            left: 100px;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 42px;
+            font-weight: 400;
+            color: white;
+            margin-bottom: 32px;
+        }
+
+        .headline {
+            font-family: 'DM Serif Display', serif;
+            font-size: 72px;
+            font-weight: 400;
+            color: white;
+            line-height: 1.05;
+            margin-bottom: 12px;
+        }
+
+        .headline .gradient {
+            background: linear-gradient(135deg, #0099ff 0%, rgb(159, 117, 255) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-family: 'Outfit', sans-serif;
+            font-size: 26px;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.5;
+            margin-bottom: 36px;
+            max-width: 800px;
+        }
+
+        .app-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .app-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .app-badge img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .cta-row {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .cta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 24px;
+            background: linear-gradient(135deg, #0099ff 0%, rgb(159, 117, 255) 100%);
+            border-radius: 50px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .privacy-badge {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .privacy-badge strong {
+            color: #28c840;
+        }
+    </style>
+</head>
+<body>
+    <div class="og-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+
+        <div class="content">
+            <div class="logo">jo</div>
+            <h1 class="headline">
+                Finally close all those tabs.<br>
+                <span class="gradient">100% private.</span>
+            </h1>
+            <p class="tagline">jo surfaces what matters—before you think to search. Your AI sidekick that knows your notes, photos, emails, and messages.</p>
+
+            <div class="app-badges">
+                <span class="app-badge">Notes</span>
+                <span class="app-badge">Photos</span>
+                <span class="app-badge">Mail</span>
+                <span class="app-badge">iMessage</span>
+                <span class="app-badge">WhatsApp</span>
+                <span class="app-badge">Telegram</span>
+                <span class="app-badge">Calendar</span>
+            </div>
+
+            <div class="cta-row">
+                <span class="cta-badge">No subscription · Pay only for what you use</span>
+                <span class="privacy-badge"><strong>100% local</strong> · Never leaves your Mac</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
