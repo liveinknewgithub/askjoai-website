@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<!-- v7-no-ai-colors - Beautiful variant with NO gradients, NO purple/multicolor -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jo - Finally Close All Those Tabs</title>
+    <meta name="description" content="Your browser tabs aren't a memory system—they're a symptom. jo is an AI sidekick that knows your notes, photos, emails, and messages. 100% private. Pay only for what you use.">
+    <meta property="og:title" content="jo - Your AI Sidekick. 100% Private.">
+    <meta property="og:description" content="50,000+ photos. 100,000+ emails. Years of notes. jo surfaces what matters—before you think to search. Runs entirely on your Mac. No subscription.">
+    <meta property="og:image" content="https://liveinknewgithub.github.io/askjoai-website/og-image-v7.png?v=11">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="jo - Your AI Sidekick. 100% Private.">
+    <meta name="twitter:description" content="50,000+ photos. 100,000+ emails. Years of notes. jo surfaces what matters—before you think to search.">
+    <meta name="twitter:image" content="https://liveinknewgithub.github.io/askjoai-website/og-image-v7.png?v=11">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* v7-no-ai-colors: Beautiful, distinctive design - NO gradients, NO purple */
+
+        :root {
+            --accent: #0099ff;
+            --accent-dark: #0077cc;
+            --accent-light: #33aaff;
+            --bg-dark: #0a0a0f;
+            --bg-card: #111118;
+            --text-bright: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.6);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Override base fonts with more distinctive choices */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+        }
+
+        /* Animated dot grid background */
+        .dot-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 32px 32px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Floating accent orb - pure CSS glow without gradient */
+        .accent-orb {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.15;
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .accent-orb-1 {
+            top: -100px;
+            right: 10%;
+            animation-delay: 0s;
+        }
+
+        .accent-orb-2 {
+            bottom: 20%;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            animation-delay: -10s;
+            opacity: 0.1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.05); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(20px, 30px) scale(1.02); }
+        }
+
+        /* Hero section */
+        .v7-hero {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+            background: var(--bg-dark);
+        }
+
+        .v7-hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            opacity: 0;
+            animation: fadeInVideo 1.5s ease-out 0.3s forwards;
+        }
+
+        @keyframes fadeInVideo {
+            from { opacity: 0; }
+            to { opacity: 0.6; }
+        }
+
+        .v7-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 10, 15, 0.85);
+            z-index: 1;
+        }
+
+        .v7-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .v7-hero-mobile-video {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .v7-hero-video,
+            .v7-hero-mobile-video {
+                display: none;
+            }
+        }
+
+        /* Dramatic hero typography */
+        .v7-hero .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(52px, 11vw, 100px);
+            font-weight: 700;
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            color: var(--text-bright);
+            margin-bottom: var(--space-lg);
+        }
+
+        .v7-hero .hero-title .text-gradient {
+            color: var(--accent);
+            display: block;
+            position: relative;
+        }
+
+        /* Animated underline for accent text */
+        .v7-hero .hero-title .text-gradient::after {
+            content: '';
+            position: absolute;
+            bottom: 0.05em;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: underlineReveal 0.8s ease-out 0.8s forwards;
+        }
+
+        @keyframes underlineReveal {
+            to { transform: scaleX(1); }
+        }
+
+        /* Hero content animation */
+        .hero-content {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: heroReveal 1s ease-out 0.2s forwards;
+        }
+
+        @keyframes heroReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .v7-hero .hero-description {
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 540px;
+            color: var(--text-dim);
+            margin-bottom: var(--space-xl);
+        }
+
+        .v7-hero .hero-requirement {
+            color: var(--text-dim);
+            font-size: 13px;
+        }
+
+        .v7-hero .trust-badge {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+        }
+
+        .v7-hero .trust-badge::before {
+            color: var(--accent);
+        }
+
+        /* App tags with hover effect */
+        .app-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--border-subtle);
+            transition: all 0.2s ease;
+            cursor: default;
+        }
+
+        .app-tag:hover {
+            background: rgba(0, 153, 255, 0.1);
+            border-color: rgba(0, 153, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .app-tag img {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Hero tagline */
+        .hero-tagline {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(18px, 3vw, 22px);
+            font-weight: 500;
+            line-height: 1.5;
+            margin-bottom: var(--space-md);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Email form styling */
+        .v7-email-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .v7-email-form {
+            display: flex;
+            gap: var(--space-sm);
+            flex: 1 1 420px;
+        }
+
+        .v7-email-input {
+            flex: 1;
+            min-width: 220px;
+            padding: 16px 20px;
+            font-size: 16px;
+            font-family: inherit;
+            border-radius: 12px;
+            border: 2px solid var(--border-subtle);
+            background: rgba(255, 255, 255, 0.03);
+            color: white;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .v7-email-input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .v7-email-input:focus {
+            border-color: var(--accent);
+            background: rgba(0, 153, 255, 0.05);
+        }
+
+        /* Primary button with shine effect */
+        .v7-hero .btn-primary {
+            position: relative;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .v7-hero .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: skewX(-15deg);
+            transition: left 0.5s ease;
+        }
+
+        .v7-hero .btn-primary:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 153, 255, 0.3);
+        }
+
+        .v7-hero .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .v7-hero .btn-secondary {
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
+            color: white;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .v7-hero .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Demo window with enhanced styling */
+        .demo-window {
+            margin-top: var(--space-3xl);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            box-shadow:
+                0 4px 6px rgba(0, 0, 0, 0.3),
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 100px rgba(0, 153, 255, 0.1);
+            transform: perspective(1000px) rotateX(2deg);
+            transition: transform 0.4s ease;
+        }
+
+        .demo-window:hover {
+            transform: perspective(1000px) rotateX(0deg) translateY(-8px);
+        }
+
+        .demo-titlebar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 16px;
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .demo-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .demo-dot.red { background: #ff5f57; }
+        .demo-dot.yellow { background: #febc2e; }
+        .demo-dot.green { background: #28c840; }
+
+        .demo-title {
+            flex: 1;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.4);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .demo-content {
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 153, 255, 0.02);
+            position: relative;
+        }
+
+        .demo-placeholder {
+            text-align: center;
+            color: var(--text-dim);
+        }
+
+        .demo-placeholder-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-md);
+            background: rgba(0, 153, 255, 0.1);
+            border-radius: 50%;
+            font-size: 32px;
+            border: 2px solid rgba(0, 153, 255, 0.2);
+        }
+
+        .demo-placeholder-text {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* Waitlist proof badges */
+        .waitlist-proof {
+            margin-top: var(--space-xl);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+
+        .avatar-stack {
+            display: flex;
+            margin-right: 8px;
+        }
+
+        .avatar-stack-item {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid var(--bg-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: white;
+            font-weight: 700;
+            margin-left: -10px;
+        }
+
+        .avatar-stack-item:first-child {
+            margin-left: 0;
+        }
+
+        .avatar-stack-item:nth-child(1) { background: #005588; }
+        .avatar-stack-item:nth-child(2) { background: #006699; }
+        .avatar-stack-item:nth-child(3) { background: #0077aa; }
+        .avatar-stack-item:nth-child(4) { background: #0088bb; }
+
+        .waitlist-count {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .spots-left {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fbbf24;
+            padding: 4px 12px;
+            background: rgba(251, 191, 36, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        /* Section styling */
+        .section-dark {
+            background: var(--bg-dark);
+            position: relative;
+        }
+
+        .section-darker {
+            background: #050508;
+        }
+
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(32px, 6vw, 52px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        /* Solution card */
+        .solution-card {
+            grid-column: 1 / -1;
+            background: var(--bg-card);
+            padding: var(--space-3xl);
+            border-radius: 24px;
+            border: 1px solid var(--border-subtle);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .solution-card .card-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-lg);
+            filter: grayscale(1) brightness(2);
+        }
+
+        .solution-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            letter-spacing: -0.02em;
+        }
+
+        .solution-card p {
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-dim);
+        }
+
+        .solution-card .tagline {
+            display: inline-block;
+            margin-top: var(--space-lg);
+            padding: 12px 24px;
+            background: var(--accent);
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            font-family: 'Space Grotesk', sans-serif;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Steps section */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-xl);
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .steps-container::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 15%;
+            right: 15%;
+            height: 2px;
+            background: var(--accent);
+            opacity: 0.2;
+        }
+
+        .step-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background: var(--bg-card);
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            border-radius: 50%;
+            margin-bottom: var(--space-lg);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .step-item:hover .step-number {
+            background: var(--accent);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .step-item h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .step-item p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-dim);
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        /* Feature cards with dramatic hover */
+        .features-refined {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .feature-refined {
+            background: var(--bg-card);
+            padding: var(--space-xl);
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-refined::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 0;
+            background: var(--accent);
+            opacity: 0.05;
+            transition: height 0.4s ease;
+        }
+
+        .feature-refined:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 153, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 153, 255, 0.15);
+        }
+
+        .feature-refined:hover::before {
+            height: 100%;
+        }
+
+        .feature-icon-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            background: rgba(0, 153, 255, 0.1);
+            border: 1px solid rgba(0, 153, 255, 0.2);
+            border-radius: 14px;
+            font-size: 28px;
+            margin-bottom: var(--space-md);
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-refined h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-refined p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-dim);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Testimonials with card rotation */
+        .testimonials-refined {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-refined {
+            background: var(--bg-card);
+            padding: var(--space-xl);
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .testimonial-refined:hover {
+            transform: translateY(-4px) rotate(-1deg);
+            border-color: rgba(0, 153, 255, 0.2);
+        }
+
+        .testimonial-refined::before {
+            content: '"';
+            position: absolute;
+            top: var(--space-lg);
+            right: var(--space-lg);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 80px;
+            line-height: 1;
+            color: var(--accent);
+            opacity: 0.1;
+        }
+
+        .testimonial-refined blockquote {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--space-lg);
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author-refined {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .author-avatar {
+            width: 44px;
+            height: 44px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .author-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-bright);
+        }
+
+        .author-role {
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        /* FAQ section */
+        .faq-refined {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-item-refined {
+            background: var(--bg-card);
+            padding: var(--space-xl);
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item-refined:hover {
+            border-color: rgba(0, 153, 255, 0.2);
+        }
+
+        .faq-item-refined h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--text-bright);
+        }
+
+        .faq-item-refined p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-dim);
+        }
+
+        /* Privacy section with dramatic typography */
+        .privacy-statement {
+            text-align: center;
+            padding: var(--space-4xl) 0;
+            position: relative;
+        }
+
+        .privacy-statement h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(36px, 8vw, 72px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: var(--space-lg);
+            color: var(--text-bright);
+        }
+
+        .privacy-statement p {
+            font-size: 18px;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* CTA section */
+        .cta-refined {
+            background: var(--accent-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-refined::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.5;
+        }
+
+        .cta-refined h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .cta-refined .v7-email-input {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--bg-dark);
+            border-color: transparent;
+        }
+
+        .cta-refined .v7-email-input::placeholder {
+            color: rgba(0, 0, 0, 0.4);
+        }
+
+        .cta-refined .v7-email-input:focus {
+            background: white;
+            border-color: white;
+        }
+
+        .cta-refined .btn-primary {
+            background: var(--bg-dark);
+            color: white;
+        }
+
+        .cta-refined .btn-primary:hover {
+            background: #1a1a24;
+        }
+
+        /* Social proof logos */
+        .social-proof-section {
+            padding: var(--space-3xl) 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .logo-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-3xl);
+            flex-wrap: wrap;
+            opacity: 0.4;
+        }
+
+        .logo-row span {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* Mobile refinements */
+        @media (max-width: 768px) {
+            .v7-hero .hero-title {
+                font-size: clamp(40px, 12vw, 60px);
+            }
+
+            .steps-container {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .steps-container::before {
+                display: none;
+            }
+
+            .features-refined {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-refined {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-refined {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-window {
+                margin-top: var(--space-xl);
+                transform: none;
+            }
+
+            .demo-window:hover {
+                transform: none;
+            }
+
+            .v7-email-form {
+                flex-direction: column;
+                align-items: stretch;
+                flex: none;
+            }
+
+            .v7-email-actions .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .v7-email-input {
+                flex: none;
+                width: 100%;
+            }
+
+            .solution-card {
+                padding: var(--space-xl);
+            }
+
+            .waitlist-proof {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dot-grid"></div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-logo"><a href="/"><span class="logo-text" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700;">jo</span></a></div>
+            <div class="nav-links">
+                <a href="#why-jo">Why jo</a>
+                <a href="#how-it-works">How It Works</a>
+            </div>
+            <div class="nav-actions">
+                <a href="#download" class="btn btn-primary" style="font-family: 'Space Grotesk', sans-serif;">Save My Spot</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero v7-hero section-dark">
+            <div class="accent-orb accent-orb-1"></div>
+            <div class="accent-orb accent-orb-2"></div>
+
+            <!-- Video Background -->
+            <video class="v7-hero-video" autoplay muted loop playsinline>
+                <source src="hero-bg-desktop.mp4" type="video/mp4">
+            </video>
+            <video class="v7-hero-mobile-video" autoplay muted loop playsinline>
+                <source src="hero-bg-mobile.mp4" type="video/mp4">
+            </video>
+            <div class="v7-hero-overlay"></div>
+
+            <div class="container">
+                <div class="hero-content" style="text-align: left; max-width: 800px;">
+                    <h1 class="hero-title">
+                        Close your tabs.
+                        <span class="text-gradient">jo remembers.</span>
+                    </h1>
+
+                    <div class="app-logos" style="display: flex; align-items: center; justify-content: flex-start; gap: 10px; flex-wrap: wrap; margin: var(--space-xl) 0;">
+                        <span class="app-tag">Notes</span>
+                        <span class="app-tag">Photos</span>
+                        <span class="app-tag">Mail</span>
+                        <span class="app-tag">iMessage</span>
+                        <span class="app-tag"><img src="whatsapp-icon.png" alt=""> WhatsApp</span>
+                        <span class="app-tag"><img src="telegram-icon.png" alt=""> Telegram</span>
+                        <span class="app-tag">Calendar</span>
+                        <span class="app-tag">Obsidian</span>
+                        <span class="app-tag"><img src="googledocs-icon.png" alt=""> Google Docs</span>
+                        <span class="app-tag"><img src="sheets-icon.png" alt=""> Sheets</span>
+                        <span class="app-tag"><img src="chrome-icon.png" alt=""> Chrome</span>
+                        <span class="app-tag"><img src="safari-icon.png" alt=""> Safari</span>
+                    </div>
+
+                    <p class="hero-tagline">
+                        50+ open tabs. 50,000+ photos. 100,000+ emails.<br>
+                        Years of notes—turned into answers.
+                    </p>
+
+                    <p class="hero-description">
+                        Your browser tabs aren't a memory system—they're a symptom. jo knows your notes, photos, emails, and files. Close them. Clear your head. jo surfaces what matters—before you think to search.
+                    </p>
+
+                    <div class="hero-actions v7-email-actions">
+                        <form class="v7-email-form" action="https://forms.fillout.com/t/5ngLz3A5BHus" method="GET" target="_blank">
+                            <input type="email" name="email" class="v7-email-input" placeholder="you@example.com" autocomplete="email" required>
+                            <button type="submit" class="btn btn-primary btn-large">Save My Spot</button>
+                        </form>
+                        <a href="#how-it-works" class="btn btn-secondary btn-large">See How It Works</a>
+                    </div>
+
+                    <p class="hero-requirement" style="margin-top: var(--space-md);">Requires Mac with M-series chip + 16GB RAM</p>
+
+                    <div class="trust-badges" style="margin-top: var(--space-sm);">
+                        <span class="trust-badge">100% Private. Never leaves your Mac.</span>
+                        <span class="trust-badge">Pay only for what you use</span>
+                    </div>
+
+                    <div class="waitlist-proof">
+                        <div style="display: flex; align-items: center;">
+                            <div class="avatar-stack">
+                                <div class="avatar-stack-item">JM</div>
+                                <div class="avatar-stack-item">KL</div>
+                                <div class="avatar-stack-item">AR</div>
+                                <div class="avatar-stack-item">TS</div>
+                            </div>
+                            <span class="waitlist-count">1,369 people on the waitlist</span>
+                        </div>
+                        <span class="spots-left">Only 50 spots left</span>
+                    </div>
+
+                    <!-- Demo Window Mockup -->
+                    <div class="demo-window">
+                        <div class="demo-titlebar">
+                            <span class="demo-dot red"></span>
+                            <span class="demo-dot yellow"></span>
+                            <span class="demo-dot green"></span>
+                            <span class="demo-title">jo</span>
+                            <div style="width: 36px;"></div>
+                        </div>
+                        <div class="demo-content">
+                            <div class="demo-placeholder">
+                                <div class="demo-placeholder-icon">&#9658;</div>
+                                <div class="demo-placeholder-text">Demo video coming soon</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-jo" class="opportunity-section section-darker" style="padding: var(--space-4xl) 0;">
+            <div class="container">
+                <div class="section-header animate-on-scroll" style="text-align: center; margin-bottom: var(--space-3xl);">
+                    <h2>You've been saving things for years.<br>Where did they go?</h2>
+                </div>
+
+                <div class="problem-grid animate-on-scroll stagger-children" style="max-width: 1000px; margin: 0 auto;">
+                    <div class="solution-card">
+                        <div class="card-icon">&#10024;</div>
+                        <h3>jo turns years of notes, photos, and emails into answers</h3>
+                        <p>
+                            50,000+ photos. 100,000+ emails. Years of notes. Group threads across iMessage, WhatsApp, and Telegram. They're all on your Mac—and jo knows them all. The moment you install it, jo connects to everything. Ask anything. It already knows.
+                        </p>
+                        <div style="display: flex; gap: var(--space-md); justify-content: center; margin-top: var(--space-xl); flex-wrap: wrap;">
+                            <span class="tagline">No subscription</span>
+                            <span class="tagline">Like Siri, but useful</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works-section section-dark" style="padding: var(--space-4xl) 0;">
+            <div class="container">
+                <div class="section-header animate-on-scroll" style="text-align: center; margin-bottom: var(--space-3xl);">
+                    <h2>jo works the moment you install it</h2>
+                </div>
+                <div class="steps-container animate-on-scroll stagger-children">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h3>Install</h3>
+                        <p>One download, drag to Applications. jo immediately connects to your Notes, Photos, Mail, and files.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h3>It learns you</h3>
+                        <p>jo reads your history—years of notes, photos, emails. Everything stays on your Mac. Nothing leaves.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h3>It brings things forward</h3>
+                        <p>Meeting tomorrow? jo surfaces your notes on that client. Working on a project? It pulls up related docs you forgot you had.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="difference-section section-darker" style="padding: var(--space-4xl) 0;">
+            <div class="container">
+                <div class="section-header animate-on-scroll" style="text-align: center; margin-bottom: var(--space-3xl);">
+                    <h2>Try asking jo</h2>
+                    <p style="color: var(--text-dim); font-size: 18px; margin-top: var(--space-md);">Real prompts. Real answers. Connecting your stuff across apps.</p>
+                </div>
+                <div class="features-refined animate-on-scroll stagger-children">
+                    <div class="feature-refined">
+                        <div class="feature-icon-wrapper">&#127869;</div>
+                        <h3>"What was that amazing tempura place in Tokyo?"</h3>
+                        <p>jo finds your reservation email from 2022, pulls up the photos you took of the food, and shows the note where you wrote "best meal of the trip."</p>
+                    </div>
+                    <div class="feature-refined">
+                        <div class="feature-icon-wrapper">&#128197;</div>
+                        <h3>"Prep me for my 2pm with Sarah Chen"</h3>
+                        <p>jo checks your calendar, finds your last 5 email threads with Sarah, pulls up notes from previous meetings, and reminds you she mentioned her daughter's graduation.</p>
+                    </div>
+                    <div class="feature-refined">
+                        <div class="feature-icon-wrapper">&#127968;</div>
+                        <h3>"What did we decide about the kitchen remodel?"</h3>
+                        <p>jo surfaces your notes on cabinet styles, the contractor's email with the quote, photos of the inspiration kitchens you saved, and the calendar note about the start date.</p>
+                    </div>
+                    <div class="feature-refined">
+                        <div class="feature-icon-wrapper">&#128218;</div>
+                        <h3>"What did I learn at that conference last year?"</h3>
+                        <p>jo finds your notes from each session, the photos of slides you snapped, the business cards you photographed, and the follow-up emails you sent.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="social-proof-section section-dark">
+            <div class="container">
+                <div class="animate-on-scroll" style="text-align: center;">
+                    <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-dim); margin-bottom: var(--space-xl);">Featured in</p>
+                    <div class="logo-row">
+                        <span>TechCrunch</span>
+                        <span>Hacker News</span>
+                        <span style="font-style: italic; font-weight: 500;">Product Hunt</span>
+                        <span style="letter-spacing: 0.1em;">WIRED</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials-section section-darker" style="padding: var(--space-4xl) 0;">
+            <div class="container">
+                <div class="section-header animate-on-scroll" style="text-align: center; margin-bottom: var(--space-3xl);">
+                    <h2>What early users are saying</h2>
+                </div>
+                <div class="testimonials-refined animate-on-scroll stagger-children">
+                    <div class="testimonial-refined">
+                        <blockquote>"I had a call with a client I hadn't talked to in months. jo surfaced my notes from our last conversation before I even asked. I looked way more prepared than I was."</blockquote>
+                        <div class="testimonial-author-refined">
+                            <div class="author-avatar">S</div>
+                            <div class="author-info">
+                                <span class="author-name">Early Beta User</span>
+                                <span class="author-role">Consultant</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-refined">
+                        <blockquote>"I've saved thousands of notes over the years and never looked at most of them again. Now jo brings up relevant ones while I'm working. It's like having a photographic memory."</blockquote>
+                        <div class="testimonial-author-refined">
+                            <div class="author-avatar">M</div>
+                            <div class="author-info">
+                                <span class="author-name">Early Beta User</span>
+                                <span class="author-role">Writer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-refined">
+                        <blockquote>"I asked jo to find 'that photo with the blue door from Portugal' and it found it. Not tagged, not labeled. It just understood what I meant."</blockquote>
+                        <div class="testimonial-author-refined">
+                            <div class="author-avatar">J</div>
+                            <div class="author-info">
+                                <span class="author-name">Early Beta User</span>
+                                <span class="author-role">Designer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section section-dark" style="padding: var(--space-4xl) 0;">
+            <div class="container">
+                <div class="section-header animate-on-scroll" style="text-align: center; margin-bottom: var(--space-3xl);">
+                    <h2>Questions</h2>
+                </div>
+                <div class="faq-refined animate-on-scroll stagger-children">
+                    <div class="faq-item-refined">
+                        <h3>How does jo know my stuff instantly?</h3>
+                        <p>jo connects directly to Notes, Photos, Mail, and your files—the same way Apple apps talk to each other. It indexes everything locally, so it's ready to help the moment you install it.</p>
+                    </div>
+                    <div class="faq-item-refined">
+                        <h3>Does my data ever leave my Mac?</h3>
+                        <p>No. jo runs 100% on your computer. Your notes, photos, and emails never get uploaded anywhere.</p>
+                    </div>
+                    <div class="faq-item-refined">
+                        <h3>How is this different from Apple's search?</h3>
+                        <p>Apple search matches keywords. jo understands meaning. Ask for "that email about the budget issue" and jo finds it—even if you never used the word "budget."</p>
+                    </div>
+                    <div class="faq-item-refined">
+                        <h3>How does pricing work?</h3>
+                        <p>No subscription. Simple queries (finding a note, searching photos) cost ~1 cent. Complex queries that synthesize multiple sources cost ~5 cents. Most users spend $3-8/month.</p>
+                    </div>
+                    <div class="faq-item-refined">
+                        <h3>Which Mac do I need?</h3>
+                        <p>Any Mac with an M-series chip (M1, M2, M3, M4) and 16GB of memory. That's most Macs from 2020 on.</p>
+                    </div>
+                    <div class="faq-item-refined">
+                        <h3>Will this slow down my Mac?</h3>
+                        <p>You won't notice it. jo uses dedicated AI hardware that sits idle most of the time anyway.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="privacy-statement section-darker">
+            <div class="container">
+                <div class="animate-on-scroll">
+                    <h2>It never leaves<br>your device.</h2>
+                    <p>
+                        jo runs entirely on your Mac. Your notes, photos, emails, and files stay exactly where they are. Nothing is uploaded. Nothing is shared. Nothing leaves your machine. Ever.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="download" class="cta cta-refined" style="padding: var(--space-4xl) 0;">
+            <div class="container">
+                <div class="cta-content animate-on-scroll scale-up" style="text-align: center; position: relative; z-index: 1;">
+                    <h2>Years of notes, photos, and emails.<br>Finally working for you.</h2>
+                    <p style="font-size: 18px; margin: var(--space-lg) auto; max-width: 500px; opacity: 0.9;">jo knows your stuff from the moment you install it. Private. No subscription. Pay only for what you use.</p>
+                    <div class="cta-actions" style="margin: var(--space-xl) auto; max-width: 500px;">
+                        <form class="v7-email-form" action="https://forms.fillout.com/t/5ngLz3A5BHus" method="GET" target="_blank" style="justify-content: center;">
+                            <input type="email" name="email" class="v7-email-input" placeholder="you@example.com" autocomplete="email" required>
+                            <button type="submit" class="btn btn-primary btn-large">Save My Spot</button>
+                        </form>
+                    </div>
+                    <p class="cta-note" style="opacity: 0.7;">Requires Mac with M-series chip and 16GB RAM</p>
+                    <div class="cta-trust-badges" style="margin-top: var(--space-md);">
+                        <span class="cta-trust-badge">No subscription</span>
+                        <span class="cta-trust-badge">No spam</span>
+                        <span class="cta-trust-badge">100% local</span>
+                    </div>
+                    <p style="margin-top: var(--space-lg); font-size: 14px;">
+                        <strong style="color: #fbbf24;">Only 50 spots remaining</strong> <span style="opacity: 0.6; margin: 0 8px;">·</span> 1,369 people already on the waitlist
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer section-dark" style="border-top: 1px solid var(--border-subtle);">
+        <div class="container">
+            <div class="footer-simple">
+                <span class="logo-text" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700;">jo</span>
+                <div class="footer-links-inline">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Contact</a>
+                </div>
+                <p>&copy; 2026 jo</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+        document.querySelectorAll('.stagger-children').forEach(parent => {
+            Array.from(parent.children).forEach((child, index) => {
+                child.style.transitionDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>
