@@ -1044,6 +1044,11 @@
                 flex-direction: column;
                 align-items: stretch;
                 flex: none;
+                width: 100%;
+            }
+
+            .v7-email-actions {
+                width: 100%;
             }
 
             .v7-email-actions .btn-secondary {
@@ -1054,6 +1059,17 @@
             .v7-email-input {
                 flex: none;
                 width: 100%;
+                min-width: 0;  /* Override the 220px min-width */
+            }
+
+            .v7-hero .btn-primary,
+            .v7-hero .btn-secondary {
+                width: 100%;
+                padding: 16px 20px;  /* Reduce horizontal padding */
+            }
+
+            .hero-content {
+                max-width: 100% !important;  /* Override inline style */
             }
 
             .solution-card {
