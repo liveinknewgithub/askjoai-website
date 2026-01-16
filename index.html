@@ -24,22 +24,101 @@
     <meta name="twitter:image" content="https://liveinknewgithub.github.io/askjoai-website/og-image.png">
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- FAQ Schema Markup for AEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What data does jo access?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "jo can index your local files, emails (via IMAP), and browser history. You control exactly what jo sees, and everything stays on your Mac."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is my data sent to the cloud?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Never, unless you explicitly choose to. jo runs entirely on your Mac. When you call in a cloud model like GPT, only that specific conversation is sent."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Why does jo require an M-series Mac?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Apple's M-series chips have a Neural Engine that makes local AI fast and efficient. jo uses this power to run models directly on your hardware without needing cloud processing."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How much do cloud models cost?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Pay-per-use, typically $0.01-0.05 per conversation. No subscriptions. Most users spend less than $5/month, and local queries are always free."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is jo AI assistant?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "jo is a local AI assistant for Mac that runs entirely on your computer. It indexes your files, emails, and browsing history to provide context-aware answers without sending data to the cloud."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How is jo different from ChatGPT or other AI assistants?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Unlike cloud-based AI assistants, jo runs locally on your Mac and already knows your context—your files, emails, and browsing. No need to copy-paste or explain your situation each time you ask a question."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is jo free to use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The jo app is free to download and use. Local AI queries are always free. You only pay for optional cloud model access (like GPT or Claude) on a pay-per-use basis, typically under $5/month."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does jo protect my privacy?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "jo runs 100% locally on your Mac. Your data never leaves your device unless you explicitly choose to send a specific conversation to a cloud model. No account required, no data collection."
+                }
+            }
+        ]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Fraunces:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="header">
-        <nav class="nav">
+    <!-- Skip Navigation Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="header" role="banner">
+        <nav class="nav" aria-label="Main navigation">
             <div class="nav-logo">
-                <a href="/">
+                <a href="/" aria-label="jo - Home">
                     <span class="logo-text">jo</span>
                 </a>
             </div>
-            <div class="nav-links">
+            <div class="nav-links" role="navigation">
                 <a href="#features">Why jo</a>
                 <a href="#how-it-works">How It Works</a>
+                <a href="#faq">FAQ</a>
             </div>
             <div class="nav-actions">
                 <a href="#login" class="btn btn-secondary">Sign In</a>
@@ -48,16 +127,16 @@
         </nav>
     </header>
 
-    <main>
+    <main id="main-content" role="main">
         <!-- Hero Section -->
-        <section class="hero">
-            <video class="hero-video-bg" autoplay muted loop playsinline>
+        <section class="hero" aria-labelledby="hero-title">
+            <video class="hero-video-bg" autoplay muted loop playsinline aria-hidden="true">
                 <source src="hero-bg-desktop.mp4" type="video/mp4">
             </video>
             <div class="hero-overlay"></div>
             <div class="container">
                 <div class="hero-content hero-centered">
-                    <h1 class="hero-title">
+                    <h1 id="hero-title" class="hero-title">
                         AI for people who<br>
                         <span class="text-gradient">don't have time.</span>
                     </h1>
@@ -74,7 +153,7 @@
                         <span class="trust-badge">No account required</span>
                         <span class="trust-badge">Free forever</span>
                     </div>
-                    <video class="hero-mobile-video" autoplay muted loop playsinline>
+                    <video class="hero-mobile-video" autoplay muted loop playsinline aria-hidden="true">
                         <source src="hero-bg-mobile.mp4" type="video/mp4">
                     </video>
                 </div>
@@ -101,10 +180,10 @@
         </section>
 
         <!-- Opportunity Section -->
-        <section id="features" class="opportunity-section">
+        <section id="features" class="opportunity-section" aria-labelledby="features-heading">
             <div class="container">
                 <div class="section-header animate-on-scroll">
-                    <h2>Ask anything about your digital life</h2>
+                    <h2 id="features-heading">Ask anything about your digital life</h2>
                 </div>
                 <div class="opportunity-grid animate-on-scroll stagger-children">
                     <div class="opportunity-card">
@@ -137,10 +216,10 @@
         </section>
 
         <!-- Why jo Section -->
-        <section class="difference-section">
+        <section class="difference-section" aria-labelledby="why-jo-heading">
             <div class="container">
                 <div class="section-header animate-on-scroll">
-                    <h2>Why jo actually helps</h2>
+                    <h2 id="why-jo-heading">Why jo actually helps</h2>
                 </div>
                 <div class="difference-grid animate-on-scroll stagger-children">
                     <div class="difference-card">
@@ -180,10 +259,10 @@
         </section>
 
         <!-- Hybrid Cloud Section -->
-        <section class="hybrid-section">
+        <section class="hybrid-section" aria-labelledby="hybrid-heading">
             <div class="container">
                 <div class="section-header animate-on-scroll">
-                    <h2>Local first. Cloud when you want.</h2>
+                    <h2 id="hybrid-heading">Local first. Cloud when you want.</h2>
                 </div>
                 <div class="hybrid-content animate-on-scroll">
                     <div class="hybrid-local">
@@ -209,10 +288,10 @@
         </section>
 
         <!-- How It Works Section -->
-        <section id="how-it-works" class="how-it-works-section">
+        <section id="how-it-works" class="how-it-works-section" aria-labelledby="how-it-works-heading">
             <div class="container">
                 <div class="section-header animate-on-scroll">
-                    <h2>Get started in 2 minutes</h2>
+                    <h2 id="how-it-works-heading">Get started in 2 minutes</h2>
                 </div>
                 <div class="how-steps animate-on-scroll stagger-children">
                     <div class="how-step">
@@ -235,10 +314,10 @@
         </section>
 
         <!-- Testimonials Section -->
-        <section class="testimonials-section">
+        <section class="testimonials-section" aria-labelledby="testimonials-heading">
             <div class="container">
                 <div class="section-header animate-on-scroll">
-                    <h2>What people are saying</h2>
+                    <h2 id="testimonials-heading">What people are saying</h2>
                 </div>
                 <div class="testimonials-grid animate-on-scroll stagger-children">
                     <div class="testimonial-card">
@@ -273,28 +352,60 @@
         </section>
 
         <!-- FAQ Section -->
-        <section class="faq-section">
+        <section id="faq" class="faq-section" aria-labelledby="faq-heading">
             <div class="container">
                 <div class="section-header animate-on-scroll">
-                    <h2>Common questions</h2>
+                    <h2 id="faq-heading">Frequently Asked Questions</h2>
                 </div>
-                <div class="faq-grid animate-on-scroll stagger-children">
-                    <div class="faq-item">
-                        <h3>What data does jo access?</h3>
-                        <p>jo can index your local files, emails (via IMAP), and browser history. You control exactly what jo sees, and everything stays on your Mac.</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3>Is my data sent to the cloud?</h3>
-                        <p>Never, unless you explicitly choose to. jo runs entirely on your Mac. When you call in a cloud model like GPT, only that specific conversation is sent.</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3>Why does it require an M-series Mac?</h3>
-                        <p>Apple's M-series chips have a Neural Engine that makes local AI fast and efficient. jo uses this power to run models directly on your hardware.</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3>How much do cloud models cost?</h3>
-                        <p>Pay-per-use, typically $0.01-0.05 per conversation. No subscriptions. Most users spend less than $5/month, and local queries are always free.</p>
-                    </div>
+                <div class="faq-grid animate-on-scroll stagger-children" role="list">
+                    <article class="faq-item" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">What is jo and how does it work?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">jo is a local AI assistant for Mac that runs entirely on your computer. It indexes your files, emails, and browsing history to provide context-aware answers without sending data to the cloud. Think of it as an AI that already knows your world.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">What data does jo access?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">jo can index your local files, emails (via IMAP), and browser history. You control exactly what jo sees through granular permissions, and everything stays on your Mac.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">Is my data sent to the cloud?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">Never, unless you explicitly choose to. jo runs entirely on your Mac. When you optionally call in a cloud model like GPT or Claude, only that specific conversation is sent—never your indexed data.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">Why does jo require an M-series Mac?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">Apple's M-series chips (M1, M2, M3, M4) have a Neural Engine that makes local AI fast and efficient. jo uses this dedicated AI hardware to run models directly on your Mac without needing cloud processing.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">How is jo different from ChatGPT or Siri?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">Unlike cloud-based assistants, jo runs locally and already knows your context—your files, emails, and browsing. No need to copy-paste or re-explain your situation each time. It's like having an AI with a perfect memory of your digital life.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">Is jo free to use?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">The jo app is free to download and use. Local AI queries are always free. You only pay for optional cloud model access (like GPT-5.2 or Claude) on a pay-per-use basis, typically $0.01-0.05 per conversation.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">How much does jo cost per month?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">Most users spend less than $5/month on cloud model queries. Local queries are always free. There are no subscriptions—you only pay for what you use when you choose to call in more powerful cloud models.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">How does jo protect my privacy?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">jo runs 100% locally on your Mac. Your data never leaves your device unless you explicitly choose to send a specific conversation to a cloud model. No account required, no data collection, no tracking.</p>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -318,16 +429,16 @@
         </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-simple">
-                <span class="logo-text">jo</span>
-                <div class="footer-links-inline">
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
-                    <a href="#">Contact</a>
-                </div>
-                <p>&copy; 2026 jo</p>
+                <span class="logo-text" aria-hidden="true">jo</span>
+                <nav class="footer-links-inline" aria-label="Footer navigation">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Us</a>
+                </nav>
+                <p><small>&copy; 2026 jo. All rights reserved.</small></p>
             </div>
         </div>
     </footer>

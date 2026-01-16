@@ -17,10 +17,88 @@
     <meta name="twitter:description" content="50,000+ photos. 100,000+ emails. Years of notes. jo surfaces what matters—before you think to search.">
     <meta name="twitter:image" content="https://liveinknewgithub.github.io/askjoai-website/og-image-v7.png?v=11">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- FAQ Schema Markup for AEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How does jo know my stuff instantly?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "jo connects directly to Notes, Photos, Mail, and your files—the same way Apple apps talk to each other. It indexes everything locally, so it's ready to help the moment you install it."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does my data ever leave my Mac?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. jo runs 100% on your computer. Your notes, photos, and emails never get uploaded anywhere."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How is jo different from Apple's search?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Apple search matches keywords. jo understands meaning. Ask for 'that email about the budget issue' and jo finds it—even if you never used the word 'budget.'"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does jo pricing work?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No subscription. Simple queries (finding a note, searching photos) cost ~1 cent. Complex queries that synthesize multiple sources cost ~5 cents. Most users spend $3-8/month."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Which Mac do I need for jo?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Any Mac with an M-series chip (M1, M2, M3, M4) and 16GB of memory. That's most Macs from 2020 on."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Will jo slow down my Mac?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You won't notice it. jo uses dedicated AI hardware that sits idle most of the time anyway."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is jo AI assistant?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "jo is a local AI assistant for Mac that indexes your notes, photos, emails, and files. It runs entirely on your computer and surfaces relevant information before you even search for it."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does jo protect my privacy?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "jo runs entirely on your Mac. Your notes, photos, emails, and files stay exactly where they are. Nothing is uploaded. Nothing is shared. Nothing leaves your machine. Ever."
+                }
+            }
+        ]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <!-- GSAP for scroll-based animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <style>
         /* v7-marquee: Clean hero with infinite scrolling app tags */
 
@@ -396,26 +474,24 @@
             border-color: rgba(255, 255, 255, 0.4);
         }
 
-        /* Demo window */
+        /* Demo window - scroll-expanding */
         .demo-window {
             margin-top: var(--space-3xl);
             max-width: 900px;
             margin-left: auto;
             margin-right: auto;
             background: var(--bg-card);
-            border-radius: 16px;
+            border-radius: 24px;
             overflow: hidden;
             border: 1px solid var(--border-subtle);
             box-shadow:
                 0 4px 6px rgba(0, 0, 0, 0.3),
                 0 20px 60px rgba(0, 0, 0, 0.5),
                 0 0 100px rgba(0, 153, 255, 0.1);
-            transform: perspective(1000px) rotateX(2deg);
-            transition: transform 0.4s ease;
-        }
-
-        .demo-window:hover {
-            transform: perspective(1000px) rotateX(0deg) translateY(-8px);
+            /* Initial state: scaled down for scroll animation */
+            transform: scale(0.7);
+            transform-origin: center center;
+            will-change: transform, border-radius;
         }
 
         .demo-titlebar {
@@ -1033,11 +1109,8 @@
 
             .demo-window {
                 margin-top: var(--space-xl);
-                transform: none;
-            }
-
-            .demo-window:hover {
-                transform: none;
+                transform: none !important;
+                border-radius: 12px !important;
             }
 
             .v7-email-form {
@@ -1084,14 +1157,18 @@
     </style>
 </head>
 <body>
-    <div class="dot-grid"></div>
+    <!-- Skip Navigation Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-logo"><a href="/"><span class="logo-text" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700;">jo</span></a></div>
-            <div class="nav-links">
+    <div class="dot-grid" aria-hidden="true"></div>
+
+    <header class="header" role="banner">
+        <nav class="nav" aria-label="Main navigation">
+            <div class="nav-logo"><a href="/" aria-label="jo - Home"><span class="logo-text" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700;">jo</span></a></div>
+            <div class="nav-links" role="navigation">
                 <a href="#why-jo">Why jo</a>
                 <a href="#how-it-works">How It Works</a>
+                <a href="#faq">FAQ</a>
             </div>
             <div class="nav-actions">
                 <a href="#download" class="btn btn-primary" style="font-family: 'Space Grotesk', sans-serif;">Save My Spot</a>
@@ -1099,55 +1176,55 @@
         </nav>
     </header>
 
-    <main>
-        <section class="hero v7-hero section-dark">
-            <div class="accent-orb accent-orb-1"></div>
-            <div class="accent-orb accent-orb-2"></div>
+    <main id="main-content" role="main">
+        <section class="hero v7-hero section-dark" aria-labelledby="hero-title">
+            <div class="accent-orb accent-orb-1" aria-hidden="true"></div>
+            <div class="accent-orb accent-orb-2" aria-hidden="true"></div>
 
-            <video class="v7-hero-video" autoplay muted loop playsinline>
+            <video class="v7-hero-video" autoplay muted loop playsinline aria-hidden="true">
                 <source src="hero-bg-desktop.mp4" type="video/mp4">
             </video>
-            <video class="v7-hero-mobile-video" autoplay muted loop playsinline>
+            <video class="v7-hero-mobile-video" autoplay muted loop playsinline aria-hidden="true">
                 <source src="hero-bg-mobile.mp4" type="video/mp4">
             </video>
-            <div class="v7-hero-overlay"></div>
+            <div class="v7-hero-overlay" aria-hidden="true"></div>
 
             <div class="container">
                 <div class="hero-content" style="text-align: left; max-width: 800px;">
-                    <h1 class="hero-title">
+                    <h1 id="hero-title" class="hero-title">
                         Close your tabs.
                         <span class="text-gradient">jo remembers.</span>
                     </h1>
 
-                    <!-- Infinite scrolling marquee -->
-                    <div class="app-marquee">
+                    <!-- Infinite scrolling marquee - shows supported apps -->
+                    <div class="app-marquee" role="marquee" aria-label="Supported applications: Notes, Photos, Mail, iMessage, WhatsApp, Telegram, Calendar, Obsidian, Google Docs, Sheets, Chrome, Safari">
                         <div class="app-marquee-track">
                             <!-- First set of apps -->
-                            <span class="app-tag">📝 Notes</span>
-                            <span class="app-tag">📷 Photos</span>
-                            <span class="app-tag"><img src="gmail-icon.png" alt=""> Mail</span>
-                            <span class="app-tag"><img src="imessage-icon.png" alt=""> iMessage</span>
-                            <span class="app-tag"><img src="whatsapp-icon.png" alt=""> WhatsApp</span>
-                            <span class="app-tag"><img src="telegram-icon.png" alt=""> Telegram</span>
-                            <span class="app-tag"><img src="gcalendar-icon.png" alt=""> Calendar</span>
-                            <span class="app-tag"><img src="obsidian-icon.png" alt=""> Obsidian</span>
-                            <span class="app-tag"><img src="googledocs-icon.png" alt=""> Google Docs</span>
-                            <span class="app-tag"><img src="sheets-icon.png" alt=""> Sheets</span>
-                            <span class="app-tag"><img src="chrome-icon.png" alt=""> Chrome</span>
-                            <span class="app-tag"><img src="safari-icon.png" alt=""> Safari</span>
+                            <span class="app-tag"><span aria-hidden="true">📝</span> Notes</span>
+                            <span class="app-tag"><span aria-hidden="true">📷</span> Photos</span>
+                            <span class="app-tag"><img src="gmail-icon.png" alt="" aria-hidden="true"> Mail</span>
+                            <span class="app-tag"><img src="imessage-icon.png" alt="" aria-hidden="true"> iMessage</span>
+                            <span class="app-tag"><img src="whatsapp-icon.png" alt="" aria-hidden="true"> WhatsApp</span>
+                            <span class="app-tag"><img src="telegram-icon.png" alt="" aria-hidden="true"> Telegram</span>
+                            <span class="app-tag"><img src="gcalendar-icon.png" alt="" aria-hidden="true"> Calendar</span>
+                            <span class="app-tag"><img src="obsidian-icon.png" alt="" aria-hidden="true"> Obsidian</span>
+                            <span class="app-tag"><img src="googledocs-icon.png" alt="" aria-hidden="true"> Google Docs</span>
+                            <span class="app-tag"><img src="sheets-icon.png" alt="" aria-hidden="true"> Sheets</span>
+                            <span class="app-tag"><img src="chrome-icon.png" alt="" aria-hidden="true"> Chrome</span>
+                            <span class="app-tag"><img src="safari-icon.png" alt="" aria-hidden="true"> Safari</span>
                             <!-- Duplicate set for seamless loop -->
-                            <span class="app-tag app-tag-duplicate">📝 Notes</span>
-                            <span class="app-tag app-tag-duplicate">📷 Photos</span>
-                            <span class="app-tag app-tag-duplicate"><img src="gmail-icon.png" alt=""> Mail</span>
-                            <span class="app-tag app-tag-duplicate"><img src="imessage-icon.png" alt=""> iMessage</span>
-                            <span class="app-tag app-tag-duplicate"><img src="whatsapp-icon.png" alt=""> WhatsApp</span>
-                            <span class="app-tag app-tag-duplicate"><img src="telegram-icon.png" alt=""> Telegram</span>
-                            <span class="app-tag app-tag-duplicate"><img src="gcalendar-icon.png" alt=""> Calendar</span>
-                            <span class="app-tag app-tag-duplicate"><img src="obsidian-icon.png" alt=""> Obsidian</span>
-                            <span class="app-tag app-tag-duplicate"><img src="googledocs-icon.png" alt=""> Google Docs</span>
-                            <span class="app-tag app-tag-duplicate"><img src="sheets-icon.png" alt=""> Sheets</span>
-                            <span class="app-tag app-tag-duplicate"><img src="chrome-icon.png" alt=""> Chrome</span>
-                            <span class="app-tag app-tag-duplicate"><img src="safari-icon.png" alt=""> Safari</span>
+                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><span>📝</span> Notes</span>
+                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><span>📷</span> Photos</span>
+                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="gmail-icon.png" alt=""> Mail</span>
+                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="imessage-icon.png" alt=""> iMessage</span>
+                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="whatsapp-icon.png" alt=""> WhatsApp</span>
+                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="telegram-icon.png" alt=""> Telegram</span>
+                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="gcalendar-icon.png" alt=""> Calendar</span>
+                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="obsidian-icon.png" alt=""> Obsidian</span>
+                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="googledocs-icon.png" alt=""> Google Docs</span>
+                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="sheets-icon.png" alt=""> Sheets</span>
+                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="chrome-icon.png" alt=""> Chrome</span>
+                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="safari-icon.png" alt=""> Safari</span>
                         </div>
                     </div>
 
@@ -1204,10 +1281,10 @@
             </div>
         </section>
 
-        <section id="why-jo" class="opportunity-section section-darker" style="padding: var(--space-4xl) 0;">
+        <section id="why-jo" class="opportunity-section section-darker" style="padding: var(--space-4xl) 0;" aria-labelledby="why-jo-heading">
             <div class="container">
                 <div class="section-header animate-on-scroll" style="text-align: center; margin-bottom: var(--space-3xl);">
-                    <h2>You've been saving things for years.<br>Where did they go?</h2>
+                    <h2 id="why-jo-heading">You've been saving things for years.<br>Where did they go?</h2>
                 </div>
 
                 <div class="problem-grid animate-on-scroll stagger-children" style="max-width: 1000px; margin: 0 auto;">
@@ -1226,10 +1303,10 @@
             </div>
         </section>
 
-        <section id="how-it-works" class="how-it-works-section section-dark" style="padding: var(--space-4xl) 0;">
+        <section id="how-it-works" class="how-it-works-section section-dark" style="padding: var(--space-4xl) 0;" aria-labelledby="how-it-works-heading">
             <div class="container">
                 <div class="section-header animate-on-scroll" style="text-align: center; margin-bottom: var(--space-3xl);">
-                    <h2>jo works the moment you install it</h2>
+                    <h2 id="how-it-works-heading">jo works the moment you install it</h2>
                 </div>
                 <div class="steps-container animate-on-scroll stagger-children">
                     <div class="step-item">
@@ -1251,10 +1328,10 @@
             </div>
         </section>
 
-        <section id="features" class="difference-section section-darker" style="padding: var(--space-4xl) 0;">
+        <section id="features" class="difference-section section-darker" style="padding: var(--space-4xl) 0;" aria-labelledby="features-heading">
             <div class="container">
                 <div class="section-header animate-on-scroll" style="text-align: center; margin-bottom: var(--space-3xl);">
-                    <h2>Try asking jo</h2>
+                    <h2 id="features-heading">Try asking jo</h2>
                     <p style="color: var(--text-dim); font-size: 18px; margin-top: var(--space-md);">Real prompts. Real answers. Connecting your stuff across apps.</p>
                 </div>
                 <div class="features-refined animate-on-scroll stagger-children">
@@ -1296,10 +1373,10 @@
             </div>
         </section>
 
-        <section class="testimonials-section section-darker" style="padding: var(--space-4xl) 0;">
+        <section class="testimonials-section section-darker" style="padding: var(--space-4xl) 0;" aria-labelledby="testimonials-heading">
             <div class="container">
                 <div class="section-header animate-on-scroll" style="text-align: center; margin-bottom: var(--space-3xl);">
-                    <h2>What early users are saying</h2>
+                    <h2 id="testimonials-heading">What early users are saying</h2>
                 </div>
                 <div class="testimonials-refined animate-on-scroll stagger-children">
                     <div class="testimonial-refined">
@@ -1336,44 +1413,68 @@
             </div>
         </section>
 
-        <section class="faq-section section-dark" style="padding: var(--space-4xl) 0;">
+        <section id="faq" class="faq-section section-dark" style="padding: var(--space-4xl) 0;" aria-labelledby="faq-heading">
             <div class="container">
                 <div class="section-header animate-on-scroll" style="text-align: center; margin-bottom: var(--space-3xl);">
-                    <h2>Questions</h2>
+                    <h2 id="faq-heading">Frequently Asked Questions</h2>
                 </div>
-                <div class="faq-refined animate-on-scroll stagger-children">
-                    <div class="faq-item-refined">
-                        <h3>How does jo know my stuff instantly?</h3>
-                        <p>jo connects directly to Notes, Photos, Mail, and your files—the same way Apple apps talk to each other. It indexes everything locally, so it's ready to help the moment you install it.</p>
-                    </div>
-                    <div class="faq-item-refined">
-                        <h3>Does my data ever leave my Mac?</h3>
-                        <p>No. jo runs 100% on your computer. Your notes, photos, and emails never get uploaded anywhere.</p>
-                    </div>
-                    <div class="faq-item-refined">
-                        <h3>How is this different from Apple's search?</h3>
-                        <p>Apple search matches keywords. jo understands meaning. Ask for "that email about the budget issue" and jo finds it—even if you never used the word "budget."</p>
-                    </div>
-                    <div class="faq-item-refined">
-                        <h3>How does pricing work?</h3>
-                        <p>No subscription. Simple queries (finding a note, searching photos) cost ~1 cent. Complex queries that synthesize multiple sources cost ~5 cents. Most users spend $3-8/month.</p>
-                    </div>
-                    <div class="faq-item-refined">
-                        <h3>Which Mac do I need?</h3>
-                        <p>Any Mac with an M-series chip (M1, M2, M3, M4) and 16GB of memory. That's most Macs from 2020 on.</p>
-                    </div>
-                    <div class="faq-item-refined">
-                        <h3>Will this slow down my Mac?</h3>
-                        <p>You won't notice it. jo uses dedicated AI hardware that sits idle most of the time anyway.</p>
-                    </div>
+                <div class="faq-refined animate-on-scroll stagger-children" role="list">
+                    <article class="faq-item-refined" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">What is jo and how does it work?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">jo is a local AI assistant for Mac that indexes your notes, photos, emails, and files. It runs entirely on your computer and surfaces relevant information before you even search for it—like having an AI with a perfect memory of your digital life.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item-refined" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">How does jo know my stuff instantly?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">jo connects directly to Notes, Photos, Mail, and your files—the same way Apple apps talk to each other. It indexes everything locally, so it's ready to help the moment you install it.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item-refined" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">Does my data ever leave my Mac?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">No. jo runs 100% on your computer. Your notes, photos, and emails never get uploaded anywhere. Nothing is shared. Nothing leaves your machine. Ever.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item-refined" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">How is jo different from Apple's search or Siri?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">Apple search matches keywords. jo understands meaning. Ask for "that email about the budget issue" and jo finds it—even if you never used the word "budget." It's like Siri, but useful.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item-refined" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">How does jo pricing work?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">No subscription. Simple queries (finding a note, searching photos) cost ~1 cent. Complex queries that synthesize multiple sources cost ~5 cents. Most users spend $3-8/month.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item-refined" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">Which Mac do I need for jo?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">Any Mac with an M-series chip (M1, M2, M3, M4) and 16GB of memory. That's most Macs from 2020 on. The M-series Neural Engine makes local AI fast and efficient.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item-refined" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">Will jo slow down my Mac?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">You won't notice it. jo uses dedicated AI hardware (the Neural Engine) that sits idle most of the time anyway. It's designed to run efficiently in the background.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item-refined" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">Is jo free to use?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">The jo app is free to download. You only pay for queries on a per-use basis—no subscriptions. Most users spend less than $8/month, and simple queries cost just pennies.</p>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <section class="privacy-statement section-darker">
+        <section class="privacy-statement section-darker" aria-labelledby="privacy-heading">
             <div class="container">
                 <div class="animate-on-scroll">
-                    <h2>It never leaves<br>your device.</h2>
+                    <h2 id="privacy-heading">It never leaves<br>your device.</h2>
                     <p>
                         jo runs entirely on your Mac. Your notes, photos, emails, and files stay exactly where they are. Nothing is uploaded. Nothing is shared. Nothing leaves your machine. Ever.
                     </p>
@@ -1406,21 +1507,42 @@
         </section>
     </main>
 
-    <footer class="footer section-dark" style="border-top: 1px solid var(--border-subtle);">
+    <footer class="footer section-dark" style="border-top: 1px solid var(--border-subtle);" role="contentinfo">
         <div class="container">
             <div class="footer-simple">
-                <span class="logo-text" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700;">jo</span>
-                <div class="footer-links-inline">
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
-                    <a href="#">Contact</a>
-                </div>
-                <p>&copy; 2026 jo</p>
+                <span class="logo-text" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700;" aria-hidden="true">jo</span>
+                <nav class="footer-links-inline" aria-label="Footer navigation">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Us</a>
+                </nav>
+                <p><small>&copy; 2026 jo. All rights reserved.</small></p>
             </div>
         </div>
     </footer>
 
     <script>
+        // GSAP ScrollTrigger - Demo window expansion
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Only run scroll animation if user hasn't requested reduced motion
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            gsap.to('.demo-window', {
+                scale: 1,
+                borderRadius: '8px',
+                scrollTrigger: {
+                    trigger: '.demo-window',
+                    start: 'top bottom',   // starts when top of demo hits bottom of viewport
+                    end: 'top 30%',        // ends when it reaches 30% from top
+                    scrub: 1,
+                    markers: true,         // DEBUG: remove after testing
+                }
+            });
+        } else {
+            // If reduced motion, just show at full size
+            gsap.set('.demo-window', { scale: 1, borderRadius: '8px' });
+        }
+
         // Scroll animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
