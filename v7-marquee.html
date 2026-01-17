@@ -474,24 +474,29 @@
         (function() {
             // Check if GSAP is available
             if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                console.log('GSAP loaded successfully');
                 gsap.registerPlugin(ScrollTrigger);
 
                 // Only run scroll animation if user hasn't requested reduced motion
                 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                     // Add class to indicate GSAP is ready (enables scaled-down initial state)
                     document.body.classList.add('gsap-ready');
+                    console.log('gsap-ready class added');
 
                     gsap.to('.demo-window', {
                         scale: 1,
                         borderRadius: '8px',
                         scrollTrigger: {
                             trigger: '.demo-window',
-                            start: 'top bottom',
-                            end: 'top 30%',
-                            scrub: 1
+                            start: 'top 90%',      // start earlier (when demo is 90% down viewport)
+                            end: 'top 20%',        // end when demo reaches 20% from top
+                            scrub: 1.5,
+                            markers: true          // DEBUG: shows green/red markers
                         }
                     });
                 }
+            } else {
+                console.log('GSAP failed to load');
             }
             // If GSAP fails to load, the demo window stays at scale(1) via CSS fallback
         })();
