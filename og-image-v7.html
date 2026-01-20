@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,7 +16,9 @@
             width: 1200px;
             height: 630px;
             overflow: hidden;
-            background: rgb(12, 10, 18);
+            background: rgb(10, 10, 15);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .og-container {
@@ -25,7 +27,7 @@
             left: 0;
             width: 1200px;
             height: 630px;
-            background: linear-gradient(135deg, rgb(12, 10, 18) 0%, rgb(24, 22, 32) 50%, rgb(12, 10, 18) 100%);
+            background: rgb(10, 10, 15);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -64,20 +66,23 @@
         }
 
         .logo {
-            font-family: 'DM Serif Display', serif;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 42px;
-            font-weight: 400;
+            font-weight: 700;
             color: white;
             margin-bottom: 16px;
+            letter-spacing: -0.02em;
         }
 
         .headline {
-            font-family: 'DM Serif Display', serif;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 72px;
-            font-weight: 400;
+            font-weight: 700;
             color: white;
             line-height: 1.05;
             margin-bottom: 20px;
+            letter-spacing: -0.03em;
+            text-wrap: balance;
         }
 
         .headline .gradient {
@@ -88,9 +93,9 @@
         }
 
         .tagline {
-            font-family: 'Outfit', sans-serif;
-            font-size: 22px;
-            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.6);
             line-height: 1.5;
             margin-bottom: 28px;
         }
@@ -105,10 +110,10 @@
         .cta-badge {
             display: inline-flex;
             align-items: center;
-            padding: 10px 16px;
+            padding: 12px 20px;
             background: linear-gradient(135deg, #0099ff 0%, rgb(159, 117, 255) 100%);
             border-radius: 50px;
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 14px;
             font-weight: 600;
             color: white;
@@ -116,9 +121,9 @@
         }
 
         .privacy-badge {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.6);
             white-space: nowrap;
         }
 
@@ -144,13 +149,14 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 10px 16px;
-            background: rgba(255, 255, 255, 0.08);
+            padding: 12px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
             border-radius: 10px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
             font-weight: 500;
-            color: rgba(255, 255, 255, 0.95);
+            color: rgba(255, 255, 255, 0.85);
         }
 
         .app-badge img {
