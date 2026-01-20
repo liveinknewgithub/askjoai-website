@@ -16,6 +16,13 @@
     --v7-marquee-speed: 40s;
     --border-hairline: 1px;
 
+    /* Easing curves - sorted weak to strong */
+    --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+    --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+    --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+
     /* Z-index scale */
     --z-behind: -1;
     --z-default: 0;
@@ -365,7 +372,7 @@ body.v7-marquee-page h3 {
     max-width: 800px;
     opacity: 0;
     transform: translateY(20px) scale(0.98);
-    animation: heroReveal 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.2s forwards;
+    animation: heroReveal 0.8s var(--ease-out-quint) 0.2s forwards;
 }
 
 @keyframes heroReveal {
@@ -373,6 +380,23 @@ body.v7-marquee-page h3 {
         opacity: 1;
         transform: translateY(0) scale(1);
     }
+}
+
+/* Skip intro for returning visitors (same session) */
+.skip-intro .v7-hero-content {
+    animation: none;
+    opacity: 1;
+    transform: none;
+}
+
+.skip-intro .v7-hero .hero-title .text-gradient::after {
+    animation: none;
+    transform: scaleX(1);
+}
+
+.skip-intro .v7-hero-video {
+    animation: none;
+    opacity: 0.6;
 }
 
 /* =====================================================
@@ -430,7 +454,7 @@ body.v7-marquee-page h3 {
     color: rgba(255, 255, 255, 0.85);
     box-shadow: 0 0 0 1px var(--v7-border-subtle);
     white-space: nowrap;
-    transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s var(--ease-out-quint);
     cursor: default;
 }
 
@@ -519,7 +543,7 @@ body.v7-marquee-page h3 {
     background: rgba(255, 255, 255, 0.03);
     color: white;
     outline: none;
-    transition: border-color 0.15s ease, background-color 0.15s ease;
+    transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.2s var(--ease-out-quint);
 }
 
 .v7-email-input::placeholder {
@@ -529,6 +553,7 @@ body.v7-marquee-page h3 {
 .v7-email-input:focus {
     border-color: var(--v7-accent);
     background: rgba(0, 153, 255, 0.05);
+    box-shadow: 0 0 0 4px rgba(0, 153, 255, 0.15);
 }
 
 /* =====================================================
@@ -547,7 +572,7 @@ body.v7-marquee-page h3 {
     border-radius: 12px;
     cursor: pointer;
     overflow: hidden;
-    transition: background-color 0.15s ease, transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.2s ease;
+    transition: background-color 0.15s ease, transform 0.2s var(--ease-out-quint), box-shadow 0.2s ease;
 }
 
 .v7-hero .btn-primary::before {
@@ -572,6 +597,11 @@ body.v7-marquee-page h3 {
     left: 100%;
 }
 
+.v7-hero .btn-primary:active {
+    transform: scale(0.97);
+    transition-duration: 0.1s;
+}
+
 .v7-hero .btn-secondary {
     padding: 16px 32px;
     font-size: 16px;
@@ -588,6 +618,11 @@ body.v7-marquee-page h3 {
 .v7-hero .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.4);
+}
+
+.v7-hero .btn-secondary:active {
+    transform: scale(0.97);
+    transition-duration: 0.1s;
 }
 
 /* =====================================================
@@ -671,6 +706,12 @@ body.v7-marquee-page h3 {
     font-size: 32px;
     border: 2px solid rgba(0, 153, 255, 0.2);
     user-select: none;
+    animation: demoPulse 2s ease-in-out infinite;
+}
+
+@keyframes demoPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
 }
 
 .demo-placeholder-text {
@@ -871,7 +912,7 @@ body.v7-marquee-page h3 {
     margin-bottom: var(--space-lg);
     position: relative;
     z-index: 1;
-    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.2s ease, color 0.2s ease;
+    transition: transform 0.2s var(--ease-out-quint), background-color 0.2s ease, color 0.2s ease;
     user-select: none;
 }
 
@@ -914,7 +955,7 @@ body.v7-marquee-page h3 {
     padding: var(--space-xl);
     border-radius: 20px;
     box-shadow: 0 0 0 1px var(--v7-border-subtle);
-    transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.25s ease;
+    transition: transform 0.25s var(--ease-out-quint), box-shadow 0.25s ease;
     position: relative;
     overflow: hidden;
 }
@@ -991,12 +1032,12 @@ body.v7-marquee-page h3 {
     border-radius: 20px;
     box-shadow: 0 0 0 1px var(--v7-border-subtle);
     position: relative;
-    transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.2s ease;
+    transition: transform 0.25s var(--ease-out-quint), box-shadow 0.2s ease;
 }
 
 .testimonial-refined:hover {
-    transform: translateY(-4px) rotate(-1deg);
-    box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.2), 0 12px 40px rgba(0, 0, 0, 0.3);
 }
 
 .testimonial-refined::before {
@@ -1171,6 +1212,11 @@ body.v7-marquee-page h3 {
 
 .cta-refined .btn-primary:hover {
     background: #1a1a24;
+}
+
+.cta-refined .btn-primary:active {
+    transform: scale(0.97);
+    transition-duration: 0.1s;
 }
 
 /* =====================================================
@@ -1359,7 +1405,8 @@ body.v7-marquee-page h3 {
 
 @media (prefers-reduced-motion: reduce) {
     /* Disable ambient/decorative animations */
-    .accent-orb {
+    .accent-orb,
+    .demo-placeholder-icon {
         animation: none;
     }
 

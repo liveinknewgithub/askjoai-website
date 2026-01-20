@@ -469,15 +469,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>
-        // GSAP ScrollTrigger - Demo window expansion
-        // Only runs if GSAP loaded successfully
         (function() {
-            // Check if GSAP is available
+            // Session-based intro animation caching
+            // Skip hero animations for returning visitors in the same session
+            const hasSeenIntro = sessionStorage.getItem('v7-hero-intro');
+            if (hasSeenIntro) {
+                document.body.classList.add('skip-intro');
+            } else {
+                sessionStorage.setItem('v7-hero-intro', 'true');
+            }
+
+            // Check for reduced motion preference
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // GSAP ScrollTrigger - Demo window expansion
+            // Only runs if GSAP loaded successfully
             if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
                 gsap.registerPlugin(ScrollTrigger);
 
-                // Only run scroll animation if user hasn't requested reduced motion
-                if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                if (!prefersReducedMotion) {
                     // Add class to indicate GSAP is ready (enables scaled-down initial state)
                     document.body.classList.add('gsap-ready');
 
@@ -493,24 +503,47 @@
                     });
                 }
             }
-            // If GSAP fails to load, the demo window stays at scale(1) via CSS fallback
-        })();
 
-        // Scroll animations (vanilla JS - always works)
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                    observer.unobserve(entry.target);
+            // Pause looping animations when off-screen (saves GPU resources)
+            if (!prefersReducedMotion) {
+                // Pause accent orbs when not visible
+                const orbs = document.querySelectorAll('.accent-orb');
+                const orbObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        entry.target.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
+                    });
+                }, { threshold: 0 });
+                orbs.forEach(orb => orbObserver.observe(orb));
+
+                // Pause marquee when not visible
+                const marqueeTrack = document.querySelector('.app-marquee-track');
+                if (marqueeTrack) {
+                    const marqueeObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            entry.target.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
+                        });
+                    }, { threshold: 0 });
+                    marqueeObserver.observe(marqueeTrack);
                 }
+
+                // Pause demo placeholder pulse when not visible
+                const demoPulse = document.querySelector('.demo-placeholder-icon');
+                if (demoPulse) {
+                    const pulseObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            entry.target.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
+                        });
+                    }, { threshold: 0 });
+                    pulseObserver.observe(demoPulse);
+                }
+            }
+
+            // Make all sections visible immediately (no scroll-triggered fades)
+            // Per Emil's guidelines: "No scroll animations on marketing pages"
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                el.classList.add('animate-in');
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-        document.querySelectorAll('.stagger-children').forEach(parent => {
-            Array.from(parent.children).forEach((child, index) => {
-                child.style.transitionDelay = `${index * 0.1}s`;
-            });
-        });
+        })();
 
         // Email validation
         const emailInputs = document.querySelectorAll('.v7-email-input');
