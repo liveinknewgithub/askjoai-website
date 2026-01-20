@@ -40,6 +40,14 @@
 body.v7-marquee-page {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--v7-bg-dark);
+    color: var(--v7-text-bright);
+}
+
+/* Override light mode text colors for dark page */
+body.v7-marquee-page h1,
+body.v7-marquee-page h2,
+body.v7-marquee-page h3 {
+    color: var(--v7-text-bright);
 }
 
 /* Scroll margin for anchor links (accounts for fixed header) */
