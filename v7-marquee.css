@@ -14,12 +14,37 @@
     --v7-text-dim: rgba(255, 255, 255, 0.6);
     --v7-border-subtle: rgba(255, 255, 255, 0.08);
     --v7-marquee-speed: 40s;
+    --border-hairline: 1px;
+
+    /* Z-index scale */
+    --z-behind: -1;
+    --z-default: 0;
+    --z-above: 1;
+    --z-overlay: 10;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-modal: 300;
+    --z-tooltip: 400;
+    --z-skip-link: 500;
+}
+
+/* Hairline borders on retina displays */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min-resolution: 192dpi) {
+    :root {
+        --border-hairline: 0.5px;
+    }
 }
 
 /* Base overrides */
 body.v7-marquee-page {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--v7-bg-dark);
+}
+
+/* Scroll margin for anchor links (accounts for fixed header) */
+[id] {
+    scroll-margin-top: 80px;
 }
 
 /* Font family utilities */
@@ -174,7 +199,7 @@ body.v7-marquee-page {
 
 /* Footer border */
 .v7-footer {
-    border-top: 1px solid var(--v7-border-subtle);
+    border-top: var(--border-hairline) solid var(--v7-border-subtle);
 }
 
 /* =====================================================
@@ -190,6 +215,7 @@ body.v7-marquee-page {
     background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     background-size: 32px 32px;
     pointer-events: none;
+    user-select: none;
     z-index: 0;
 }
 
@@ -207,6 +233,7 @@ body.v7-marquee-page {
     opacity: 0.15;
     animation: float 20s ease-in-out infinite;
     pointer-events: none;
+    user-select: none;
     will-change: transform;
 }
 
@@ -299,6 +326,7 @@ body.v7-marquee-page {
     letter-spacing: -0.03em;
     color: var(--v7-text-bright);
     margin-bottom: var(--space-lg);
+    text-wrap: balance;
 }
 
 .v7-hero .hero-title .text-gradient {
@@ -392,15 +420,15 @@ body.v7-marquee-page {
     font-size: 14px;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.85);
-    border: 1px solid var(--v7-border-subtle);
+    box-shadow: 0 0 0 1px var(--v7-border-subtle);
     white-space: nowrap;
-    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s cubic-bezier(0.23, 1, 0.32, 1);
     cursor: default;
 }
 
 .app-marquee:hover .app-tag:hover {
     background: rgba(0, 153, 255, 0.1);
-    border-color: rgba(0, 153, 255, 0.3);
+    box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.3);
     transform: translateY(-2px);
 }
 
@@ -566,8 +594,8 @@ body.v7-marquee-page {
     background: var(--v7-bg-card);
     border-radius: 24px;
     overflow: hidden;
-    border: 1px solid var(--v7-border-subtle);
     box-shadow:
+        0 0 0 1px var(--v7-border-subtle),
         0 4px 6px rgba(0, 0, 0, 0.3),
         0 20px 60px rgba(0, 0, 0, 0.5),
         0 0 100px rgba(0, 153, 255, 0.1);
@@ -588,7 +616,7 @@ body.v7-marquee-page {
     gap: 8px;
     padding: 14px 16px;
     background: rgba(0, 0, 0, 0.4);
-    border-bottom: 1px solid var(--v7-border-subtle);
+    border-bottom: var(--border-hairline) solid var(--v7-border-subtle);
 }
 
 .demo-dot {
@@ -634,6 +662,7 @@ body.v7-marquee-page {
     border-radius: 50%;
     font-size: 32px;
     border: 2px solid rgba(0, 153, 255, 0.2);
+    user-select: none;
 }
 
 .demo-placeholder-text {
@@ -656,6 +685,7 @@ body.v7-marquee-page {
 .avatar-stack {
     display: flex;
     margin-right: 8px;
+    user-select: none;
 }
 
 .avatar-stack-item {
@@ -714,6 +744,7 @@ body.v7-marquee-page {
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.1;
+    text-wrap: balance;
 }
 
 /* =====================================================
@@ -725,7 +756,7 @@ body.v7-marquee-page {
     background: var(--v7-bg-card);
     padding: var(--space-3xl);
     border-radius: 24px;
-    border: 1px solid var(--v7-border-subtle);
+    box-shadow: 0 0 0 1px var(--v7-border-subtle);
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -745,6 +776,7 @@ body.v7-marquee-page {
     font-size: 48px;
     margin-bottom: var(--space-lg);
     filter: grayscale(1) brightness(2);
+    user-select: none;
 }
 
 .solution-card h3 {
@@ -831,6 +863,7 @@ body.v7-marquee-page {
     position: relative;
     z-index: 1;
     transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.2s ease, color 0.2s ease;
+    user-select: none;
 }
 
 .step-item:hover .step-number {
@@ -870,8 +903,8 @@ body.v7-marquee-page {
     background: var(--v7-bg-card);
     padding: var(--space-xl);
     border-radius: 20px;
-    border: 1px solid var(--v7-border-subtle);
-    transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.2s ease, box-shadow 0.25s ease;
+    box-shadow: 0 0 0 1px var(--v7-border-subtle);
+    transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.25s ease;
     position: relative;
     overflow: hidden;
 }
@@ -890,8 +923,7 @@ body.v7-marquee-page {
 
 .feature-refined:hover {
     transform: translateY(-6px);
-    border-color: rgba(0, 153, 255, 0.3);
-    box-shadow: 0 20px 60px rgba(0, 153, 255, 0.15);
+    box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.3), 0 20px 60px rgba(0, 153, 255, 0.15);
 }
 
 .feature-refined:hover::before {
@@ -911,6 +943,7 @@ body.v7-marquee-page {
     margin-bottom: var(--space-md);
     position: relative;
     z-index: 1;
+    user-select: none;
 }
 
 .feature-refined h3 {
@@ -946,14 +979,14 @@ body.v7-marquee-page {
     background: var(--v7-bg-card);
     padding: var(--space-xl);
     border-radius: 20px;
-    border: 1px solid var(--v7-border-subtle);
+    box-shadow: 0 0 0 1px var(--v7-border-subtle);
     position: relative;
-    transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.2s ease;
+    transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.2s ease;
 }
 
 .testimonial-refined:hover {
     transform: translateY(-4px) rotate(-1deg);
-    border-color: rgba(0, 153, 255, 0.2);
+    box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.2);
 }
 
 .testimonial-refined::before {
@@ -982,7 +1015,7 @@ body.v7-marquee-page {
     align-items: center;
     gap: var(--space-md);
     padding-top: var(--space-md);
-    border-top: 1px solid var(--v7-border-subtle);
+    border-top: var(--border-hairline) solid var(--v7-border-subtle);
 }
 
 .author-avatar {
@@ -1026,12 +1059,12 @@ body.v7-marquee-page {
     background: var(--v7-bg-card);
     padding: var(--space-xl);
     border-radius: 16px;
-    border: 1px solid var(--v7-border-subtle);
-    transition: border-color 0.2s ease;
+    box-shadow: 0 0 0 1px var(--v7-border-subtle);
+    transition: box-shadow 0.2s ease;
 }
 
 .faq-item-refined:hover {
-    border-color: rgba(0, 153, 255, 0.2);
+    box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.2);
 }
 
 .faq-item-refined h3 {
@@ -1064,6 +1097,7 @@ body.v7-marquee-page {
     letter-spacing: -0.03em;
     margin-bottom: var(--space-lg);
     color: var(--v7-text-bright);
+    text-wrap: balance;
 }
 
 .privacy-statement p {
@@ -1102,6 +1136,7 @@ body.v7-marquee-page {
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -0.02em;
+    text-wrap: balance;
 }
 
 .cta-refined .v7-email-input {
@@ -1134,7 +1169,7 @@ body.v7-marquee-page {
 
 .social-proof-section {
     padding: var(--space-3xl) 0;
-    border-bottom: 1px solid var(--v7-border-subtle);
+    border-bottom: var(--border-hairline) solid var(--v7-border-subtle);
 }
 
 .featured-label {
@@ -1357,5 +1392,28 @@ body.v7-marquee-page {
     /* Disable stagger delays set by JS */
     .stagger-children > * {
         transition-delay: 0s !important;
+    }
+}
+
+/* =====================================================
+   Touch devices - disable hover transforms
+   Prevents "stuck hover" on touch
+   ===================================================== */
+
+@media (hover: none) {
+    /* Reset hover transforms on touch devices */
+    .app-marquee:hover .app-tag:hover,
+    .step-item:hover .step-number,
+    .feature-refined:hover,
+    .testimonial-refined:hover,
+    .v7-hero .btn-primary:hover,
+    .v7-hero .btn-secondary:hover,
+    .cta-refined .btn-primary:hover {
+        transform: none;
+    }
+
+    /* Disable marquee pause on touch (no hover to unpause) */
+    .app-marquee:hover .app-marquee-track {
+        animation-play-state: running;
     }
 }
