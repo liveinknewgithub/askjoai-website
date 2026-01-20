@@ -745,6 +745,7 @@ body.v7-marquee-page {
     letter-spacing: -0.02em;
     line-height: 1.1;
     text-wrap: balance;
+    color: var(--v7-text-bright);
 }
 
 /* =====================================================
@@ -877,6 +878,7 @@ body.v7-marquee-page {
     font-size: 22px;
     font-weight: 600;
     margin-bottom: var(--space-sm);
+    color: var(--v7-text-bright);
 }
 
 .step-item p {
