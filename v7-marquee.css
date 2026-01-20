@@ -203,10 +203,11 @@ body.v7-marquee-page {
     height: 400px;
     background: var(--v7-accent);
     border-radius: 50%;
-    filter: blur(150px);
+    filter: blur(100px);
     opacity: 0.15;
     animation: float 20s ease-in-out infinite;
     pointer-events: none;
+    will-change: transform;
 }
 
 .accent-orb-1 {
@@ -252,7 +253,7 @@ body.v7-marquee-page {
     transform: translate(-50%, -50%);
     z-index: 0;
     opacity: 0;
-    animation: fadeInVideo 1.5s ease-out 0.3s forwards;
+    animation: fadeInVideo 0.8s ease-out 0.3s forwards;
 }
 
 @keyframes fadeInVideo {
@@ -327,14 +328,14 @@ body.v7-marquee-page {
     text-align: left;
     max-width: 800px;
     opacity: 0;
-    transform: translateY(30px);
-    animation: heroReveal 1s ease-out 0.2s forwards;
+    transform: translateY(20px) scale(0.98);
+    animation: heroReveal 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.2s forwards;
 }
 
 @keyframes heroReveal {
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
@@ -393,7 +394,7 @@ body.v7-marquee-page {
     color: rgba(255, 255, 255, 0.85);
     border: 1px solid var(--v7-border-subtle);
     white-space: nowrap;
-    transition: all 0.2s ease;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s cubic-bezier(0.23, 1, 0.32, 1);
     cursor: default;
 }
 
@@ -482,7 +483,7 @@ body.v7-marquee-page {
     background: rgba(255, 255, 255, 0.03);
     color: white;
     outline: none;
-    transition: all 0.2s ease;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
 .v7-email-input::placeholder {
@@ -510,7 +511,7 @@ body.v7-marquee-page {
     border-radius: 12px;
     cursor: pointer;
     overflow: hidden;
-    transition: all 0.2s ease;
+    transition: background-color 0.15s ease, transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.2s ease;
 }
 
 .v7-hero .btn-primary::before {
@@ -522,7 +523,7 @@ body.v7-marquee-page {
     height: 100%;
     background: rgba(255, 255, 255, 0.2);
     transform: skewX(-15deg);
-    transition: left 0.5s ease;
+    transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .v7-hero .btn-primary:hover {
@@ -545,7 +546,7 @@ body.v7-marquee-page {
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
 .v7-hero .btn-secondary:hover {
@@ -578,7 +579,7 @@ body.v7-marquee-page {
 
 /* When GSAP is available, start scaled down for animation */
 .gsap-ready .demo-window {
-    transform: scale(0.7);
+    transform: scale(0.9);
 }
 
 .demo-titlebar {
@@ -829,13 +830,13 @@ body.v7-marquee-page {
     margin-bottom: var(--space-lg);
     position: relative;
     z-index: 1;
-    transition: all 0.3s ease;
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.2s ease, color 0.2s ease;
 }
 
 .step-item:hover .step-number {
     background: var(--v7-accent);
     color: white;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .step-item h3 {
@@ -870,7 +871,7 @@ body.v7-marquee-page {
     padding: var(--space-xl);
     border-radius: 20px;
     border: 1px solid var(--v7-border-subtle);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.2s ease, box-shadow 0.25s ease;
     position: relative;
     overflow: hidden;
 }
@@ -884,11 +885,11 @@ body.v7-marquee-page {
     height: 0;
     background: var(--v7-accent);
     opacity: 0.05;
-    transition: height 0.4s ease;
+    transition: height 0.25s ease;
 }
 
 .feature-refined:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     border-color: rgba(0, 153, 255, 0.3);
     box-shadow: 0 20px 60px rgba(0, 153, 255, 0.15);
 }
@@ -947,7 +948,7 @@ body.v7-marquee-page {
     border-radius: 20px;
     border: 1px solid var(--v7-border-subtle);
     position: relative;
-    transition: all 0.4s ease;
+    transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.2s ease;
 }
 
 .testimonial-refined:hover {
@@ -1026,7 +1027,7 @@ body.v7-marquee-page {
     padding: var(--space-xl);
     border-radius: 16px;
     border: 1px solid var(--v7-border-subtle);
-    transition: all 0.3s ease;
+    transition: border-color 0.2s ease;
 }
 
 .faq-item-refined:hover {
@@ -1304,5 +1305,57 @@ body.v7-marquee-page {
     .waitlist-proof {
         flex-direction: column;
         align-items: flex-start;
+    }
+}
+
+/* =====================================================
+   Reduced motion - comprehensive accessibility rules
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    /* Disable ambient/decorative animations */
+    .accent-orb {
+        animation: none;
+    }
+
+    /* Disable page load animations */
+    .v7-hero-content {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .v7-hero .hero-title .text-gradient::after {
+        animation: none;
+        transform: scaleX(1);
+    }
+
+    .v7-hero-video {
+        animation: none;
+        opacity: 0.6;
+    }
+
+    /* Disable all hover transitions */
+    .step-number,
+    .feature-refined,
+    .feature-refined::before,
+    .testimonial-refined,
+    .faq-item-refined,
+    .app-tag,
+    .v7-email-input,
+    .v7-hero .btn-primary,
+    .v7-hero .btn-primary::before,
+    .v7-hero .btn-secondary {
+        transition: none;
+    }
+
+    /* Disable GSAP demo window animation */
+    .gsap-ready .demo-window {
+        transform: none;
+    }
+
+    /* Disable stagger delays set by JS */
+    .stagger-children > * {
+        transition-delay: 0s !important;
     }
 }
