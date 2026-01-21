@@ -532,13 +532,13 @@ body.v7-marquee-page [role="button"] {
    ===================================================== */
 
 .hero-tagline {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(18px, 3vw, 24px);
-    font-weight: 500;
-    line-height: 1.4;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: clamp(16px, 2.5vw, 20px);
+    font-weight: 400;
+    line-height: 1.6;
     margin-bottom: var(--space-xl);
-    color: rgba(255, 255, 255, 0.9);
-    max-width: 600px;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 540px;
 }
 
 .v7-hero .hero-requirement {
@@ -790,11 +790,7 @@ body.v7-marquee-page [role="button"] {
    ===================================================== */
 
 .waitlist-proof {
-    margin-top: var(--space-xl);
-    display: flex;
-    align-items: center;
-    gap: var(--space-md);
-    flex-wrap: wrap;
+    margin-top: var(--space-lg);
 }
 
 .avatar-stack {
@@ -840,8 +836,8 @@ body.v7-marquee-page [role="button"] {
 
 .waitlist-count {
     font-size: 14px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
     font-variant-numeric: tabular-nums;
 }
 
@@ -1026,9 +1022,15 @@ body.v7-marquee-page [role="button"] {
    Feature cards
    ===================================================== */
 
+/* Features bento grid */
 .features-refined {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+        "hero tempura"
+        "hero kitchen"
+        "hero conference";
     gap: var(--space-lg);
     max-width: 1000px;
     margin: 0 auto;
@@ -1056,6 +1058,71 @@ body.v7-marquee-page [role="button"] {
     transition: height 0.25s ease;
 }
 
+/* Hero feature card - "Prep me for my 2pm" */
+.feature-refined--hero {
+    grid-area: hero;
+    padding: var(--space-2xl);
+    border: 2px solid var(--v7-accent);
+    background: linear-gradient(180deg, rgba(0, 153, 255, 0.1) 0%, var(--v7-bg-card) 50%);
+    display: flex;
+    flex-direction: column;
+}
+
+.feature-refined--hero .feature-icon-wrapper {
+    width: 72px;
+    height: 72px;
+    font-size: 36px;
+    margin-bottom: var(--space-lg);
+}
+
+.feature-refined--hero h3 {
+    font-size: 22px;
+    line-height: 1.3;
+    margin-bottom: var(--space-md);
+}
+
+.feature-refined--hero p {
+    font-size: 16px;
+    line-height: 1.8;
+    flex-grow: 1;
+}
+
+/* Source icons row for hero card */
+.feature-sources {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: var(--border-hairline) solid var(--v7-border-subtle);
+}
+
+.feature-source-icon {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--v7-text-dim);
+    background: rgba(0, 153, 255, 0.1);
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.feature-source-icon span {
+    font-size: 14px;
+}
+
+.feature-refined--tempura {
+    grid-area: tempura;
+}
+
+.feature-refined--kitchen {
+    grid-area: kitchen;
+}
+
+.feature-refined--conference {
+    grid-area: conference;
+}
+
 @media (hover: hover) and (pointer: fine) {
     .feature-refined:hover {
         transform: translateY(-6px);
@@ -1064,6 +1131,29 @@ body.v7-marquee-page [role="button"] {
 
     .feature-refined:hover::before {
         height: 100%;
+    }
+
+    .feature-refined--hero:hover {
+        box-shadow: 0 0 0 2px var(--v7-accent), 0 24px 60px rgba(0, 153, 255, 0.25);
+    }
+}
+
+@media (max-width: 768px) {
+    .features-refined {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "hero"
+            "tempura"
+            "kitchen"
+            "conference";
+    }
+
+    .feature-refined--hero {
+        padding: var(--space-xl);
+    }
+
+    .feature-sources {
+        flex-wrap: wrap;
     }
 }
 
@@ -1104,11 +1194,16 @@ body.v7-marquee-page [role="button"] {
    Testimonials
    ===================================================== */
 
+/* Testimonials bento grid */
 .testimonials-refined {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "sarah michael"
+        "james james";
     gap: var(--space-lg);
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
@@ -1121,10 +1216,59 @@ body.v7-marquee-page [role="button"] {
     transition: transform 0.25s var(--ease-out-quint), box-shadow 0.2s ease;
 }
 
+/* Hero testimonial - Sarah */
+.testimonial-refined--sarah {
+    grid-area: sarah;
+    padding: var(--space-2xl);
+    border: 2px solid var(--v7-accent);
+    background: linear-gradient(135deg, rgba(0, 153, 255, 0.08) 0%, var(--v7-bg-card) 100%);
+}
+
+.testimonial-refined--sarah blockquote {
+    font-size: 18px;
+    line-height: 1.9;
+}
+
+.testimonial-refined--sarah::before {
+    font-size: 100px;
+    color: var(--v7-accent);
+    opacity: 0.15;
+}
+
+.testimonial-refined--michael {
+    grid-area: michael;
+}
+
+/* Wide testimonial - James */
+.testimonial-refined--james {
+    grid-area: james;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xl);
+    padding: var(--space-xl) var(--space-2xl);
+}
+
+.testimonial-refined--james blockquote {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.testimonial-refined--james .testimonial-author-refined {
+    flex-shrink: 0;
+    padding-top: 0;
+    border-top: none;
+    border-left: var(--border-hairline) solid var(--v7-border-subtle);
+    padding-left: var(--space-xl);
+}
+
 @media (hover: hover) and (pointer: fine) {
     .testimonial-refined:hover {
         transform: translateY(-4px);
         box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.2), 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .testimonial-refined--sarah:hover {
+        box-shadow: 0 0 0 2px var(--v7-accent), 0 16px 50px rgba(0, 153, 255, 0.2);
     }
 }
 
@@ -1138,6 +1282,34 @@ body.v7-marquee-page [role="button"] {
     line-height: 1;
     color: var(--v7-accent);
     opacity: 0.1;
+}
+
+@media (max-width: 768px) {
+    .testimonials-refined {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "sarah"
+            "michael"
+            "james";
+    }
+
+    .testimonial-refined--sarah {
+        padding: var(--space-xl);
+    }
+
+    .testimonial-refined--james {
+        flex-direction: column;
+        gap: var(--space-lg);
+        padding: var(--space-xl);
+    }
+
+    .testimonial-refined--james .testimonial-author-refined {
+        border-left: none;
+        border-top: var(--border-hairline) solid var(--v7-border-subtle);
+        padding-left: 0;
+        padding-top: var(--space-md);
+        width: 100%;
+    }
 }
 
 .testimonial-refined blockquote {
@@ -1489,11 +1661,6 @@ body.v7-marquee-page .cta-refined h2 {
     .solution-card {
         padding: var(--space-xl);
     }
-
-    .waitlist-proof {
-        flex-direction: column;
-        align-items: flex-start;
-    }
 }
 
 /* =====================================================
@@ -1529,6 +1696,7 @@ body.v7-marquee-page .cta-refined h2 {
     .step-number,
     .feature-refined,
     .feature-refined::before,
+    .comparison-card,
     .testimonial-refined,
     .faq-item-refined,
     .app-tag,
@@ -1568,19 +1736,94 @@ body.v7-marquee-page .cta-refined h2 {
     border-top: var(--border-hairline) solid var(--v7-border-subtle);
 }
 
+/* Comparison bento grid */
 .comparison-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+        "spotlight chatgpt"
+        "spotlight rewind"
+        "noteapps noteapps";
     gap: var(--space-lg);
-    max-width: 1000px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
 .comparison-card {
     background: var(--v7-bg-card);
     border: var(--border-hairline) solid var(--v7-border-subtle);
-    border-radius: 12px;
-    padding: var(--space-lg);
+    border-radius: 16px;
+    padding: var(--space-xl);
+    transition: transform 0.25s var(--ease-out-quint), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.comparison-card--spotlight {
+    grid-area: spotlight;
+    border-color: var(--v7-accent);
+    border-width: 2px;
+    background: linear-gradient(135deg, rgba(0, 153, 255, 0.08) 0%, var(--v7-bg-card) 100%);
+}
+
+.comparison-card--spotlight h3 {
+    font-size: 20px;
+    color: var(--v7-accent);
+}
+
+.comparison-card--spotlight .comparison-limitation {
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.comparison-card--chatgpt {
+    grid-area: chatgpt;
+}
+
+.comparison-card--rewind {
+    grid-area: rewind;
+}
+
+.comparison-card--noteapps {
+    grid-area: noteapps;
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+}
+
+.comparison-card--noteapps h3 {
+    flex-shrink: 0;
+}
+
+.comparison-card--noteapps .comparison-limitation {
+    margin: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .comparison-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .comparison-card--spotlight:hover {
+        box-shadow: 0 12px 40px rgba(0, 153, 255, 0.2);
+    }
+}
+
+@media (max-width: 768px) {
+    .comparison-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "spotlight"
+            "chatgpt"
+            "rewind"
+            "noteapps";
+    }
+
+    .comparison-card--noteapps {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+    }
 }
 
 .comparison-card h3 {
@@ -1907,4 +2150,183 @@ body.v7-marquee-page .cta-refined h2 {
     color: var(--v7-text-dim);
     opacity: 0.8;
     margin-top: var(--space-xs);
+}
+
+/* =====================================================
+   Demo caption
+   ===================================================== */
+
+.demo-caption {
+    font-size: 16px;
+    color: var(--v7-text-dim);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* =====================================================
+   Author avatar images (testimonials)
+   ===================================================== */
+
+.author-avatar-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* =====================================================
+   Founders section
+   ===================================================== */
+
+.founders-row {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+}
+
+.founder-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    background: var(--v7-bg-card);
+    border: var(--border-hairline) solid var(--v7-border-subtle);
+    border-radius: 12px;
+    padding: var(--space-lg);
+}
+
+.founder-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.founder-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.founder-info strong {
+    font-size: 16px;
+    color: var(--v7-text-bright);
+}
+
+.founder-info span {
+    font-size: 14px;
+    color: var(--v7-text-dim);
+}
+
+.founder-prev {
+    font-size: 12px !important;
+    opacity: 0.7;
+}
+
+.team-contact {
+    font-size: 14px;
+    color: var(--v7-text-dim);
+    margin-top: var(--space-md);
+}
+
+.team-contact a {
+    color: var(--v7-accent);
+    text-decoration: none;
+}
+
+.team-contact a:hover {
+    text-decoration: underline;
+}
+
+/* =====================================================
+   Simplified pricing
+   ===================================================== */
+
+.pricing-simple {
+    text-align: center;
+}
+
+.pricing-main-card {
+    background: var(--v7-bg-card);
+    border: 2px solid var(--v7-accent);
+    border-radius: 20px;
+    padding: var(--space-3xl);
+}
+
+.pricing-amount-large {
+    font-size: 56px;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--v7-text-bright);
+    margin-bottom: var(--space-sm);
+    font-variant-numeric: tabular-nums;
+}
+
+.pricing-per {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--v7-text-dim);
+}
+
+.pricing-explanation {
+    font-size: 16px;
+    color: var(--v7-text-dim);
+    max-width: 400px;
+    margin: 0 auto var(--space-xl);
+    line-height: 1.6;
+}
+
+.pricing-details {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+    padding-top: var(--space-lg);
+    border-top: var(--border-hairline) solid var(--v7-border-subtle);
+}
+
+.pricing-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.detail-label {
+    font-size: 12px;
+    color: var(--v7-text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.detail-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--v7-accent);
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+@media (max-width: 768px) {
+    .founders-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .founder-card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .pricing-main-card {
+        padding: var(--space-xl);
+    }
+
+    .pricing-amount-large {
+        font-size: 42px;
+    }
+
+    .pricing-details {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
 }

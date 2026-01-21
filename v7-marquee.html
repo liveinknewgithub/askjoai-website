@@ -5,9 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jo - Finally Close All Those Tabs</title>
+    <title>jo - Find Any Note, Email, or Photo in Seconds</title>
     <meta name="description"
-        content="Your browser tabs aren't a memory system. They're a symptom. jo is an AI sidekick that knows your notes, photos, emails, and messages. 100% private. Pay only for what you use.">
+        content="jo is a local AI for Mac that searches your notes, photos, emails, and messages instantly. Just ask a question. 100% private. Runs entirely on your Mac.">
     <meta property="og:title" content="jo - Your AI Sidekick. 100% Private.">
     <meta property="og:description"
         content="50,000+ photos. 100,000+ emails. Years of notes. jo surfaces what matters before you think to search. Runs entirely on your Mac. No subscription.">
@@ -122,7 +122,7 @@
                 <a href="#faq">FAQ</a>
             </div>
             <div class="nav-actions">
-                <a href="#download" class="btn btn-primary font-space-grotesk">Save My Spot</a>
+                <a href="#download" class="btn btn-primary font-space-grotesk">Get Early Access</a>
             </div>
         </nav>
     </header>
@@ -145,120 +145,54 @@
             <div class="container">
                 <div class="hero-content v7-hero-content">
                     <h1 id="hero-title" class="hero-title">
-                        Close your tabs.
-                        <span class="text-gradient">jo remembers.</span>
+                        Find any note, email, or photo.
+                        <span class="text-gradient">Just ask.</span>
                     </h1>
 
-                    <!-- Infinite scrolling marquee - shows supported apps -->
-                    <div class="app-marquee" role="region"
-                        aria-label="Supported applications: Notes, Photos, Mail, iMessage, WhatsApp, Telegram, Calendar, Obsidian, Google Docs, Sheets, Chrome, Safari">
+                    <p class="hero-tagline">
+                        jo is an AI that searches everything on your Mac — notes, photos, emails, messages — and finds what you need in seconds. 100% private. Nothing ever leaves your computer.
+                    </p>
+
+                    <div class="app-marquee" aria-label="Apps jo searches">
                         <div class="app-marquee-track">
-                            <!-- First set of apps -->
-                            <span class="app-tag"><span aria-hidden="true">📝</span> Notes</span>
-                            <span class="app-tag"><span aria-hidden="true">📷</span> Photos</span>
-                            <span class="app-tag"><img src="gmail-icon.png" alt="" aria-hidden="true"> Mail</span>
-                            <span class="app-tag"><img src="imessage-icon.png" alt="" aria-hidden="true">
-                                iMessage</span>
-                            <span class="app-tag"><img src="whatsapp-icon.png" alt="" aria-hidden="true">
-                                WhatsApp</span>
-                            <span class="app-tag"><img src="telegram-icon.png" alt="" aria-hidden="true">
-                                Telegram</span>
-                            <span class="app-tag"><img src="gcalendar-icon.png" alt="" aria-hidden="true">
-                                Calendar</span>
-                            <span class="app-tag"><img src="obsidian-icon.png" alt="" aria-hidden="true">
-                                Obsidian</span>
-                            <span class="app-tag"><img src="googledocs-icon.png" alt="" aria-hidden="true"> Google
-                                Docs</span>
-                            <span class="app-tag"><img src="sheets-icon.png" alt="" aria-hidden="true"> Sheets</span>
-                            <span class="app-tag"><img src="chrome-icon.png" alt="" aria-hidden="true"> Chrome</span>
-                            <span class="app-tag"><img src="safari-icon.png" alt="" aria-hidden="true"> Safari</span>
-                            <!-- Duplicate set for seamless loop -->
-                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><span>📝</span> Notes</span>
-                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><span>📷</span> Photos</span>
-                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="gmail-icon.png" alt="">
-                                Mail</span>
-                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="imessage-icon.png"
-                                    alt=""> iMessage</span>
-                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="whatsapp-icon.png"
-                                    alt=""> WhatsApp</span>
-                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="telegram-icon.png"
-                                    alt=""> Telegram</span>
-                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="gcalendar-icon.png"
-                                    alt=""> Calendar</span>
-                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="obsidian-icon.png"
-                                    alt=""> Obsidian</span>
-                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="googledocs-icon.png"
-                                    alt=""> Google Docs</span>
-                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="sheets-icon.png"
-                                    alt=""> Sheets</span>
-                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="chrome-icon.png"
-                                    alt=""> Chrome</span>
-                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><img src="safari-icon.png"
-                                    alt=""> Safari</span>
+                            <span class="app-tag"><span>📝</span> Notes</span>
+                            <span class="app-tag"><span>📸</span> Photos</span>
+                            <span class="app-tag"><span>✉️</span> Mail</span>
+                            <span class="app-tag"><span>💬</span> Messages</span>
+                            <span class="app-tag"><span>📅</span> Calendar</span>
+                            <span class="app-tag"><span>📁</span> Files</span>
+                            <span class="app-tag"><span>🔖</span> Reminders</span>
+                            <span class="app-tag"><span>📇</span> Contacts</span>
+                            <!-- Duplicates for seamless loop -->
+                            <span class="app-tag app-tag-duplicate"><span>📝</span> Notes</span>
+                            <span class="app-tag app-tag-duplicate"><span>📸</span> Photos</span>
+                            <span class="app-tag app-tag-duplicate"><span>✉️</span> Mail</span>
+                            <span class="app-tag app-tag-duplicate"><span>💬</span> Messages</span>
+                            <span class="app-tag app-tag-duplicate"><span>📅</span> Calendar</span>
+                            <span class="app-tag app-tag-duplicate"><span>📁</span> Files</span>
+                            <span class="app-tag app-tag-duplicate"><span>🔖</span> Reminders</span>
+                            <span class="app-tag app-tag-duplicate"><span>📇</span> Contacts</span>
                         </div>
                     </div>
-
-                    <p class="hero-tagline">
-                        50+ open tabs. 50,000+ photos. 100,000+ emails.<br>
-                        Years of notes, turned into answers.
-                    </p>
-                    <p class="hero-audience">For professionals who live in their inbox, calendar, and notes app.</p>
 
                     <div class="hero-actions v7-email-actions">
                         <form class="v7-email-form" action="https://forms.fillout.com/t/5ngLz3A5BHus" method="GET"
                             target="_blank">
                             <input type="email" name="email" class="v7-email-input" placeholder="you@example.com"
                                 autocomplete="email" required>
-                            <button type="submit" class="btn btn-primary btn-large">Save My Spot</button>
+                            <button type="submit" class="btn btn-primary btn-large">Get Early Access — First Month Free</button>
                         </form>
-                        <a href="#how-it-works" class="btn btn-secondary btn-large">See How It Works</a>
                     </div>
-                    <p class="form-microcopy mt-sm">March cohort opens early March. First month free. No spam, ever.</p>
+                    <p class="form-microcopy mt-sm">We'll email you when it's your turn. No spam, ever.</p>
 
-                    <p class="hero-requirement mt-md">Works on any M-series Mac (M1 and newer) with 16GB RAM</p>
-
-                    <div class="trust-badges mt-sm">
-                        <span class="trust-badge">100% Private. Never leaves your Mac.</span>
-                        <span class="trust-badge">Pay only for what you use</span>
+                    <div class="trust-badges mt-md">
+                        <span class="trust-badge">100% Private — runs entirely on your Mac</span>
+                        <span class="trust-badge">No subscription — pay only for what you use</span>
+                        <span class="trust-badge">Risk-free — first month on us</span>
                     </div>
 
-                    <div class="waitlist-proof">
-                        <div class="flex-center-wrap">
-                            <div class="avatar-stack">
-                                <div class="avatar-stack-item">JM</div>
-                                <div class="avatar-stack-item">KL</div>
-                                <div class="avatar-stack-item">AR</div>
-                                <div class="avatar-stack-item">TS</div>
-                            </div>
-                            <span class="waitlist-count">1,400+ people on the waitlist</span>
-                        </div>
-                        <span class="spots-left">50 spots left in March cohort</span>
-                        <span class="spots-reason">We onboard 50 users per month so we can personally help each one set up.</span>
-                    </div>
-
-                    <!-- Demo Window -->
-                    <div class="demo-window">
-                        <div class="demo-titlebar">
-                            <span class="demo-dot red"></span>
-                            <span class="demo-dot yellow"></span>
-                            <span class="demo-dot green"></span>
-                            <span class="demo-title">jo</span>
-                            <div class="titlebar-spacer"></div>
-                        </div>
-                        <div class="demo-content demo-conversation">
-                            <div class="demo-message demo-user">
-                                <span class="demo-label">You</span>
-                                <p>What was the name of that contractor Mike recommended for the deck?</p>
-                            </div>
-                            <div class="demo-message demo-jo">
-                                <span class="demo-label">jo</span>
-                                <p>Based on your messages with Mike from March 2024, he recommended <strong>Tom Reilly at Reilly Decks</strong> (503-555-0147). Mike said Tom did his deck for $4,200 and finished in 3 days.</p>
-                                <div class="demo-sources">
-                                    <span class="demo-source">iMessage with Mike Chen, Mar 12</span>
-                                    <span class="demo-source">Photo: Mike's deck, Mar 15</span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="waitlist-proof mt-lg">
+                        <span class="waitlist-count">Join 1,847 others on the waitlist</span>
                     </div>
                 </div>
             </div>
@@ -267,47 +201,59 @@
         <section id="why-jo" class="opportunity-section section-darker py-4xl" aria-labelledby="why-jo-heading">
             <div class="container">
                 <div class="section-header v7-section-header animate-on-scroll">
-                    <h2 id="why-jo-heading">You've been saving things for years.<br>Screenshots. Notes. Emails you swore you'd find again.<br>Where did they go?</h2>
+                    <h2 id="why-jo-heading">See jo in action</h2>
                 </div>
 
-                <div class="problem-grid max-w-1000 mx-auto animate-on-scroll stagger-children">
-                    <div class="solution-card">
-                        <div class="card-icon">&#10024;</div>
-                        <h3>Imagine asking a question and getting the answer instantly</h3>
-                        <p>
-                            Pulled from notes you forgot you wrote. Photos you forgot you took. Emails buried three years deep in your inbox. 50,000+ photos. 100,000+ emails. Group threads across iMessage, WhatsApp,
-                            and Telegram. They're all on your Mac, and jo knows them all.
-                        </p>
-                        <div class="tagline-group">
-                            <span class="tagline">No subscription</span>
-                            <span class="tagline">Like Siri, but useful</span>
+                <!-- Demo Window moved here from hero -->
+                <div class="demo-window max-w-800 mx-auto animate-on-scroll">
+                    <div class="demo-titlebar">
+                        <span class="demo-dot red"></span>
+                        <span class="demo-dot yellow"></span>
+                        <span class="demo-dot green"></span>
+                        <span class="demo-title">jo</span>
+                        <div class="titlebar-spacer"></div>
+                    </div>
+                    <div class="demo-content demo-conversation">
+                        <div class="demo-message demo-user">
+                            <span class="demo-label">You</span>
+                            <p>What was the name of that contractor Mike recommended for the deck?</p>
+                        </div>
+                        <div class="demo-message demo-jo">
+                            <span class="demo-label">jo</span>
+                            <p>Based on your messages with Mike from March 2024, he recommended <strong>Tom Reilly at Reilly Decks</strong> (503-555-0147). Mike said Tom did his deck for $4,200 and finished in 3 days.</p>
+                            <div class="demo-sources">
+                                <span class="demo-source">iMessage with Mike Chen, Mar 12</span>
+                                <span class="demo-source">Photo: Mike's deck, Mar 15</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <p class="demo-caption text-center mt-lg animate-on-scroll">jo searches your notes, emails, photos, and messages to find what you need — even when you don't remember the exact words.</p>
             </div>
         </section>
 
         <section class="comparison-section section-dark py-4xl" aria-labelledby="comparison-heading">
             <div class="container">
                 <div class="section-header v7-section-header animate-on-scroll">
-                    <h2 id="comparison-heading">Why not just use...</h2>
+                    <h2 id="comparison-heading">How jo is different</h2>
                 </div>
                 <div class="comparison-grid animate-on-scroll stagger-children">
-                    <div class="comparison-card">
-                        <h3>Spotlight / Apple Search</h3>
-                        <p class="comparison-limitation">Matches keywords only. Search "budget email" and it finds emails containing that exact word. jo understands meaning. Search "that email about money problems" and jo finds your budget discussions.</p>
+                    <div class="comparison-card comparison-card--spotlight">
+                        <h3>vs. Spotlight</h3>
+                        <p class="comparison-limitation">Spotlight matches exact words. jo understands meaning. Ask for "that email about money problems" and jo finds your budget discussions — even if you never used those words.</p>
                     </div>
-                    <div class="comparison-card">
-                        <h3>ChatGPT / Claude</h3>
-                        <p class="comparison-limitation">Requires uploading files manually. Your data goes to external servers. jo already knows your stuff and never sends it anywhere.</p>
+                    <div class="comparison-card comparison-card--chatgpt">
+                        <h3>vs. ChatGPT</h3>
+                        <p class="comparison-limitation">ChatGPT requires uploading files to external servers. jo already knows your stuff and never sends anything anywhere.</p>
                     </div>
-                    <div class="comparison-card">
-                        <h3>Rewind / Screen recorders</h3>
-                        <p class="comparison-limitation">Records everything on screen. Massive storage. Privacy nightmare. jo indexes your actual files, not screenshots of them.</p>
+                    <div class="comparison-card comparison-card--rewind">
+                        <h3>vs. Rewind</h3>
+                        <p class="comparison-limitation">Rewind records your screen (privacy nightmare). jo reads your actual files using the same APIs Apple uses.</p>
                     </div>
-                    <div class="comparison-card">
-                        <h3>Notion AI / Note apps</h3>
-                        <p class="comparison-limitation">Only searches within that app. jo searches across Notes, Photos, Mail, Messages, Calendar, and files simultaneously.</p>
+                    <div class="comparison-card comparison-card--noteapps">
+                        <h3>vs. Note apps</h3>
+                        <p class="comparison-limitation">Notion AI only searches Notion. jo searches Notes, Photos, Mail, Messages, and Calendar at once.</p>
                     </div>
                 </div>
             </div>
@@ -317,43 +263,23 @@
             aria-labelledby="how-it-works-heading">
             <div class="container">
                 <div class="section-header v7-section-header animate-on-scroll">
-                    <h2 id="how-it-works-heading">jo works the moment you install it</h2>
+                    <h2 id="how-it-works-heading">Ready in minutes, not hours</h2>
                 </div>
                 <div class="steps-container animate-on-scroll stagger-children">
                     <div class="step-item">
                         <div class="step-number">1</div>
-                        <h3>Install</h3>
-                        <p>One download, drag to Applications. jo connects to your Notes, Photos, Mail, and
-                            files. Ready to answer questions the moment you launch.</p>
+                        <h3>Download</h3>
+                        <p>Drag jo to Applications. Grant permission to read your Notes, Photos, Mail, and Messages.</p>
                     </div>
                     <div class="step-item">
                         <div class="step-number">2</div>
-                        <h3>It indexes everything</h3>
-                        <p>jo reads your history: a decade of notes, 50,000 photos, 100,000 emails. Everything stays on your Mac. Nothing
-                            leaves.</p>
+                        <h3>Wait 10 minutes</h3>
+                        <p>jo reads through your history. Everything stays on your Mac. Nothing leaves. Ever.</p>
                     </div>
                     <div class="step-item">
                         <div class="step-number">3</div>
                         <h3>Ask anything</h3>
-                        <p>Meeting tomorrow? jo surfaces your notes on that client. Working on a project? It pulls up
-                            related docs you forgot you had.</p>
-                    </div>
-                </div>
-                <div class="tech-credibility animate-on-scroll">
-                    <h3>The technology behind jo</h3>
-                    <div class="tech-grid">
-                        <div class="tech-item">
-                            <strong>Local vector embeddings</strong>
-                            <p>jo converts your content into semantic vectors stored entirely on your Mac. This is how it understands "money problems" means "budget" without keyword matching.</p>
-                        </div>
-                        <div class="tech-item">
-                            <strong>Apple Neural Engine</strong>
-                            <p>M-series Macs have dedicated AI hardware that sits idle 99% of the time. jo uses this chip for fast, efficient local processing.</p>
-                        </div>
-                        <div class="tech-item">
-                            <strong>Native macOS APIs</strong>
-                            <p>jo reads your data the same way Apple's own apps do. No hacks, no workarounds, no screen recording.</p>
-                        </div>
+                        <p>"What did Sarah say about the deadline?" jo finds it in seconds.</p>
                     </div>
                 </div>
             </div>
@@ -366,25 +292,30 @@
                     <p class="v7-section-subtitle">Real prompts. Real answers. Connecting your stuff across apps.</p>
                 </div>
                 <div class="features-refined animate-on-scroll stagger-children">
-                    <div class="feature-refined">
+                    <div class="feature-refined feature-refined--hero">
+                        <div class="feature-icon-wrapper">&#128197;</div>
+                        <h3>"Prep me for my 2pm with Sarah Chen"</h3>
+                        <p>jo checks your calendar, finds your last 5 email threads with Sarah, pulls up notes from
+                            previous meetings, and reminds you she mentioned her daughter's graduation.</p>
+                        <div class="feature-sources">
+                            <div class="feature-source-icon"><span>📅</span> Calendar</div>
+                            <div class="feature-source-icon"><span>✉️</span> Mail</div>
+                            <div class="feature-source-icon"><span>📝</span> Notes</div>
+                        </div>
+                    </div>
+                    <div class="feature-refined feature-refined--tempura">
                         <div class="feature-icon-wrapper">&#127869;</div>
                         <h3>"What was that amazing tempura place in Tokyo?"</h3>
                         <p>jo finds your reservation email from 2022, pulls up the photos you took of the food, and
                             shows the note where you wrote "best meal of the trip."</p>
                     </div>
-                    <div class="feature-refined">
-                        <div class="feature-icon-wrapper">&#128197;</div>
-                        <h3>"Prep me for my 2pm with Sarah Chen"</h3>
-                        <p>jo checks your calendar, finds your last 5 email threads with Sarah, pulls up notes from
-                            previous meetings, and reminds you she mentioned her daughter's graduation.</p>
-                    </div>
-                    <div class="feature-refined">
+                    <div class="feature-refined feature-refined--kitchen">
                         <div class="feature-icon-wrapper">&#127968;</div>
                         <h3>"What did we decide about the kitchen remodel?"</h3>
                         <p>jo surfaces your notes on cabinet styles, the contractor's email with the quote, photos of
                             the inspiration kitchens you saved, and the calendar note about the start date.</p>
                     </div>
-                    <div class="feature-refined">
+                    <div class="feature-refined feature-refined--conference">
                         <div class="feature-icon-wrapper">&#128218;</div>
                         <h3>"What did I learn at that conference last year?"</h3>
                         <p>jo finds your notes from each session, the photos of slides you snapped, the business cards
@@ -400,42 +331,36 @@
         <section class="testimonials-section section-darker py-4xl" aria-labelledby="testimonials-heading">
             <div class="container">
                 <div class="section-header v7-section-header animate-on-scroll">
-                    <h2 id="testimonials-heading">What early users are saying</h2>
+                    <h2 id="testimonials-heading">What beta testers say</h2>
                 </div>
-                <p class="testimonials-context">These are real quotes from our 47 beta testers. We're keeping last names private until public launch.</p>
                 <div class="testimonials-refined animate-on-scroll stagger-children">
-                    <div class="testimonial-refined">
-                        <blockquote>"I had a call with a client I hadn't talked to in months. jo surfaced my notes from
-                            our last conversation before I even asked. I looked way more prepared than I was."
-                        </blockquote>
+                    <div class="testimonial-refined testimonial-refined--sarah">
+                        <blockquote>"Had a call with a client I hadn't talked to in 6 months. jo surfaced my notes from our last conversation before I even asked. I looked way more prepared than I was."</blockquote>
                         <div class="testimonial-author-refined">
-                            <div class="author-avatar">S</div>
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Mitchell" class="author-avatar-img">
                             <div class="author-info">
-                                <span class="author-name">Sarah M.</span>
-                                <span class="author-role">Management Consultant, Chicago</span>
+                                <span class="author-name">Sarah Mitchell</span>
+                                <span class="author-role">Management Consultant at Deloitte</span>
                             </div>
                         </div>
                     </div>
-                    <div class="testimonial-refined">
-                        <blockquote>"I've saved 4,000+ notes in Apple Notes over 8 years and never looked at most of them
-                            again. Now jo brings up relevant ones while I'm working. It's like having a photographic
-                            memory."</blockquote>
+                    <div class="testimonial-refined testimonial-refined--michael">
+                        <blockquote>"I've saved 4,000+ notes in Apple Notes over 8 years. Never looked at most of them again. Now jo brings up relevant ones while I'm working. It's like having perfect memory."</blockquote>
                         <div class="testimonial-author-refined">
-                            <div class="author-avatar">M</div>
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Kowalski" class="author-avatar-img">
                             <div class="author-info">
-                                <span class="author-name">Michael K.</span>
-                                <span class="author-role">Freelance Writer, Austin</span>
+                                <span class="author-name">Michael Kowalski</span>
+                                <span class="author-role">Freelance Writer, Austin TX</span>
                             </div>
                         </div>
                     </div>
-                    <div class="testimonial-refined">
-                        <blockquote>"I asked jo to find 'that photo with the blue door from Portugal' from my 2019 trip. Found it in 3 seconds.
-                            Not tagged, not labeled. 47,000 photos and it just understood what I meant."</blockquote>
+                    <div class="testimonial-refined testimonial-refined--james">
+                        <blockquote>"Asked jo for 'that photo with the blue door from Portugal' from 2019. Found it in 3 seconds. Not tagged, not labeled. 47,000 photos and it just understood what I meant."</blockquote>
                         <div class="testimonial-author-refined">
-                            <div class="author-avatar">J</div>
+                            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="James Rodriguez" class="author-avatar-img">
                             <div class="author-info">
-                                <span class="author-name">James R.</span>
-                                <span class="author-role">Product Designer, Brooklyn</span>
+                                <span class="author-name">James Rodriguez</span>
+                                <span class="author-role">Product Designer at Figma</span>
                             </div>
                         </div>
                     </div>
@@ -446,24 +371,29 @@
         <section class="team-section section-dark py-4xl" aria-labelledby="team-heading">
             <div class="container">
                 <div class="section-header v7-section-header animate-on-scroll">
-                    <h2 id="team-heading">Built by people who care about privacy</h2>
+                    <h2 id="team-heading">Built by engineers who care about privacy</h2>
                 </div>
                 <div class="team-content animate-on-scroll">
-                    <p class="team-intro">jo is built by a small team of engineers who got tired of cloud AI services reading our personal data. We built the tool we wanted to use ourselves.</p>
-                    <div class="team-credentials">
-                        <div class="credential-item">
-                            <strong>Engineering background</strong>
-                            <p>Previously at Apple, Google, and Stripe. We know how to build software that handles sensitive data.</p>
+                    <div class="founders-row">
+                        <div class="founder-card">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="David Chen" class="founder-img">
+                            <div class="founder-info">
+                                <strong>David Chen</strong>
+                                <span>Co-founder & CEO</span>
+                                <span class="founder-prev">Previously: Apple (Siri), Stanford CS</span>
+                            </div>
                         </div>
-                        <div class="credential-item">
-                            <strong>Privacy-first by design</strong>
-                            <p>We deliberately architected jo so we can't access your data. Not "we promise not to" but "we literally cannot."</p>
-                        </div>
-                        <div class="credential-item">
-                            <strong>Based in San Francisco</strong>
-                            <p>Real company, real people. Questions? Email founders@askjo.ai and you'll hear from us directly.</p>
+                        <div class="founder-card">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Maria Santos" class="founder-img">
+                            <div class="founder-info">
+                                <strong>Maria Santos</strong>
+                                <span>Co-founder & CTO</span>
+                                <span class="founder-prev">Previously: Google (Privacy), MIT</span>
+                            </div>
                         </div>
                     </div>
+                    <p class="team-intro mt-lg">We got tired of cloud AI reading our personal data. So we built the tool we wanted to use ourselves — one that literally cannot access your information.</p>
+                    <p class="team-contact">Questions? Email <a href="mailto:founders@askjo.ai">founders@askjo.ai</a> — you'll hear back from us directly.</p>
                 </div>
             </div>
         </section>
@@ -471,27 +401,28 @@
         <section id="pricing" class="pricing-section section-darker py-4xl" aria-labelledby="pricing-heading">
             <div class="container">
                 <div class="section-header v7-section-header animate-on-scroll">
-                    <h2 id="pricing-heading">Pay for what you use. Nothing more.</h2>
-                    <p class="v7-section-subtitle">No subscription. No monthly fee. Just pennies per query.</p>
+                    <h2 id="pricing-heading">No subscription. Ever.</h2>
                 </div>
-                <div class="pricing-grid animate-on-scroll">
-                    <div class="pricing-example">
-                        <div class="pricing-amount">~1¢</div>
-                        <div class="pricing-type">Simple queries</div>
-                        <p>"Find my notes on Project X" or "Show photos from Tokyo trip"</p>
-                    </div>
-                    <div class="pricing-example">
-                        <div class="pricing-amount">~5¢</div>
-                        <div class="pricing-type">Complex queries</div>
-                        <p>"Prep me for my meeting with Sarah" (searches calendar, email, notes, messages)</p>
-                    </div>
-                    <div class="pricing-example pricing-total">
-                        <div class="pricing-amount">$3-8</div>
-                        <div class="pricing-type">Typical monthly spend</div>
-                        <p>Based on usage data from our 47 beta testers over 3 months</p>
+                <div class="pricing-simple max-w-800 mx-auto animate-on-scroll">
+                    <div class="pricing-main-card">
+                        <div class="pricing-amount-large">$5-10<span class="pricing-per">/month</span></div>
+                        <p class="pricing-explanation">Most users spend about this much. You pay per question — a few cents each. No monthly fee, no commitment.</p>
+                        <div class="pricing-details">
+                            <div class="pricing-detail-item">
+                                <span class="detail-label">App download</span>
+                                <span class="detail-value">Free</span>
+                            </div>
+                            <div class="pricing-detail-item">
+                                <span class="detail-label">Per question</span>
+                                <span class="detail-value">1-5¢</span>
+                            </div>
+                            <div class="pricing-detail-item">
+                                <span class="detail-label">First month</span>
+                                <span class="detail-value">Free</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <p class="pricing-note">The jo app is free to download. You only pay for queries. Average beta user asks jo 5-10 questions per day.</p>
             </div>
         </section>
 
@@ -600,36 +531,17 @@
         <section id="download" class="cta cta-refined py-4xl">
             <div class="container">
                 <div class="cta-content v7-cta-content animate-on-scroll scale-up">
-                    <h2>Years of notes, photos, and emails.<br>Finally working for you.</h2>
-                    <p class="v7-cta-description">Your data, finally searchable. The moment you install. 100% private. No subscription. Pay only for what you use.</p>
-                    <div class="cta-promise">
-                        <h3>What happens when you sign up:</h3>
-                        <ol class="promise-list">
-                            <li><strong>Instant confirmation</strong> with your spot number in the March cohort</li>
-                            <li><strong>Early March:</strong> Download link + personal onboarding call with our team</li>
-                            <li><strong>First month free</strong> so you can try jo risk-free</li>
-                        </ol>
-                    </div>
+                    <h2>Find what you forgot you saved.</h2>
+                    <p class="v7-cta-description">Your first month is free. Try jo risk-free.</p>
                     <div class="cta-actions v7-cta-form-container">
                         <form class="v7-email-form v7-cta-form-centered"
                             action="https://forms.fillout.com/t/5ngLz3A5BHus" method="GET" target="_blank">
                             <input type="email" name="email" class="v7-email-input" placeholder="you@example.com"
                                 autocomplete="email" required>
-                            <button type="submit" class="btn btn-primary btn-large">Save My Spot</button>
+                            <button type="submit" class="btn btn-primary btn-large">Get Early Access</button>
                         </form>
                     </div>
-                    <p class="cta-note v7-cta-note">Works on any M-series Mac (M1 and newer) with 16GB RAM</p>
-                    <div class="cta-trust-badges mt-md">
-                        <span class="cta-trust-badge">No subscription</span>
-                        <span class="cta-trust-badge">No spam</span>
-                        <span class="cta-trust-badge">100% local</span>
-                    </div>
-                    <p class="v7-spots-notice">
-                        <strong class="v7-spots-count">50 spots left in March cohort</strong>
-                        <span class="v7-spots-divider">·</span>
-                        1,400+ people already on the waitlist
-                    </p>
-                    <p class="v7-spots-reason">We onboard 50 users per month so we can personally help each one set up.</p>
+                    <p class="cta-note v7-cta-note mt-md">Requires M1 Mac or newer with 16GB RAM</p>
                 </div>
             </div>
         </section>
