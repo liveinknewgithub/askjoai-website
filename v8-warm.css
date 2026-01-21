@@ -1831,6 +1831,34 @@ body.v8-warm-page .v8-hero .btn-primary:active {
     opacity: 0.7;
 }
 
+.founder-linkedin {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--v8-text-dim) !important;
+    text-decoration: none;
+    transition: color 0.2s ease, gap 0.2s var(--ease-out-quint);
+}
+
+.founder-linkedin:hover {
+    color: var(--v8-amber) !important;
+    gap: 8px;
+}
+
+.founder-linkedin svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: transform 0.2s var(--ease-out-quint), opacity 0.2s ease;
+}
+
+.founder-linkedin:hover svg {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
 .team-intro {
     font-size: 18px;
     color: var(--v8-text-dim);
