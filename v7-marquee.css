@@ -191,6 +191,7 @@ body.v7-marquee-page [role="button"] {
 }
 
 .v7-cta-description {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 18px;
     margin: var(--space-lg) auto;
     max-width: 500px;
