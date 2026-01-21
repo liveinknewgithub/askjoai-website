@@ -52,10 +52,11 @@ body.v7-marquee-page {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Override light mode text colors for dark page */
+/* Override light mode text colors and font for dark page */
 body.v7-marquee-page h1,
 body.v7-marquee-page h2,
 body.v7-marquee-page h3 {
+    font-family: 'Space Grotesk', sans-serif;
     color: var(--v7-text-bright);
     text-wrap: balance;
 }
