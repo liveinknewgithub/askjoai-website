@@ -84,6 +84,91 @@ body.v7-marquee-page [role="button"] {
 }
 
 /* =====================================================
+   Nav logo animation
+   ===================================================== */
+
+body.v7-marquee-page .nav-logo .logo-text {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: navLogoIn 0.6s var(--ease-out-quint) 0.1s forwards;
+}
+
+@keyframes navLogoIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body.v7-marquee-page .nav-logo a {
+    display: inline-block;
+    transition: transform 0.2s var(--ease-out-quint);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    body.v7-marquee-page .nav-logo a:hover {
+        transform: scale(1.05);
+    }
+
+    body.v7-marquee-page .nav-logo a:hover .logo-text {
+        text-shadow: 0 0 20px rgba(0, 153, 255, 0.5);
+    }
+}
+
+/* Skip intro: show immediately */
+.skip-intro .nav-logo .logo-text {
+    animation: none;
+    opacity: 1;
+    transform: none;
+}
+
+/* Nav links stagger entrance */
+body.v7-marquee-page .nav-links a {
+    opacity: 0;
+    transform: translateY(-8px);
+    animation: navLinkIn 0.4s var(--ease-out-quint) forwards;
+}
+
+body.v7-marquee-page .nav-links a:nth-child(1) { animation-delay: 0.15s; }
+body.v7-marquee-page .nav-links a:nth-child(2) { animation-delay: 0.2s; }
+body.v7-marquee-page .nav-links a:nth-child(3) { animation-delay: 0.25s; }
+body.v7-marquee-page .nav-links a:nth-child(4) { animation-delay: 0.3s; }
+
+@keyframes navLinkIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.skip-intro .nav-links a {
+    animation: none;
+    opacity: 1;
+    transform: none;
+}
+
+/* Nav CTA button entrance */
+body.v7-marquee-page .nav-actions .btn-primary {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+    animation: navCtaIn 0.5s var(--ease-out-quint) 0.35s forwards;
+}
+
+@keyframes navCtaIn {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.skip-intro .nav-actions .btn-primary {
+    animation: none;
+    opacity: 1;
+    transform: none;
+}
+
+/* =====================================================
    Layout Utilities
    ===================================================== */
 
@@ -389,15 +474,25 @@ body.v7-marquee-page [role="button"] {
     left: 0;
     width: 100%;
     height: 4px;
-    background: var(--v7-accent);
+    background: linear-gradient(90deg, var(--v7-accent) 0%, var(--v7-accent-light) 100%);
+    border-radius: 2px;
     transform: scaleX(0);
     transform-origin: left;
-    animation: underlineReveal 0.8s ease-out 0.8s forwards;
+    animation: underlineReveal 1s var(--ease-out-quint) 0.6s forwards;
+    box-shadow: 0 0 0 0 rgba(0, 153, 255, 0);
 }
 
 @keyframes underlineReveal {
-    to {
+    0% {
+        transform: scaleX(0);
+        box-shadow: 0 0 20px 4px rgba(0, 153, 255, 0.6);
+    }
+    60% {
+        box-shadow: 0 0 20px 4px rgba(0, 153, 255, 0.4);
+    }
+    100% {
         transform: scaleX(1);
+        box-shadow: 0 0 12px 2px rgba(0, 153, 255, 0.3);
     }
 }
 
@@ -426,6 +521,7 @@ body.v7-marquee-page [role="button"] {
 .skip-intro .v7-hero .hero-title .text-gradient::after {
     animation: none;
     transform: scaleX(1);
+    box-shadow: 0 0 12px 2px rgba(0, 153, 255, 0.3);
 }
 
 .skip-intro .v7-hero-video {
@@ -546,13 +642,40 @@ body.v7-marquee-page [role="button"] {
     font-size: 13px;
 }
 
+/* Trust badges with stagger entrance */
+.v7-hero .trust-badges {
+    justify-content: flex-start;
+}
+
 .v7-hero .trust-badge {
     color: rgba(255, 255, 255, 0.7);
     font-size: 13px;
+    /* Staggered entrance */
+    opacity: 0;
+    transform: translateY(10px);
+    animation: trustBadgeIn 0.5s var(--ease-out-quint) forwards;
+}
+
+.v7-hero .trust-badge:nth-child(1) { animation-delay: 1.0s; }
+.v7-hero .trust-badge:nth-child(2) { animation-delay: 1.15s; }
+.v7-hero .trust-badge:nth-child(3) { animation-delay: 1.3s; }
+
+@keyframes trustBadgeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .v7-hero .trust-badge::before {
     color: var(--v7-accent);
+}
+
+/* Skip intro: show immediately */
+.skip-intro .v7-hero .trust-badge {
+    animation: none;
+    opacity: 1;
+    transform: none;
 }
 
 /* =====================================================
@@ -625,9 +748,54 @@ body.v7-marquee-page [role="button"] {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 100%
+    );
     transform: skewX(-15deg);
     transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Ambient shimmer animation */
+.v7-hero .btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.15) 50%,
+        transparent 100%
+    );
+    transform: skewX(-15deg);
+    animation: buttonShimmer 4s ease-in-out 2s infinite;
+}
+
+@keyframes buttonShimmer {
+    0%, 100% {
+        left: -100%;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    30% {
+        left: 150%;
+        opacity: 1;
+    }
+    31%, 100% {
+        opacity: 0;
+    }
+}
+
+/* Skip intro: delay shimmer less */
+.skip-intro .v7-hero .btn-primary::after {
+    animation-delay: 0.5s;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -815,26 +983,48 @@ body.v7-marquee-page [role="button"] {
     color: white;
     font-weight: 700;
     margin-left: -10px;
+    /* Staggered entrance animation */
+    opacity: 0;
+    transform: scale(0.5) translateX(-10px);
+    animation: avatarIn 0.4s var(--ease-out-quint) forwards;
+}
+
+.avatar-stack-item:nth-child(1) {
+    background: #005588;
+    animation-delay: 0.8s;
+}
+
+.avatar-stack-item:nth-child(2) {
+    background: #006699;
+    animation-delay: 0.9s;
+}
+
+.avatar-stack-item:nth-child(3) {
+    background: #0077aa;
+    animation-delay: 1.0s;
+}
+
+.avatar-stack-item:nth-child(4) {
+    background: #0088bb;
+    animation-delay: 1.1s;
 }
 
 .avatar-stack-item:first-child {
     margin-left: 0;
 }
 
-.avatar-stack-item:nth-child(1) {
-    background: #005588;
+@keyframes avatarIn {
+    to {
+        opacity: 1;
+        transform: scale(1) translateX(0);
+    }
 }
 
-.avatar-stack-item:nth-child(2) {
-    background: #006699;
-}
-
-.avatar-stack-item:nth-child(3) {
-    background: #0077aa;
-}
-
-.avatar-stack-item:nth-child(4) {
-    background: #0088bb;
+/* Skip intro: show avatars immediately */
+.skip-intro .avatar-stack-item {
+    animation: none;
+    opacity: 1;
+    transform: none;
 }
 
 .waitlist-count {
@@ -842,6 +1032,24 @@ body.v7-marquee-page [role="button"] {
     font-weight: 500;
     color: rgba(255, 255, 255, 0.7);
     font-variant-numeric: tabular-nums;
+    /* Fade in after avatars */
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: waitlistCountIn 0.5s var(--ease-out-quint) 1.25s forwards;
+}
+
+@keyframes waitlistCountIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Skip intro: show immediately */
+.skip-intro .waitlist-count {
+    animation: none;
+    opacity: 1;
+    transform: none;
 }
 
 .spots-left {
@@ -1069,6 +1277,8 @@ body.v7-marquee-page [role="button"] {
     background: linear-gradient(180deg, rgba(0, 153, 255, 0.1) 0%, var(--v7-bg-card) 50%);
     display: flex;
     flex-direction: column;
+    /* Subtle pulsing glow */
+    animation: heroCardGlow 3s ease-in-out 2s infinite;
 }
 
 .feature-refined--hero .feature-icon-wrapper {
@@ -1108,6 +1318,28 @@ body.v7-marquee-page [role="button"] {
     background: rgba(0, 153, 255, 0.1);
     padding: 6px 10px;
     border-radius: 6px;
+    /* Staggered entrance */
+    opacity: 0;
+    transform: translateY(8px);
+    animation: sourceIconIn 0.4s var(--ease-out-quint) forwards;
+}
+
+.feature-source-icon:nth-child(1) { animation-delay: 1.2s; }
+.feature-source-icon:nth-child(2) { animation-delay: 1.35s; }
+.feature-source-icon:nth-child(3) { animation-delay: 1.5s; }
+
+@keyframes sourceIconIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Skip intro: show immediately */
+.skip-intro .feature-source-icon {
+    animation: none;
+    opacity: 1;
+    transform: none;
 }
 
 .feature-source-icon span {
@@ -1225,6 +1457,8 @@ body.v7-marquee-page [role="button"] {
     padding: var(--space-2xl);
     border: 2px solid var(--v7-accent);
     background: linear-gradient(135deg, rgba(0, 153, 255, 0.08) 0%, var(--v7-bg-card) 100%);
+    /* Subtle pulsing glow */
+    animation: heroCardGlow 3s ease-in-out 2.5s infinite;
 }
 
 .testimonial-refined--sarah blockquote {
@@ -1688,11 +1922,67 @@ body.v7-marquee-page .cta-refined h2 {
     .v7-hero .hero-title .text-gradient::after {
         animation: none;
         transform: scaleX(1);
+        box-shadow: none;
     }
 
     .v7-hero-video {
         animation: none;
         opacity: 0.6;
+    }
+
+    /* Disable avatar stack entrance animation */
+    .avatar-stack-item {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    /* Disable button shimmer */
+    .v7-hero .btn-primary::after {
+        animation: none;
+        opacity: 0;
+    }
+
+    /* Disable feature source icon entrance */
+    .feature-source-icon {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    /* Disable hero card glow pulses */
+    .comparison-card--spotlight,
+    .feature-refined--hero,
+    .testimonial-refined--sarah {
+        animation: none;
+    }
+
+    /* Disable trust badge entrance */
+    .v7-hero .trust-badge {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    /* Disable waitlist count entrance */
+    .waitlist-count {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    /* Disable pricing card border animation */
+    .pricing-main-card::before {
+        animation: none;
+    }
+
+    /* Disable nav animations */
+    body.v7-marquee-page .nav-logo .logo-text,
+    body.v7-marquee-page .nav-links a,
+    body.v7-marquee-page .nav-actions .btn-primary {
+        animation: none;
+        opacity: 1;
+        transform: none;
     }
 
     /* Disable all hover transitions */
@@ -1706,7 +1996,9 @@ body.v7-marquee-page .cta-refined h2 {
     .v7-email-input,
     .v7-hero .btn-primary,
     .v7-hero .btn-primary::before,
-    .v7-hero .btn-secondary {
+    .v7-hero .btn-secondary,
+    body.v7-marquee-page .nav-logo a,
+    body.v7-marquee-page .nav-logo .logo-text {
         transition: none;
     }
 
@@ -1766,6 +2058,18 @@ body.v7-marquee-page .cta-refined h2 {
     border-color: var(--v7-accent);
     border-width: 2px;
     background: linear-gradient(135deg, rgba(0, 153, 255, 0.08) 0%, var(--v7-bg-card) 100%);
+    /* Subtle pulsing glow */
+    box-shadow: 0 0 0 0 rgba(0, 153, 255, 0);
+    animation: heroCardGlow 3s ease-in-out 1.5s infinite;
+}
+
+@keyframes heroCardGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px 0 rgba(0, 153, 255, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 30px 5px rgba(0, 153, 255, 0.2);
+    }
 }
 
 .comparison-card--spotlight h3 {
@@ -2252,9 +2556,50 @@ body.v7-marquee-page .cta-refined h2 {
 
 .pricing-main-card {
     background: var(--v7-bg-card);
-    border: 2px solid var(--v7-accent);
     border-radius: 20px;
     padding: var(--space-3xl);
+    position: relative;
+    /* Remove static border, use animated one */
+    border: none;
+}
+
+/* Animated gradient border */
+.pricing-main-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 2px;
+    background: conic-gradient(
+        from var(--gradient-angle, 0deg),
+        var(--v7-accent) 0%,
+        var(--v7-accent-light) 25%,
+        rgba(159, 117, 255, 0.8) 50%,
+        var(--v7-accent-light) 75%,
+        var(--v7-accent) 100%
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: rotateBorder 6s linear infinite;
+}
+
+@keyframes rotateBorder {
+    to {
+        --gradient-angle: 360deg;
+    }
+}
+
+/* Register custom property for animation */
+@property --gradient-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
 }
 
 .pricing-amount-large {
