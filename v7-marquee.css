@@ -1583,6 +1583,7 @@ body.v7-marquee-page [role="button"] {
 }
 
 .comparison-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 16px;
     font-weight: 600;
     color: var(--v7-text-bright);
@@ -1663,6 +1664,7 @@ body.v7-marquee-page [role="button"] {
 }
 
 .tech-credibility h3 {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 18px;
     font-weight: 600;
     color: var(--v7-text-bright);
@@ -1814,6 +1816,7 @@ body.v7-marquee-page [role="button"] {
 }
 
 .privacy-proof h3 {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 16px;
     font-weight: 600;
     color: var(--v7-text-bright);
@@ -1861,6 +1864,7 @@ body.v7-marquee-page [role="button"] {
 }
 
 .cta-promise h3 {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 14px;
     font-weight: 600;
     color: var(--v7-text-bright);
