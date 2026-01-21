@@ -1270,7 +1270,7 @@ body.v7-marquee-page [role="button"] {
     opacity: 0.5;
 }
 
-.cta-refined h2 {
+body.v7-marquee-page .cta-refined h2 {
     font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(28px, 5vw, 48px);
     font-weight: 700;
