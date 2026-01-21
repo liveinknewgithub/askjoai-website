@@ -72,6 +72,38 @@
                         </div>
                         <span class="proof-text">Join <strong>1,847 others</strong> on the waitlist</span>
                     </div>
+
+                    <!-- App marquee -->
+                    <div class="app-marquee-redesign" aria-label="Apps jo searches">
+                        <div class="app-marquee-track">
+                            <span class="app-pill"><span>📝</span> Notes</span>
+                            <span class="app-pill"><span>📸</span> Photos</span>
+                            <span class="app-pill"><span>✉️</span> Mail</span>
+                            <span class="app-pill"><span>💬</span> Messages</span>
+                            <span class="app-pill"><span>📅</span> Calendar</span>
+                            <span class="app-pill"><span>📁</span> Files</span>
+                            <span class="app-pill"><span>🔖</span> Reminders</span>
+                            <span class="app-pill"><span>📇</span> Contacts</span>
+                            <!-- Duplicates for seamless loop -->
+                            <span class="app-pill" aria-hidden="true"><span>📝</span> Notes</span>
+                            <span class="app-pill" aria-hidden="true"><span>📸</span> Photos</span>
+                            <span class="app-pill" aria-hidden="true"><span>✉️</span> Mail</span>
+                            <span class="app-pill" aria-hidden="true"><span>💬</span> Messages</span>
+                            <span class="app-pill" aria-hidden="true"><span>📅</span> Calendar</span>
+                            <span class="app-pill" aria-hidden="true"><span>📁</span> Files</span>
+                            <span class="app-pill" aria-hidden="true"><span>🔖</span> Reminders</span>
+                            <span class="app-pill" aria-hidden="true"><span>📇</span> Contacts</span>
+                        </div>
+                    </div>
+
+                    <!-- YC Badge -->
+                    <div class="yc-badge">
+                        <svg class="yc-logo" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                            <rect width="24" height="24" rx="4" fill="#f26625"/>
+                            <path d="M8 6l4 6.5L16 6h2.5l-5.5 8.5V19h-2v-4.5L5.5 6H8z" fill="white"/>
+                        </svg>
+                        <span>Backed by Y Combinator</span>
+                    </div>
                 </div>
             </div>
 
@@ -246,6 +278,38 @@
             </div>
         </section>
 
+        <!-- Founding Team -->
+        <section class="section-team">
+            <div class="container">
+                <div class="section-header-redesign">
+                    <h2>Meet the founders</h2>
+                    <p>We've spent our careers building products that respect users.</p>
+                </div>
+
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <img src="pradeep.jpg" alt="Pradeep Elankumaran">
+                        </div>
+                        <h3>Pradeep Elankumaran</h3>
+                        <p class="team-role">CEO</p>
+                        <p class="team-bio">Previously founded Farmstead (YC W16), led engineering at Minted. Stanford CS.</p>
+                        <a href="https://www.linkedin.com/in/pradeepelankumaran/" target="_blank" rel="noopener" class="team-link">LinkedIn →</a>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <img src="kevin.jpg" alt="Kevin Li">
+                        </div>
+                        <h3>Kevin Li</h3>
+                        <p class="team-role">CMO</p>
+                        <p class="team-bio">Previously growth at Notion, marketing at Dropbox. Berkeley Haas MBA.</p>
+                        <a href="https://www.linkedin.com/in/liveink" target="_blank" rel="noopener" class="team-link">LinkedIn →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Pricing -->
         <section id="pricing" class="section-pricing">
             <div class="container">
@@ -327,6 +391,92 @@
             <span class="footer-copyright">&copy; 2026 jo. All rights reserved.</span>
         </div>
     </footer>
+
+    <!-- Scroll-triggered animations -->
+    <script>
+    (function() {
+        'use strict';
+
+        // Respect reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) return;
+
+        // Elements to animate on scroll
+        const revealSelectors = [
+            '.section-header-redesign',
+            '.comparison-main',
+            '.comparison-secondary',
+            '.feature-card-redesign',
+            '.testimonial-featured',
+            '.testimonial-small',
+            '.team-card',
+            '.pricing-card-redesign',
+            '.privacy-headline',
+            '.privacy-text',
+            '.privacy-proofs',
+            '.cta-content-redesign',
+            '.footer-redesign .container'
+        ];
+
+        // Intersection Observer with staggered delays
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -80px 0px',
+            threshold: 0.1
+        };
+
+        // Track stagger delays per container
+        const staggerDelays = new Map();
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+
+                    // Get parent section for stagger grouping
+                    const section = el.closest('section') || el.closest('footer');
+                    const sectionId = section ? section.id || section.className : 'default';
+
+                    // Initialize stagger counter for this section
+                    if (!staggerDelays.has(sectionId)) {
+                        staggerDelays.set(sectionId, 0);
+                    }
+
+                    // Get current delay and increment
+                    const delay = staggerDelays.get(sectionId);
+                    staggerDelays.set(sectionId, delay + 1);
+
+                    // Apply staggered delay (100ms between items in same section)
+                    const staggerMs = delay * 100;
+
+                    setTimeout(() => {
+                        el.classList.add('revealed');
+                    }, staggerMs);
+
+                    // Stop observing once revealed
+                    observer.unobserve(el);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements
+        revealSelectors.forEach(selector => {
+            document.querySelectorAll(selector).forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Reset stagger delays when scrolling back up (for sections coming back into view)
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            if (window.scrollY < lastScrollY - 200) {
+                staggerDelays.clear();
+            }
+            lastScrollY = window.scrollY;
+        }, { passive: true });
+
+    })();
+    </script>
 
 </body>
 
