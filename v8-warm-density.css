@@ -1,0 +1,289 @@
+/* ==========================================================================
+   Density Slider Styles for v8-warm-density.html
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Slider Container
+   -------------------------------------------------------------------------- */
+.density-slider {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: rgba(30, 25, 20, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(201, 163, 105, 0.3);
+    border-radius: 50px;
+    box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(201, 163, 105, 0.1) inset;
+}
+
+/* --------------------------------------------------------------------------
+   Icon Buttons
+   -------------------------------------------------------------------------- */
+.density-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    color: rgba(201, 163, 105, 0.6);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.density-icon:hover {
+    color: #c9a369;
+    background: rgba(201, 163, 105, 0.15);
+}
+
+.density-icon:active {
+    transform: scale(0.95);
+}
+
+.density-icon svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+/* Active state for icons based on slider position */
+.density-slider[data-density="quick"] .density-icon--quick,
+.density-slider[data-density="full"] .density-icon--full {
+    color: #c9a369;
+}
+
+/* --------------------------------------------------------------------------
+   Slider Track & Input
+   -------------------------------------------------------------------------- */
+.density-track {
+    position: relative;
+    width: 120px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.density-input {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg,
+        rgba(201, 163, 105, 0.3) 0%,
+        rgba(201, 163, 105, 0.5) 100%);
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Webkit (Chrome, Safari) track */
+.density-input::-webkit-slider-runnable-track {
+    height: 6px;
+    background: linear-gradient(90deg,
+        rgba(201, 163, 105, 0.3) 0%,
+        rgba(201, 163, 105, 0.5) 100%);
+    border-radius: 3px;
+}
+
+/* Webkit thumb */
+.density-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #d4b07a 0%, #c9a369 100%);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: grab;
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        0 0 0 4px rgba(201, 163, 105, 0.15);
+    margin-top: -7px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.density-input::-webkit-slider-thumb:hover {
+    box-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.4),
+        0 0 0 6px rgba(201, 163, 105, 0.2);
+}
+
+.density-input::-webkit-slider-thumb:active {
+    cursor: grabbing;
+    transform: scale(1.1);
+}
+
+/* Firefox track */
+.density-input::-moz-range-track {
+    height: 6px;
+    background: linear-gradient(90deg,
+        rgba(201, 163, 105, 0.3) 0%,
+        rgba(201, 163, 105, 0.5) 100%);
+    border-radius: 3px;
+    border: none;
+}
+
+/* Firefox thumb */
+.density-input::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #d4b07a 0%, #c9a369 100%);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: grab;
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        0 0 0 4px rgba(201, 163, 105, 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   Tick Marks
+   -------------------------------------------------------------------------- */
+.density-ticks {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 8px;
+    pointer-events: none;
+}
+
+.density-ticks span {
+    width: 4px;
+    height: 4px;
+    background: rgba(201, 163, 105, 0.4);
+    border-radius: 50%;
+}
+
+/* --------------------------------------------------------------------------
+   Labels (tooltip style)
+   -------------------------------------------------------------------------- */
+.density-label {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 12px;
+    background: rgba(30, 25, 20, 0.95);
+    border: 1px solid rgba(201, 163, 105, 0.3);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #c9a369;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.density-slider:hover .density-label,
+.density-slider:focus-within .density-label {
+    opacity: 1;
+    visibility: visible;
+}
+
+.density-label::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(201, 163, 105, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   Section Visibility & Transitions
+   -------------------------------------------------------------------------- */
+
+/* Base transition for all sections */
+section[data-density] {
+    transition:
+        opacity 0.4s ease,
+        max-height 0.5s ease,
+        margin 0.4s ease,
+        padding 0.4s ease;
+    overflow: hidden;
+}
+
+/* Hidden state */
+section[data-density].density-hidden {
+    opacity: 0;
+    max-height: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Ensure smooth reveal */
+section[data-density]:not(.density-hidden) {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Responsiveness
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+    .density-slider {
+        bottom: 16px;
+        padding: 10px 16px;
+        gap: 8px;
+    }
+
+    .density-track {
+        width: 100px;
+    }
+
+    .density-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .density-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Bottom Page Padding (so slider doesn't cover content)
+   -------------------------------------------------------------------------- */
+body.has-density-slider {
+    padding-bottom: 80px;
+}
+
+/* --------------------------------------------------------------------------
+   Reduced Motion Support
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    section[data-density] {
+        transition: none;
+    }
+
+    .density-input::-webkit-slider-thumb {
+        transition: none;
+    }
+
+    .density-label {
+        transition: none;
+    }
+}
