@@ -790,6 +790,9 @@ body.v7-marquee-page [role="button"] {
    ===================================================== */
 
 .waitlist-proof {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
     margin-top: var(--space-lg);
 }
 
