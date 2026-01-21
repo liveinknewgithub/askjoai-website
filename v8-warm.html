@@ -98,6 +98,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap"
         rel="stylesheet">
@@ -111,11 +112,11 @@
 
     <div class="warm-grain" aria-hidden="true"></div>
 
-    <header class="header" role="banner">
+    <header class="header">
         <nav class="nav" aria-label="Main navigation">
             <div class="nav-logo"><a href="/" aria-label="jo - Home"><span
                         class="logo-text font-fraunces font-weight-700">jo</span></a></div>
-            <div class="nav-links" role="navigation">
+            <div class="nav-links">
                 <a href="#why-jo">Why jo</a>
                 <a href="#how-it-works">How It Works</a>
                 <a href="#pricing">Pricing</a>
@@ -127,7 +128,7 @@
         </nav>
     </header>
 
-    <main id="main-content" role="main">
+    <main id="main-content">
         <section class="hero v8-hero section-dark" aria-labelledby="hero-title">
             <div class="accent-orb accent-orb-1" aria-hidden="true"></div>
             <div class="accent-orb accent-orb-2" aria-hidden="true"></div>
@@ -169,10 +170,12 @@
                     <div class="hero-actions v8-email-actions">
                         <form class="v8-email-form" action="https://forms.fillout.com/t/5ngLz3A5BHus" method="GET"
                             target="_blank">
-                            <input type="email" name="email" class="v8-email-input" placeholder="you@example.com"
-                                autocomplete="email" required>
+                            <label for="hero-email" class="visually-hidden">Email address</label>
+                            <input type="email" id="hero-email" name="email" class="v8-email-input" placeholder="you@example.com"
+                                autocomplete="email" autocapitalize="off" spellcheck="false" aria-describedby="hero-email-hint" required>
                             <button type="submit" class="btn btn-primary btn-large">Get Early Access — First Month Free</button>
                         </form>
+                        <span id="hero-email-hint" class="visually-hidden">Enter your email to join the waitlist</span>
                     </div>
                     <p class="form-microcopy mt-sm">We'll email you when it's your turn. No spam, ever.</p>
 
@@ -246,7 +249,7 @@
                 <div class="comparison-grid animate-on-scroll stagger-children">
                     <div class="comparison-card comparison-card--spotlight">
                         <h3>vs. Spotlight</h3>
-                        <p class="comparison-limitation">Spotlight matches exact words. jo understands meaning. Ask for "that email about money problems" and jo finds your budget discussions — even if you never used those words.</p>
+                        <p class="comparison-limitation">Spotlight matches exact words. jo understands meaning. Ask for "that email about money problems" and jo finds your budget discussions—even if you never used those words.</p>
                     </div>
                     <div class="comparison-card comparison-card--chatgpt">
                         <h3>vs. ChatGPT</h3>
@@ -339,7 +342,7 @@
                     <div class="testimonial-refined testimonial-refined--sarah">
                         <blockquote>"Had a call with a client I hadn't talked to in 6 months. jo surfaced my notes from our last conversation before I even asked. I looked way more prepared than I was."</blockquote>
                         <div class="testimonial-author-refined">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Mitchell" class="author-avatar-img">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Mitchell" class="author-avatar-img" width="48" height="48" loading="lazy">
                             <div class="author-info">
                                 <span class="author-name">Sarah Mitchell</span>
                                 <span class="author-role">Management Consultant at Deloitte</span>
@@ -349,7 +352,7 @@
                     <div class="testimonial-refined testimonial-refined--michael">
                         <blockquote>"I've saved 4,000+ notes in Apple Notes over 8 years. Never looked at most of them again. Now jo brings up relevant ones while I'm working. It's like having perfect memory."</blockquote>
                         <div class="testimonial-author-refined">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Kowalski" class="author-avatar-img">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Kowalski" class="author-avatar-img" width="48" height="48" loading="lazy">
                             <div class="author-info">
                                 <span class="author-name">Michael Kowalski</span>
                                 <span class="author-role">Freelance Writer, Austin TX</span>
@@ -359,7 +362,7 @@
                     <div class="testimonial-refined testimonial-refined--james">
                         <blockquote>"Asked jo for 'that photo with the blue door from Portugal' from 2019. Found it in 3 seconds. Not tagged, not labeled. 47,000 photos and it just understood what I meant."</blockquote>
                         <div class="testimonial-author-refined">
-                            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="James Rodriguez" class="author-avatar-img">
+                            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="James Rodriguez" class="author-avatar-img" width="48" height="48" loading="lazy">
                             <div class="author-info">
                                 <span class="author-name">James Rodriguez</span>
                                 <span class="author-role">Product Designer at Figma</span>
@@ -378,7 +381,7 @@
                 <div class="team-content animate-on-scroll">
                     <div class="founders-row">
                         <div class="founder-card">
-                            <img src="pradeep.jpeg" alt="Pradeep Elankumaran" class="founder-img">
+                            <img src="pradeep.jpeg" alt="Pradeep Elankumaran" class="founder-img" width="64" height="64" loading="lazy">
                             <div class="founder-info">
                                 <strong>Pradeep Elankumaran</strong>
                                 <span>Co-founder & CEO</span>
@@ -390,7 +393,7 @@
                             </div>
                         </div>
                         <div class="founder-card">
-                            <img src="kevin.jpeg" alt="Kevin Li" class="founder-img">
+                            <img src="kevin.jpeg" alt="Kevin Li" class="founder-img" width="64" height="64" loading="lazy">
                             <div class="founder-info">
                                 <strong>Kevin Li</strong>
                                 <span>Co-founder & CMO</span>
@@ -545,10 +548,12 @@
                     <div class="cta-actions v8-cta-form-container">
                         <form class="v8-email-form v8-cta-form-centered"
                             action="https://forms.fillout.com/t/5ngLz3A5BHus" method="GET" target="_blank">
-                            <input type="email" name="email" class="v8-email-input" placeholder="you@example.com"
-                                autocomplete="email" required>
+                            <label for="cta-email" class="visually-hidden">Email address</label>
+                            <input type="email" id="cta-email" name="email" class="v8-email-input" placeholder="you@example.com"
+                                autocomplete="email" autocapitalize="off" spellcheck="false" aria-describedby="cta-email-hint" required>
                             <button type="submit" class="btn btn-primary btn-large">Get Early Access</button>
                         </form>
+                        <span id="cta-email-hint" class="visually-hidden">Enter your email to join the waitlist</span>
                     </div>
                     <p class="cta-note v8-cta-note mt-md">Requires M1 Mac or newer with 16GB RAM</p>
                 </div>
@@ -556,14 +561,14 @@
         </section>
     </main>
 
-    <footer class="footer section-dark v8-footer" role="contentinfo">
+    <footer class="footer section-dark v8-footer">
         <div class="container">
             <div class="footer-simple">
                 <span class="logo-text font-fraunces font-weight-700" aria-hidden="true">jo</span>
                 <nav class="footer-links-inline" aria-label="Footer navigation">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Contact Us</a>
+                    <a href="/privacy">Privacy Policy</a>
+                    <a href="/terms">Terms of Service</a>
+                    <a href="mailto:founders@askjo.ai">Contact Us</a>
                 </nav>
                 <p><small>&copy; 2026 jo. All rights reserved.</small></p>
             </div>

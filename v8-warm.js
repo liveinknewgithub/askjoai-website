@@ -183,39 +183,34 @@
     }
 })();
 
-// Email validation
+// Email validation - visual feedback only, let HTML5 validation handle submit
 const emailInputs = document.querySelectorAll('.v8-email-input');
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 emailInputs.forEach(input => {
-    const form = input.closest('form');
-    const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
-
-    // Disable button initially
-    if (submitBtn) submitBtn.disabled = true;
-
     input.addEventListener('input', function() {
         const value = this.value.trim();
         const isValid = emailRegex.test(value);
 
         if (value === '') {
             this.classList.remove('valid', 'invalid');
+            this.removeAttribute('aria-invalid');
         } else if (isValid) {
             this.classList.remove('invalid');
             this.classList.add('valid');
+            this.setAttribute('aria-invalid', 'false');
         } else {
             this.classList.remove('valid');
             this.classList.add('invalid');
+            this.setAttribute('aria-invalid', 'true');
         }
-
-        // Enable/disable submit button
-        if (submitBtn) submitBtn.disabled = !isValid;
     });
 
     input.addEventListener('blur', function() {
         const value = this.value.trim();
         if (value !== '' && !emailRegex.test(value)) {
             this.classList.add('invalid');
+            this.setAttribute('aria-invalid', 'true');
         }
     });
 });

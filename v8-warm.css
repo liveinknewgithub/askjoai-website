@@ -244,6 +244,19 @@ body.v8-warm-page .nav-actions .btn-primary {
    Layout Utilities
    ===================================================== */
 
+/* Visually hidden but accessible to screen readers */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 .text-left {
     text-align: left;
 }
@@ -434,19 +447,20 @@ body.v8-warm-page .footer-links-inline a:hover {
 }
 
 /* Breathing opacity - creates a living, ambient feel */
+/* Using only opacity and transform for performance (filter is expensive) */
 @keyframes breatheOrb1 {
-    0%, 100% { opacity: 0.12; filter: blur(120px); }
-    50% { opacity: 0.18; filter: blur(100px); }
+    0%, 100% { opacity: 0.12; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1); }
+    50% { opacity: 0.18; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1.05); }
 }
 
 @keyframes breatheOrb2 {
-    0%, 100% { opacity: 0.08; filter: blur(120px); }
-    50% { opacity: 0.12; filter: blur(110px); }
+    0%, 100% { opacity: 0.08; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1); }
+    50% { opacity: 0.12; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1.03); }
 }
 
 @keyframes breatheOrb3 {
-    0%, 100% { opacity: 0.06; filter: blur(120px); }
-    50% { opacity: 0.1; filter: blur(100px); }
+    0%, 100% { opacity: 0.06; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1); }
+    50% { opacity: 0.1; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1.04); }
 }
 
 /* =====================================================
