@@ -616,6 +616,7 @@ body.v7-marquee-page h3 {
 
 .v7-hero .btn-primary:hover {
     background: var(--v7-accent-light);
+    color: white !important;
     transform: translateY(-2px);
     box-shadow: 0 8px 30px rgba(0, 153, 255, 0.3);
 }
