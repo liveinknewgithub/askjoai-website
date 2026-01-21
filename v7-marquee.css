@@ -1271,6 +1271,7 @@ body.v7-marquee-page h3 {
 
 .cta-refined .btn-primary:hover {
     background: #1a1a24;
+    color: white !important;
 }
 
 .cta-refined .btn-primary:active {
