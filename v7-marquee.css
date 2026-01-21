@@ -11,7 +11,7 @@
     --v7-bg-dark: #0a0a0f;
     --v7-bg-card: #111118;
     --v7-text-bright: #ffffff;
-    --v7-text-dim: rgba(255, 255, 255, 0.6);
+    --v7-text-dim: rgba(255, 255, 255, 0.75);
     --v7-border-subtle: rgba(255, 255, 255, 0.08);
     --v7-marquee-speed: 40s;
     --border-hairline: 1px;
@@ -37,7 +37,7 @@
 
 /* Hairline borders on retina displays */
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
-    only screen and (min-resolution: 192dpi) {
+only screen and (min-resolution: 192dpi) {
     :root {
         --border-hairline: 0.5px;
     }
@@ -267,10 +267,23 @@ body.v7-marquee-page h3 {
 }
 
 @keyframes float {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(30px, -30px) scale(1.05); }
-    50% { transform: translate(-20px, 20px) scale(0.95); }
-    75% { transform: translate(20px, 30px) scale(1.02); }
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    25% {
+        transform: translate(30px, -30px) scale(1.05);
+    }
+
+    50% {
+        transform: translate(-20px, 20px) scale(0.95);
+    }
+
+    75% {
+        transform: translate(20px, 30px) scale(1.02);
+    }
 }
 
 /* =====================================================
@@ -299,8 +312,13 @@ body.v7-marquee-page h3 {
 }
 
 @keyframes fadeInVideo {
-    from { opacity: 0; }
-    to { opacity: 0.6; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 0.6;
+    }
 }
 
 .v7-hero-overlay {
@@ -323,6 +341,7 @@ body.v7-marquee-page h3 {
 }
 
 @media (max-width: 768px) {
+
     .v7-hero-video,
     .v7-hero-mobile-video {
         display: none;
@@ -337,7 +356,7 @@ body.v7-marquee-page h3 {
     font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(52px, 11vw, 100px);
     font-weight: 700;
-    line-height: 0.9;
+    line-height: 1.1;
     letter-spacing: -0.03em;
     color: var(--v7-text-bright);
     margin-bottom: var(--space-lg);
@@ -364,7 +383,9 @@ body.v7-marquee-page h3 {
 }
 
 @keyframes underlineReveal {
-    to { transform: scaleX(1); }
+    to {
+        transform: scaleX(1);
+    }
 }
 
 .v7-hero-content {
@@ -408,20 +429,16 @@ body.v7-marquee-page h3 {
     overflow: hidden;
     margin: var(--space-xl) 0;
     /* Gradient masks for smooth fade on edges */
-    mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        black 8%,
-        black 92%,
-        transparent 100%
-    );
-    -webkit-mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        black 8%,
-        black 92%,
-        transparent 100%
-    );
+    mask-image: linear-gradient(to right,
+            transparent 0%,
+            black 8%,
+            black 92%,
+            transparent 100%);
+    -webkit-mask-image: linear-gradient(to right,
+            transparent 0%,
+            black 8%,
+            black 92%,
+            transparent 100%);
 }
 
 .app-marquee-track {
@@ -432,13 +449,19 @@ body.v7-marquee-page h3 {
 }
 
 /* Pause on hover */
-.app-marquee:hover .app-marquee-track {
+.app-marquee:hover .app-marquee-track,
+.app-marquee:focus-within .app-marquee-track {
     animation-play-state: paused;
 }
 
 @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 /* App tag styling */
@@ -477,10 +500,12 @@ body.v7-marquee-page h3 {
         justify-content: flex-start;
         width: auto;
     }
+
     .app-marquee {
         mask-image: none;
         -webkit-mask-image: none;
     }
+
     /* Hide duplicates in reduced motion mode */
     .app-marquee-track .app-tag-duplicate {
         display: none;
@@ -542,7 +567,8 @@ body.v7-marquee-page h3 {
     border: 2px solid var(--v7-border-subtle);
     background: rgba(255, 255, 255, 0.03);
     color: white;
-    outline: none;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
     transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.2s var(--ease-out-quint);
 }
 
@@ -552,8 +578,9 @@ body.v7-marquee-page h3 {
 
 .v7-email-input:focus {
     border-color: var(--v7-accent);
-    background: rgba(0, 153, 255, 0.05);
-    box-shadow: 0 0 0 4px rgba(0, 153, 255, 0.15);
+    background: rgba(0, 153, 255, 0.1);
+    outline: 2px solid var(--v7-accent);
+    box-shadow: 0 0 0 4px rgba(0, 153, 255, 0.2);
 }
 
 /* =====================================================
@@ -668,9 +695,17 @@ body.v7-marquee-page h3 {
     border-radius: 50%;
 }
 
-.demo-dot.red { background: #ff5f57; }
-.demo-dot.yellow { background: #febc2e; }
-.demo-dot.green { background: #28c840; }
+.demo-dot.red {
+    background: #ff5f57;
+}
+
+.demo-dot.yellow {
+    background: #febc2e;
+}
+
+.demo-dot.green {
+    background: #28c840;
+}
 
 .demo-title {
     flex: 1;
@@ -710,8 +745,17 @@ body.v7-marquee-page h3 {
 }
 
 @keyframes demoPulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.05); opacity: 0.8; }
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
 }
 
 .demo-placeholder-text {
@@ -752,11 +796,25 @@ body.v7-marquee-page h3 {
     margin-left: -10px;
 }
 
-.avatar-stack-item:first-child { margin-left: 0; }
-.avatar-stack-item:nth-child(1) { background: #005588; }
-.avatar-stack-item:nth-child(2) { background: #006699; }
-.avatar-stack-item:nth-child(3) { background: #0077aa; }
-.avatar-stack-item:nth-child(4) { background: #0088bb; }
+.avatar-stack-item:first-child {
+    margin-left: 0;
+}
+
+.avatar-stack-item:nth-child(1) {
+    background: #005588;
+}
+
+.avatar-stack-item:nth-child(2) {
+    background: #006699;
+}
+
+.avatar-stack-item:nth-child(3) {
+    background: #0077aa;
+}
+
+.avatar-stack-item:nth-child(4) {
+    background: #0088bb;
+}
 
 .waitlist-count {
     font-size: 14px;
@@ -1404,6 +1462,7 @@ body.v7-marquee-page h3 {
    ===================================================== */
 
 @media (prefers-reduced-motion: reduce) {
+
     /* Disable ambient/decorative animations */
     .accent-orb,
     .demo-placeholder-icon {
@@ -1447,7 +1506,7 @@ body.v7-marquee-page h3 {
     }
 
     /* Disable stagger delays set by JS */
-    .stagger-children > * {
+    .stagger-children>* {
         transition-delay: 0s !important;
     }
 }
@@ -1458,6 +1517,7 @@ body.v7-marquee-page h3 {
    ===================================================== */
 
 @media (hover: none) {
+
     /* Reset hover transforms on touch devices */
     .app-marquee:hover .app-tag:hover,
     .step-item:hover .step-number,
