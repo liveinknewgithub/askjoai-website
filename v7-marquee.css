@@ -48,6 +48,8 @@ body.v7-marquee-page {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--v7-bg-dark);
     color: var(--v7-text-bright);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Override light mode text colors for dark page */
@@ -55,6 +57,15 @@ body.v7-marquee-page h1,
 body.v7-marquee-page h2,
 body.v7-marquee-page h3 {
     color: var(--v7-text-bright);
+    text-wrap: balance;
+}
+
+/* Touch-friendly interactive elements */
+body.v7-marquee-page button,
+body.v7-marquee-page a,
+body.v7-marquee-page input,
+body.v7-marquee-page [role="button"] {
+    touch-action: manipulation;
 }
 
 /* Scroll margin for anchor links (accounts for fixed header) */
@@ -481,10 +492,12 @@ body.v7-marquee-page h3 {
     cursor: default;
 }
 
-.app-marquee:hover .app-tag:hover {
-    background: rgba(0, 153, 255, 0.1);
-    box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.3);
-    transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+    .app-marquee:hover .app-tag:hover {
+        background: rgba(0, 153, 255, 0.1);
+        box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.3);
+        transform: translateY(-2px);
+    }
 }
 
 .app-tag img {
@@ -590,6 +603,7 @@ body.v7-marquee-page h3 {
 .v7-hero .btn-primary {
     position: relative;
     padding: 16px 32px;
+    min-height: 44px;
     font-size: 16px;
     font-weight: 600;
     font-family: 'Space Grotesk', sans-serif;
@@ -614,15 +628,17 @@ body.v7-marquee-page h3 {
     transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.v7-hero .btn-primary:hover {
-    background: var(--v7-accent-light);
-    color: white !important;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(0, 153, 255, 0.3);
-}
+@media (hover: hover) and (pointer: fine) {
+    .v7-hero .btn-primary:hover {
+        background: var(--v7-accent-light);
+        color: white !important;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(0, 153, 255, 0.3);
+    }
 
-.v7-hero .btn-primary:hover::before {
-    left: 100%;
+    .v7-hero .btn-primary:hover::before {
+        left: 100%;
+    }
 }
 
 .v7-hero .btn-primary:active {
@@ -632,6 +648,7 @@ body.v7-marquee-page h3 {
 
 .v7-hero .btn-secondary {
     padding: 16px 32px;
+    min-height: 44px;
     font-size: 16px;
     font-weight: 600;
     font-family: 'Space Grotesk', sans-serif;
@@ -643,9 +660,11 @@ body.v7-marquee-page h3 {
     transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
-.v7-hero .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.4);
+@media (hover: hover) and (pointer: fine) {
+    .v7-hero .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.4);
+    }
 }
 
 .v7-hero .btn-secondary:active {
@@ -821,6 +840,7 @@ body.v7-marquee-page h3 {
     font-size: 14px;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.9);
+    font-variant-numeric: tabular-nums;
 }
 
 .spots-left {
@@ -831,6 +851,7 @@ body.v7-marquee-page h3 {
     background: rgba(251, 191, 36, 0.1);
     border-radius: 20px;
     border: 1px solid rgba(251, 191, 36, 0.2);
+    font-variant-numeric: tabular-nums;
 }
 
 /* =====================================================
@@ -975,10 +996,12 @@ body.v7-marquee-page h3 {
     user-select: none;
 }
 
-.step-item:hover .step-number {
-    background: var(--v7-accent);
-    color: white;
-    transform: scale(1.05);
+@media (hover: hover) and (pointer: fine) {
+    .step-item:hover .step-number {
+        background: var(--v7-accent);
+        color: white;
+        transform: scale(1.05);
+    }
 }
 
 .step-item h3 {
@@ -1031,13 +1054,15 @@ body.v7-marquee-page h3 {
     transition: height 0.25s ease;
 }
 
-.feature-refined:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.3), 0 20px 60px rgba(0, 153, 255, 0.15);
-}
+@media (hover: hover) and (pointer: fine) {
+    .feature-refined:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.3), 0 20px 60px rgba(0, 153, 255, 0.15);
+    }
 
-.feature-refined:hover::before {
-    height: 100%;
+    .feature-refined:hover::before {
+        height: 100%;
+    }
 }
 
 .feature-icon-wrapper {
@@ -1094,9 +1119,11 @@ body.v7-marquee-page h3 {
     transition: transform 0.25s var(--ease-out-quint), box-shadow 0.2s ease;
 }
 
-.testimonial-refined:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.2), 0 12px 40px rgba(0, 0, 0, 0.3);
+@media (hover: hover) and (pointer: fine) {
+    .testimonial-refined:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.2), 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
 }
 
 .testimonial-refined::before {
@@ -1173,8 +1200,10 @@ body.v7-marquee-page h3 {
     transition: box-shadow 0.2s ease;
 }
 
-.faq-item-refined:hover {
-    box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.2);
+@media (hover: hover) and (pointer: fine) {
+    .faq-item-refined:hover {
+        box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.2);
+    }
 }
 
 .faq-item-refined h3 {
@@ -1269,9 +1298,11 @@ body.v7-marquee-page h3 {
     color: white;
 }
 
-.cta-refined .btn-primary:hover {
-    background: #1a1a24;
-    color: white !important;
+@media (hover: hover) and (pointer: fine) {
+    .cta-refined .btn-primary:hover {
+        background: #1a1a24;
+        color: white !important;
+    }
 }
 
 .cta-refined .btn-primary:active {
@@ -1517,29 +1548,6 @@ body.v7-marquee-page h3 {
     }
 }
 
-/* =====================================================
-   Touch devices - disable hover transforms
-   Prevents "stuck hover" on touch
-   ===================================================== */
-
-@media (hover: none) {
-
-    /* Reset hover transforms on touch devices */
-    .app-marquee:hover .app-tag:hover,
-    .step-item:hover .step-number,
-    .feature-refined:hover,
-    .testimonial-refined:hover,
-    .v7-hero .btn-primary:hover,
-    .v7-hero .btn-secondary:hover,
-    .cta-refined .btn-primary:hover {
-        transform: none;
-    }
-
-    /* Disable marquee pause on touch (no hover to unpause) */
-    .app-marquee:hover .app-marquee-track {
-        animation-play-state: running;
-    }
-}
 
 /* =====================================================
    New sections - Copy improvements
@@ -1771,6 +1779,7 @@ body.v7-marquee-page h3 {
     font-family: 'Space Grotesk', sans-serif;
     color: var(--v7-text-bright);
     margin-bottom: var(--space-xs);
+    font-variant-numeric: tabular-nums;
 }
 
 .pricing-type {
