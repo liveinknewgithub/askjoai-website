@@ -68,6 +68,18 @@
 }
 
 /* =====================================================
+   Reset - Defensive
+   ===================================================== */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* =====================================================
    Base
    ===================================================== */
 *,
@@ -77,8 +89,10 @@
 }
 
 html {
+    width: 100%;
     overflow-x: hidden;
     -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body.v7-redesign {
@@ -91,11 +105,23 @@ body.v7-redesign {
     overflow-x: hidden;
     width: 100%;
     max-width: 100%;
+    position: relative;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 body.v7-redesign main {
     overflow-x: hidden;
     width: 100%;
+}
+
+/* Universal Section Containment */
+main>section,
+header,
+footer,
+.nav-redesign {
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 /* Film grain texture overlay */
@@ -429,6 +455,7 @@ h3 {
 .app-marquee-redesign {
     position: relative;
     overflow: hidden;
+    max-width: 100vw;
     margin: var(--space-lg) 0;
     /* Padding to prevent hover state clipping */
     padding: 8px 0;
