@@ -90,7 +90,7 @@ body.v7-redesign {
     line-height: 1.6;
     overflow-x: hidden;
     width: 100%;
-    max-width: 100vw;
+    max-width: 100%;
 }
 
 body.v7-redesign main {
@@ -245,7 +245,7 @@ h3 {
     padding: var(--space-5xl) 0;
     position: relative;
     overflow: hidden;
-    max-width: 100vw;
+    max-width: 100%;
 }
 
 /* Warm gradient atmosphere */
@@ -1636,7 +1636,7 @@ h3 {
     }
 
     .app-marquee-redesign {
-        max-width: 100vw;
+        max-width: 100%;
     }
 
     .yc-badge {
