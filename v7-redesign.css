@@ -1579,6 +1579,7 @@ h1, h2, h3 {
 @media (max-width: 768px) {
     .container {
         padding: 0 var(--space-md);
+        max-width: 100%;
     }
 
     .nav-links-redesign {
@@ -1594,8 +1595,40 @@ h1, h2, h3 {
         max-width: 100%;
     }
 
+    /* Disable entrance animations on mobile - ensure content is visible */
+    .hero-eyebrow,
+    .hero-title-redesign,
+    .hero-subtitle-redesign,
+    .hero-form-redesign,
+    .hero-proof-redesign,
+    .proof-avatar,
+    .proof-text,
+    .app-marquee-redesign,
+    .yc-badge,
+    .nav-logo-redesign,
+    .nav-cta-redesign,
+    .collage-item,
+    .collage-email,
+    .collage-photo,
+    .collage-note,
+    .collage-jo {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .hero-title-redesign em::after {
+        animation: none !important;
+        transform: scaleX(1) !important;
+    }
+
+    .hero-eyebrow::before {
+        animation: none !important;
+        transform: scaleX(1) !important;
+    }
+
     .hero-title-redesign {
-        font-size: clamp(36px, 10vw, 56px);
+        font-size: clamp(32px, 9vw, 48px);
     }
 
     .hero-subtitle-redesign {
@@ -1606,12 +1639,21 @@ h1, h2, h3 {
     .hero-form-redesign {
         flex-direction: column;
         max-width: 100%;
+        width: 100%;
     }
 
-    .hero-input-redesign,
-    .hero-button-redesign {
-        width: 100%;
+    .hero-input-redesign {
+        width: 100% !important;
         min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .hero-button-redesign {
+        width: 100% !important;
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     .hero-proof-redesign {
