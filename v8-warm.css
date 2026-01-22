@@ -28,7 +28,7 @@
     --v8-border-warm: rgba(245, 158, 11, 0.2);
 
     /* Marquee */
-    --v8-marquee-speed: 40s;
+    --v8-marquee-speed: 50s;
     --border-hairline: 1px;
 
     /* Easing curves */
@@ -131,7 +131,7 @@ body.v8-warm-page [role="button"] {
     pointer-events: none;
     user-select: none;
     z-index: 0;
-    animation: grainDrift 20s ease-in-out infinite;
+    animation: grainDrift 30s ease-in-out infinite;
 }
 
 @keyframes grainDrift {
@@ -406,7 +406,7 @@ body.v8-warm-page .footer-links-inline a:hover {
     top: -150px;
     right: 5%;
     opacity: 0.12;
-    animation: floatWarm1 25s ease-in-out infinite, breatheOrb1 8s ease-in-out infinite;
+    animation: floatWarm1 35s ease-in-out infinite, breatheOrb1 12s ease-in-out infinite;
 }
 
 .accent-orb-2 {
@@ -416,7 +416,7 @@ body.v8-warm-page .footer-links-inline a:hover {
     bottom: 10%;
     left: -100px;
     opacity: 0.08;
-    animation: floatWarm2 30s ease-in-out infinite, breatheOrb2 12s ease-in-out infinite;
+    animation: floatWarm2 40s ease-in-out infinite, breatheOrb2 14s ease-in-out infinite;
 }
 
 .accent-orb-3 {
@@ -426,7 +426,7 @@ body.v8-warm-page .footer-links-inline a:hover {
     top: 40%;
     right: -80px;
     opacity: 0.06;
-    animation: floatWarm3 20s ease-in-out infinite, breatheOrb3 10s ease-in-out infinite;
+    animation: floatWarm3 30s ease-in-out infinite, breatheOrb3 12s ease-in-out infinite;
 }
 
 @keyframes floatWarm1 {
@@ -514,7 +514,7 @@ body.v8-warm-page .footer-links-inline a:hover {
     border-radius: 2px;
     transform: scaleX(0);
     transform-origin: left;
-    animation: underlineRevealWarm 1s var(--ease-out-quint) 0.6s forwards;
+    animation: underlineRevealWarm 1.2s var(--ease-out-quint) 0.6s forwards;
 }
 
 @keyframes underlineRevealWarm {
@@ -536,7 +536,7 @@ body.v8-warm-page .footer-links-inline a:hover {
     max-width: 800px;
     opacity: 0;
     transform: translateY(20px) scale(0.98);
-    animation: heroReveal 0.8s var(--ease-out-quint) 0.2s forwards;
+    animation: heroReveal 1.0s var(--ease-out-quint) 0.2s forwards;
 }
 
 @keyframes heroReveal {
@@ -790,7 +790,7 @@ body.v8-warm-page .v8-hero .btn-primary.btn-large {
         transparent 100%
     );
     transform: skewX(-15deg);
-    animation: buttonShimmerWarm 5s ease-in-out 2s infinite;
+    animation: buttonShimmerWarm 6s ease-in-out 2s infinite;
     z-index: -1;
     pointer-events: none;
 }

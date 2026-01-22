@@ -27,7 +27,7 @@
                     trigger: '.demo-window',
                     start: 'top 90%',
                     end: 'top 30%',
-                    scrub: 0.8
+                    scrub: 1.2
                 }
             });
 
@@ -38,7 +38,7 @@
                     trigger: '.v8-hero',
                     start: 'top top',
                     end: 'bottom top',
-                    scrub: 1.5
+                    scrub: 2
                 }
             });
 
@@ -49,7 +49,7 @@
                     trigger: '.v8-hero',
                     start: 'top top',
                     end: 'bottom top',
-                    scrub: 2
+                    scrub: 2.5
                 }
             });
 
@@ -59,7 +59,7 @@
                     trigger: '.v8-hero',
                     start: 'top top',
                     end: 'bottom top',
-                    scrub: 1
+                    scrub: 1.8
                 }
             });
 
@@ -74,8 +74,8 @@
                     {
                         opacity: 1,
                         y: 0,
-                        duration: 0.8,
-                        ease: 'power2.out',
+                        duration: 1.0,
+                        ease: 'power3.out',
                         scrollTrigger: {
                             trigger: section,
                             start: 'top 85%',
@@ -96,9 +96,9 @@
                     {
                         opacity: 1,
                         y: 0,
-                        duration: 0.5,
-                        stagger: 0.1,
-                        ease: 'power2.out',
+                        duration: 0.6,
+                        stagger: 0.15,
+                        ease: 'power3.out',
                         scrollTrigger: {
                             trigger: container,
                             start: 'top 80%',
@@ -125,11 +125,11 @@
 
         function animateOrbs() {
             // Smooth interpolation
-            targetX += (mouseX - targetX) * 0.05;
-            targetY += (mouseY - targetY) * 0.05;
+            targetX += (mouseX - targetX) * 0.03;
+            targetY += (mouseY - targetY) * 0.03;
 
             orbs.forEach((orb, index) => {
-                const factor = (index + 1) * 8;
+                const factor = (index + 1) * 6;
                 const offsetX = targetX * factor;
                 const offsetY = targetY * factor;
                 orb.style.setProperty('--mouse-x', `${offsetX}px`);
