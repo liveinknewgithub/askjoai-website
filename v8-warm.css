@@ -2441,6 +2441,118 @@ body.v8-warm-page .cta-refined .btn-primary:active {
 }
 
 /* =====================================================
+   SVG Icons styling
+   ===================================================== */
+
+/* Trust badge icons */
+.trust-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
+    color: var(--v8-amber);
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+.v8-hero .trust-badge {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Remove the default checkmark pseudo-element for v8-warm trust badges */
+.v8-hero .trust-badge::before {
+    display: none;
+}
+
+/* Comparison card icons */
+.comparison-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    border-radius: 14px;
+    margin-bottom: var(--space-md);
+    color: var(--v8-amber);
+    transition: transform 0.2s var(--ease-out-quint), background-color 0.2s ease;
+}
+
+.comparison-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .comparison-card:hover .comparison-icon {
+        transform: scale(1.05);
+        background: rgba(245, 158, 11, 0.15);
+    }
+}
+
+/* How it works step icons */
+.step-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: var(--v8-bg-card);
+    border: 2px solid var(--v8-amber);
+    color: var(--v8-amber);
+    border-radius: 50%;
+    margin-bottom: var(--space-lg);
+    position: relative;
+    z-index: 1;
+    transition: transform 0.2s var(--ease-out-quint), background-color 0.2s ease, color 0.2s ease;
+    user-select: none;
+}
+
+.step-icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+/* Ring pulse for step icons */
+.step-icon::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px solid var(--v8-amber);
+    opacity: 0;
+    animation: stepRingPulse 3s ease-in-out infinite;
+    animation-delay: var(--ring-delay, 0s);
+}
+
+.step-item:nth-child(1) .step-icon::after { --ring-delay: 0s; }
+.step-item:nth-child(2) .step-icon::after { --ring-delay: 1s; }
+.step-item:nth-child(3) .step-icon::after { --ring-delay: 2s; }
+
+@media (hover: hover) and (pointer: fine) {
+    .step-item:hover .step-icon {
+        background: linear-gradient(135deg, var(--v8-amber) 0%, var(--v8-coral) 100%);
+        color: #1a1612;
+        border-color: transparent;
+        transform: scale(1.05);
+    }
+}
+
+/* Feature card icon styling */
+.feature-icon-wrapper svg {
+    color: var(--v8-amber);
+}
+
+/* Feature source icons */
+.feature-source-icon svg {
+    width: 16px;
+    height: 16px;
+    color: var(--v8-amber);
+    flex-shrink: 0;
+}
+
+/* =====================================================
    Reduced motion
    ===================================================== */
 
@@ -2529,9 +2641,14 @@ body.v8-warm-page .cta-refined .btn-primary:active {
         transform: none;
     }
 
-    .step-number::after {
+    .step-number::after,
+    .step-icon::after {
         animation: none;
         opacity: 0;
+    }
+
+    .comparison-icon {
+        transition: none;
     }
 
     .demo-source::after {
