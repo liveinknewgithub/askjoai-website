@@ -21,7 +21,7 @@
     /* Text colors */
     --v8-text-bright: #FFFBF5;
     --v8-text-dim: rgba(255, 251, 245, 0.8);
-    --v8-text-muted: rgba(255, 251, 245, 0.55);
+    --v8-text-muted: rgba(255, 251, 245, 0.62);
 
     /* Borders and accents */
     --v8-border-subtle: rgba(254, 243, 226, 0.08);
