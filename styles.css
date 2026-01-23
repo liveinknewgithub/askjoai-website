@@ -81,6 +81,7 @@
 
 html {
     scroll-behavior: smooth;
+    color-scheme: light dark;
 }
 
 /* Skip Link - Accessibility */
@@ -103,6 +104,11 @@ html {
     top: var(--space-md);
     outline: 3px solid var(--accent-purple);
     outline-offset: 2px;
+}
+
+/* Headings scroll margin for anchor navigation */
+h1, h2, h3, h4, h5, h6 {
+    scroll-margin-top: 120px;
 }
 
 body {
@@ -292,6 +298,8 @@ a:hover {
     align-items: center;
     position: relative;
     overflow: hidden;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
 }
 
 .hero-video-bg {

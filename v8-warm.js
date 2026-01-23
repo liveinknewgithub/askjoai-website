@@ -107,6 +107,26 @@
                     }
                 );
             });
+
+            // Interactive demo conversation animation
+            const demoMessages = document.querySelectorAll('.demo-message');
+            demoMessages.forEach((message, index) => {
+                gsap.fromTo(message,
+                    { opacity: 0, y: 10 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.5,
+                        delay: index * 0.8,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: '.demo-window',
+                            start: 'top 80%',
+                            toggleActions: 'play none none none'
+                        }
+                    }
+                );
+            });
         }
     }
 
@@ -180,6 +200,33 @@
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
             el.classList.add('animate-in');
         });
+    }
+
+    // Progress nav active state
+    const progressDots = document.querySelectorAll('.progress-dot');
+    const sections = document.querySelectorAll('section[id]');
+
+    if (progressDots.length && sections.length) {
+        const observerOptions = {
+            rootMargin: '-50% 0px -50% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeSection = entry.target.id;
+                    progressDots.forEach(dot => {
+                        dot.classList.remove('active');
+                        if (dot.dataset.section === activeSection) {
+                            dot.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
     }
 })();
 

@@ -577,6 +577,7 @@ body.v8-warm-page .footer-links-inline a:hover {
             black 8%,
             black 92%,
             transparent 100%);
+    touch-action: manipulation;
 }
 
 .app-marquee-track {
@@ -1192,13 +1193,94 @@ body.v8-warm-page .v8-hero .btn-primary:active {
    Section styling
    ===================================================== */
 
+.section-darker {
+    background: var(--v8-bg-darker);
+}
+
 .section-dark {
-    background: var(--v8-bg-dark);
-    position: relative;
+    background: linear-gradient(135deg, var(--v8-bg-dark) 0%, rgba(245, 158, 11, 0.02) 50%, var(--v8-bg-dark) 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
 }
 
 .section-darker {
-    background: var(--v8-bg-darker);
+    background: linear-gradient(135deg, var(--v8-bg-darker) 0%, rgba(249, 115, 22, 0.015) 50%, var(--v8-bg-darker) 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite reverse;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Warm glow effects for interactive elements */
+.btn-primary:hover,
+.btn-primary:focus-visible {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.4), 0 4px 12px rgba(245, 158, 11, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.v8-email-input:focus {
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+    animation: inputPulse 2s ease-in-out infinite;
+}
+
+@keyframes inputPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.2); }
+    50% { box-shadow: 0 0 0 8px rgba(245, 158, 11, 0); }
+}
+
+a:hover {
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+}
+
+/* Progress nav */
+.progress-nav {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .progress-nav {
+        display: block;
+    }
+}
+
+.progress-dots {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.progress-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(254, 243, 226, 0.3);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: block;
+    text-decoration: none;
+}
+
+.progress-dot:hover {
+    background: rgba(254, 243, 226, 0.6);
+    transform: scale(1.2);
+}
+
+.progress-dot.active {
+    background: var(--v8-amber);
+    transform: scale(1.2);
 }
 
 .section-header h2 {
