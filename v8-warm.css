@@ -572,6 +572,7 @@ body.v8-warm-page .footer-links-inline a:hover {
     position: relative;
     overflow: hidden;
     margin: var(--space-xl) 0;
+    padding: 8px 0;
     mask-image: linear-gradient(to right,
             transparent 0%,
             black 3%,
