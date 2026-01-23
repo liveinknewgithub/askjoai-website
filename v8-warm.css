@@ -19,9 +19,9 @@
     --v8-bg-card-hover: #2e2720;
 
     /* Text colors */
-    --v8-text-bright: #FEF3E2;
-    --v8-text-dim: rgba(254, 243, 226, 0.7);
-    --v8-text-muted: rgba(254, 243, 226, 0.5);
+    --v8-text-bright: #FFFBF5;
+    --v8-text-dim: rgba(255, 251, 245, 0.8);
+    --v8-text-muted: rgba(255, 251, 245, 0.55);
 
     /* Borders and accents */
     --v8-border-subtle: rgba(254, 243, 226, 0.08);
@@ -114,7 +114,7 @@ body.v8-warm-page [role="button"] {
 }
 
 /* =====================================================
-   Warm grain texture background with ambient drift
+   Elegant ambient background with soft color washes
    ===================================================== */
 
 .warm-grain {
@@ -123,23 +123,25 @@ body.v8-warm-page [role="button"] {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image:
-        radial-gradient(ellipse at 20% 20%, rgba(245, 158, 11, 0.03) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 80%, rgba(249, 115, 22, 0.02) 0%, transparent 50%),
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    opacity: 0.4;
+    background:
+        radial-gradient(ellipse 80% 60% at 10% 20%, rgba(245, 158, 11, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 70% 50% at 90% 30%, rgba(251, 113, 133, 0.08) 0%, transparent 45%),
+        radial-gradient(ellipse 60% 80% at 80% 90%, rgba(249, 115, 22, 0.10) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(217, 119, 6, 0.06) 0%, transparent 40%);
     pointer-events: none;
     user-select: none;
     z-index: 0;
-    animation: grainDrift 30s ease-in-out infinite;
+    animation: ambientShift 20s ease-in-out infinite;
 }
 
-@keyframes grainDrift {
+@keyframes ambientShift {
     0%, 100% {
-        background-position: 0% 0%, 100% 100%, 0 0;
+        opacity: 1;
+        filter: blur(0px);
     }
     50% {
-        background-position: 10% 5%, 90% 95%, 0 0;
+        opacity: 0.85;
+        filter: blur(0px);
     }
 }
 
@@ -400,32 +402,35 @@ body.v8-warm-page .footer-links-inline a:hover {
 }
 
 .accent-orb-1 {
-    width: 500px;
-    height: 500px;
-    background: var(--v8-amber);
-    top: -150px;
-    right: 5%;
-    opacity: 0.12;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--v8-amber) 0%, var(--v8-amber-dark) 60%, transparent 70%);
+    top: -200px;
+    right: -5%;
+    opacity: 0.25;
+    filter: blur(80px);
     animation: floatWarm1 35s ease-in-out infinite, breatheOrb1 12s ease-in-out infinite;
 }
 
 .accent-orb-2 {
-    width: 400px;
-    height: 400px;
-    background: var(--v8-coral);
-    bottom: 10%;
-    left: -100px;
-    opacity: 0.08;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--v8-coral) 0%, rgba(249, 115, 22, 0.5) 50%, transparent 70%);
+    bottom: 5%;
+    left: -150px;
+    opacity: 0.20;
+    filter: blur(100px);
     animation: floatWarm2 40s ease-in-out infinite, breatheOrb2 14s ease-in-out infinite;
 }
 
 .accent-orb-3 {
-    width: 300px;
-    height: 300px;
-    background: var(--v8-rose);
-    top: 40%;
-    right: -80px;
-    opacity: 0.06;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--v8-rose) 0%, rgba(251, 113, 133, 0.4) 50%, transparent 70%);
+    top: 35%;
+    right: -100px;
+    opacity: 0.15;
+    filter: blur(90px);
     animation: floatWarm3 30s ease-in-out infinite, breatheOrb3 12s ease-in-out infinite;
 }
 
@@ -447,20 +452,19 @@ body.v8-warm-page .footer-links-inline a:hover {
 }
 
 /* Breathing opacity - creates a living, ambient feel */
-/* Using only opacity and transform for performance (filter is expensive) */
 @keyframes breatheOrb1 {
-    0%, 100% { opacity: 0.12; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1); }
-    50% { opacity: 0.18; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1.05); }
+    0%, 100% { opacity: 0.25; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1); }
+    50% { opacity: 0.35; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1.08); }
 }
 
 @keyframes breatheOrb2 {
-    0%, 100% { opacity: 0.08; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1); }
-    50% { opacity: 0.12; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1.03); }
+    0%, 100% { opacity: 0.20; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1); }
+    50% { opacity: 0.28; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1.05); }
 }
 
 @keyframes breatheOrb3 {
-    0%, 100% { opacity: 0.06; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1); }
-    50% { opacity: 0.1; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1.04); }
+    0%, 100% { opacity: 0.15; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1); }
+    50% { opacity: 0.22; transform: translate(var(--mouse-x), var(--mouse-y)) scale(1.06); }
 }
 
 /* =====================================================
@@ -471,7 +475,8 @@ body.v8-warm-page .footer-links-inline a:hover {
     position: relative;
     min-height: 100vh;
     overflow: hidden;
-    background: var(--v8-bg-dark);
+    background:
+        linear-gradient(180deg, var(--v8-bg-dark) 0%, rgba(26, 22, 18, 0.97) 50%, var(--v8-bg-darker) 100%);
 }
 
 .v8-hero .container {
