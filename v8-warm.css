@@ -574,13 +574,13 @@ body.v8-warm-page .footer-links-inline a:hover {
     margin: var(--space-xl) 0;
     mask-image: linear-gradient(to right,
             transparent 0%,
-            black 8%,
-            black 92%,
+            black 3%,
+            black 97%,
             transparent 100%);
     -webkit-mask-image: linear-gradient(to right,
             transparent 0%,
-            black 8%,
-            black 92%,
+            black 3%,
+            black 97%,
             transparent 100%);
     touch-action: manipulation;
 }
