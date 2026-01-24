@@ -504,7 +504,7 @@ body.v8-warm-page .footer-links-inline a {
     font-family: 'Fraunces', Georgia, serif;
     font-size: clamp(48px, 10vw, 88px);
     font-weight: 600;
-    line-height: 1.1;
+    line-height: 1.2;
     letter-spacing: -0.02em;
     color: var(--v8-text-bright);
     margin-bottom: var(--space-lg);
