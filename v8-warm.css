@@ -1098,9 +1098,11 @@ body.v8-warm-page .v8-hero .btn-primary:active {
     color: #1a1612;
     font-weight: 700;
     margin-left: -10px;
-    opacity: 0;
-    transform: scale(0.5) translateX(-10px);
-    animation: avatarIn 0.4s var(--ease-out-quint) forwards;
+    /* Start visible - use animation for entrance only, not ongoing state */
+    opacity: 1;
+    transform: scale(1) translateX(0);
+    /* Entrance animation - will end at the values above */
+    animation: avatarIn 0.4s var(--ease-out-quint) backwards;
 }
 
 .avatar-stack-item:nth-child(1) {
@@ -1128,9 +1130,9 @@ body.v8-warm-page .v8-hero .btn-primary:active {
 }
 
 @keyframes avatarIn {
-    to {
-        opacity: 1;
-        transform: scale(1) translateX(0);
+    from {
+        opacity: 0;
+        transform: scale(0.5) translateX(-10px);
     }
 }
 
@@ -1145,15 +1147,16 @@ body.v8-warm-page .v8-hero .btn-primary:active {
     font-weight: 500;
     color: var(--v8-text-dim);
     font-variant-numeric: tabular-nums;
-    opacity: 0;
-    transform: translateX(-10px);
-    animation: waitlistCountIn 0.5s var(--ease-out-quint) 0.55s forwards;
+    /* Final state as default - animation applies backwards */
+    opacity: 1;
+    transform: translateX(0);
+    animation: waitlistCountIn 0.5s var(--ease-out-quint) 0.55s backwards;
 }
 
 @keyframes waitlistCountIn {
-    to {
-        opacity: 1;
-        transform: translateX(0);
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
     }
 }
 
