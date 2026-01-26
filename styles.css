@@ -174,8 +174,10 @@ a {
     transition: color var(--transition-fast);
 }
 
-a:hover {
-    color: var(--accent-purple);
+@media (hover: hover) and (pointer: fine) {
+    a:hover {
+        color: var(--accent-purple);
+    }
 }
 
 /* Buttons */
@@ -202,9 +204,11 @@ a:hover {
     box-shadow: 0 4px 15px rgba(0, 153, 255, 0.25);
 }
 
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 153, 255, 0.35), 0 0 40px rgba(159, 117, 255, 0.2);
+@media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 153, 255, 0.35), 0 0 40px rgba(159, 117, 255, 0.2);
+    }
 }
 
 .btn-secondary {
@@ -213,9 +217,16 @@ a:hover {
     border-color: var(--text-primary);
 }
 
-.btn-secondary:hover {
-    background: var(--text-primary);
-    color: var(--bg-primary);
+@media (hover: hover) and (pointer: fine) {
+    .btn-secondary:hover {
+        background: var(--text-primary);
+        color: var(--bg-primary);
+    }
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
 }
 
 .btn-large {
@@ -279,10 +290,20 @@ a:hover {
     color: var(--text-secondary);
     font-weight: 500;
     transition: color var(--transition-fast);
+    padding: 8px 4px;
+    border-radius: 4px;
 }
 
-.nav-links a:hover {
+@media (hover: hover) and (pointer: fine) {
+    .nav-links a:hover {
+        color: var(--text-primary);
+    }
+}
+
+.nav-links a:focus-visible {
     color: var(--text-primary);
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
 }
 
 .nav-actions {
@@ -571,9 +592,11 @@ a:hover {
     transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
-.model-option:hover {
-    background: rgba(0, 153, 255, 0.2);
-    color: var(--accent-cyan);
+@media (hover: hover) and (pointer: fine) {
+    .model-option:hover {
+        background: rgba(0, 153, 255, 0.2);
+        color: var(--accent-cyan);
+    }
 }
 
 /* Example Cards */
@@ -657,9 +680,11 @@ a:hover {
     transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
-.opportunity-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+@media (hover: hover) and (pointer: fine) {
+    .opportunity-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+    }
 }
 
 .opportunity-icon {
@@ -704,9 +729,11 @@ a:hover {
     transition: border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
-.difference-card:hover {
-    border-color: rgba(0, 153, 255, 0.25);
-    box-shadow: 0 0 30px rgba(0, 153, 255, 0.08);
+@media (hover: hover) and (pointer: fine) {
+    .difference-card:hover {
+        border-color: rgba(0, 153, 255, 0.25);
+        box-shadow: 0 0 30px rgba(0, 153, 255, 0.08);
+    }
 }
 
 .difference-icon {
@@ -894,9 +921,11 @@ a:hover {
     transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
-.feature-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+@media (hover: hover) and (pointer: fine) {
+    .feature-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+    }
 }
 
 .feature-icon {
@@ -978,9 +1007,11 @@ a:hover {
     transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
-.use-case-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+@media (hover: hover) and (pointer: fine) {
+    .use-case-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+    }
 }
 
 .use-case-icon {
@@ -1379,11 +1410,13 @@ a:hover {
     box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
 }
 
-.cta .btn-primary:hover {
-    background: #f0f0f0;
-    color: #121218;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(255, 255, 255, 0.4);
+@media (hover: hover) and (pointer: fine) {
+    .cta .btn-primary:hover {
+        background: #f0f0f0;
+        color: #121218;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(255, 255, 255, 0.4);
+    }
 }
 
 .cta .btn-secondary {
@@ -1392,9 +1425,11 @@ a:hover {
     border-color: white;
 }
 
-.cta .btn-secondary:hover {
-    background: white;
-    color: var(--text-primary);
+@media (hover: hover) and (pointer: fine) {
+    .cta .btn-secondary:hover {
+        background: white;
+        color: var(--text-primary);
+    }
 }
 
 .cta-note {
@@ -1427,8 +1462,16 @@ a:hover {
     font-size: 14px;
 }
 
-.footer-links-inline a:hover {
+@media (hover: hover) and (pointer: fine) {
+    .footer-links-inline a:hover {
+        color: var(--accent-cyan);
+    }
+}
+
+.footer-links-inline a:focus-visible {
     color: var(--accent-cyan);
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
 }
 
 .footer-simple p {
@@ -2067,9 +2110,11 @@ body.throw-app .skip-link {
     box-shadow: 0 8px 16px rgba(27, 133, 102, 0.2);
 }
 
-.btn-throw:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 22px rgba(27, 133, 102, 0.28);
+@media (hover: hover) and (pointer: fine) {
+    .btn-throw:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 22px rgba(27, 133, 102, 0.28);
+    }
 }
 
 .btn-ghost {
@@ -2078,9 +2123,11 @@ body.throw-app .skip-link {
     border-color: rgba(29, 36, 40, 0.25);
 }
 
-.btn-ghost:hover {
-    background: rgba(27, 133, 102, 0.08);
-    border-color: rgba(27, 133, 102, 0.4);
+@media (hover: hover) and (pointer: fine) {
+    .btn-ghost:hover {
+        background: rgba(27, 133, 102, 0.08);
+        border-color: rgba(27, 133, 102, 0.4);
+    }
 }
 
 .throw-hero {
@@ -2347,9 +2394,11 @@ body.throw-app .skip-link {
     transition: border-color var(--transition-fast), color var(--transition-fast);
 }
 
-.item-delete:hover {
-    border-color: #c2594a;
-    color: #c2594a;
+@media (hover: hover) and (pointer: fine) {
+    .item-delete:hover {
+        border-color: #c2594a;
+        color: #c2594a;
+    }
 }
 
 .log-item {
