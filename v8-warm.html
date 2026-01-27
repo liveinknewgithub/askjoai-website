@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>jo - Find Any Note, Email, or Photo in Seconds</title>
     <meta name="description"
-        content="jo is a local AI for Mac that searches your notes, photos, emails, and messages instantly. Just ask a question. 100% private. Runs entirely on your Mac.">
+        content="jo is a local AI for Mac that searches your notes, photos, emails, and summarizes groupchats across iMessage, WhatsApp, and Telegram. 100% private. Runs entirely on your Mac.">
     <meta property="og:title" content="jo - Your AI Sidekick. 100% Private.">
     <meta property="og:description"
         content="50,000+ photos. 100,000+ emails. Years of notes. jo surfaces what matters before you think to search. Runs entirely on your Mac. No subscription.">
@@ -93,6 +93,22 @@
                     "@type": "Answer",
                     "text": "jo runs entirely on your Mac. Your notes, photos, emails, and files stay exactly where they are. Nothing is uploaded. Nothing is shared. Nothing leaves your machine. Ever."
                 }
+            },
+            {
+                "@type": "Question",
+                "name": "Can jo summarize my WhatsApp and Telegram chats?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. jo connects to iMessage, WhatsApp, and Telegram on your Mac. Ask 'catch me up on the family chat' and jo summarizes the key points, decisions, and anything that needs your attention. All processing happens locally."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How is jo different from running my own AI agent?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Self-hosting AI agents means buying a Mac mini, renting a VPS, configuring SSH, managing API keys, and debugging at midnight. jo gives you the same capabilities with none of the infrastructure. Drag it to Applications. You're done."
+                }
             }
         ]
     }
@@ -156,7 +172,7 @@
                     </h1>
 
                     <p class="hero-tagline">
-                        jo searches your Mac—notes, photos, emails, messages—and finds what you need in seconds. Runs 100% locally. Nothing ever leaves your computer.
+                        jo searches your Mac and summarizes groupchats across iMessage, WhatsApp, and Telegram. No more scrolling through 200 unread messages. Runs 100% locally.
                     </p>
 
                     <div class="app-marquee" aria-label="Apps jo searches">
@@ -164,20 +180,20 @@
                             <span class="app-tag"><span>📝</span> Notes</span>
                             <span class="app-tag"><span>📸</span> Photos</span>
                             <span class="app-tag"><span>✉️</span> Mail</span>
-                            <span class="app-tag"><span>💬</span> Messages</span>
+                            <span class="app-tag"><span>💬</span> iMessage</span>
+                            <span class="app-tag"><span>💬</span> WhatsApp</span>
+                            <span class="app-tag"><span>💬</span> Telegram</span>
                             <span class="app-tag"><span>📅</span> Calendar</span>
                             <span class="app-tag"><span>📁</span> Files</span>
-                            <span class="app-tag"><span>🔖</span> Reminders</span>
-                            <span class="app-tag"><span>📇</span> Contacts</span>
                             <!-- Duplicates for seamless loop - hidden from screen readers -->
                             <span class="app-tag app-tag-duplicate" aria-hidden="true"><span>📝</span> Notes</span>
                             <span class="app-tag app-tag-duplicate" aria-hidden="true"><span>📸</span> Photos</span>
                             <span class="app-tag app-tag-duplicate" aria-hidden="true"><span>✉️</span> Mail</span>
-                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><span>💬</span> Messages</span>
+                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><span>💬</span> iMessage</span>
+                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><span>💬</span> WhatsApp</span>
+                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><span>💬</span> Telegram</span>
                             <span class="app-tag app-tag-duplicate" aria-hidden="true"><span>📅</span> Calendar</span>
                             <span class="app-tag app-tag-duplicate" aria-hidden="true"><span>📁</span> Files</span>
-                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><span>🔖</span> Reminders</span>
-                            <span class="app-tag app-tag-duplicate" aria-hidden="true"><span>📇</span> Contacts</span>
                         </div>
                     </div>
 
@@ -198,6 +214,7 @@
                         <span class="trust-badge"><svg class="trust-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M8.732 5.771L5.67 9.914c-1.285 1.739-1.928 2.608-1.574 3.291l.018.034c.375.673 1.485.673 3.704.673c1.233 0 1.85 0 2.236.363l.02.02l3.872-4.57l-.02-.02c-.379-.371-.379-.963-.379-2.148v-.31c0-3.285 0-4.927-.923-5.21s-1.913 1.056-3.892 3.734" clip-rule="evenodd"/><path fill="currentColor" d="M10.453 16.443v.31c0 3.284 0 4.927.923 5.21s1.913-1.056 3.893-3.734l3.062-4.143c1.284-1.739 1.927-2.608 1.573-3.291l-.018-.034c-.375-.673-1.485-.673-3.704-.673c-1.233 0-1.85 0-2.236-.363l-3.872 4.57c.379.371.379.963.379 2.148" opacity=".5"/></svg>No subscription — pay only for what you use</span>
                         <span class="trust-badge"><svg class="trust-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10" opacity=".5"/><path fill="currentColor" d="M16.03 8.97a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06l1.47 1.47l4.47-4.47a.75.75 0 0 1 1.06 0"/></svg>30-day satisfaction guarantee</span>
                         <span class="trust-badge"><svg class="trust-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 3c.385 0 .698.312.698.698v2.79q.764.001 1.395.017V3.698a.698.698 0 0 1 1.395 0v2.79a1 1 0 0 1-.008.108c.936.115 1.585.353 2.078.846s.731 1.142.846 2.078a1 1 0 0 1 .108-.008h2.79a.698.698 0 0 1 0 1.395h-2.807q.017.63.017 1.395h2.79a.698.698 0 0 1 0 1.396h-2.79q-.001.764-.017 1.395h2.807a.698.698 0 0 1 0 1.395h-2.79a1 1 0 0 1-.108-.008c-.115.936-.353 1.585-.846 2.078s-1.142.731-2.078.846q.009.053.008.108v2.79a.698.698 0 0 1-1.395 0v-2.807q-.63.017-1.395.017v2.79a.698.698 0 0 1-1.396 0v-2.79a56 56 0 0 1-1.395-.017v2.807a.698.698 0 0 1-1.395 0v-2.79q0-.056.008-.108c-.936-.115-1.585-.353-2.078-.846s-.731-1.142-.846-2.078a1 1 0 0 1-.108.008h-2.79a.698.698 0 0 1 0-1.395h2.807a56 56 0 0 1-.017-1.395h-2.79a.698.698 0 0 1 0-1.396h2.79q.001-.764.017-1.395H2.698a.698.698 0 0 1 0-1.395h2.79q.056 0 .108.008c.115-.936.353-1.585.846-2.078s1.142-.731 2.078-.846a1 1 0 0 1-.008-.108v-2.79a.698.698 0 0 1 1.395 0v2.807q.63-.017 1.395-.017v-2.79c0-.386.313-.698.698-.698m-.976 5.581c-.619 0-1.152 0-1.578.058c-.458.061-.896.2-1.252.555c-.355.356-.494.794-.555 1.252c-.058.427-.058.96-.058 1.578v1.952c0 .619 0 1.151.058 1.578c.061.458.2.896.555 1.252c.356.355.794.494 1.252.555c.426.058.96.058 1.578.058h1.952c.619 0 1.151 0 1.578-.058c.458-.061.896-.2 1.252-.555c.355-.356.494-.794.555-1.252c.058-.427.058-.96.058-1.578v-1.952c0-.619 0-1.151-.058-1.578c-.061-.458-.2-.896-.555-1.252c-.356-.355-.794-.494-1.252-.555c-.427-.058-.96-.058-1.578-.058z" clip-rule="evenodd"/><path fill="currentColor" d="M9.18 10.18c.054-.052.149-.118.451-.159c.323-.043.761-.044 1.439-.044h1.86c.678 0 1.116.001 1.438.044c.303.041.398.107.45.16c.054.053.12.148.16.45c.044.323.045.761.045 1.439v1.86c0 .678-.001 1.116-.045 1.438c-.04.303-.106.398-.16.45c-.052.054-.147.12-.45.16c-.322.044-.76.045-1.438.045h-1.86c-.678 0-1.116-.001-1.439-.045c-.302-.04-.397-.106-.45-.16c-.053-.052-.119-.147-.16-.45c-.043-.322-.044-.76-.044-1.438v-1.86c0-.678.001-1.116.044-1.438c.041-.303.107-.398.16-.451" opacity=".5"/></svg>Requires M1 Mac or newer with 16GB RAM</span>
+                        <span class="trust-badge"><svg class="trust-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M22 16v-1c0-2.828 0-4.242-.879-5.12C20.242 9 18.828 9 16 9H8c-2.829 0-4.243 0-5.122.88C2 10.757 2 12.17 2 14.997V16c0 2.829 0 4.243.879 5.122C3.757 22 5.172 22 8 22h8c2.828 0 4.243 0 5.121-.878C22 20.242 22 18.829 22 16" opacity=".5"/><path fill="currentColor" fill-rule="evenodd" d="M12 1.25a.75.75 0 0 0-.75.75v10.973l-1.68-1.961a.75.75 0 1 0-1.14.976l3 3.5a.75.75 0 0 0 1.14 0l3-3.5a.75.75 0 1 0-1.14-.976l-1.68 1.96V2a.75.75 0 0 0-.75-.75" clip-rule="evenodd"/></svg>No server, no terminal — drag to Applications and go</span>
                     </div>
 
                     <div class="social-proof mt-md">
@@ -243,20 +260,20 @@
                     <div class="demo-content demo-conversation">
                         <div class="demo-message demo-user">
                             <span class="demo-label">You</span>
-                            <p>What was the name of that contractor Mike recommended for the deck?</p>
+                            <p>What did I miss in the neighborhood WhatsApp?</p>
                         </div>
                         <div class="demo-message demo-jo">
                             <span class="demo-label">jo</span>
-                            <p>Based on your messages with Mike from March 2024, he recommended <strong>Tom Reilly at Reilly Decks</strong> (503-555-0147). Mike said Tom did his deck for $4,200 and finished in 3 days.</p>
+                            <p><strong>47 messages since yesterday.</strong> The Chens are hosting a block party June 15th and need RSVPs by Friday. Someone's dog has been barking at night (3 complaints). Maria is selling her kid's bike for $30. Tom asked if anyone has a ladder he can borrow.</p>
                             <div class="demo-sources">
-                                <span class="demo-source">iMessage with Mike Chen, Mar 12</span>
-                                <span class="demo-source">Photo: Mike's deck, Mar 15</span>
+                                <span class="demo-source">WhatsApp: Maple Street Neighbors</span>
+                                <span class="demo-source">47 messages summarized</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <p class="demo-caption text-center mt-lg animate-on-scroll">Found in 3 seconds. No exact keywords needed.</p>
+                <p class="demo-caption text-center mt-lg animate-on-scroll">47 messages summarized in 3 seconds. Works across iMessage, WhatsApp, and Telegram.</p>
             </div>
         </section>
 
@@ -285,6 +302,11 @@
                         <div class="comparison-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M4.979 9.685C2.993 8.891 2 8.494 2 8s.993-.89 2.979-1.685l2.808-1.123C9.773 4.397 10.767 4 12 4s2.227.397 4.213 1.192l2.808 1.123C21.007 7.109 22 7.506 22 8s-.993.89-2.979 1.685l-2.808 1.124C14.227 11.603 13.233 12 12 12s-2.227-.397-4.213-1.191z"/><path fill="currentColor" d="m5.766 10l-.787.315C2.993 11.109 2 11.507 2 12s.993.89 2.979 1.685l2.808 1.124C9.773 15.603 10.767 16 12 16s2.227-.397 4.213-1.191l2.808-1.124C21.007 12.891 22 12.493 22 12s-.993-.89-2.979-1.685L18.234 10l-2.021.809C14.227 11.603 13.233 12 12 12s-2.227-.397-4.213-1.191z" opacity=".7"/><path fill="currentColor" d="m5.766 14l-.787.315C2.993 15.109 2 15.507 2 16s.993.89 2.979 1.685l2.808 1.124C9.773 19.603 10.767 20 12 20s2.227-.397 4.213-1.192l2.808-1.123C21.007 16.891 22 16.494 22 16c0-.493-.993-.89-2.979-1.685L18.234 14l-2.021.809C14.227 15.603 13.233 16 12 16s-2.227-.397-4.213-1.191z" opacity=".4"/></svg></div>
                         <h3>vs. Note apps</h3>
                         <p class="comparison-limitation">Notion AI only searches Notion. jo searches Notes, Photos, Mail, Messages, and Calendar at once.</p>
+                    </div>
+                    <div class="comparison-card comparison-card--diy">
+                        <div class="comparison-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19h8M4 17l6-6l-6-6"/></svg></div>
+                        <h3>vs. DIY AI Agents</h3>
+                        <p class="comparison-limitation">Self-hosting means a $700 Mac mini, monthly VPS bills, SSH sessions, and debugging at midnight. jo is drag, drop, ask.</p>
                     </div>
                 </div>
             </div>
@@ -351,6 +373,11 @@
                         <h3>"What did I learn at that conference last year?"</h3>
                         <p>jo finds your notes from each session, the photos of slides you snapped, the business cards
                             you photographed, and the follow-up emails you sent.</p>
+                    </div>
+                    <div class="feature-refined feature-refined--groupchat">
+                        <div class="feature-icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></g></svg></div>
+                        <h3>"Catch me up on the family groupchat"</h3>
+                        <p>jo reads the last 100 messages in your iMessage, WhatsApp, or Telegram groups and gives you the highlights. Who said what, decisions made, anything you need to respond to.</p>
                     </div>
                 </div>
             </div>
@@ -557,6 +584,20 @@
                                 just pennies.</p>
                         </div>
                     </article>
+                    <article class="faq-item-refined" role="listitem" itemscope itemprop="mainEntity"
+                        itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">Can jo summarize my WhatsApp and Telegram chats?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">Yes. jo connects to iMessage, WhatsApp, and Telegram on your Mac. Ask "catch me up on the family chat" and jo summarizes the key points, decisions, and anything that needs your attention. All processing happens locally.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item-refined" role="listitem" itemscope itemprop="mainEntity"
+                        itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">How is jo different from running my own AI agent?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">Self-hosting AI agents means buying a Mac mini, renting a VPS, configuring SSH, managing API keys, and debugging at midnight. jo gives you the same capabilities with none of the infrastructure. Drag it to Applications. You're done.</p>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -572,7 +613,7 @@
                     <div class="privacy-proof">
                         <h3>How we guarantee this:</h3>
                         <ul class="privacy-list">
-                            <li><strong>No network calls for your data.</strong> Open Activity Monitor while using jo. You'll see zero outbound connections to our servers for your content.</li>
+                            <li><strong>No network calls for your data.</strong> Don't trust us. Open Activity Monitor while jo runs. Zero outbound connections. That's not a promise—it's verifiable.</li>
                             <li><strong>All processing on-device.</strong> The AI model runs locally on your Mac's Neural Engine. Your queries never leave your machine.</li>
                             <li><strong>Verifiable architecture.</strong> jo uses Apple's native APIs (same as Spotlight). We can't access your data even if we wanted to.</li>
                             <li><strong>Open to audit.</strong> Security researchers can verify our claims. Email security@askjo.ai for technical documentation.</li>
