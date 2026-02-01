@@ -298,8 +298,7 @@
                     domCache.progressDots.forEach(dot => {
                         const isActive = dot.dataset.section === activeSection;
                         dot.classList.toggle('active', isActive);
-                        dot.setAttribute('aria-selected', isActive.toString());
-                        dot.setAttribute('tabindex', isActive ? '0' : '-1');
+                        dot.setAttribute('aria-current', isActive.toString());
                     });
                 }
             });

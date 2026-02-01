@@ -727,7 +727,7 @@ h1, h2, h3 {
     outline-offset: 2px;
 }
 
-.progress-dot[aria-selected="true"]::before {
+.progress-dot[aria-current="true"]::before {
     background: var(--v8-amber);
     transform: scale(1.2);
 }
@@ -780,7 +780,7 @@ h1, h2, h3 {
 }
 
 .demo-content {
-    aspect-ratio: 16/9;
+    min-height: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -869,11 +869,12 @@ h1, h2, h3 {
 .comparison-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto auto auto;
     grid-template-areas:
         "spotlight chatgpt"
         "spotlight rewind"
-        "noteapps noteapps";
+        "noteapps noteapps"
+        "diy diy";
     gap: var(--space-lg);
     max-width: 900px;
     margin: 0 auto;
@@ -926,6 +927,16 @@ h1, h2, h3 {
 
 .comparison-card--noteapps h3 { flex-shrink: 0; }
 .comparison-card--noteapps .comparison-limitation { margin: 0; }
+
+.comparison-card--diy {
+    grid-area: diy;
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+}
+
+.comparison-card--diy h3 { flex-shrink: 0; }
+.comparison-card--diy .comparison-limitation { margin: 0; }
 
 .comparison-card h3 {
     font-size: 16px;
@@ -1413,6 +1424,73 @@ h1, h2, h3 {
     opacity: 1;
 }
 
+/* Tools Card (replaces fake team members) */
+.tools-card {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    background: var(--v8-bg-card);
+    border: var(--border-hairline) solid var(--v8-border-subtle);
+    border-radius: 16px;
+    padding: var(--space-md) var(--space-lg);
+    margin-top: var(--space-sm);
+}
+
+.tools-label {
+    font-size: 13px;
+    color: var(--v8-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.tools-list {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.tool-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--v8-text-dim);
+    text-decoration: none;
+    padding: 6px 12px;
+    background: rgba(245, 158, 11, 0.08);
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s var(--ease-out-quint);
+}
+
+.tool-link:hover {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--v8-amber);
+    transform: translateY(-2px);
+}
+
+.tool-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .tools-card {
+        grid-column: span 1;
+        flex-direction: column;
+        gap: var(--space-sm);
+        text-align: center;
+    }
+
+    .tools-list {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
 .team-intro {
     font-size: 18px;
     color: var(--v8-text-dim);
@@ -1843,10 +1921,12 @@ h1, h2, h3 {
             "spotlight"
             "chatgpt"
             "rewind"
-            "noteapps";
+            "noteapps"
+            "diy";
     }
 
-    .comparison-card--noteapps {
+    .comparison-card--noteapps,
+    .comparison-card--diy {
         flex-direction: column;
         align-items: flex-start;
         gap: var(--space-sm);
