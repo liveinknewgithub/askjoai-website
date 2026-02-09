@@ -280,6 +280,27 @@
 
             marqueeObserver.observe(domCache.marqueeTrack);
         }
+
+        // Pause other looping animations when off-screen
+        const loopingSelectors = [
+            '.comparison-card--spotlight',
+            '.feature-refined--hero',
+            '.testimonial-refined--sarah',
+            '.feature-icon-wrapper',
+            '.testimonial-refined::before',
+            '.step-icon::after',
+            '.section-darker',
+            '.section-dark'
+        ];
+        const loopingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                entry.target.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
+            });
+        }, observerOptions);
+
+        loopingSelectors.forEach(selector => {
+            document.querySelectorAll(selector).forEach(el => loopingObserver.observe(el));
+        });
     }
 
     // ===== Progress Navigation =====

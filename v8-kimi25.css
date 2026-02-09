@@ -121,7 +121,7 @@ h1, h2, h3 {
 .accent-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(120px);
+    filter: blur(20px);
     pointer-events: none;
     user-select: none;
     will-change: transform;
@@ -134,7 +134,7 @@ h1, h2, h3 {
     top: -200px;
     right: -5%;
     opacity: 0.25;
-    filter: blur(80px);
+    filter: blur(20px);
     animation: floatWarm1 35s ease-in-out infinite, breatheOrb 12s ease-in-out infinite;
 }
 
@@ -145,7 +145,7 @@ h1, h2, h3 {
     bottom: 5%;
     left: -150px;
     opacity: 0.20;
-    filter: blur(100px);
+    filter: blur(20px);
     animation: floatWarm2 40s ease-in-out infinite, breatheOrb 14s ease-in-out infinite;
 }
 
@@ -156,7 +156,7 @@ h1, h2, h3 {
     top: 35%;
     right: -100px;
     opacity: 0.15;
-    filter: blur(90px);
+    filter: blur(20px);
     animation: floatWarm3 30s ease-in-out infinite, breatheOrb 12s ease-in-out infinite;
 }
 
@@ -208,10 +208,12 @@ h1, h2, h3 {
     border-radius: 4px;
 }
 
-.nav-links a:hover { color: var(--v8-amber); }
+@media (hover: hover) and (pointer: fine) {
+    .nav-links a:hover { color: var(--v8-amber); }
+}
 .nav-links a:focus-visible {
     color: var(--v8-amber);
-    outline: 2px solid var(--v8-amber);
+    outline: 2px solid #fff;
     outline-offset: 2px;
 }
 
@@ -279,9 +281,9 @@ h1, h2, h3 {
 }
 
 @keyframes underlineReveal {
-    0% { transform: scaleX(0); box-shadow: 0 0 25px 5px rgba(245, 158, 11, 0.6); }
-    60% { box-shadow: 0 0 25px 5px rgba(245, 158, 11, 0.4); }
-    100% { transform: scaleX(1); box-shadow: 0 0 15px 3px rgba(245, 158, 11, 0.3); }
+    0% { transform: scaleX(0); opacity: 0.6; }
+    60% { opacity: 0.8; }
+    100% { transform: scaleX(1); opacity: 1; }
 }
 
 /* =====================================================
@@ -329,10 +331,12 @@ h1, h2, h3 {
     transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s var(--ease-out-quint);
 }
 
-.app-tag:hover {
-    background: rgba(245, 158, 11, 0.15);
-    box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.4), 0 4px 20px rgba(245, 158, 11, 0.15);
-    transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+    .app-tag:hover {
+        background: rgba(245, 158, 11, 0.15);
+        box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.4), 0 4px 20px rgba(245, 158, 11, 0.15);
+        transform: translateY(-2px);
+    }
 }
 
 /* =====================================================
@@ -435,9 +439,11 @@ h1, h2, h3 {
     box-shadow: 0 4px 15px rgba(245, 158, 11, 0.25);
 }
 
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(245, 158, 11, 0.4);
+@media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(245, 158, 11, 0.4);
+    }
 }
 
 .btn-primary:active {
@@ -590,10 +596,12 @@ h1, h2, h3 {
     transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s var(--ease-out-quint);
 }
 
-.yc-badge:hover {
-    background: rgba(255, 102, 0, 0.12);
-    border-color: rgba(255, 102, 0, 0.35);
-    transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+    .yc-badge:hover {
+        background: rgba(255, 102, 0, 0.12);
+        border-color: rgba(255, 102, 0, 0.35);
+        transform: translateY(-2px);
+    }
 }
 
 .yc-logo {
@@ -717,13 +725,15 @@ h1, h2, h3 {
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.progress-dot:hover::before {
-    background: rgba(254, 243, 226, 0.6);
-    transform: scale(1.2);
+@media (hover: hover) and (pointer: fine) {
+    .progress-dot:hover::before {
+        background: rgba(254, 243, 226, 0.6);
+        transform: scale(1.2);
+    }
 }
 
 .progress-dot:focus-visible {
-    outline: 2px solid var(--v8-amber);
+    outline: 2px solid #fff;
     outline-offset: 2px;
 }
 
@@ -888,9 +898,11 @@ h1, h2, h3 {
     transition: transform 0.25s var(--ease-out-quint), box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-.comparison-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+@media (hover: hover) and (pointer: fine) {
+    .comparison-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
 }
 
 .comparison-card--spotlight {
@@ -901,13 +913,15 @@ h1, h2, h3 {
     animation: cardGlow 3s ease-in-out 0.5s infinite;
 }
 
-.comparison-card--spotlight:hover {
-    box-shadow: 0 12px 40px rgba(245, 158, 11, 0.2);
+@media (hover: hover) and (pointer: fine) {
+    .comparison-card--spotlight:hover {
+        box-shadow: 0 12px 40px rgba(245, 158, 11, 0.2);
+    }
 }
 
 @keyframes cardGlow {
-    0%, 100% { box-shadow: 0 0 20px 0 rgba(245, 158, 11, 0.1); }
-    50% { box-shadow: 0 0 35px 8px rgba(245, 158, 11, 0.2); }
+    0%, 100% { opacity: 0.85; }
+    50% { opacity: 1; }
 }
 
 .comparison-card--spotlight h3 {
@@ -970,9 +984,11 @@ h1, h2, h3 {
     height: 28px;
 }
 
-.comparison-card:hover .comparison-icon {
-    transform: scale(1.05);
-    background: rgba(245, 158, 11, 0.15);
+@media (hover: hover) and (pointer: fine) {
+    .comparison-card:hover .comparison-icon {
+        transform: scale(1.05);
+        background: rgba(245, 158, 11, 0.15);
+    }
 }
 
 /* =====================================================
@@ -1045,11 +1061,13 @@ h1, h2, h3 {
     50% { opacity: 0.4; transform: scale(1.1); }
 }
 
-.step-item:hover .step-icon {
-    background: linear-gradient(135deg, var(--v8-amber) 0%, var(--v8-coral) 100%);
-    color: #1a1612;
-    border-color: transparent;
-    transform: scale(1.05);
+@media (hover: hover) and (pointer: fine) {
+    .step-item:hover .step-icon {
+        background: linear-gradient(135deg, var(--v8-amber) 0%, var(--v8-coral) 100%);
+        color: #1a1612;
+        border-color: transparent;
+        transform: scale(1.05);
+    }
 }
 
 .step-item h3 {
@@ -1094,9 +1112,11 @@ h1, h2, h3 {
     overflow: hidden;
 }
 
-.feature-refined:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.3), 0 20px 60px rgba(245, 158, 11, 0.1);
+@media (hover: hover) and (pointer: fine) {
+    .feature-refined:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.3), 0 20px 60px rgba(245, 158, 11, 0.1);
+    }
 }
 
 .feature-refined--hero {
@@ -1109,8 +1129,10 @@ h1, h2, h3 {
     animation: cardGlow 3s ease-in-out 0.7s infinite;
 }
 
-.feature-refined--hero:hover {
-    box-shadow: 0 0 0 2px var(--v8-amber), 0 24px 60px rgba(245, 158, 11, 0.2);
+@media (hover: hover) and (pointer: fine) {
+    .feature-refined--hero:hover {
+        box-shadow: 0 0 0 2px var(--v8-amber), 0 24px 60px rgba(245, 158, 11, 0.2);
+    }
 }
 
 .feature-refined--hero .feature-icon-wrapper {
@@ -1152,8 +1174,8 @@ h1, h2, h3 {
 }
 
 @keyframes iconBreath {
-    0%, 100% { background: rgba(245, 158, 11, 0.1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
-    50% { background: rgba(245, 158, 11, 0.15); box-shadow: 0 0 20px 0 rgba(245, 158, 11, 0.15); }
+    0%, 100% { opacity: 0.85; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
 }
 
 .feature-refined h3 {
@@ -1220,9 +1242,11 @@ h1, h2, h3 {
     transition: transform 0.25s var(--ease-out-quint), box-shadow 0.2s ease;
 }
 
-.testimonial-refined:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.2), 0 12px 40px rgba(0, 0, 0, 0.3);
+@media (hover: hover) and (pointer: fine) {
+    .testimonial-refined:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.2), 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
 }
 
 .testimonial-refined--sarah {
@@ -1233,8 +1257,10 @@ h1, h2, h3 {
     animation: cardGlow 3s ease-in-out 0.8s infinite;
 }
 
-.testimonial-refined--sarah:hover {
-    box-shadow: 0 0 0 2px var(--v8-amber), 0 16px 50px rgba(245, 158, 11, 0.2);
+@media (hover: hover) and (pointer: fine) {
+    .testimonial-refined--sarah:hover {
+        box-shadow: 0 0 0 2px var(--v8-amber), 0 16px 50px rgba(245, 158, 11, 0.2);
+    }
 }
 
 .testimonial-refined--sarah blockquote {
@@ -1313,9 +1339,11 @@ h1, h2, h3 {
     transition: transform 0.3s var(--ease-out-quint), box-shadow 0.3s ease;
 }
 
-.testimonial-refined:hover .author-avatar-img {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+@media (hover: hover) and (pointer: fine) {
+    .testimonial-refined:hover .author-avatar-img {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+    }
 }
 
 .author-info {
@@ -1405,23 +1433,23 @@ h1, h2, h3 {
     font-weight: 500;
     color: var(--v8-text-dim);
     text-decoration: none;
-    transition: color 0.2s ease, gap 0.2s var(--ease-out-quint);
+    transition: color 0.2s ease;
 }
 
-.founder-linkedin:hover {
-    color: var(--v8-amber);
-    gap: 8px;
+@media (hover: hover) and (pointer: fine) {
+    .founder-linkedin:hover {
+        color: var(--v8-amber);
+    }
+    .founder-linkedin:hover svg {
+        transform: scale(1.1) translateX(2px);
+        opacity: 1;
+    }
 }
 
 .founder-linkedin svg {
     flex-shrink: 0;
     opacity: 0.7;
     transition: transform 0.2s var(--ease-out-quint), opacity 0.2s ease;
-}
-
-.founder-linkedin:hover svg {
-    transform: scale(1.1);
-    opacity: 1;
 }
 
 /* Tools Card (replaces fake team members) */
@@ -1464,10 +1492,12 @@ h1, h2, h3 {
     transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s var(--ease-out-quint);
 }
 
-.tool-link:hover {
-    background: rgba(245, 158, 11, 0.15);
-    color: var(--v8-amber);
-    transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+    .tool-link:hover {
+        background: rgba(245, 158, 11, 0.15);
+        color: var(--v8-amber);
+        transform: translateY(-2px);
+    }
 }
 
 .tool-icon {
@@ -1509,8 +1539,10 @@ h1, h2, h3 {
     text-decoration: none;
 }
 
-.team-contact a:hover {
-    text-decoration: underline;
+@media (hover: hover) and (pointer: fine) {
+    .team-contact a:hover {
+        text-decoration: underline;
+    }
 }
 
 /* =====================================================
@@ -1636,8 +1668,10 @@ h1, h2, h3 {
     transition: box-shadow 0.2s ease;
 }
 
-.faq-item-refined:hover {
-    box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.2);
+@media (hover: hover) and (pointer: fine) {
+    .faq-item-refined:hover {
+        box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.2);
+    }
 }
 
 .faq-item-refined h3 {
@@ -1800,8 +1834,10 @@ h1, h2, h3 {
     color: var(--v8-text-bright);
 }
 
-.cta-refined .btn-primary:hover {
-    background: #2a241e;
+@media (hover: hover) and (pointer: fine) {
+    .cta-refined .btn-primary:hover {
+        background: #2a241e;
+    }
 }
 
 .v8-cta-note {
@@ -1842,13 +1878,41 @@ h1, h2, h3 {
     transition: color 0.2s ease;
 }
 
-.footer-links-inline a:hover {
-    color: var(--v8-amber);
+@media (hover: hover) and (pointer: fine) {
+    .footer-links-inline a:hover {
+        color: var(--v8-amber);
+    }
 }
 
 .footer-simple p {
     font-size: 14px;
     color: var(--v8-text-muted);
+}
+
+/* =====================================================
+   Touch Device Improvements
+   ===================================================== */
+
+a, button, [role="button"], input[type="submit"], .progress-dot {
+    touch-action: manipulation;
+}
+
+/* =====================================================
+   Skip Intro (session-cached page load animations)
+   ===================================================== */
+
+.skip-intro .v8-hero-content,
+.skip-intro .nav-logo .logo-text,
+.skip-intro .nav-links a,
+.skip-intro .nav-actions .btn-primary,
+.skip-intro .trust-badge,
+.skip-intro .social-proof-text,
+.skip-intro .avatar-stack-item,
+.skip-intro .waitlist-count,
+.skip-intro .yc-badge {
+    animation: none;
+    opacity: 1;
+    transform: none;
 }
 
 /* =====================================================
