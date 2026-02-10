@@ -21,7 +21,6 @@
         orbs: null,
         sections: null,
         progressDots: null,
-        marqueeTrack: null,
         emailInputs: null
     };
 
@@ -30,7 +29,6 @@
         domCache.orbs = document.querySelectorAll('.accent-orb');
         domCache.sections = document.querySelectorAll('section[id]');
         domCache.progressDots = document.querySelectorAll('.progress-dot');
-        domCache.marqueeTrack = document.querySelector('.app-marquee-track');
         domCache.emailInputs = document.querySelectorAll('.v8-email-input');
     }
 
@@ -59,113 +57,9 @@
     }
 
     function initGSAPAnimations() {
-        // Demo window scale animation
-        const demoWindow = document.querySelector('.demo-window');
-        if (demoWindow) {
-            gsap.to(demoWindow, {
-                scale: 1,
-                borderRadius: '12px',
-                scrollTrigger: {
-                    trigger: demoWindow,
-                    start: 'top 90%',
-                    end: 'top 30%',
-                    scrub: 1.2
-                }
-            });
-        }
-
-        // Parallax on accent orbs
-        if (domCache.orbs && domCache.orbs.length >= 3) {
-            gsap.to(domCache.orbs[0], {
-                y: -80,
-                scrollTrigger: {
-                    trigger: '.v8-hero',
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: 2
-                }
-            });
-
-            gsap.to(domCache.orbs[1], {
-                y: -50,
-                x: 30,
-                scrollTrigger: {
-                    trigger: '.v8-hero',
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: 2.5
-                }
-            });
-
-            gsap.to(domCache.orbs[2], {
-                y: -60,
-                scrollTrigger: {
-                    trigger: '.v8-hero',
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: 1.8
-                }
-            });
-        }
-
-        // Section reveal animations
-        const animatedSections = document.querySelectorAll('.animate-on-scroll');
-        animatedSections.forEach((section) => {
-            gsap.fromTo(section,
-                { opacity: 0.6, y: 30 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1.0,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: section,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none'
-                    }
-                }
-            );
-        });
-
-        // Staggered children reveal
-        document.querySelectorAll('.stagger-children').forEach(container => {
-            const children = container.children;
-            gsap.fromTo(children,
-                { opacity: 0, y: 20 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.6,
-                    stagger: 0.15,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: container,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none'
-                    }
-                }
-            );
-        });
-
-        // Demo conversation animation
-        const demoMessages = document.querySelectorAll('.demo-message');
-        demoMessages.forEach((message, index) => {
-            gsap.fromTo(message,
-                { opacity: 0, y: 10 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.5,
-                    delay: index * 0.8,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: '.demo-window',
-                        start: 'top 80%',
-                        toggleActions: 'play none none none'
-                    }
-                }
-            );
-        });
+        // No scroll-triggered animations on marketing pages (Emil principle:
+        // no fade-ups, translate-Y on scroll, no disconnected parallax).
+        // GSAP is kept registered for potential future scrubbed 1:1 interactions.
     }
 
     function initFallbackAnimations() {
@@ -197,62 +91,6 @@
         }
     }
 
-    // ===== Throttled Mouse Parallax =====
-    let mouseX = 0;
-    let mouseY = 0;
-    let targetX = 0;
-    let targetY = 0;
-    let lastMouseMove = 0;
-    let mouseTimeout = null;
-    let isMouseActive = false;
-
-    function initMouseParallax() {
-        if (prefersReducedMotion || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-            return;
-        }
-
-        if (!domCache.orbs || domCache.orbs.length === 0) return;
-
-        // Throttled mousemove handler
-        document.addEventListener('mousemove', (e) => {
-            const now = performance.now();
-            if (now - lastMouseMove < 16) return; // Throttle to ~60fps
-            lastMouseMove = now;
-
-            mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-            mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-
-            if (!isMouseActive) {
-                isMouseActive = true;
-                requestAnimationFrame(animateOrbs);
-            }
-
-            // Clear timeout to stop animation after inactivity
-            clearTimeout(mouseTimeout);
-            mouseTimeout = setTimeout(() => {
-                isMouseActive = false;
-            }, 100);
-        }, { passive: true });
-    }
-
-    function animateOrbs() {
-        if (!isMouseActive) return;
-
-        // Smooth interpolation
-        targetX += (mouseX - targetX) * 0.03;
-        targetY += (mouseY - targetY) * 0.03;
-
-        domCache.orbs.forEach((orb, index) => {
-            const factor = (index + 1) * 6;
-            const offsetX = targetX * factor;
-            const offsetY = targetY * factor;
-            orb.style.setProperty('--mouse-x', `${offsetX}px`);
-            orb.style.setProperty('--mouse-y', `${offsetY}px`);
-        });
-
-        requestAnimationFrame(animateOrbs);
-    }
-
     // ===== Intersection Observer for Animation Pause =====
     function initVisibilityObservers() {
         if (prefersReducedMotion) return;
@@ -270,27 +108,14 @@
             domCache.orbs.forEach(orb => orbObserver.observe(orb));
         }
 
-        // Pause marquee when off-screen
-        if (domCache.marqueeTrack) {
-            const marqueeObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    entry.target.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
-                });
-            }, observerOptions);
-
-            marqueeObserver.observe(domCache.marqueeTrack);
-        }
-
-        // Pause other looping animations when off-screen
+        // Pause looping animations when off-screen
         const loopingSelectors = [
             '.comparison-card--spotlight',
             '.feature-refined--hero',
             '.testimonial-refined--sarah',
             '.feature-icon-wrapper',
-            '.testimonial-refined::before',
-            '.step-icon::after',
-            '.section-darker',
-            '.section-dark'
+            '.testimonial-refined',
+            '.step-icon'
         ];
         const loopingObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -403,11 +228,12 @@
                 }
             });
 
-            // Prevent form submission if invalid
+            // Prevent form submission if invalid, disable button after valid submit
             const form = input.closest('form');
             if (form) {
                 form.addEventListener('submit', (e) => {
                     const value = input.value.trim();
+                    const submitBtn = form.querySelector('button[type="submit"]');
                     if (!emailRegex.test(value)) {
                         e.preventDefault();
                         input.focus();
@@ -416,6 +242,9 @@
                         if (errorElement) {
                             errorElement.textContent = 'Please enter a valid email address before submitting';
                         }
+                    } else if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.textContent = 'Submitting\u2026';
                     }
                 });
             }
@@ -441,8 +270,6 @@
                     fbq('trackCustom', trackEvent);
                 }
 
-                // Console log for debugging (remove in production)
-                console.log('Track:', trackEvent);
             });
         });
 
@@ -466,9 +293,6 @@
             window.observers.forEach(observer => observer.disconnect());
         }
 
-        // Clear timeouts
-        clearTimeout(mouseTimeout);
-
         // Kill GSAP animations
         if (gsapReady && typeof gsap !== 'undefined') {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
@@ -479,7 +303,6 @@
     function init() {
         cacheDOMElements();
         initGSAP();
-        initMouseParallax();
         initVisibilityObservers();
         initProgressNav();
         initEmailValidation();

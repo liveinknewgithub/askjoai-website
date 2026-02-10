@@ -121,7 +121,7 @@ h1, h2, h3 {
 .accent-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(20px);
+    filter: blur(12px);
     pointer-events: none;
     user-select: none;
     will-change: transform;
@@ -134,7 +134,7 @@ h1, h2, h3 {
     top: -200px;
     right: -5%;
     opacity: 0.25;
-    filter: blur(20px);
+    filter: blur(12px);
     animation: floatWarm1 35s ease-in-out infinite, breatheOrb 12s ease-in-out infinite;
 }
 
@@ -145,7 +145,7 @@ h1, h2, h3 {
     bottom: 5%;
     left: -150px;
     opacity: 0.20;
-    filter: blur(20px);
+    filter: blur(12px);
     animation: floatWarm2 40s ease-in-out infinite, breatheOrb 14s ease-in-out infinite;
 }
 
@@ -156,7 +156,7 @@ h1, h2, h3 {
     top: 35%;
     right: -100px;
     opacity: 0.15;
-    filter: blur(20px);
+    filter: blur(12px);
     animation: floatWarm3 30s ease-in-out infinite, breatheOrb 12s ease-in-out infinite;
 }
 
@@ -292,28 +292,18 @@ h1, h2, h3 {
 
 .app-marquee {
     position: relative;
-    overflow: hidden;
     margin: var(--space-xl) 0;
     padding: 8px 0;
-    mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
 }
 
 .app-marquee-track {
     display: flex;
+    flex-wrap: wrap;
     gap: 12px;
-    width: max-content;
-    animation: marquee 50s linear infinite;
 }
 
-.app-marquee:hover .app-marquee-track,
-.app-marquee:focus-within .app-marquee-track {
-    animation-play-state: paused;
-}
-
-@keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+.app-tag-duplicate {
+    display: none;
 }
 
 .app-tag {
@@ -614,6 +604,11 @@ h1, h2, h3 {
    Layout Utilities
    ===================================================== */
 
+/* Scroll margin for fixed header clearance */
+[id] {
+    scroll-margin-top: 80px;
+}
+
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -660,24 +655,14 @@ h1, h2, h3 {
 
 .section-darker {
     background: linear-gradient(135deg, var(--v8-bg-darker) 0%, rgba(249, 115, 22, 0.015) 50%, var(--v8-bg-darker) 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 12s ease infinite;
     content-visibility: auto;
     contain-intrinsic-size: 0 500px;
 }
 
 .section-dark {
     background: linear-gradient(135deg, var(--v8-bg-dark) 0%, rgba(245, 158, 11, 0.02) 50%, var(--v8-bg-dark) 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 10s ease infinite;
     content-visibility: auto;
     contain-intrinsic-size: 0 500px;
-}
-
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
 }
 
 /* =====================================================
@@ -1092,11 +1077,12 @@ h1, h2, h3 {
 .features-refined {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto auto auto;
     grid-template-areas:
         "hero tempura"
         "hero kitchen"
-        "hero conference";
+        "hero conference"
+        "groupchat groupchat";
     gap: var(--space-lg);
     max-width: 1000px;
     margin: 0 auto;
@@ -1157,6 +1143,7 @@ h1, h2, h3 {
 .feature-refined--tempura { grid-area: tempura; }
 .feature-refined--kitchen { grid-area: kitchen; }
 .feature-refined--conference { grid-area: conference; }
+.feature-refined--groupchat { grid-area: groupchat; }
 
 .feature-icon-wrapper {
     display: inline-flex;
@@ -1339,8 +1326,24 @@ h1, h2, h3 {
     transition: transform 0.3s var(--ease-out-quint), box-shadow 0.3s ease;
 }
 
+.author-avatar-initials {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1612;
+    flex-shrink: 0;
+    user-select: none;
+    transition: transform 0.3s var(--ease-out-quint), box-shadow 0.3s ease;
+}
+
 @media (hover: hover) and (pointer: fine) {
-    .testimonial-refined:hover .author-avatar-img {
+    .testimonial-refined:hover .author-avatar-img,
+    .testimonial-refined:hover .author-avatar-initials {
         transform: scale(1.05);
         box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
     }
@@ -2011,7 +2014,8 @@ a, button, [role="button"], input[type="submit"], .progress-dot {
             "hero"
             "tempura"
             "kitchen"
-            "conference";
+            "conference"
+            "groupchat";
     }
 
     .feature-refined--hero {
@@ -2102,27 +2106,6 @@ a, button, [role="button"], input[type="submit"], .progress-dot {
 
     .accent-orb,
     .warm-grain {
-        animation: none;
-    }
-
-    .app-marquee-track {
-        animation: none;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        width: auto;
-    }
-
-    .app-marquee {
-        mask-image: none;
-        -webkit-mask-image: none;
-    }
-
-    .app-tag-duplicate {
-        display: none;
-    }
-
-    .section-darker,
-    .section-dark {
         animation: none;
     }
 
