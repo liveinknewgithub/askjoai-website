@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code vs pi.dev - Why Claude Code Wins for Real Work</title>
+    <meta name="description" content="A developer's honest comparison of Claude Code and pi.dev. Sub-1000 token minimalism sounds great until you need to actually ship.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0a0a0f;
+            --bg-raised: #12121a;
+            --bg-surface: #1a1a26;
+            --bg-surface-2: #222233;
+            --border: rgba(255, 255, 255, 0.06);
+            --border-bright: rgba(255, 255, 255, 0.12);
+            --text: #e8e6f0;
+            --text-dim: #8a869e;
+            --text-muted: #5c5872;
+            --claude-orange: #da7756;
+            --claude-peach: #e8956a;
+            --claude-warm: #c4603e;
+            --pi-gray: #6b7280;
+            --pi-muted: #4b5563;
+            --green: #34d399;
+            --red: #f87171;
+            --yellow: #fbbf24;
+            --font-display: 'Instrument Serif', serif;
+            --font-body: 'Space Grotesk', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Atmospheric background */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 40% at 20% 10%, rgba(218, 119, 86, 0.07) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 50% at 80% 80%, rgba(196, 96, 62, 0.04) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            font-family: var(--font-mono);
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-brand span { color: var(--claude-orange); }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: var(--claude-orange);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(218, 119, 86, 0.3);
+        }
+
+        /* HERO */
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+        }
+
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--claude-orange);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 28px;
+        }
+
+        .hero-kicker::before,
+        .hero-kicker::after {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--claude-orange);
+            opacity: 0.4;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(44px, 7vw, 80px);
+            font-weight: 400;
+            line-height: 1.0;
+            letter-spacing: -0.02em;
+            color: var(--text);
+            margin-bottom: 28px;
+        }
+
+        h1 em {
+            font-style: italic;
+            color: var(--claude-orange);
+        }
+
+        .hero-sub {
+            font-size: 19px;
+            color: var(--text-dim);
+            max-width: 620px;
+            margin: 0 auto 48px;
+            line-height: 1.65;
+        }
+
+        .hero-sub strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* Terminal Block */
+        .terminal {
+            background: var(--bg-raised);
+            border: 1px solid var(--border-bright);
+            border-radius: 12px;
+            overflow: hidden;
+            max-width: 680px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .terminal-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .terminal-dot {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+        }
+        .terminal-dot.r { background: #ff5f57; }
+        .terminal-dot.y { background: #febc2e; }
+        .terminal-dot.g { background: #28c840; }
+
+        .terminal-title {
+            margin-left: auto;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .terminal-body {
+            padding: 20px;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .terminal-body .prompt {
+            color: var(--claude-orange);
+        }
+        .terminal-body .cmd {
+            color: var(--text);
+        }
+        .terminal-body .output {
+            color: var(--text-dim);
+        }
+        .terminal-body .success {
+            color: var(--green);
+        }
+        .terminal-body .dim {
+            color: var(--text-muted);
+        }
+
+        /* SECTION STYLING */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--claude-orange);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        h2 em {
+            font-style: italic;
+            color: var(--claude-orange);
+        }
+
+        .section-desc {
+            font-size: 18px;
+            color: var(--text-dim);
+            max-width: 600px;
+            line-height: 1.65;
+        }
+
+        /* VERDICT SECTION */
+        .verdict-section {
+            border-top: 1px solid var(--border);
+        }
+
+        .verdict-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .verdict-header .section-desc {
+            margin: 0 auto;
+        }
+
+        .verdict-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            background: var(--border-bright);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .verdict-card {
+            background: var(--bg-raised);
+            padding: 36px;
+        }
+
+        .verdict-card.header-card {
+            background: var(--bg-surface);
+            padding: 20px 36px;
+            display: flex;
+            align-items: center;
+        }
+
+        .verdict-label {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .verdict-label.claude { color: var(--claude-orange); }
+        .verdict-label.pi { color: var(--pi-gray); }
+
+        .verdict-feature {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 10px;
+        }
+
+        .verdict-title {
+            font-family: var(--font-body);
+            font-size: 17px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .verdict-desc {
+            font-size: 14px;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .verdict-card .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-top: 12px;
+        }
+
+        .tag.win {
+            background: rgba(52, 211, 153, 0.12);
+            color: var(--green);
+        }
+
+        .tag.lose {
+            background: rgba(248, 113, 113, 0.1);
+            color: var(--red);
+        }
+
+        .tag.neutral {
+            background: rgba(251, 191, 36, 0.1);
+            color: var(--yellow);
+        }
+
+        /* DEEP DIVE CARDS */
+        .deep-section {
+            border-top: 1px solid var(--border);
+        }
+
+        .deep-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 56px;
+        }
+
+        .deep-card {
+            background: var(--bg-raised);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 36px;
+            transition: border-color 0.3s ease;
+        }
+
+        .deep-card:hover {
+            border-color: var(--border-bright);
+        }
+
+        .deep-card.full {
+            grid-column: 1 / -1;
+        }
+
+        .deep-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .deep-icon.orange { background: rgba(218, 119, 86, 0.12); }
+        .deep-icon.green { background: rgba(52, 211, 153, 0.12); }
+        .deep-icon.yellow { background: rgba(251, 191, 36, 0.12); }
+        .deep-icon.red { background: rgba(248, 113, 113, 0.1); }
+
+        .deep-card h3 {
+            font-family: var(--font-body);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .deep-card p {
+            font-size: 15px;
+            color: var(--text-dim);
+            line-height: 1.7;
+        }
+
+        .deep-card .code-inline {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            background: var(--bg-surface-2);
+            padding: 2px 7px;
+            border-radius: 4px;
+            color: var(--claude-peach);
+        }
+
+        /* PHILOSOPHY SECTION */
+        .philosophy-section {
+            border-top: 1px solid var(--border);
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            margin-top: 56px;
+            align-items: start;
+        }
+
+        .philosophy-col h3 {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .philosophy-col h3 em { font-style: italic; }
+
+        .philosophy-col.claude h3 em { color: var(--claude-orange); }
+        .philosophy-col.pi h3 em { color: var(--pi-gray); }
+
+        .philosophy-col p {
+            font-size: 16px;
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .philosophy-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .philosophy-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: var(--text-dim);
+        }
+
+        .philosophy-list li::before {
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        .philosophy-col.claude .philosophy-list li::before {
+            content: '+';
+            color: var(--green);
+        }
+
+        .philosophy-col.pi .philosophy-list li::before {
+            content: '\2013';
+            color: var(--text-muted);
+        }
+
+        /* TLDR SECTION */
+        .tldr-section {
+            border-top: 1px solid var(--border);
+        }
+
+        .tldr-box {
+            background: linear-gradient(135deg, rgba(218, 119, 86, 0.08) 0%, rgba(196, 96, 62, 0.04) 100%);
+            border: 1px solid rgba(218, 119, 86, 0.15);
+            border-radius: 16px;
+            padding: 48px;
+            text-align: center;
+            margin-top: 48px;
+        }
+
+        .tldr-box h3 {
+            font-family: var(--font-display);
+            font-size: 32px;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .tldr-box p {
+            font-size: 17px;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto 28px;
+            line-height: 1.7;
+        }
+
+        .tldr-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 32px;
+            text-align: left;
+        }
+
+        .tldr-pick {
+            background: var(--bg-raised);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+        }
+
+        .tldr-pick h4 {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+        }
+
+        .tldr-pick.pick-claude h4 { color: var(--claude-orange); }
+        .tldr-pick.pick-pi h4 { color: var(--pi-gray); }
+
+        .tldr-pick p {
+            font-size: 15px;
+            margin-bottom: 0;
+        }
+
+        /* CTA */
+        .cta-section {
+            padding: 120px 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .cta-section h2 {
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            color: var(--text-dim);
+            margin-bottom: 36px;
+        }
+
+        .cta-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--claude-orange);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(218, 119, 86, 0.3);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border-bright);
+        }
+
+        .btn-ghost:hover {
+            background: var(--bg-surface);
+            transform: translateY(-2px);
+        }
+
+        .cta-note {
+            margin-top: 16px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 32px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        footer a:hover { color: var(--claude-orange); }
+
+        /* ANIMATIONS */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger */
+        .stagger > * { transition-delay: calc(var(--i, 0) * 80ms); }
+
+        /* Hero animation cascade */
+        .hero .hero-kicker { animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
+        .hero h1 { animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+        .hero .hero-sub { animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both; }
+        .hero .terminal { animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Terminal typing animation */
+        .type-line {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid var(--claude-orange);
+            width: 0;
+            animation: typing 1.8s steps(40) 1.2s forwards, blinkCaret 0.5s step-end 1.2s 5;
+        }
+
+        @keyframes typing {
+            to { width: 100%; }
+        }
+
+        @keyframes blinkCaret {
+            50% { border-color: transparent; }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero { padding: 130px 0 60px; }
+            section { padding: 64px 0; }
+            .verdict-grid { grid-template-columns: 1fr; }
+            .deep-grid { grid-template-columns: 1fr; }
+            .philosophy-grid { grid-template-columns: 1fr; gap: 48px; }
+            .tldr-cols { grid-template-columns: 1fr; }
+            .cta-actions { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 320px; justify-content: center; }
+            .terminal-body { font-size: 12px; padding: 16px; }
+            .verdict-card { padding: 24px; }
+            .tldr-box { padding: 32px 20px; }
+            .footer-inner { flex-direction: column; gap: 12px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="/" class="nav-brand"><span>&gt;</span> claude code <span>vs</span> pi.dev</a>
+        <a href="https://docs.anthropic.com/en/docs/claude-code/overview" class="nav-cta">Install Claude Code</a>
+    </div>
+</nav>
+
+<main>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-kicker">Developer Comparison</div>
+            <h1>Minimalism is beautiful.<br>Until you need to <em>ship.</em></h1>
+            <p class="hero-sub">
+                pi.dev is a <strong>beautifully minimal</strong> coding agent with just 4 tools and a 300-word prompt.
+                Claude Code ships with the power to actually handle your codebase. Here's where each one wins.
+            </p>
+
+            <div class="terminal">
+                <div class="terminal-bar">
+                    <div class="terminal-dot r"></div>
+                    <div class="terminal-dot y"></div>
+                    <div class="terminal-dot g"></div>
+                    <span class="terminal-title">claude-code</span>
+                </div>
+                <div class="terminal-body">
+                    <div><span class="prompt">$</span> <span class="cmd">claude "refactor auth module, add tests, update docs"</span></div>
+                    <div class="output">&nbsp;</div>
+                    <div class="output"><span class="dim"># Claude Code plans, executes across 12 files,</span></div>
+                    <div class="output"><span class="dim"># spawns sub-agents for parallel test writing,</span></div>
+                    <div class="output"><span class="dim"># and creates a PR when it's done.</span></div>
+                    <div class="output">&nbsp;</div>
+                    <div class="success">Done. PR #247 created with 94% test coverage.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HEAD-TO-HEAD VERDICT -->
+    <section class="verdict-section">
+        <div class="container">
+            <div class="verdict-header">
+                <div class="section-label">Head to Head</div>
+                <h2>The real comparison,<br><em>no hand-waving</em></h2>
+                <p class="section-desc">Every feature that matters when you're choosing a coding agent for production work.</p>
+            </div>
+
+            <div class="verdict-grid fade-up">
+                <!-- Headers -->
+                <div class="verdict-card header-card">
+                    <span class="verdict-label claude">Claude Code</span>
+                </div>
+                <div class="verdict-card header-card">
+                    <span class="verdict-label pi">pi.dev</span>
+                </div>
+
+                <!-- Sub-agents -->
+                <div class="verdict-card">
+                    <div class="verdict-feature">Sub-agents</div>
+                    <div class="verdict-title">Built-in parallel agents</div>
+                    <div class="verdict-desc">Spawn background workers for tests, research, and multi-file edits simultaneously. No extensions needed.</div>
+                    <span class="tag win">Built-in</span>
+                </div>
+                <div class="verdict-card">
+                    <div class="verdict-feature">Sub-agents</div>
+                    <div class="verdict-title">Deliberately excluded</div>
+                    <div class="verdict-desc">Philosophy says "no sub-agents." You can add them via extensions, but that's your problem to solve.</div>
+                    <span class="tag lose">Extension required</span>
+                </div>
+
+                <!-- Planning -->
+                <div class="verdict-card">
+                    <div class="verdict-feature">Plan Mode</div>
+                    <div class="verdict-title">Think before you act</div>
+                    <div class="verdict-desc">Plan mode lets Claude explore, design, and get your approval before writing a single line. Catch mistakes before they cost tokens.</div>
+                    <span class="tag win">Built-in</span>
+                </div>
+                <div class="verdict-card">
+                    <div class="verdict-feature">Plan Mode</div>
+                    <div class="verdict-title">No planning step</div>
+                    <div class="verdict-desc">With only 4 tools and no plan mode, the agent dives straight in. Works for small tasks. Risky for large refactors.</div>
+                    <span class="tag lose">Not available</span>
+                </div>
+
+                <!-- Tool System -->
+                <div class="verdict-card">
+                    <div class="verdict-feature">Tool Ecosystem</div>
+                    <div class="verdict-title">MCP + rich built-in tools</div>
+                    <div class="verdict-desc">Read, write, edit, bash, glob, grep, web fetch, notebooks, and full MCP server support. Connect to any external system.</div>
+                    <span class="tag win">Comprehensive</span>
+                </div>
+                <div class="verdict-card">
+                    <div class="verdict-feature">Tool Ecosystem</div>
+                    <div class="verdict-title">4 tools. That's the point.</div>
+                    <div class="verdict-desc">Read, write, edit, bash. Intentionally minimal. "If you want more, ask the agent to extend itself." No MCP.</div>
+                    <span class="tag neutral">Minimal by design</span>
+                </div>
+
+                <!-- Model Lock-in -->
+                <div class="verdict-card">
+                    <div class="verdict-feature">Model</div>
+                    <div class="verdict-title">Claude Opus / Sonnet</div>
+                    <div class="verdict-desc">Powered by Anthropic's frontier models. Deep reasoning with Claude Opus, fast iteration with Sonnet. Tight integration means better tool use.</div>
+                    <span class="tag win">Best-in-class</span>
+                </div>
+                <div class="verdict-card">
+                    <div class="verdict-feature">Model</div>
+                    <div class="verdict-title">Any LLM provider</div>
+                    <div class="verdict-desc">Works with 15+ providers. Flexibility is real, but quality varies wildly. You're responsible for tuning prompts per model.</div>
+                    <span class="tag win">Flexible</span>
+                </div>
+
+                <!-- Extensibility -->
+                <div class="verdict-card">
+                    <div class="verdict-feature">Extensibility</div>
+                    <div class="verdict-title">Hooks, MCP servers, slash commands</div>
+                    <div class="verdict-desc">Pre/post hooks for any tool call, custom slash commands, MCP servers for external integrations. Extend without forking.</div>
+                    <span class="tag win">Powerful</span>
+                </div>
+                <div class="verdict-card">
+                    <div class="verdict-feature">Extensibility</div>
+                    <div class="verdict-title">TypeScript extensions + skills</div>
+                    <div class="verdict-desc">Write extensions in TS, share as npm packages. Compatible with Claude Code skills. The extension system is genuinely elegant.</div>
+                    <span class="tag win">Elegant</span>
+                </div>
+
+                <!-- Context -->
+                <div class="verdict-card">
+                    <div class="verdict-feature">Context Management</div>
+                    <div class="verdict-title">Automatic compression + CLAUDE.md</div>
+                    <div class="verdict-desc">Conversations auto-compress as they hit limits. Project instructions via CLAUDE.md persist across sessions. Context never truly runs out.</div>
+                    <span class="tag win">Smart</span>
+                </div>
+                <div class="verdict-card">
+                    <div class="verdict-feature">Context Management</div>
+                    <div class="verdict-title">Sub-1000 token system prompt</div>
+                    <div class="verdict-desc">~300 words leaves maximum room for your code. Session trees let you branch and revisit. But no automatic compression means you hit walls.</div>
+                    <span class="tag neutral">Trade-off</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEEP DIVE -->
+    <section class="deep-section">
+        <div class="container">
+            <div class="section-label">Where it matters</div>
+            <h2>The things you feel<br><em>at 2am on a deadline</em></h2>
+            <p class="section-desc">Feature tables don't capture the lived experience. These are the moments that separate the tools.</p>
+
+            <div class="deep-grid">
+                <div class="deep-card fade-up">
+                    <div class="deep-icon orange">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--claude-orange)"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+                    </div>
+                    <h3>Multi-file refactors without babysitting</h3>
+                    <p>Claude Code's sub-agents mean you say "refactor the auth module" and it simultaneously updates routes, middleware, tests, and types. Pi makes you watch it go file-by-file, sequentially, hoping it doesn't lose context halfway through.</p>
+                </div>
+
+                <div class="deep-card fade-up">
+                    <div class="deep-icon green">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--green)"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+                    </div>
+                    <h3>Plan mode saves real money</h3>
+                    <p>Before burning tokens on a wrong approach, Claude Code lets you explore and plan. Get alignment on the architecture before any code is written. Pi's philosophy of "just do it" works until the bill arrives for a bad refactor loop.</p>
+                </div>
+
+                <div class="deep-card fade-up">
+                    <div class="deep-icon yellow">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--yellow)"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    </div>
+                    <h3>Background tasks keep you moving</h3>
+                    <p>Kick off a test suite, keep coding. Claude Code runs background bash, parallel file searches, and async agents. Pi runs everything synchronously. You wait, or you context-switch. Neither is good.</p>
+                </div>
+
+                <div class="deep-card fade-up">
+                    <div class="deep-icon red">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--red)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Safety nets for dangerous commands</h3>
+                    <p>Claude Code's permission system and pre/post hooks catch destructive actions before they happen. <span class="code-inline">git push --force</span>? You'll get a confirmation. Pi's bash tool runs with whatever permissions you have. YOLO mode by default.</p>
+                </div>
+
+                <div class="deep-card full fade-up">
+                    <div class="deep-icon orange">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--claude-orange)"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                    </div>
+                    <h3>MCP turns Claude Code into a platform</h3>
+                    <p>Model Context Protocol lets Claude Code talk to databases, APIs, design tools, CI/CD, and anything else with an MCP server. It's not just a coding agent&mdash;it's a programmable interface to your entire dev stack. Pi explicitly chose not to support MCP, betting that bash can do everything. It can. But should your agent be writing curl commands to hit your Figma API?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHILOSOPHY -->
+    <section class="philosophy-section">
+        <div class="container">
+            <div class="section-label">Different Bets</div>
+            <h2>Two valid philosophies,<br><em>one clear winner</em></h2>
+
+            <div class="philosophy-grid fade-up">
+                <div class="philosophy-col claude">
+                    <h3>Claude Code: <em>Power by default</em></h3>
+                    <p>Anthropic's bet is that coding agents should be <strong>capable out of the box</strong>. The complexity is managed for you. Sub-agents, planning, task management, MCP&mdash;all built in, all tested together.</p>
+                    <p>You customize with hooks, MCP servers, and CLAUDE.md files. You don't have to build the foundation.</p>
+                    <ul class="philosophy-list">
+                        <li>Sub-agents for parallel work</li>
+                        <li>Plan mode for complex tasks</li>
+                        <li>Background bash execution</li>
+                        <li>MCP for external systems</li>
+                        <li>Automatic context compression</li>
+                        <li>Built-in safety and permissions</li>
+                    </ul>
+                </div>
+
+                <div class="philosophy-col pi">
+                    <h3>pi.dev: <em>Minimal by conviction</em></h3>
+                    <p>Mario Zechner's bet is that LLMs are good enough that you only need 4 tools and a tiny prompt. Everything else is bloat that burns tokens and confuses the model.</p>
+                    <p>It's a compelling argument. And for small, focused tasks it genuinely works well. But the moment you need coordination across files, planning, or external integrations, you're writing extensions.</p>
+                    <ul class="philosophy-list">
+                        <li>300-word system prompt</li>
+                        <li>4 tools: read, write, edit, bash</li>
+                        <li>TS extension system</li>
+                        <li>Session trees for branching</li>
+                        <li>Multi-provider LLM support</li>
+                        <li>MIT licensed, fully open</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TL;DR -->
+    <section class="tldr-section">
+        <div class="container">
+            <div class="section-label">The Honest Take</div>
+            <h2>Pick the right tool<br><em>for how you work</em></h2>
+
+            <div class="tldr-box fade-up">
+                <h3>Here's the real answer</h3>
+                <p>Pi.dev is impressive engineering and a genuinely good tool for developers who want full control and minimal overhead. But for most professional work, Claude Code's built-in capabilities mean you ship faster with fewer headaches.</p>
+
+                <div class="tldr-cols">
+                    <div class="tldr-pick pick-claude">
+                        <h4>Choose Claude Code if you...</h4>
+                        <p>Work on real codebases with 50+ files. Need multi-file refactors. Want planning before execution. Use external tools (databases, APIs, CI). Value safety guardrails. Want things to just work.</p>
+                    </div>
+                    <div class="tldr-pick pick-pi">
+                        <h4>Choose pi.dev if you...</h4>
+                        <p>Want maximum model flexibility. Prefer building your own tooling. Work on focused, single-file tasks. Want the smallest possible prompt overhead. Love tinkering with extensions. Run local/self-hosted LLMs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to try the one<br>that <em>ships?</em></h2>
+            <p>Install Claude Code in 30 seconds. No configuration needed.</p>
+            <div class="cta-actions">
+                <a href="https://docs.anthropic.com/en/docs/claude-code/overview" class="btn btn-primary">Install Claude Code</a>
+                <a href="https://github.com/badlogic/pi-mono" class="btn btn-ghost">Check out pi.dev too</a>
+            </div>
+            <p class="cta-note">npm install -g @anthropic-ai/claude-code</p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <p>An opinionated comparison. Not affiliated with Anthropic or pi.dev.</p>
+            <a href="/">Back to jo</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Intersection Observer for fade-up animations
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                obs.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    // Stagger children
+    document.querySelectorAll('.stagger').forEach(parent => {
+        Array.from(parent.children).forEach((child, i) => {
+            child.style.setProperty('--i', i);
+        });
+    });
+</script>
+
+</body>
+</html>
