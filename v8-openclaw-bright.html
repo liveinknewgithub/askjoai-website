@@ -4,17 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jo - OpenClaw Power, Zero Terminal</title>
-    <meta name="description" content="Love what OpenClaw does but don't want to touch a terminal? jo gives you the same local AI superpowers — search notes, photos, emails, summarize groupchats — without a single command line.">
+    <title>jo — OpenClaw Alternative for Mac | Local AI Search for Notes, Emails, Photos</title>
+    <meta name="description" content="jo is a local AI assistant for Mac. Search notes, photos, emails, and summarize groupchats privately — no terminal, no config files. OpenClaw power, zero setup.">
+    <link rel="canonical" href="https://askjo.ai/v8-openclaw-bright.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="jo — OpenClaw Alternative for Mac | Local AI Search">
+    <meta property="og:description" content="jo is a local AI assistant for Mac. Search notes, photos, emails, and summarize groupchats privately — no terminal, no config files.">
+    <meta property="og:url" content="https://askjo.ai/v8-openclaw-bright.html">
+    <meta property="og:site_name" content="jo">
+    <!-- <meta property="og:image" content="https://askjo.ai/og-image.png"> -->
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="jo — OpenClaw Alternative for Mac | Local AI Search">
+    <meta name="twitter:description" content="jo is a local AI assistant for Mac. Search notes, photos, emails, and summarize groupchats privately — no terminal, no config files.">
+    <!-- <meta name="twitter:image" content="https://askjo.ai/og-image.png"> -->
+
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Satoshi:wght@400;500;700;900&family=Cabinet+Grotesk:wght@700;800;900&display=swap" rel="stylesheet">
     <style>
-        @font-face {
-            font-family: 'Satoshi';
-            src: url('https://fonts.googleapis.com/css2?family=Satoshi:wght@400;500;700;900&display=swap');
-        }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -55,6 +67,10 @@
         .nav-links { display: flex; gap: 28px; }
         .nav-links a { color: var(--text-dim); text-decoration: none; font-weight: 500; font-size: 15px; transition: color 0.2s; }
         .nav-links a:hover { color: var(--orange); }
+        .mobile-toggle {
+            display: none; background: none; border: none; cursor: pointer;
+            font-size: 24px; color: var(--text); padding: 4px 8px; line-height: 1;
+        }
         .btn-bold {
             background: var(--text); color: #fff; font-weight: 700;
             padding: 12px 28px; border-radius: 100px; text-decoration: none;
@@ -258,7 +274,14 @@
         .test-card .stars { font-size: 18px; margin-bottom: 12px; color: var(--yellow); }
         .test-card blockquote { font-size: 15px; line-height: 1.7; color: var(--text); margin-bottom: 16px; font-weight: 500; }
         .test-author { display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 2px solid var(--border); }
-        .test-author img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 3px solid var(--border); }
+        .test-author img, .test-author .avatar-placeholder { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 3px solid var(--border); }
+        .avatar-placeholder {
+            display: flex; align-items: center; justify-content: center;
+            background: var(--electric-blue); color: #fff; font-weight: 800;
+            font-size: 16px; font-family: var(--font);
+        }
+        .avatar-placeholder.orange { background: var(--orange); }
+        .avatar-placeholder.violet { background: var(--violet); }
         .test-author strong { display: block; font-size: 14px; font-weight: 700; }
         .test-author span { font-size: 12px; color: var(--text-muted); }
 
@@ -361,7 +384,14 @@
 
         /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
+            .mobile-toggle { display: block; }
+            .nav-links {
+                display: none; position: absolute; top: 100%; left: 0; right: 0;
+                background: rgba(250,250,247,0.98); backdrop-filter: blur(20px);
+                flex-direction: column; padding: 16px 32px 20px; gap: 16px;
+                border-bottom: 1px solid var(--border);
+            }
+            .nav-links.open { display: flex; }
             .steps { grid-template-columns: 1fr; }
             .email-form { flex-direction: column; }
             .price-details { flex-direction: column; gap: 16px; }
@@ -379,6 +409,7 @@
 
 <nav>
     <a href="/" class="logo">jo</a>
+    <button class="mobile-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
     <div class="nav-links">
         <a href="#why-jo">Why jo</a>
         <a href="#how-it-works">How It Works</a>
@@ -393,7 +424,7 @@
         <div class="hero-content">
             <div class="hero-badge">● Now in Beta</div>
             <h1>OpenClaw power.<br><span class="color-block">Zero terminal.</span></h1>
-            <p class="hero-sub">Love what OpenClaw does? jo gives you the same local AI superpowers — searching notes, photos, emails, and summarizing groupchats — without <code>curl | bash</code> or a single config file.</p>
+            <p class="hero-sub">Love what OpenClaw does? jo is a local AI assistant for Mac that gives you the same superpowers — searching notes, photos, emails, and summarizing groupchats — without <code>curl | bash</code> or a single config file.</p>
 
             <div class="app-tags">
                 <span class="app-tag">📝 Notes</span>
@@ -519,8 +550,8 @@
 <section id="features" class="section-alt">
     <div class="container">
         <div class="section-header">
-            <h2>Everything you'd build with OpenClaw — already built</h2>
-            <p>No skills to install. No scripts to write. Just ask.</p>
+            <h2>Everything you'd build with OpenClaw, already built</h2>
+            <p>A local AI assistant that searches notes, photos, emails, and messages. No skills to install. No scripts to write.</p>
         </div>
         <div class="feat-grid">
             <div class="feat-card hero-feat">
@@ -562,24 +593,24 @@
                 <div class="stars">★★★★★</div>
                 <blockquote>"Had a call with a client I hadn't talked to in 6 months. jo surfaced my notes from our last conversation before I even asked."</blockquote>
                 <div class="test-author">
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Mitchell" loading="lazy">
-                    <div><strong>Sarah Mitchell</strong><span>Consultant at Deloitte</span></div>
+                    <div class="avatar-placeholder">SM</div>
+                    <div><strong>Beta tester</strong><span>Consultant</span></div>
                 </div>
             </div>
             <div class="test-card">
                 <div class="stars">★★★★★</div>
                 <blockquote>"4,000+ notes in Apple Notes over 8 years. Never looked at most of them. Now jo brings up relevant ones while I'm working."</blockquote>
                 <div class="test-author">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Kowalski" loading="lazy">
-                    <div><strong>Michael Kowalski</strong><span>Freelance Writer</span></div>
+                    <div class="avatar-placeholder orange">MK</div>
+                    <div><strong>Beta tester</strong><span>Freelance Writer</span></div>
                 </div>
             </div>
             <div class="test-card">
                 <div class="stars">★★★★★</div>
                 <blockquote>"Asked jo for 'that photo with the blue door from Portugal' from 2019. Found it in 3 seconds. 47,000 photos."</blockquote>
                 <div class="test-author">
-                    <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="James Rodriguez" loading="lazy">
-                    <div><strong>James Rodriguez</strong><span>Designer at Figma</span></div>
+                    <div class="avatar-placeholder violet">JR</div>
+                    <div><strong>Beta tester</strong><span>Product Designer</span></div>
                 </div>
             </div>
         </div>
@@ -593,7 +624,7 @@
         </div>
         <div class="team-row">
             <div class="team-card">
-                <img src="pradeep.jpeg" alt="Pradeep Elankumaran" loading="lazy">
+                <img src="pradeep.jpeg" alt="Pradeep Elankumaran, co-founder of jo" width="56" height="56" loading="lazy">
                 <div>
                     <strong>Pradeep Elankumaran</strong>
                     <span>Co-founder & CEO</span>
@@ -601,7 +632,7 @@
                 </div>
             </div>
             <div class="team-card">
-                <img src="kevin.jpeg" alt="Kevin Li" loading="lazy">
+                <img src="kevin.jpeg" alt="Kevin Li, co-founder of jo" width="56" height="56" loading="lazy">
                 <div>
                     <strong>Kevin Li</strong>
                     <span>Co-founder & CMO</span>
@@ -686,5 +717,110 @@
     </div>
 </footer>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is jo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "jo is a local AI assistant for Mac that indexes your notes, photos, emails, and files. It provides total recall for your Mac, letting you search across all your data using natural language."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does my data leave my Mac?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Never. jo runs 100% locally on your Mac. Nothing is uploaded to external servers. Nothing leaves your machine."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is jo different from Siri?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Siri matches keywords. jo understands meaning. Ask for 'that email about the budget issue' and jo finds it using semantic search across all your data."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does jo pricing work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No subscription. The app is free to download. Simple queries cost about 1 cent, complex queries about 5 cents. Most users spend $5-10 per month. First month is free."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which Mac does jo work on?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "jo works on any Mac with an M-series chip (M1 through M4) and 16GB RAM. That covers most Macs from 2020 onwards."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is jo different from OpenClaw?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "OpenClaw requires a terminal, Node.js, and API keys to set up. jo gives you the same local AI superpowers by simply dragging to your Applications folder. Same capabilities, zero setup."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can jo summarize groupchats?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. jo can summarize iMessage, WhatsApp, and Telegram group chats. Just say 'Catch me up' and jo gives you key points, decisions, and action items."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will jo slow down my Mac?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. jo uses the Neural Engine, dedicated AI hardware built into Apple Silicon chips that normally sits idle. It won't affect your Mac's performance."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "jo",
+  "description": "Local AI assistant for Mac that searches notes, photos, emails, and messages privately on your device.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "macOS",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "description": "Free to download. Pay per question (1-5 cents). First month free."
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "jo",
+    "url": "https://askjo.ai",
+    "founder": [
+      {
+        "@type": "Person",
+        "name": "Pradeep Elankumaran",
+        "jobTitle": "Co-founder & CEO"
+      },
+      {
+        "@type": "Person",
+        "name": "Kevin Li",
+        "jobTitle": "Co-founder & CMO"
+      }
+    ]
+  }
+}
+</script>
 </body>
 </html>
