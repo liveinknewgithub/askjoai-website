@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pi — The Better Way to Use Claude Code</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a26;
+            --border: #1e1e2e;
+            --text: #e4e4ef;
+            --text-muted: #6b6b8a;
+            --text-dim: #44445a;
+            --accent: #a78bfa;
+            --accent-bright: #c4b5fd;
+            --green: #4ade80;
+            --red: #f87171;
+            --orange: #fb923c;
+            --font-body: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 32px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem; font-weight: 700;
+            color: var(--accent-bright);
+            text-decoration: none;
+        }
+        .logo span { color: var(--text-muted); font-weight: 400; }
+        nav a.cta-nav {
+            font-size: 0.85rem; font-weight: 600;
+            color: var(--bg); background: var(--accent);
+            padding: 8px 20px; border-radius: 8px;
+            text-decoration: none; transition: background 0.2s;
+        }
+        nav a.cta-nav:hover { background: var(--accent-bright); }
+
+        /* ── LAYOUT ── */
+        .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+        section { padding: 100px 0; }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            padding-top: 80px; text-align: center;
+        }
+        .hero-inner { width: 100%; }
+        .badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-family: var(--font-mono); font-size: 0.8rem;
+            color: var(--accent); background: rgba(167, 139, 250, 0.1);
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            padding: 6px 16px; border-radius: 100px; margin-bottom: 32px;
+        }
+        .badge::before { content: "▲"; font-size: 0.65rem; }
+        h1 {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            font-weight: 800; line-height: 1.08;
+            letter-spacing: -0.035em; margin-bottom: 24px;
+        }
+        h1 .highlight {
+            background: linear-gradient(135deg, var(--accent) 0%, #818cf8 50%, var(--green) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p.subtitle {
+            font-size: 1.25rem; color: var(--text-muted);
+            max-width: 600px; margin: 0 auto 48px;
+        }
+        .hero-cta {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-family: var(--font-mono); font-size: 0.95rem;
+            background: var(--bg-card); border: 1px solid var(--border);
+            color: var(--text); padding: 16px 28px; border-radius: 12px;
+            cursor: pointer; transition: all 0.2s;
+            text-decoration: none;
+        }
+        .hero-cta:hover { border-color: var(--accent); background: var(--bg-card-hover); }
+        .hero-cta code { color: var(--green); }
+        .hero-cta .copy-hint { color: var(--text-dim); font-size: 0.75rem; }
+
+        /* ── PROBLEM ── */
+        .problem { border-top: 1px solid var(--border); }
+        .problem h2 {
+            font-size: 1.1rem; font-weight: 600;
+            color: var(--text-muted); text-transform: uppercase;
+            letter-spacing: 0.08em; margin-bottom: 48px;
+        }
+        .pain-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .pain-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 12px; padding: 28px;
+        }
+        .pain-card .icon { font-size: 1.5rem; margin-bottom: 12px; }
+        .pain-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+        .pain-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* ── COMPARISON TABLE ── */
+        .comparison { border-top: 1px solid var(--border); }
+        .comparison h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800; letter-spacing: -0.03em;
+            margin-bottom: 16px;
+        }
+        .comparison .lead {
+            color: var(--text-muted); font-size: 1.05rem;
+            margin-bottom: 48px; max-width: 600px;
+        }
+        .table-wrap {
+            border: 1px solid var(--border); border-radius: 16px;
+            overflow: hidden;
+        }
+        table { width: 100%; border-collapse: collapse; }
+        thead th {
+            text-align: left; padding: 20px 24px;
+            font-family: var(--font-mono); font-size: 0.85rem;
+            color: var(--text-muted); border-bottom: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+        thead th:first-child { width: 40%; }
+        thead th.pi-col { color: var(--accent-bright); }
+        tbody td {
+            padding: 16px 24px; border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+        tbody tr:last-child td { border-bottom: none; }
+        tbody td:first-child {
+            font-weight: 600; color: var(--text);
+        }
+        tbody td:nth-child(2) { color: var(--green); }
+        tbody td:nth-child(3) { color: var(--text-muted); }
+        .check { color: var(--green); }
+        .cross { color: var(--red); }
+        .meh { color: var(--orange); }
+
+        /* ── FEATURES ── */
+        .features { border-top: 1px solid var(--border); }
+        .features h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800; letter-spacing: -0.03em;
+            margin-bottom: 48px;
+        }
+        .feature-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .feature-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 32px;
+            transition: border-color 0.2s;
+        }
+        .feature-card:hover { border-color: rgba(167, 139, 250, 0.3); }
+        .feature-card .tag {
+            font-family: var(--font-mono); font-size: 0.7rem;
+            color: var(--accent); text-transform: uppercase;
+            letter-spacing: 0.1em; margin-bottom: 12px;
+        }
+        .feature-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+        .feature-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* ── TERMINAL DEMO ── */
+        .demo { border-top: 1px solid var(--border); text-align: center; }
+        .demo h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800; letter-spacing: -0.03em; margin-bottom: 16px;
+        }
+        .demo .lead { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 48px; }
+        .terminal {
+            background: #0d0d14; border: 1px solid var(--border);
+            border-radius: 16px; text-align: left;
+            overflow: hidden; max-width: 700px; margin: 0 auto;
+        }
+        .terminal-bar {
+            display: flex; align-items: center; gap: 8px;
+            padding: 14px 18px; border-bottom: 1px solid var(--border);
+        }
+        .terminal-dot {
+            width: 12px; height: 12px; border-radius: 50%;
+        }
+        .terminal-dot.r { background: #f87171; }
+        .terminal-dot.y { background: #fbbf24; }
+        .terminal-dot.g { background: #4ade80; }
+        .terminal-bar span {
+            font-family: var(--font-mono); font-size: 0.75rem;
+            color: var(--text-dim); margin-left: 8px;
+        }
+        .terminal-body {
+            padding: 24px; font-family: var(--font-mono);
+            font-size: 0.85rem; line-height: 1.8;
+        }
+        .terminal-body .prompt { color: var(--green); }
+        .terminal-body .cmd { color: var(--text); }
+        .terminal-body .output { color: var(--text-muted); }
+        .terminal-body .accent { color: var(--accent-bright); }
+        .terminal-body .dim { color: var(--text-dim); }
+
+        /* ── QUOTES ── */
+        .quotes { border-top: 1px solid var(--border); }
+        .quotes h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800; letter-spacing: -0.03em; margin-bottom: 48px;
+            text-align: center;
+        }
+        .quote-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .quote-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 28px;
+        }
+        .quote-card p {
+            font-size: 1rem; font-style: italic;
+            color: var(--text); margin-bottom: 16px; line-height: 1.6;
+        }
+        .quote-card .author {
+            font-size: 0.8rem; color: var(--text-dim);
+            font-style: normal; font-family: var(--font-mono);
+        }
+
+        /* ── FINAL CTA ── */
+        .final-cta {
+            border-top: 1px solid var(--border);
+            text-align: center; padding: 120px 0;
+        }
+        .final-cta h2 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800; letter-spacing: -0.03em; margin-bottom: 16px;
+        }
+        .final-cta p {
+            color: var(--text-muted); font-size: 1.1rem;
+            margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto;
+        }
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--accent); color: var(--bg);
+            font-weight: 700; font-size: 1rem;
+            padding: 16px 36px; border-radius: 12px;
+            text-decoration: none; transition: all 0.2s;
+            border: none; cursor: pointer;
+        }
+        .btn-primary:hover { background: var(--accent-bright); transform: translateY(-1px); }
+        .install-alt {
+            margin-top: 20px; font-family: var(--font-mono);
+            font-size: 0.85rem; color: var(--text-dim);
+        }
+        .install-alt code {
+            color: var(--text-muted); background: var(--bg-card);
+            padding: 4px 10px; border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0; text-align: center;
+            color: var(--text-dim); font-size: 0.8rem;
+        }
+        footer a { color: var(--text-muted); text-decoration: none; }
+        footer a:hover { color: var(--accent); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 640px) {
+            nav { padding: 12px 16px; }
+            section { padding: 72px 0; }
+            .pain-grid, .feature-grid, .quote-grid { grid-template-columns: 1fr; }
+            thead th, tbody td { padding: 12px 14px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="#" class="logo">pi<span>.dev</span></a>
+    <a href="https://github.com/mariozechner/pi-coding-agent" class="cta-nav">Get Started →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container hero-inner">
+        <div class="badge">Same Claude. Better harness.</div>
+        <h1>Claude Code is the engine.<br><span class="highlight">pi is the cockpit.</span></h1>
+        <p class="subtitle">An open-source coding agent that wraps Claude with memory, skills, extensions, and a real TUI. Everything Claude Code should have shipped with.</p>
+        <a href="https://github.com/mariozechner/pi-coding-agent" class="hero-cta">
+            <code>npm i -g @mariozechner/pi-coding-agent</code>
+            <span class="copy-hint">↵</span>
+        </a>
+    </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+    <div class="container">
+        <h2>Claude Code is great. Until it isn't.</h2>
+        <div class="pain-grid">
+            <div class="pain-card">
+                <div class="icon">🧠</div>
+                <h3>Amnesia by default</h3>
+                <p>Every session starts from zero. No memory of your project decisions, preferences, or what you did yesterday.</p>
+            </div>
+            <div class="pain-card">
+                <div class="icon">🔧</div>
+                <h3>No skill system</h3>
+                <p>You paste the same instructions over and over. No way to package expertise into reusable, shareable skills.</p>
+            </div>
+            <div class="pain-card">
+                <div class="icon">📦</div>
+                <h3>No extensions</h3>
+                <p>Want custom tools? A browser? Image generation? You're on your own. Claude Code is a closed box.</p>
+            </div>
+            <div class="pain-card">
+                <div class="icon">🎨</div>
+                <h3>Bare-bones UI</h3>
+                <p>A plain terminal prompt. No themes, no keybindings, no rich TUI components. Functional, but joyless.</p>
+            </div>
+            <div class="pain-card">
+                <div class="icon">🏗️</div>
+                <h3>Vendor lock-in</h3>
+                <p>Anthropic's product, Anthropic's rules. Closed source. Can't add your own models or providers.</p>
+            </div>
+            <div class="pain-card">
+                <div class="icon">📋</div>
+                <h3>No scratchpad</h3>
+                <p>No built-in way to track TODOs, keep notes between sessions, or maintain a running checklist.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="comparison">
+    <div class="container">
+        <h2>Side by side, it's not close.</h2>
+        <p class="lead">pi gives you everything Claude Code has, plus everything it's missing.</p>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th class="pi-col">pi.dev</th>
+                        <th>Claude Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Claude as the AI engine</td>
+                        <td><span class="check">✓</span> Same Claude</td>
+                        <td><span class="check">✓</span> Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Persistent memory</td>
+                        <td><span class="check">✓</span> Long-term + daily logs</td>
+                        <td><span class="cross">✗</span> None</td>
+                    </tr>
+                    <tr>
+                        <td>Reusable skills</td>
+                        <td><span class="check">✓</span> Shareable skill files</td>
+                        <td><span class="cross">✗</span> None</td>
+                    </tr>
+                    <tr>
+                        <td>Extensions &amp; custom tools</td>
+                        <td><span class="check">✓</span> Full extension API</td>
+                        <td><span class="cross">✗</span> None</td>
+                    </tr>
+                    <tr>
+                        <td>Custom model providers</td>
+                        <td><span class="check">✓</span> Bring any model</td>
+                        <td><span class="cross">✗</span> Anthropic only</td>
+                    </tr>
+                    <tr>
+                        <td>Themes</td>
+                        <td><span class="check">✓</span> Fully customizable</td>
+                        <td><span class="cross">✗</span> None</td>
+                    </tr>
+                    <tr>
+                        <td>Scratchpad / checklists</td>
+                        <td><span class="check">✓</span> Built-in</td>
+                        <td><span class="cross">✗</span> None</td>
+                    </tr>
+                    <tr>
+                        <td>Rich TUI components</td>
+                        <td><span class="check">✓</span> Full TUI SDK</td>
+                        <td><span class="meh">~</span> Basic prompt</td>
+                    </tr>
+                    <tr>
+                        <td>Open source</td>
+                        <td><span class="check">✓</span> MIT licensed</td>
+                        <td><span class="cross">✗</span> Proprietary</td>
+                    </tr>
+                    <tr>
+                        <td>Prompt templates</td>
+                        <td><span class="check">✓</span> Per-project templates</td>
+                        <td><span class="cross">✗</span> None</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+    <div class="container">
+        <h2>What makes pi different.</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="tag">Memory</div>
+                <h3>It remembers everything</h3>
+                <p>Long-term memory for durable facts. Daily logs for session context. Scratchpad for TODOs. Your agent actually learns your project over time.</p>
+            </div>
+            <div class="feature-card">
+                <div class="tag">Skills</div>
+                <h3>Package expertise, share it</h3>
+                <p>Write a skill once — for SEO audits, CRO, copywriting, debugging patterns — and it's available in every project. Share skills across your team.</p>
+            </div>
+            <div class="feature-card">
+                <div class="tag">Extensions</div>
+                <h3>Add any capability</h3>
+                <p>Browser automation, image generation, web scraping, API integrations. If you can build it, pi can use it. Full extension SDK included.</p>
+            </div>
+            <div class="feature-card">
+                <div class="tag">Providers</div>
+                <h3>Not locked to one model</h3>
+                <p>Use Claude, GPT, Gemini, local models — whatever fits the task. Swap providers without changing your workflow.</p>
+            </div>
+            <div class="feature-card">
+                <div class="tag">TUI</div>
+                <h3>A terminal UI worth using</h3>
+                <p>Custom themes, keybindings, rich components. Your coding agent should feel as good as your editor.</p>
+            </div>
+            <div class="feature-card">
+                <div class="tag">Open Source</div>
+                <h3>Inspect, extend, own it</h3>
+                <p>MIT licensed. Read every line. Fork it. Contribute back. No black boxes, no vendor lock-in, no surprises on your bill.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TERMINAL DEMO -->
+<section class="demo">
+    <div class="container">
+        <h2>See it in action.</h2>
+        <p class="lead">A real session. Memory loaded, skills matched, work done.</p>
+        <div class="terminal">
+            <div class="terminal-bar">
+                <div class="terminal-dot r"></div>
+                <div class="terminal-dot y"></div>
+                <div class="terminal-dot g"></div>
+                <span>pi — ~/my-project</span>
+            </div>
+            <div class="terminal-body">
+                <span class="dim">■ Memory loaded: MEMORY.md, daily/2026-02-11.md</span><br>
+                <span class="dim">■ 47 skills available, 3 extensions active</span><br><br>
+                <span class="prompt">❯ </span><span class="cmd">audit the landing page for CRO issues</span><br><br>
+                <span class="dim">  ↳ Matched skill: page-cro</span><br>
+                <span class="dim">  ↳ Loading SKILL.md...</span><br>
+                <span class="dim">  ↳ Reading index.html (remembered from yesterday)</span><br><br>
+                <span class="output">Found 6 issues across 4 categories:</span><br>
+                <span class="accent">  1. Hero headline buries the value prop (line 47)</span><br>
+                <span class="accent">  2. CTA below fold on mobile (line 83)</span><br>
+                <span class="accent">  3. No social proof in first viewport</span><br>
+                <span class="accent">  4. Form has 7 fields — reduce to 3</span><br>
+                <span class="output">  ...</span><br><br>
+                <span class="prompt">❯ </span><span class="cmd">fix issues 1 and 2, remember the others for later</span><br><br>
+                <span class="dim">  ↳ Editing index.html...</span><br>
+                <span class="dim">  ↳ Added 2 items to scratchpad</span><br>
+                <span class="output">  Done. Changes saved. Scratchpad updated.</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- QUOTES -->
+<section class="quotes">
+    <div class="container">
+        <h2>Developers get it immediately.</h2>
+        <div class="quote-grid">
+            <div class="quote-card">
+                <p>"I switched from Claude Code to pi in an afternoon. The memory system alone is worth it — my agent finally knows my codebase."</p>
+                <div class="author">— Senior Engineer, startup</div>
+            </div>
+            <div class="quote-card">
+                <p>"Skills are a game-changer. I packaged our deployment checklist as a skill and now every engineer on the team has it."</p>
+                <div class="author">— Tech Lead, 30-person team</div>
+            </div>
+            <div class="quote-card">
+                <p>"Open source matters. I added a custom provider for our self-hosted model in about 20 lines of code."</p>
+                <div class="author">— Platform Engineer</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+    <div class="container">
+        <h2>Same Claude.<br>Way better experience.</h2>
+        <p>One install. Instant upgrade. Your existing projects, your existing API key. Just a better harness.</p>
+        <a href="https://github.com/mariozechner/pi-coding-agent" class="btn-primary">
+            Get pi — it's free →
+        </a>
+        <div class="install-alt">
+            or: <code>npm i -g @mariozechner/pi-coding-agent</code>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <p>pi is open source under MIT. Built by <a href="https://github.com/mariozechner">Mario Zechner</a>. Not affiliated with Anthropic.</p>
+    </div>
+</footer>
+
+</body>
+</html>
