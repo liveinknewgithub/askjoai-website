@@ -165,7 +165,7 @@
         .yc-badge svg { width: 22px; height: 22px; }
 
         /* ── SECTIONS ── */
-        section { padding: 100px 0; }
+        section { padding: 100px 0; scroll-margin-top: 92px; }
         .section-alt { background: var(--bg-white); }
         .section-cream { background: var(--bg-cream); }
         .section-dark { background: var(--bg-dark); color: #fff; }
@@ -178,6 +178,7 @@
             font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 12px;
         }
         .section-header p { font-size: 17px; color: var(--text-dim); max-width: 550px; margin: 0 auto; }
+        .section-dark .section-header h2 { color: #fff; }
         .section-dark .section-header p { color: rgba(255,255,255,0.6); }
 
         /* ── DEMO ── */
@@ -196,6 +197,7 @@
         .dot.y { background: #FEBC2E; }
         .dot.g { background: #28C840; }
         .demo-bar span { flex: 1; text-align: center; font-size: 14px; color: var(--text-muted); font-weight: 700; }
+        .demo-bar-spacer { width: 36px; display: inline-block; }
         .demo-body { padding: 28px; }
         .demo-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
         .demo-user .demo-label { color: var(--text-muted); }
@@ -382,6 +384,20 @@
         footer a:hover { color: var(--orange-light); }
         footer .logo { color: var(--orange-light); font-size: 22px; }
 
+        /* Utility */
+        .security-link { color: var(--electric-blue); }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
         /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
             .mobile-toggle { display: block; }
@@ -409,8 +425,8 @@
 
 <nav>
     <a href="/" class="logo">jo</a>
-    <button class="mobile-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
-    <div class="nav-links">
+    <button type="button" class="mobile-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">☰</button>
+    <div id="primary-nav" class="nav-links">
         <a href="#why-jo">Why jo</a>
         <a href="#how-it-works">How It Works</a>
         <a href="#pricing">Pricing</a>
@@ -419,6 +435,7 @@
     <a href="#download" class="btn-bold">Get Beta Access →</a>
 </nav>
 
+<main>
 <section class="hero">
     <div class="container">
         <div class="hero-content">
@@ -437,8 +454,9 @@
                 <span class="app-tag">📁 Files</span>
             </div>
 
-            <form class="email-form" action="https://forms.fillout.com/t/5ngLz3A5BHus" method="POST" target="_blank">
-                <input type="email" class="email-input" placeholder="you@example.com" required>
+            <form class="email-form" action="https://forms.fillout.com/t/5ngLz3A5BHus" method="POST" target="_blank" autocomplete="off">
+                <label class="sr-only" for="hero-email">Email address</label>
+                <input id="hero-email" type="email" name="email" inputmode="email" autocomplete="email" class="email-input" placeholder="you@example.com" required>
                 <button type="submit" class="btn-bold">Get Beta Access →</button>
             </form>
             <p class="microcopy">We'll email you when it's your turn. No spam, ever.</p>
@@ -466,7 +484,7 @@
         <div class="demo-window">
             <div class="demo-bar">
                 <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-                <span>jo</span><span style="width:36px"></span>
+                <span>jo</span><span class="demo-bar-spacer" aria-hidden="true"></span>
             </div>
             <div class="demo-body">
                 <div class="demo-user">
@@ -620,7 +638,7 @@
 <section class="section-dark">
     <div class="container">
         <div class="section-header">
-            <h2 style="color:#fff">Built by founders who care about privacy</h2>
+            <h2>Built by founders who care about privacy</h2>
         </div>
         <div class="team-row">
             <div class="team-card">
@@ -689,7 +707,7 @@
                 <li><strong>No network calls.</strong> Open Activity Monitor. Zero outbound connections.</li>
                 <li><strong>On-device processing.</strong> AI runs locally on your Neural Engine.</li>
                 <li><strong>Apple-native APIs.</strong> Same APIs as Spotlight. Verifiable.</li>
-                <li><strong>Open to audit.</strong> Email <a href="mailto:security@askjo.ai" style="color:var(--electric-blue)">security@askjo.ai</a></li>
+                <li><strong>Open to audit.</strong> Email <a href="mailto:security@askjo.ai" class="security-link">security@askjo.ai</a></li>
             </ul>
         </div>
     </div>
@@ -699,13 +717,15 @@
     <div class="container">
         <h2>OpenClaw power.<br>One drag-and-drop.</h2>
         <p>First month free. No terminal required. Ever.</p>
-        <form class="email-form" action="https://forms.fillout.com/t/5ngLz3A5BHus" method="POST" target="_blank">
-            <input type="email" class="email-input" placeholder="you@example.com" required>
+        <form class="email-form" action="https://forms.fillout.com/t/5ngLz3A5BHus" method="POST" target="_blank" autocomplete="off">
+            <label class="sr-only" for="download-email">Email address</label>
+            <input id="download-email" type="email" name="email" inputmode="email" autocomplete="email" class="email-input" placeholder="you@example.com" required>
             <button type="submit" class="btn-bold">Get Beta Access →</button>
         </form>
         <p class="microcopy">Requires M1 Mac or newer with 16GB RAM</p>
     </div>
 </section>
+</main>
 
 <footer>
     <div class="container">
@@ -713,9 +733,68 @@
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
         <a href="mailto:founders@askjo.ai">Contact</a>
-        <p style="margin-top:12px">&copy; 2026 jo. All rights reserved.</p>
+        <p class="copyright-text">&copy; 2026 jo. All rights reserved.</p>
     </div>
 </footer>
+
+<script>
+    (function () {
+        const navToggle = document.querySelector('.mobile-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (!navToggle || !navLinks) {
+            return;
+        }
+
+        const mediaQuery = window.matchMedia('(max-width: 768px)');
+
+        const closeMobileMenu = () => {
+            navLinks.classList.remove('open');
+            navToggle.setAttribute('aria-expanded', 'false');
+        };
+
+        const toggleMobileMenu = () => {
+            const isOpen = navLinks.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', String(isOpen));
+        };
+
+        navToggle.addEventListener('click', toggleMobileMenu);
+
+        navLinks.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && navLinks.classList.contains('open')) {
+                closeMobileMenu();
+            }
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!navLinks.classList.contains('open')) {
+                return;
+            }
+
+            if (navToggle.contains(event.target) || navLinks.contains(event.target)) {
+                return;
+            }
+
+            closeMobileMenu();
+        });
+
+        const handleViewportChange = (event) => {
+            if (!event.matches) {
+                closeMobileMenu();
+            }
+        };
+
+        if (typeof mediaQuery.addEventListener === 'function') {
+            mediaQuery.addEventListener('change', handleViewportChange);
+        } else {
+            mediaQuery.addListener(handleViewportChange);
+        }
+    })();
+</script>
 
 <script type="application/ld+json">
 {

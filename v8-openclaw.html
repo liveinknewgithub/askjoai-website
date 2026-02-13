@@ -123,7 +123,18 @@
             html { scroll-behavior: auto; }
             *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
         }
-        
+
+        .inline-code { background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+        .inline-code.small {
+            font-size: 0.85em;
+        }
+        .avatar-stack-item--amber-dark { background: var(--v8-amber-dark); }
+        .avatar-stack-item--amber { background: var(--v8-amber); }
+        .avatar-stack-item--coral { background: var(--v8-coral); }
+        .avatar-stack-item--rose { background: var(--v8-rose); }
+        .comparison-card--diy { grid-column: 1 / -1; }
+        .tool-icon--contain { object-fit: contain; }
+
         /* Mobile header adjustments */
         @media (max-width: 768px) {
             .nav-links { display: none; }
@@ -359,7 +370,7 @@
                     </h1>
 
                     <p class="hero-tagline">
-                        Love what OpenClaw does? jo gives you the same local AI superpowers — searching notes, photos, emails, and summarizing groupchats — without <code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-size:0.9em;">curl | bash</code> or a single config file.
+                        Love what OpenClaw does? jo gives you the same local AI superpowers — searching notes, photos, emails, and summarizing groupchats — without <code class="inline-code">curl | bash</code> or a single config file.
                     </p>
 
                     <!-- App Marquee -->
@@ -450,10 +461,10 @@
                     <!-- Waitlist Proof -->
                     <div class="waitlist-proof mt-lg">
                         <div class="avatar-stack" aria-hidden="true">
-                            <span class="avatar-stack-item" style="background: var(--v8-amber-dark)">JM</span>
-                            <span class="avatar-stack-item" style="background: var(--v8-amber)">KL</span>
-                            <span class="avatar-stack-item" style="background: var(--v8-coral)">SR</span>
-                            <span class="avatar-stack-item" style="background: var(--v8-rose)">AT</span>
+                            <span class="avatar-stack-item avatar-stack-item--amber-dark">JM</span>
+                            <span class="avatar-stack-item avatar-stack-item--amber">KL</span>
+                            <span class="avatar-stack-item avatar-stack-item--coral">SR</span>
+                            <span class="avatar-stack-item avatar-stack-item--rose">AT</span>
                         </div>
                         <span class="waitlist-count">Early access spots filling quickly — join the waitlist</span>
                     </div>
@@ -513,12 +524,12 @@
                     <h2 id="comparison-heading">OpenClaw is incredible. jo is easier.</h2>
                 </div>
                 <div class="comparison-grid">
-                    <div class="comparison-card comparison-card--diy" style="grid-column: 1 / -1;">
+                    <div class="comparison-card comparison-card--diy">
                         <div class="comparison-icon" aria-hidden="true">
                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19h8M4 17l6-6l-6-6"/></svg>
                         </div>
                         <h3>vs. OpenClaw</h3>
-                        <p class="comparison-limitation">OpenClaw is powerful — but it needs <code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-size:0.9em;">curl | bash</code>, Node.js, API keys, and config files. jo does the same personal AI stuff (search your data, summarize chats, prep for meetings) with zero terminal. Drag to Applications. Done.</p>
+                        <p class="comparison-limitation">OpenClaw is powerful — but it needs <code class="inline-code">curl | bash</code>, Node.js, API keys, and config files. jo does the same personal AI stuff (search your data, summarize chats, prep for meetings) with zero terminal. Drag to Applications. Done.</p>
                     </div>
                     <div class="comparison-card comparison-card--spotlight">
                         <div class="comparison-icon" aria-hidden="true">
@@ -564,7 +575,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M22 16v-1c0-2.828 0-4.242-.879-5.12C20.242 9 18.828 9 16 9H8c-2.829 0-4.243 0-5.122.88C2 10.757 2 12.17 2 14.997V16c0 2.829 0 4.243.879 5.122C3.757 22 5.172 22 8 22h8c2.828 0 4.243 0 5.121-.878C22 20.242 22 18.829 22 16" opacity=".5"/><path fill="currentColor" fill-rule="evenodd" d="M12 1.25a.75.75 0 0 0-.75.75v10.973l-1.68-1.961a.75.75 0 1 0-1.14.976l3 3.5a.75.75 0 0 0 1.14 0l3-3.5a.75.75 0 1 0-1.14-.976l-1.68 1.96V2a.75.75 0 0 0-.75-.75" clip-rule="evenodd"/></svg>
                         </div>
                         <h3>Download</h3>
-                        <p>Drag jo to Applications. No <code style="background:rgba(255,255,255,0.08);padding:2px 5px;border-radius:4px;font-size:0.85em;">curl | bash</code>. No Node.js. No API keys. Just a Mac app.</p>
+                        <p>Drag jo to Applications. No <code class="inline-code small">curl | bash</code>. No Node.js. No API keys. Just a Mac app.</p>
                     </div>
                     <div class="step-item">
                         <div class="step-icon" aria-hidden="true">
@@ -727,7 +738,7 @@
                                     <span>Amp Code</span>
                                 </a>
                                 <a href="https://docs.anthropic.com/en/docs/claude-code/overview" target="_blank" rel="noopener noreferrer" class="tool-link">
-                                    <img src="claude-code-logo.png" alt="" class="tool-icon" width="24" height="24" loading="lazy" style="object-fit: contain;">
+                                    <img src="claude-code-logo.png" alt="" class="tool-icon tool-icon--contain" width="24" height="24" loading="lazy">
                                     <span>Claude Code</span>
                                 </a>
                             </div>
