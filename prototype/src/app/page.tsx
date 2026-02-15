@@ -1,0 +1,663 @@
+import Image from "next/image";
+import V8WarmAnimations, { EmailValidation } from "@/components/V8WarmAnimations";
+
+export default function Home() {
+  return (
+    <div className="v8-warm-page">
+      {/* Skip Navigation Link for Accessibility */}
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+
+      <div className="warm-grain" aria-hidden="true"></div>
+
+      <header className="header">
+        <nav className="nav" aria-label="Main navigation">
+          <div className="nav-logo">
+            <a href="/" aria-label="jo - Home">
+              <span className="logo-text font-fraunces font-weight-700">jo</span>
+            </a>
+          </div>
+          <div className="nav-links">
+            <a href="#why-jo">Why jo</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#faq">FAQ</a>
+          </div>
+          <div className="nav-actions">
+            <a href="#download" className="btn btn-primary font-fraunces">Get Beta Access</a>
+          </div>
+        </nav>
+      </header>
+
+      <nav className="progress-nav" aria-label="Page progress">
+        <div className="progress-dots">
+          <a href="#why-jo" className="progress-dot" data-section="why-jo"></a>
+          <a href="#how-it-works" className="progress-dot" data-section="how-it-works"></a>
+          <a href="#features" className="progress-dot" data-section="features"></a>
+          <a href="#testimonials" className="progress-dot" data-section="testimonials"></a>
+          <a href="#pricing" className="progress-dot" data-section="pricing"></a>
+          <a href="#faq" className="progress-dot" data-section="faq"></a>
+          <a href="#download" className="progress-dot" data-section="download"></a>
+        </div>
+      </nav>
+
+      <main id="main-content">
+        {/* Hero Section */}
+        <section className="hero v8-hero section-dark" aria-labelledby="hero-title">
+          <div className="accent-orb accent-orb-1" aria-hidden="true"></div>
+          <div className="accent-orb accent-orb-2" aria-hidden="true"></div>
+          <div className="accent-orb accent-orb-3" aria-hidden="true"></div>
+
+          <div className="container">
+            <div className="hero-content v8-hero-content">
+              <h1 id="hero-title" className="hero-title">
+                Never search again.
+                <span className="text-gradient"> Just ask your Mac.</span>
+              </h1>
+
+              <p className="hero-tagline">
+                jo is an AI that searches everything on your Mac (notes, photos, emails, messages) and finds what you need in seconds. 100% private. Nothing ever leaves your computer.
+              </p>
+
+              <div className="app-marquee" aria-label="Apps jo searches">
+                <div className="app-marquee-track">
+                  <span className="app-tag"><span>📝</span> Notes</span>
+                  <span className="app-tag"><span>📸</span> Photos</span>
+                  <span className="app-tag"><span>✉️</span> Mail</span>
+                  <span className="app-tag"><span>💬</span> Messages</span>
+                  <span className="app-tag"><span>📅</span> Calendar</span>
+                  <span className="app-tag"><span>📁</span> Files</span>
+                  <span className="app-tag"><span>🔖</span> Reminders</span>
+                  <span className="app-tag"><span>📇</span> Contacts</span>
+                  {/* Duplicates for seamless loop */}
+                  <span className="app-tag app-tag-duplicate"><span>📝</span> Notes</span>
+                  <span className="app-tag app-tag-duplicate"><span>📸</span> Photos</span>
+                  <span className="app-tag app-tag-duplicate"><span>✉️</span> Mail</span>
+                  <span className="app-tag app-tag-duplicate"><span>💬</span> Messages</span>
+                  <span className="app-tag app-tag-duplicate"><span>📅</span> Calendar</span>
+                  <span className="app-tag app-tag-duplicate"><span>📁</span> Files</span>
+                  <span className="app-tag app-tag-duplicate"><span>🔖</span> Reminders</span>
+                  <span className="app-tag app-tag-duplicate"><span>📇</span> Contacts</span>
+                </div>
+              </div>
+
+              <div className="hero-actions v8-email-actions">
+                <form className="v8-email-form" action="https://forms.fillout.com/t/5ngLz3A5BHus" method="GET" target="_blank">
+                  <label htmlFor="hero-email" className="visually-hidden">Email address</label>
+                  <input
+                    type="email"
+                    id="hero-email"
+                    name="email"
+                    className="v8-email-input"
+                    placeholder="you@example.com"
+                    autoComplete="email"
+                    autoCapitalize="off"
+                    spellCheck="false"
+                    aria-describedby="hero-email-hint"
+                    required
+                  />
+                  <button type="submit" className="btn btn-primary btn-large">Get Beta Access</button>
+                </form>
+                <span id="hero-email-hint" className="visually-hidden">Enter your email to join the waitlist</span>
+              </div>
+              <p className="form-microcopy mt-sm">We&apos;ll email you when it&apos;s your turn. No spam, ever.</p>
+
+              <div className="trust-badges mt-md">
+                <span className="trust-badge">
+                  <svg className="trust-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M3 11.991c0 5.638 4.239 8.375 6.899 9.536c.721.315 1.082.473 2.101.473V8l-9 3z"/>
+                    <path fill="currentColor" d="M14.101 21.527C16.761 20.365 21 17.63 21 11.991V11l-9-3v14c1.02 0 1.38-.158 2.101-.473M8.838 2.805L8.265 3c-3.007 1.03-4.51 1.545-4.887 2.082C3 5.62 3 7.22 3 10.417V11l9-3V2c-.811 0-1.595.268-3.162.805" opacity=".5"/>
+                    <path fill="currentColor" d="m15.735 3l-.573-.195C13.595 2.268 12.812 2 12 2v6l9 3v-.583c0-3.198 0-4.797-.378-5.335c-.377-.537-1.88-1.052-4.887-2.081"/>
+                  </svg>
+                  100% Private — runs entirely on your Mac
+                </span>
+                <span className="trust-badge">
+                  <svg className="trust-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                    <path fill="currentColor" fillRule="evenodd" d="M8.732 5.771L5.67 9.914c-1.285 1.739-1.928 2.608-1.574 3.291l.018.034c.375.673 1.485.673 3.704.673c1.233 0 1.85 0 2.236.363l.02.02l3.872-4.57l-.02-.02c-.379-.371-.379-.963-.379-2.148v-.31c0-3.285 0-4.927-.923-5.21s-1.913 1.056-3.892 3.734" clipRule="evenodd"/>
+                    <path fill="currentColor" d="M10.453 16.443v.31c0 3.284 0 4.927.923 5.21s1.913-1.056 3.893-3.734l3.062-4.143c1.284-1.739 1.927-2.608 1.573-3.291l-.018-.034c-.375-.673-1.485-.673-3.704-.673c-1.233 0-1.85 0-2.236-.363l-3.872 4.57c.379.371.379.963.379 2.148" opacity=".5"/>
+                  </svg>
+                  No subscription — pay only for what you use
+                </span>
+                <span className="trust-badge">
+                  <svg className="trust-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10" opacity=".5"/>
+                    <path fill="currentColor" d="M16.03 8.97a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06l1.47 1.47l4.47-4.47a.75.75 0 0 1 1.06 0"/>
+                  </svg>
+                  30-day satisfaction guarantee
+                </span>
+                <span className="trust-badge">
+                  <svg className="trust-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                    <path fill="currentColor" fillRule="evenodd" d="M12 3c.385 0 .698.312.698.698v2.79q.764.001 1.395.017V3.698a.698.698 0 0 1 1.395 0v2.79a1 1 0 0 1-.008.108c.936.115 1.585.353 2.078.846s.731 1.142.846 2.078a1 1 0 0 1 .108-.008h2.79a.698.698 0 0 1 0 1.395h-2.807q.017.63.017 1.395h2.79a.698.698 0 0 1 0 1.396h-2.79q-.001.764-.017 1.395h2.807a.698.698 0 0 1 0 1.395h-2.79a1 1 0 0 1-.108-.008c-.115.936-.353 1.585-.846 2.078s-1.142.731-2.078.846q.009.053.008.108v2.79a.698.698 0 0 1-1.395 0v-2.807q-.63.017-1.395.017v2.79a.698.698 0 0 1-1.396 0v-2.79a56 56 0 0 1-1.395-.017v2.807a.698.698 0 0 1-1.395 0v-2.79q0-.056.008-.108c-.936-.115-1.585-.353-2.078-.846s-.731-1.142-.846-2.078a1 1 0 0 1-.108.008h-2.79a.698.698 0 0 1 0-1.395h2.807a56 56 0 0 1-.017-1.395h-2.79a.698.698 0 0 1 0-1.396h2.79q.001-.764.017-1.395H2.698a.698.698 0 0 1 0-1.395h2.79q.056 0 .108.008c.115-.936.353-1.585.846-2.078s1.142-.731 2.078-.846a1 1 0 0 1-.008-.108v-2.79a.698.698 0 0 1 1.395 0v2.807q.63-.017 1.395-.017v-2.79c0-.386.313-.698.698-.698m-.976 5.581c-.619 0-1.152 0-1.578.058c-.458.061-.896.2-1.252.555c-.355.356-.494.794-.555 1.252c-.058.427-.058.96-.058 1.578v1.952c0 .619 0 1.151.058 1.578c.061.458.2.896.555 1.252c.356.355.794.494 1.252.555c.426.058.96.058 1.578.058h1.952c.619 0 1.151 0 1.578-.058c.458-.061.896-.2 1.252-.555c.355-.356.494-.794.555-1.252c.058-.427.058-.96.058-1.578v-1.952c0-.619 0-1.151-.058-1.578c-.061-.458-.2-.896-.555-1.252c-.356-.355-.794-.494-1.252-.555c-.427-.058-.96-.058-1.578-.058z" clipRule="evenodd"/>
+                    <path fill="currentColor" d="M9.18 10.18c.054-.052.149-.118.451-.159c.323-.043.761-.044 1.439-.044h1.86c.678 0 1.116.001 1.438.044c.303.041.398.107.45.16c.054.053.12.148.16.45c.044.323.045.761.045 1.439v1.86c0 .678-.001 1.116-.045 1.438c-.04.303-.106.398-.16.45c-.052.054-.147.12-.45.16c-.322.044-.76.045-1.438.045h-1.86c-.678 0-1.116-.001-1.439-.045c-.302-.04-.397-.106-.45-.16c-.053-.052-.119-.147-.16-.45c-.043-.322-.044-.76-.044-1.438v-1.86c0-.678.001-1.116.044-1.438c.041-.303.107-.398.16-.451" opacity=".5"/>
+                  </svg>
+                  Requires M1 Mac or newer with 16GB RAM
+                </span>
+              </div>
+
+              <div className="social-proof mt-md">
+                <p className="social-proof-text">Trusted by 2,847+ Mac users who&apos;ve saved hundreds of hours searching</p>
+              </div>
+
+              <div className="waitlist-proof mt-lg">
+                <div className="avatar-stack">
+                  <span className="avatar-stack-item">JM</span>
+                  <span className="avatar-stack-item">KL</span>
+                  <span className="avatar-stack-item">SR</span>
+                  <span className="avatar-stack-item">AT</span>
+                </div>
+                <span className="waitlist-count">Early access spots filling quickly — join the waitlist</span>
+              </div>
+
+              <div className="yc-badge mt-lg">
+                <svg className="yc-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="24" height="24" rx="4" fill="#FF6600"/>
+                  <path d="M12 14.5L7.5 6H9.5L12 11L14.5 6H16.5L12 14.5V18H12V14.5Z" fill="white"/>
+                </svg>
+                <span>Backed by Y Combinator</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Why jo Section - Demo Window */}
+        <section id="why-jo" className="opportunity-section section-darker py-4xl" aria-labelledby="why-jo-heading">
+          <div className="container">
+            <div className="section-header v8-section-header animate-on-scroll">
+              <h2 id="why-jo-heading">See jo in action</h2>
+            </div>
+
+            <div className="demo-window max-w-800 mx-auto animate-on-scroll">
+              <div className="demo-titlebar">
+                <span className="demo-dot red"></span>
+                <span className="demo-dot yellow"></span>
+                <span className="demo-dot green"></span>
+                <span className="demo-title">jo</span>
+                <div className="titlebar-spacer"></div>
+              </div>
+              <div className="demo-content demo-conversation">
+                <div className="demo-message demo-user">
+                  <span className="demo-label">You</span>
+                  <p>What was the name of that contractor Mike recommended for the deck?</p>
+                </div>
+                <div className="demo-message demo-jo">
+                  <span className="demo-label">jo</span>
+                  <p>Based on your messages with Mike from March 2024, he recommended <strong>Tom Reilly at Reilly Decks</strong> (503-555-0147). Mike said Tom did his deck for $4,200 and finished in 3 days.</p>
+                  <div className="demo-sources">
+                    <span className="demo-source">iMessage with Mike Chen, Mar 12</span>
+                    <span className="demo-source">Photo: Mike&apos;s deck, Mar 15</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p className="demo-caption text-center mt-lg animate-on-scroll">jo searches your notes, emails, photos, and messages to find what you need — even when you don&apos;t remember the exact words.</p>
+          </div>
+        </section>
+
+        {/* Comparison Section */}
+        <section className="comparison-section section-dark py-4xl" aria-labelledby="comparison-heading">
+          <div className="container">
+            <div className="section-header v8-section-header animate-on-scroll">
+              <h2 id="comparison-heading">How jo is different</h2>
+            </div>
+            <div className="comparison-grid animate-on-scroll stagger-children">
+              <div className="comparison-card comparison-card--spotlight">
+                <div className="comparison-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                    <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+                      <path d="m21 21l-4.34-4.34"/>
+                      <circle cx="11" cy="11" r="8"/>
+                    </g>
+                  </svg>
+                </div>
+                <h3>vs. Spotlight</h3>
+                <p className="comparison-limitation">Spotlight matches exact words. jo understands meaning. Ask for &quot;that email about money problems&quot; and jo finds your budget discussions—even if you never used those words.</p>
+              </div>
+              <div className="comparison-card comparison-card--chatgpt">
+                <div className="comparison-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                    <path fill="currentColor" fillRule="evenodd" d="M22 14.353C22 17.472 19.442 20 16.286 20h-5.787a7.5 7.5 0 0 1 7.487-11.853q.119.422.17.868C20.392 9.78 22 11.881 22 14.353" clipRule="evenodd" opacity=".5"/>
+                    <path fill="currentColor" d="M12.476 4C9.32 4 6.762 6.528 6.762 9.647c0 .69.125 1.35.354 1.962a4.4 4.4 0 0 0-.83-.08C3.919 11.53 2 13.426 2 15.765S3.919 20 6.286 20H10.5a7.5 7.5 0 0 1 7.487-11.853l-.047-.158C17.224 5.68 15.048 4 12.476 4"/>
+                  </svg>
+                </div>
+                <h3>vs. ChatGPT</h3>
+                <p className="comparison-limitation">ChatGPT requires uploading files to external servers. jo already knows your stuff and never sends anything anywhere.</p>
+              </div>
+              <div className="comparison-card comparison-card--rewind">
+                <div className="comparison-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M12 5.5a6.5 6.5 0 1 0 6.5 6.5a.75.75 0 0 1 1.5 0a8 8 0 1 1-8-8a.75.75 0 0 1 0 1.5" opacity=".5"/>
+                    <path fill="currentColor" d="M12 8.25a.75.75 0 0 1 .75.75v2.69l1.78 1.78a.75.75 0 1 1-1.06 1.06l-2-2a.75.75 0 0 1-.22-.53V9a.75.75 0 0 1 .75-.75M21 4.5a.75.75 0 0 0-.75-.75H18a.75.75 0 0 0 0 1.5h.94l-2.3 2.3a.75.75 0 0 0 1.06 1.06l2.3-2.3V7.5a.75.75 0 0 0 1.5 0V4.75a.75.75 0 0 0-.5-.25"/>
+                  </svg>
+                </div>
+                <h3>vs. Rewind</h3>
+                <p className="comparison-limitation">Rewind records your screen (privacy nightmare). jo reads your actual files using the same APIs Apple uses.</p>
+              </div>
+              <div className="comparison-card comparison-card--noteapps">
+                <div className="comparison-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M4.979 9.685C2.993 8.891 2 8.494 2 8s.993-.89 2.979-1.685l2.808-1.123C9.773 4.397 10.767 4 12 4s2.227.397 4.213 1.192l2.808 1.123C21.007 7.109 22 7.506 22 8s-.993.89-2.979 1.685l-2.808 1.124C14.227 11.603 13.233 12 12 12s-2.227-.397-4.213-1.191z"/>
+                    <path fill="currentColor" d="m5.766 10l-.787.315C2.993 11.109 2 11.507 2 12s.993.89 2.979 1.685l2.808 1.124C9.773 15.603 10.767 16 12 16s2.227-.397 4.213-1.191l2.808-1.124C21.007 12.891 22 12.493 22 12s-.993-.89-2.979-1.685L18.234 10l-2.021.809C14.227 11.603 13.233 12 12 12s-2.227-.397-4.213-1.191z" opacity=".7"/>
+                    <path fill="currentColor" d="m5.766 14l-.787.315C2.993 15.109 2 15.507 2 16s.993.89 2.979 1.685l2.808 1.124C9.773 19.603 10.767 20 12 20s2.227-.397 4.213-1.192l2.808-1.123C21.007 16.891 22 16.494 22 16c0-.493-.993-.89-2.979-1.685L18.234 14l-2.021.809C14.227 15.603 13.233 16 12 16s-2.227-.397-4.213-1.191z" opacity=".4"/>
+                  </svg>
+                </div>
+                <h3>vs. Note apps</h3>
+                <p className="comparison-limitation">Notion AI only searches Notion. jo searches Notes, Photos, Mail, Messages, and Calendar at once.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works Section */}
+        <section id="how-it-works" className="how-it-works-section section-darker py-4xl" aria-labelledby="how-it-works-heading">
+          <div className="container">
+            <div className="section-header v8-section-header animate-on-scroll">
+              <h2 id="how-it-works-heading">Ready in minutes, not hours</h2>
+            </div>
+            <div className="steps-container animate-on-scroll stagger-children">
+              <div className="step-item">
+                <div className="step-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M22 16v-1c0-2.828 0-4.242-.879-5.12C20.242 9 18.828 9 16 9H8c-2.829 0-4.243 0-5.122.88C2 10.757 2 12.17 2 14.997V16c0 2.829 0 4.243.879 5.122C3.757 22 5.172 22 8 22h8c2.828 0 4.243 0 5.121-.878C22 20.242 22 18.829 22 16" opacity=".5"/>
+                    <path fill="currentColor" fillRule="evenodd" d="M12 1.25a.75.75 0 0 0-.75.75v10.973l-1.68-1.961a.75.75 0 1 0-1.14.976l3 3.5a.75.75 0 0 0 1.14 0l3-3.5a.75.75 0 1 0-1.14-.976l-1.68 1.96V2a.75.75 0 0 0-.75-.75" clipRule="evenodd"/>
+                  </svg>
+                </div>
+                <h3>Download</h3>
+                <p>Drag jo to Applications. Grant permission to read your Notes, Photos, Mail, and Messages.</p>
+              </div>
+              <div className="step-item">
+                <div className="step-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M4.979 9.685C2.993 8.891 2 8.494 2 8s.993-.89 2.979-1.685l2.808-1.123C9.773 4.397 10.767 4 12 4s2.227.397 4.213 1.192l2.808 1.123C21.007 7.109 22 7.506 22 8s-.993.89-2.979 1.685l-2.808 1.124C14.227 11.603 13.233 12 12 12s-2.227-.397-4.213-1.191z"/>
+                    <path fill="currentColor" d="m5.766 10l-.787.315C2.993 11.109 2 11.507 2 12s.993.89 2.979 1.685l2.808 1.124C9.773 15.603 10.767 16 12 16s2.227-.397 4.213-1.191l2.808-1.124C21.007 12.891 22 12.493 22 12s-.993-.89-2.979-1.685L18.234 10l-2.021.809C14.227 11.603 13.233 12 12 12s-2.227-.397-4.213-1.191z" opacity=".7"/>
+                    <path fill="currentColor" d="m5.766 14l-.787.315C2.993 15.109 2 15.507 2 16s.993.89 2.979 1.685l2.808 1.124C9.773 19.603 10.767 20 12 20s2.227-.397 4.213-1.192l2.808-1.123C21.007 16.891 22 16.494 22 16c0-.493-.993-.89-2.979-1.685L18.234 14l-2.021.809C14.227 15.603 13.233 16 12 16s-2.227-.397-4.213-1.191z" opacity=".4"/>
+                  </svg>
+                </div>
+                <h3>Wait 10 minutes</h3>
+                <p>jo reads through your history. Everything stays on your Mac. Nothing leaves. Ever.</p>
+              </div>
+              <div className="step-item">
+                <div className="step-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                    <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+                      <path fill="currentColor" d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594zM20 2v4m2-2h-4"/>
+                      <circle fill="currentColor" cx="4" cy="20" r="2"/>
+                    </g>
+                  </svg>
+                </div>
+                <h3>Ask anything</h3>
+                <p>&quot;What did Sarah say about the deadline?&quot; jo finds it in seconds.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section id="features" className="difference-section section-darker py-4xl" aria-labelledby="features-heading">
+          <div className="container">
+            <div className="section-header v8-section-header animate-on-scroll">
+              <h2 id="features-heading">Try asking jo</h2>
+              <p className="v8-section-subtitle">Real prompts. Real answers. Connecting your stuff across apps.</p>
+            </div>
+            <div className="features-refined animate-on-scroll stagger-children">
+              <div className="feature-refined feature-refined--hero">
+                <div className="feature-icon-wrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M6.94 2c.416 0 .753.324.753.724v1.46c.668-.012 1.417-.012 2.26-.012h4.015c.842 0 1.591 0 2.259.013v-1.46c0-.4.337-.725.753-.725s.753.324.753.724V4.25c1.445.111 2.394.384 3.09 1.055c.698.67.982 1.582 1.097 2.972L22 9H2v-.724c.116-1.39.4-2.302 1.097-2.972s1.645-.944 3.09-1.055V2.724c0-.4.337-.724.753-.724"/>
+                    <path fill="currentColor" d="M22 14v-2c0-.839-.004-2.335-.017-3H2.01c-.013.665-.01 2.161-.01 3v2c0 3.771 0 5.657 1.172 6.828S6.228 22 10 22h4c3.77 0 5.656 0 6.828-1.172S22 17.772 22 14" opacity=".5"/>
+                    <path fill="currentColor" d="M18 17a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-5 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-5 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/>
+                  </svg>
+                </div>
+                <h3>&quot;Prep me for my 2pm with Sarah Chen&quot;</h3>
+                <p>jo checks your calendar, finds your last 5 email threads with Sarah, pulls up notes from previous meetings, and reminds you she mentioned her daughter&apos;s graduation.</p>
+                <div className="feature-sources">
+                  <div className="feature-source-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M6.94 2c.416 0 .753.324.753.724v1.46c.668-.012 1.417-.012 2.26-.012h4.015c.842 0 1.591 0 2.259.013v-1.46c0-.4.337-.725.753-.725s.753.324.753.724V4.25c1.445.111 2.394.384 3.09 1.055c.698.67.982 1.582 1.097 2.972L22 9H2v-.724c.116-1.39.4-2.302 1.097-2.972s1.645-.944 3.09-1.055V2.724c0-.4.337-.724.753-.724"/>
+                      <path fill="currentColor" d="M22 14v-2c0-.839-.004-2.335-.017-3H2.01c-.013.665-.01 2.161-.01 3v2c0 3.771 0 5.657 1.172 6.828S6.228 22 10 22h4c3.77 0 5.656 0 6.828-1.172S22 17.772 22 14" opacity=".5"/>
+                    </svg>
+                    Calendar
+                  </div>
+                  <div className="feature-source-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                      <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+                        <path d="m22 7l-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/>
+                        <rect width="20" height="16" x="2" y="4" rx="2"/>
+                      </g>
+                    </svg>
+                    Mail
+                  </div>
+                  <div className="feature-source-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                      <path fill="currentColor" fillRule="evenodd" d="m20.83 10.715l-.518 1.932c-.605 2.255-.907 3.383-1.592 4.114a4 4 0 0 1-2.01 1.161q-.145.034-.295.052c-.915.113-2.032-.186-4.064-.73c-2.255-.605-3.383-.907-4.114-1.592a4 4 0 0 1-1.161-2.011c-.228-.976.074-2.103.679-4.358l.517-1.932l.244-.905c.455-1.666.761-2.583 1.348-3.21a4 4 0 0 1 2.01-1.16c.976-.228 2.104.074 4.36.679c2.254.604 3.382.906 4.113 1.59a4 4 0 0 1 1.161 2.012c.228.976-.075 2.103-.679 4.358" clipRule="evenodd"/>
+                      <path fill="currentColor" d="M16.415 17.975a4 4 0 0 1-1.068 1.677c-.731.685-1.859.987-4.114 1.591s-3.383.907-4.358.679a4 4 0 0 1-2.011-1.161c-.685-.731-.988-1.859-1.592-4.114l-.517-1.932c-.605-2.255-.907-3.383-.68-4.358a4 4 0 0 1 1.162-2.011c.731-.685 1.859-.987 4.114-1.592q.638-.172 1.165-.309l-.244.906l-.517 1.932c-.605 2.255-.907 3.382-.68 4.358a4 4 0 0 0 1.162 2.011c.731.685 1.859.987 4.114 1.592c2.032.544 3.149.843 4.064.73" opacity=".5"/>
+                    </svg>
+                    Notes
+                  </div>
+                </div>
+              </div>
+              <div className="feature-refined feature-refined--tempura">
+                <div className="feature-icon-wrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                    <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+                      <path d="m16.24 7.76l-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/>
+                      <circle cx="12" cy="12" r="10"/>
+                    </g>
+                  </svg>
+                </div>
+                <h3>&quot;What was that amazing tempura place in Tokyo?&quot;</h3>
+                <p>jo finds your reservation email from 2022, pulls up the photos you took of the food, and shows the note where you wrote &quot;best meal of the trip.&quot;</p>
+              </div>
+              <div className="feature-refined feature-refined--kitchen">
+                <div className="feature-icon-wrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                    <path fill="currentColor" fillRule="evenodd" d="m21.532 11.586l-.782-.626v10.29H22a.75.75 0 0 1 0 1.5H2a.75.75 0 1 1 0-1.5h1.25V10.96l-.781.626a.75.75 0 1 1-.937-1.172l8.125-6.5a3.75 3.75 0 0 1 4.686 0l8.125 6.5a.75.75 0 1 1-.936 1.172M12 6.75a2.75 2.75 0 1 0 0 5.5a2.75 2.75 0 0 0 0-5.5m1.746 6.562c-.459-.062-1.032-.062-1.697-.062h-.098c-.665 0-1.238 0-1.697.062c-.491.066-.963.215-1.345.597s-.531.854-.597 1.345c-.062.459-.062 1.032-.062 1.697v4.299h7.5v-4.423c0-.612-.004-1.143-.062-1.573c-.066-.491-.215-.963-.597-1.345s-.853-.531-1.345-.597" clipRule="evenodd"/>
+                    <path fill="currentColor" d="M12.05 13.25c.664 0 1.237 0 1.696.062c.492.066.963.215 1.345.597s.531.853.597 1.345c.058.43.062.96.062 1.573v4.423h-7.5v-4.3c0-.664 0-1.237.062-1.696c.066-.492.215-.963.597-1.345s.854-.531 1.345-.597c.459-.062 1.032-.062 1.697-.062zM16 3h2.5a.5.5 0 0 1 .5.5v4.14l-3.5-2.8V3.5A.5.5 0 0 1 16 3" opacity=".5"/>
+                  </svg>
+                </div>
+                <h3>&quot;What did we decide about the kitchen remodel?&quot;</h3>
+                <p>jo finds your notes on cabinet styles, the contractor&apos;s email with the quote, photos of the inspiration kitchens you saved, and the calendar note about the start date.</p>
+              </div>
+              <div className="feature-refined feature-refined--conference">
+                <div className="feature-icon-wrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                    <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+                      <path d="M12 18V5m3 8a4.17 4.17 0 0 1-3-4a4.17 4.17 0 0 1-3 4m8.598-6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"/>
+                      <path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"/>
+                      <path d="M18 18a4 4 0 0 0 2-7.464"/>
+                      <path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"/>
+                      <path d="M6 18a4 4 0 0 1-2-7.464"/>
+                      <path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"/>
+                    </g>
+                  </svg>
+                </div>
+                <h3>&quot;What did I learn at that conference last year?&quot;</h3>
+                <p>jo finds your notes from each session, the photos of slides you snapped, the business cards you photographed, and the follow-up emails you sent.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials Section */}
+        <section id="testimonials" className="testimonials-section section-darker py-4xl" aria-labelledby="testimonials-heading">
+          <div className="container">
+            <div className="section-header v8-section-header animate-on-scroll">
+              <h2 id="testimonials-heading">What beta testers say</h2>
+            </div>
+            <div className="testimonials-refined animate-on-scroll stagger-children">
+              <div className="testimonial-refined testimonial-refined--sarah">
+                <blockquote>&quot;Had a call with a client I hadn&apos;t talked to in 6 months. jo surfaced my notes from our last conversation before I even asked. I looked way more prepared than I was.&quot;</blockquote>
+                <div className="testimonial-author-refined">
+                  <Image
+                    src="https://randomuser.me/api/portraits/women/44.jpg"
+                    alt="Sarah Mitchell"
+                    className="author-avatar-img"
+                    width={48}
+                    height={48}
+                    loading="lazy"
+                  />
+                  <div className="author-info">
+                    <span className="author-name">Sarah Mitchell</span>
+                    <span className="author-role">Management Consultant at Deloitte</span>
+                  </div>
+                </div>
+              </div>
+              <div className="testimonial-refined testimonial-refined--michael">
+                <blockquote>&quot;I&apos;ve saved 4,000+ notes in Apple Notes over 8 years. Never looked at most of them again. Now jo brings up relevant ones while I&apos;m working. It&apos;s like having perfect memory.&quot;</blockquote>
+                <div className="testimonial-author-refined">
+                  <Image
+                    src="https://randomuser.me/api/portraits/men/32.jpg"
+                    alt="Michael Kowalski"
+                    className="author-avatar-img"
+                    width={48}
+                    height={48}
+                    loading="lazy"
+                  />
+                  <div className="author-info">
+                    <span className="author-name">Michael Kowalski</span>
+                    <span className="author-role">Freelance Writer, Austin TX</span>
+                  </div>
+                </div>
+              </div>
+              <div className="testimonial-refined testimonial-refined--james">
+                <blockquote>&quot;Asked jo for &apos;that photo with the blue door from Portugal&apos; from 2019. Found it in 3 seconds. Not tagged, not labeled. 47,000 photos and it just understood what I meant.&quot;</blockquote>
+                <div className="testimonial-author-refined">
+                  <Image
+                    src="https://randomuser.me/api/portraits/men/67.jpg"
+                    alt="James Rodriguez"
+                    className="author-avatar-img"
+                    width={48}
+                    height={48}
+                    loading="lazy"
+                  />
+                  <div className="author-info">
+                    <span className="author-name">James Rodriguez</span>
+                    <span className="author-role">Product Designer at Figma</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Team Section */}
+        <section className="team-section section-dark py-4xl" aria-labelledby="team-heading">
+          <div className="container">
+            <div className="section-header v8-section-header animate-on-scroll">
+              <h2 id="team-heading">Built by founders who care about privacy</h2>
+            </div>
+            <div className="team-content animate-on-scroll">
+              <div className="founders-row">
+                <div className="founder-card">
+                  <Image
+                    src="/pradeep.jpeg"
+                    alt="Pradeep Elankumaran"
+                    className="founder-img"
+                    width={64}
+                    height={64}
+                    loading="lazy"
+                  />
+                  <div className="founder-info">
+                    <strong>Pradeep Elankumaran</strong>
+                    <span>Co-founder &amp; CEO</span>
+                    <span className="founder-prev">Previously: Yahoo, Lyft, YC S11/S16/W24</span>
+                    <a href="https://www.linkedin.com/in/pradeepelankumaran/" target="_blank" rel="noopener noreferrer" className="founder-linkedin">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                      </svg>
+                      LinkedIn
+                    </a>
+                  </div>
+                </div>
+                <div className="founder-card">
+                  <Image
+                    src="/kevin.jpeg"
+                    alt="Kevin Li"
+                    className="founder-img"
+                    width={64}
+                    height={64}
+                    loading="lazy"
+                  />
+                  <div className="founder-info">
+                    <strong>Kevin Li</strong>
+                    <span>Co-founder &amp; CMO</span>
+                    <span className="founder-prev">Previously: Yahoo, Kabam, YC S16/W24</span>
+                    <a href="https://www.linkedin.com/in/liveink/" target="_blank" rel="noopener noreferrer" className="founder-linkedin">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                      </svg>
+                      LinkedIn
+                    </a>
+                  </div>
+                </div>
+                <div className="founder-card">
+                  <div className="founder-img ai-avatar" style={{ background: 'linear-gradient(135deg, #ff6b35, #f7931e)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', fontWeight: 'bold', color: 'white', borderRadius: '50%', width: '64px', height: '64px' }}>
+                    ⚡
+                  </div>
+                  <div className="founder-info">
+                    <strong>Amp Code</strong>
+                    <span>CTO</span>
+                    <span className="founder-prev">Previously: Sourcegraph, Cody</span>
+                  </div>
+                </div>
+                <div className="founder-card">
+                  <div className="founder-img ai-avatar" style={{ background: 'linear-gradient(135deg, #d4a574, #c99a65)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', fontWeight: 'bold', color: 'white', borderRadius: '50%', width: '64px', height: '64px' }}>
+                    ✦
+                  </div>
+                  <div className="founder-info">
+                    <strong>Claude Code</strong>
+                    <span>VP Engineering</span>
+                    <span className="founder-prev">Previously: Anthropic</span>
+                  </div>
+                </div>
+              </div>
+              <p className="team-intro mt-lg">We got tired of cloud AI reading our personal data. So we built the tool we wanted to use ourselves. It literally cannot access your information.</p>
+              <p className="team-contact">Questions? Email <a href="mailto:founders@askjo.ai">founders@askjo.ai</a>. You&apos;ll hear back from us directly.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Section */}
+        <section id="pricing" className="pricing-section section-darker py-4xl" aria-labelledby="pricing-heading">
+          <div className="container">
+            <div className="section-header v8-section-header animate-on-scroll">
+              <h2 id="pricing-heading">No subscription. Ever.</h2>
+            </div>
+            <div className="pricing-simple max-w-800 mx-auto animate-on-scroll">
+              <div className="pricing-main-card">
+                <div className="pricing-amount-large">$5-10<span className="pricing-per">/month</span></div>
+                <p className="pricing-explanation">Most users spend about this much. You pay per question — a few cents each. No monthly fee, no commitment.</p>
+                <div className="pricing-details">
+                  <div className="pricing-detail-item">
+                    <span className="detail-label">App download</span>
+                    <span className="detail-value">Free</span>
+                  </div>
+                  <div className="pricing-detail-item">
+                    <span className="detail-label">Per question</span>
+                    <span className="detail-value">1-5¢</span>
+                  </div>
+                  <div className="pricing-detail-item">
+                    <span className="detail-label">First month</span>
+                    <span className="detail-value">Free</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section id="faq" className="faq-section section-darker py-4xl" aria-labelledby="faq-heading">
+          <div className="container">
+            <div className="section-header v8-section-header animate-on-scroll">
+              <h2 id="faq-heading">Frequently Asked Questions</h2>
+            </div>
+            <div className="faq-refined animate-on-scroll stagger-children" role="list">
+              <article className="faq-item-refined" role="listitem">
+                <h3>What is jo and how does it work?</h3>
+                <p>jo is a local AI assistant for Mac that indexes your notes, photos, emails, and files. It runs entirely on your computer. Think of it as perfect memory for your digital life.</p>
+              </article>
+              <article className="faq-item-refined" role="listitem">
+                <h3>How does jo know my stuff instantly?</h3>
+                <p>jo connects directly to Notes, Photos, Mail, and your files, the same way Apple apps talk to each other. It indexes everything locally, so it&apos;s ready to help the moment you install it.</p>
+              </article>
+              <article className="faq-item-refined" role="listitem">
+                <h3>Does my data ever leave my Mac?</h3>
+                <p>No. jo runs 100% on your computer. Your notes, photos, and emails never get uploaded anywhere. Nothing is shared. Nothing leaves your machine. Ever.</p>
+              </article>
+              <article className="faq-item-refined" role="listitem">
+                <h3>How is jo different from Apple&apos;s search or Siri?</h3>
+                <p>Apple search matches keywords. jo understands meaning. Ask for &quot;that email about the budget issue&quot; and jo finds it, even if you never used the word &quot;budget.&quot; It&apos;s like Siri, but useful.</p>
+              </article>
+              <article className="faq-item-refined" role="listitem">
+                <h3>How does jo pricing work?</h3>
+                <p>No subscription. Simple queries (finding a note, searching photos) cost ~1 cent. Complex queries that synthesize multiple sources cost ~5 cents. Most users spend $3-8/month.</p>
+              </article>
+              <article className="faq-item-refined" role="listitem">
+                <h3>Which Mac do I need for jo?</h3>
+                <p>Any Mac with an M-series chip (M1, M2, M3, M4) and 16GB of memory. That&apos;s most Macs from 2020 on. The M-series Neural Engine makes local AI fast and efficient.</p>
+              </article>
+              <article className="faq-item-refined" role="listitem">
+                <h3>Will jo slow down my Mac?</h3>
+                <p>You won&apos;t notice it. jo uses dedicated AI hardware (the Neural Engine) that normally sits idle, so it won&apos;t slow down anything else you&apos;re doing.</p>
+              </article>
+              <article className="faq-item-refined" role="listitem">
+                <h3>Is jo free to use?</h3>
+                <p>The jo app is free to download. You only pay for queries on a per-use basis with no subscriptions. Most users spend less than $8/month, and simple queries cost just pennies.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        {/* Privacy Statement Section */}
+        <section className="privacy-statement section-darker" aria-labelledby="privacy-heading">
+          <div className="container">
+            <div className="animate-on-scroll">
+              <h2 id="privacy-heading">It never leaves<br/>your device.</h2>
+              <p>
+                jo runs entirely on your Mac. Your notes, photos, emails, and files stay exactly where they are.
+                Nothing is uploaded. Nothing is shared. Nothing leaves your machine. Ever.
+              </p>
+              <div className="privacy-proof">
+                <h3>How we guarantee this:</h3>
+                <ul className="privacy-list">
+                  <li><strong>No network calls for your data.</strong> Open Activity Monitor while using jo. You&apos;ll see zero outbound connections to our servers for your content.</li>
+                  <li><strong>All processing on-device.</strong> The AI model runs locally on your Mac&apos;s Neural Engine. Your queries never leave your machine.</li>
+                  <li><strong>Verifiable architecture.</strong> jo uses Apple&apos;s native APIs (same as Spotlight). We can&apos;t access your data even if we wanted to.</li>
+                  <li><strong>Open to audit.</strong> Security researchers can verify our claims. Email security@askjo.ai for technical documentation.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section id="download" className="cta cta-refined py-4xl">
+          <div className="container">
+            <div className="cta-content v8-cta-content animate-on-scroll scale-up">
+              <h2>Find what you forgot you saved.</h2>
+              <p className="v8-cta-description">Your first month is free. Try jo risk-free.</p>
+              <div className="cta-actions v8-cta-form-container">
+                <form className="v8-email-form v8-cta-form-centered" action="https://forms.fillout.com/t/5ngLz3A5BHus" method="GET" target="_blank">
+                  <label htmlFor="cta-email" className="visually-hidden">Email address</label>
+                  <input
+                    type="email"
+                    id="cta-email"
+                    name="email"
+                    className="v8-email-input"
+                    placeholder="you@example.com"
+                    autoComplete="email"
+                    autoCapitalize="off"
+                    spellCheck="false"
+                    aria-describedby="cta-email-hint"
+                    required
+                  />
+                  <button type="submit" className="btn btn-primary btn-large">Get Beta Access</button>
+                </form>
+                <span id="cta-email-hint" className="visually-hidden">Enter your email to join the waitlist</span>
+              </div>
+              <p className="cta-note v8-cta-note mt-md">Requires M1 Mac or newer with 16GB RAM</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="footer section-dark v8-footer">
+        <div className="container">
+          <div className="footer-simple">
+            <span className="logo-text font-fraunces font-weight-700" aria-hidden="true">jo</span>
+            <nav className="footer-links-inline" aria-label="Footer navigation">
+              <a href="/privacy">Privacy Policy</a>
+              <a href="/terms">Terms of Service</a>
+              <a href="mailto:founders@askjo.ai">Contact Us</a>
+            </nav>
+            <p><small>&copy; 2026 jo. All rights reserved.</small></p>
+          </div>
+        </div>
+      </footer>
+
+      {/* Client-side animations and interactivity */}
+      <V8WarmAnimations />
+      <EmailValidation />
+    </div>
+  );
+}

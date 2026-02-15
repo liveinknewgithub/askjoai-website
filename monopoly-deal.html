@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monopoly Deal — Next Best Move Advisor</title>
+<meta name="description" content="Free in-browser tactical advisor for Monopoly Deal. Enter your hand and board state, get ranked move recommendations with reasoning.">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F7F5F0;--surface:#fff;--text:#2D2A26;--text-muted:#8A8480;
+  --border:#E5E0D8;--shadow:0 2px 8px rgba(0,0,0,.06);
+  --accent:#D32F2F;--accent-light:#FFEBEE;
+  --c-brown:#8B4513;--c-lightblue:#87CEEB;--c-pink:#D93A96;--c-orange:#F7941D;
+  --c-red:#ED1B24;--c-yellow:#FEDD00;--c-green:#1FB25A;--c-blue:#0072BB;
+  --c-railroad:#1A1A1A;--c-utility:#78B159;
+  --s-aggressive:#DC3545;--s-defensive:#43A047;--s-building:#E8A317;--s-tempo:#1976D2;
+}
+body{
+  font-family:'Inter',system-ui,sans-serif;color:var(--text);line-height:1.5;
+  background-color:var(--bg);
+  background-image:
+    linear-gradient(rgba(0,0,0,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,0,0,.025) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+.shell{width:min(960px,calc(100% - 1.5rem));margin:1.5rem auto 3rem}
+.panel{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:1.25rem;box-shadow:var(--shadow);margin-bottom:1rem;
+  opacity:0;animation:panelIn .5s ease-out forwards;animation-delay:var(--d,0s);
+}
+@keyframes panelIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.panel h2{font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.15rem;margin-bottom:.75rem;color:var(--text)}
+.header{border-top:4px solid var(--accent);text-align:center;padding:1.5rem 1.25rem}
+.header h1{font-family:'Fredoka',sans-serif;font-weight:700;font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:.15rem}
+.header .subtitle{font-family:'Fredoka',sans-serif;font-weight:500;color:var(--accent);font-size:1.05rem;margin-bottom:.5rem}
+.header .desc{color:var(--text-muted);font-size:.88rem;max-width:50ch;margin:0 auto}
+
+/* Game State */
+.state-grid{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.state-field{display:flex;flex-direction:column;gap:.3rem}
+.state-field span{font-size:.82rem;color:var(--text-muted);font-weight:500}
+.state-field input{
+  width:100%;height:38px;border-radius:10px;border:1.5px solid var(--border);
+  background:var(--bg);color:var(--text);padding:0 .6rem;font-size:.95rem;
+  font-family:'Inter',sans-serif;outline:none;
+}
+.state-field input:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-light)}
+.switch-row{display:flex;align-items:center;gap:.6rem;padding-top:.15rem}
+.switch-row input[type=checkbox]{display:none}
+.switch{
+  position:relative;width:40px;height:22px;background:#ccc;border-radius:22px;
+  cursor:pointer;transition:background .2s;flex-shrink:0;
+}
+.switch::after{
+  content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;
+  top:2px;left:2px;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.15);
+}
+.switch-row input:checked+.switch{background:var(--accent)}
+.switch-row input:checked+.switch::after{transform:translateX(18px)}
+.switch-label{font-size:.85rem;color:var(--text-muted);cursor:pointer;user-select:none}
+
+/* Property Bar */
+.property-bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.prop-block{
+  position:relative;width:74px;height:86px;border-radius:10px;
+  border:2px solid var(--color);background:#fff;overflow:hidden;
+  cursor:pointer;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:2px;user-select:none;transition:transform .15s,box-shadow .2s;
+  font-family:'Inter',sans-serif;
+}
+.prop-block:hover{transform:translateY(-2px)}
+.prop-block:active{transform:scale(.96)}
+.prop-fill{
+  position:absolute;bottom:0;left:0;right:0;background:var(--color);
+  opacity:.18;transition:height .25s ease;pointer-events:none;
+}
+.prop-abbr{
+  position:relative;z-index:1;font-family:'Fredoka',sans-serif;font-weight:600;
+  font-size:.85rem;color:var(--color);
+}
+.prop-frac{position:relative;z-index:1;font-size:.72rem;color:var(--text-muted);font-weight:500}
+.prop-rent{position:relative;z-index:1;font-size:.62rem;color:var(--text-muted);opacity:.7}
+.prop-block.complete{box-shadow:0 0 0 2px var(--color),0 0 12px rgba(0,0,0,.1)}
+.prop-block.complete .prop-fill{opacity:.32}
+.prop-block.complete::after{
+  content:'✓';position:absolute;top:4px;right:6px;font-size:.65rem;
+  color:var(--color);font-weight:700;z-index:1;
+}
+
+/* Tabs */
+.hand-tabs{display:flex;gap:4px;margin-bottom:.75rem;flex-wrap:wrap}
+.tab{
+  padding:.4rem .85rem;border-radius:8px;border:1.5px solid var(--border);
+  background:var(--bg);color:var(--text-muted);font-size:.82rem;font-weight:600;
+  cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;
+}
+.tab:hover{border-color:#bbb}
+.tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* Chips */
+.chip-grid{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  display:inline-flex;align-items:center;gap:5px;padding:7px 14px 7px 10px;
+  border-radius:20px;border:1.5px solid var(--border);background:var(--surface);
+  cursor:pointer;font-family:'Inter',sans-serif;font-size:.82rem;color:var(--text);
+  transition:all .15s;position:relative;user-select:none;white-space:nowrap;
+}
+.chip:hover{border-color:#bbb;transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,.07)}
+.chip:active{transform:scale(.96)}
+.chip-active{border-color:var(--accent);background:var(--accent-light)}
+.chip-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;border:1px solid rgba(0,0,0,.1)}
+.chip-rainbow{
+  background:conic-gradient(#ED1B24,#F7941D,#FEDD00,#1FB25A,#0072BB,#D93A96,#ED1B24);
+}
+.chip-money-dot{background:linear-gradient(135deg,#4CAF50,#81C784);border-color:rgba(0,0,0,.08)}
+.chip-badge{
+  position:absolute;top:-7px;right:-7px;background:var(--accent);color:#fff;
+  font-size:.65rem;font-weight:700;min-width:19px;height:19px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;padding:0 4px;
+  box-shadow:0 1px 3px rgba(0,0,0,.15);
+}
+.chip-label{font-weight:500}
+
+/* Controls */
+.controls{
+  display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1rem;
+  opacity:0;animation:panelIn .5s ease-out forwards;animation-delay:var(--d,0s);
+}
+.btn{
+  border:none;border-radius:10px;padding:.65rem 1.2rem;font-size:.92rem;
+  font-weight:600;cursor:pointer;font-family:'Fredoka',sans-serif;transition:all .15s;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(211,47,47,.25)}
+.btn-primary:hover{background:#b71c1c}
+.btn-secondary{background:var(--bg);color:var(--text);border:1.5px solid var(--border)}
+.btn-secondary:hover{border-color:#bbb}
+
+/* Results */
+.summary{font-size:.85rem;color:var(--text-muted);margin-bottom:.75rem;font-weight:500}
+.empty-state{
+  border:2px dashed var(--border);border-radius:12px;padding:1.5rem;
+  color:var(--text-muted);text-align:center;font-size:.9rem;
+}
+.move-card{
+  border:1px solid var(--border);border-left:4px solid var(--strategy-color,var(--border));
+  border-radius:12px;padding:1rem;margin-bottom:.6rem;background:var(--surface);
+  transition:box-shadow .15s;
+}
+.move-card:hover{box-shadow:0 3px 12px rgba(0,0,0,.06)}
+.move-header{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem;flex-wrap:wrap}
+.move-rank{
+  width:26px;height:26px;border-radius:50%;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fredoka',sans-serif;font-weight:700;font-size:.85rem;
+  color:var(--text);flex-shrink:0;
+}
+.move-title{font-family:'Fredoka',sans-serif;font-weight:600;font-size:1rem;flex:1}
+.strategy-tag{
+  padding:2px 10px;border-radius:12px;font-size:.68rem;font-weight:700;
+  color:#fff;text-transform:uppercase;letter-spacing:.04em;flex-shrink:0;
+}
+.move-reason{font-size:.85rem;color:var(--text-muted);margin-bottom:.45rem;line-height:1.45}
+.move-steps{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:4px}
+.move-steps li{
+  padding:3px 10px;border-radius:8px;font-size:.78rem;font-weight:500;
+  background:var(--bg);color:var(--text);
+}
+.move-steps .step-backup{background:#f5f5f5;color:var(--text-muted);font-style:italic}
+.win-badge{
+  display:inline-block;padding:2px 8px;border-radius:6px;font-size:.72rem;
+  font-weight:700;background:#FFD600;color:#333;margin-left:4px;
+}
+footer{text-align:center;padding:1rem;color:var(--text-muted);font-size:.75rem}
+.hint{font-size:.8rem;color:var(--text-muted);margin-bottom:.6rem}
+
+@media(max-width:600px){
+  .shell{width:calc(100% - 1rem);margin:1rem auto 2rem}
+  .panel{padding:1rem;border-radius:12px}
+  .prop-block{width:60px;height:72px}
+  .prop-abbr{font-size:.75rem}
+  .state-grid{grid-template-columns:1fr 1fr}
+  .chip{font-size:.78rem;padding:6px 10px 6px 8px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="panel header" style="--d:0s">
+    <h1>Monopoly Deal</h1>
+    <p class="subtitle">Next Best Move Advisor</p>
+    <p class="desc">Enter your board and hand, then get tactical recommendations for your next turn.</p>
+  </header>
+
+  <section class="panel" style="--d:.06s">
+    <h2>Game State</h2>
+    <div class="state-grid">
+      <div class="state-field"><span>Opponents</span><input id="opponents" type="number" min="1" max="4" value="3"></div>
+      <div class="state-field"><span>Opponent Money</span><input id="opponent-money" type="number" min="0" value="8"></div>
+      <div class="state-field"><span>Opponent Complete Sets</span><input id="opponent-sets" type="number" min="0" max="10" value="1"></div>
+      <div class="state-field"><span>Your Bank</span><input id="your-bank" type="number" min="0" value="3"></div>
+    </div>
+    <div class="switch-row" style="margin-top:.75rem">
+      <input type="checkbox" id="jsn-toggle">
+      <label class="switch" for="jsn-toggle"></label>
+      <label class="switch-label" for="jsn-toggle">Opponent likely has Just Say No</label>
+    </div>
+  </section>
+
+  <section class="panel" style="--d:.12s">
+    <h2>Your Properties</h2>
+    <p class="hint">Click to add a card, right-click to remove.</p>
+    <div class="property-bar" id="property-bar"></div>
+  </section>
+
+  <section class="panel" style="--d:.18s">
+    <h2>Your Hand</h2>
+    <p class="hint">Click chips to add cards to hand, right-click to remove.</p>
+    <div class="hand-tabs" id="hand-tabs"></div>
+    <div class="chip-grid" id="chip-container"></div>
+  </section>
+
+  <div class="controls" style="--d:.24s">
+    <button id="analyze-btn" class="btn btn-primary">Analyze</button>
+    <button id="sample-btn" class="btn btn-secondary">Load Sample</button>
+    <button id="reset-btn" class="btn btn-secondary">Reset</button>
+  </div>
+
+  <section class="panel results" id="results-panel" style="--d:.3s" aria-live="polite">
+    <h2>Top Recommendations</h2>
+    <div id="moves-list"></div>
+  </section>
+
+  <footer>Monopoly Deal is a trademark of Hasbro. This is a fan-made heuristic coach, not a guaranteed win strategy.</footer>
+</div>
+
+<script>
+/* ── Data ─────────────────────────────────────────────── */
+const PROPERTY_SETS = {
+  brown:     { name:'Brown',      abbr:'BR', target:2, color:'#8B4513', text:'#fff', rents:[1,2] },
+  lightblue: { name:'Light Blue', abbr:'LB', target:3, color:'#87CEEB', text:'#1a1a1a', rents:[1,2,3] },
+  pink:      { name:'Pink',       abbr:'PK', target:3, color:'#D93A96', text:'#fff', rents:[1,2,4] },
+  orange:    { name:'Orange',     abbr:'OR', target:3, color:'#F7941D', text:'#1a1a1a', rents:[1,3,5] },
+  red:       { name:'Red',        abbr:'RD', target:3, color:'#ED1B24', text:'#fff', rents:[2,3,6] },
+  yellow:    { name:'Yellow',     abbr:'YL', target:3, color:'#FEDD00', text:'#1a1a1a', rents:[2,4,6] },
+  green:     { name:'Green',      abbr:'GR', target:3, color:'#1FB25A', text:'#fff', rents:[2,4,7] },
+  blue:      { name:'Dark Blue',  abbr:'DB', target:2, color:'#0072BB', text:'#fff', rents:[3,8] },
+  railroad:  { name:'Railroad',   abbr:'RR', target:4, color:'#1A1A1A', text:'#fff', rents:[1,2,3,4] },
+  utility:   { name:'Utility',    abbr:'UT', target:2, color:'#78B159', text:'#fff', rents:[1,2] },
+};
+
+const PROPERTY_CARDS = [
+  { id:'prop-brown',     name:'Brown',      setKey:'brown',     max:2 },
+  { id:'prop-lightblue', name:'Light Blue',  setKey:'lightblue', max:3 },
+  { id:'prop-pink',      name:'Pink',        setKey:'pink',      max:3 },
+  { id:'prop-orange',    name:'Orange',      setKey:'orange',    max:3 },
+  { id:'prop-red',       name:'Red',         setKey:'red',       max:3 },
+  { id:'prop-yellow',    name:'Yellow',      setKey:'yellow',    max:3 },
+  { id:'prop-green',     name:'Green',       setKey:'green',     max:3 },
+  { id:'prop-blue',      name:'Dark Blue',   setKey:'blue',      max:2 },
+  { id:'prop-railroad',  name:'Railroad',    setKey:'railroad',  max:4 },
+  { id:'prop-utility',   name:'Utility',     setKey:'utility',   max:2 },
+];
+
+const WILD_CARDS = [
+  { id:'wild-any',               name:'Any Color',          colors:null,                    max:2 },
+  { id:'wild-green-blue',        name:'Green / Dk Blue',    colors:['green','blue'],        max:1 },
+  { id:'wild-lightblue-brown',   name:'Lt Blue / Brown',    colors:['lightblue','brown'],   max:1 },
+  { id:'wild-pink-orange',       name:'Pink / Orange',      colors:['pink','orange'],       max:2 },
+  { id:'wild-red-yellow',        name:'Red / Yellow',       colors:['red','yellow'],        max:2 },
+  { id:'wild-railroad-utility',  name:'Railroad / Utility', colors:['railroad','utility'],  max:1 },
+  { id:'wild-lightblue-railroad',name:'Lt Blue / Railroad', colors:['lightblue','railroad'],max:1 },
+];
+
+const RENT_CARDS = [
+  { id:'rent-brown-lightblue',  name:'Brown / Lt Blue',    colors:['brown','lightblue'],  max:2 },
+  { id:'rent-pink-orange',      name:'Pink / Orange',      colors:['pink','orange'],      max:2 },
+  { id:'rent-red-yellow',       name:'Red / Yellow',       colors:['red','yellow'],       max:2 },
+  { id:'rent-green-blue',       name:'Green / Dk Blue',    colors:['green','blue'],       max:2 },
+  { id:'rent-railroad-utility', name:'Railroad / Utility', colors:['railroad','utility'], max:2 },
+  { id:'rent-any',              name:'Any Color',          colors:null,                   max:3 },
+];
+
+const ACTION_CARDS = [
+  { id:'action-deal-breaker',  name:'Deal Breaker',     max:2 },
+  { id:'action-sly-deal',      name:'Sly Deal',         max:3 },
+  { id:'action-forced-deal',   name:'Forced Deal',      max:4 },
+  { id:'action-debt-collector', name:'Debt Collector',   max:3 },
+  { id:'action-birthday',      name:"It's My Birthday", max:3 },
+  { id:'action-pass-go',       name:'Pass Go',          max:10 },
+  { id:'action-just-say-no',   name:'Just Say No',      max:3 },
+  { id:'action-house',         name:'House',            max:3 },
+  { id:'action-hotel',         name:'Hotel',            max:3 },
+  { id:'action-double-rent',   name:'Double the Rent',  max:2 },
+];
+
+const MONEY_CARDS = [
+  { id:'money-1',  name:'$1M',  value:1,  max:6 },
+  { id:'money-2',  name:'$2M',  value:2,  max:5 },
+  { id:'money-3',  name:'$3M',  value:3,  max:3 },
+  { id:'money-4',  name:'$4M',  value:4,  max:3 },
+  { id:'money-5',  name:'$5M',  value:5,  max:2 },
+  { id:'money-10', name:'$10M', value:10, max:1 },
+];
+
+const allCards = [
+  ...PROPERTY_CARDS.map(c => ({...c, category:'property'})),
+  ...ACTION_CARDS.map(c => ({...c, category:'action'})),
+  ...RENT_CARDS.map(c => ({...c, category:'rent'})),
+  ...MONEY_CARDS.map(c => ({...c, category:'money'})),
+  ...WILD_CARDS.map(c => ({...c, category:'wild'})),
+];
+
+const TABS = [
+  { key:'property', label:'Property' },
+  { key:'action',   label:'Action' },
+  { key:'money',    label:'Money' },
+  { key:'wild',     label:'Wild' },
+];
+
+/* ── State ────────────────────────────────────────────── */
+const propState = {};
+Object.keys(PROPERTY_SETS).forEach(k => propState[k] = 0);
+
+const handState = {};
+allCards.forEach(c => handState[c.id] = 0);
+
+let activeTab = 'property';
+
+/* ── Helpers ──────────────────────────────────────────── */
+function parseNum(v, fb) { const n = Number(v); return Number.isNaN(n) ? fb : Math.max(0, n); }
+
+function countComplete(sets) {
+  return Object.entries(sets).reduce((a, [k, n]) => a + (n >= PROPERTY_SETS[k].target ? 1 : 0), 0);
+}
+
+function getRentValue(setKey, count) {
+  const s = PROPERTY_SETS[setKey];
+  const n = Math.min(count, s.target);
+  return n > 0 ? s.rents[n - 1] : 0;
+}
+
+function readGameState() {
+  return {
+    opponents: parseNum(document.getElementById('opponents').value, 3),
+    opponentMoney: parseNum(document.getElementById('opponent-money').value, 0),
+    opponentSets: parseNum(document.getElementById('opponent-sets').value, 0),
+    yourBank: parseNum(document.getElementById('your-bank').value, 0),
+    jsnAware: document.getElementById('jsn-toggle').checked,
+    ownSets: {...propState},
+    hand: {...handState},
+  };
+}
+
+function cardsForTab(tab) {
+  switch(tab) {
+    case 'property': return allCards.filter(c => c.category === 'property');
+    case 'action':   return allCards.filter(c => c.category === 'action' || c.category === 'rent');
+    case 'money':    return allCards.filter(c => c.category === 'money');
+    case 'wild':     return allCards.filter(c => c.category === 'wild');
+    default: return [];
+  }
+}
+
+/* ── Rendering ────────────────────────────────────────── */
+function renderPropertyBar() {
+  const bar = document.getElementById('property-bar');
+  bar.innerHTML = Object.entries(PROPERTY_SETS).map(([key, s]) => {
+    const n = propState[key];
+    const pct = Math.min(100, (n / s.target) * 100);
+    const done = n >= s.target;
+    const rent = getRentValue(key, n);
+    return `<button class="prop-block ${done ? 'complete' : ''}" data-key="${key}" style="--color:${s.color}"
+      aria-label="${s.name}: ${n} of ${s.target}">
+      <div class="prop-fill" style="height:${pct}%"></div>
+      <span class="prop-abbr">${s.abbr}</span>
+      <span class="prop-frac">${n}/${s.target}</span>
+      <span class="prop-rent">${n > 0 ? '$'+rent+'M' : ''}</span>
+    </button>`;
+  }).join('');
+}
+
+function renderTabs() {
+  document.getElementById('hand-tabs').innerHTML = TABS.map(t =>
+    `<button class="tab ${t.key === activeTab ? 'active' : ''}" data-tab="${t.key}">${t.label}</button>`
+  ).join('');
+}
+
+function renderChips() {
+  const cards = cardsForTab(activeTab);
+  document.getElementById('chip-container').innerHTML = cards.map(card => {
+    const count = handState[card.id] || 0;
+    let dots = '';
+    if (card.setKey) {
+      dots = `<span class="chip-dot" style="background:${PROPERTY_SETS[card.setKey].color}"></span>`;
+    } else if (card.colors) {
+      dots = card.colors.map(c => `<span class="chip-dot" style="background:${PROPERTY_SETS[c].color}"></span>`).join('');
+    } else if (card.category === 'wild' || card.category === 'rent') {
+      dots = '<span class="chip-dot chip-rainbow"></span>';
+    } else if (card.category === 'money') {
+      dots = '<span class="chip-dot chip-money-dot"></span>';
+    }
+    const badge = count > 0 ? `<span class="chip-badge">${count}</span>` : '';
+    const label = (card.category === 'rent' ? 'Rent: ' : '') + card.name;
+    return `<button class="chip ${count > 0 ? 'chip-active' : ''}" data-id="${card.id}" data-max="${card.max}"
+      aria-label="${label}: ${count} in hand">${dots}<span class="chip-label">${label}</span>${badge}</button>`;
+  }).join('');
+}
+
+/* ── Strategy Engine ──────────────────────────────────── */
+function addMove(moves, move) {
+  const dup = moves.find(m => m.title === move.title);
+  if (dup) { dup.score = Math.max(dup.score, move.score); return; }
+  moves.push(move);
+}
+
+function getMoneyPicks(state, reserved, limit) {
+  const picks = [];
+  const money = MONEY_CARDS.map(c => ({
+    ...c, count: Math.max(0, (state.hand[c.id]||0) - (reserved[c.id]||0))
+  })).sort((a,b) => b.value - a.value);
+  let slots = limit;
+  for (const c of money) {
+    if (slots <= 0) break;
+    for (let i = 0; i < Math.min(c.count, slots); i++) {
+      picks.push({name: c.name, qty:1, value: c.value});
+      slots--;
+    }
+  }
+  return picks;
+}
+
+function buildPrimary(name, qty, backups, extras) {
+  const list = [];
+  if (qty > 0) list.push({name, qty, type:'primary'});
+  if (extras) list.push(...extras);
+  backups.forEach(b => list.push({...b, type:'backup'}));
+  return list;
+}
+
+function scorePropertyMoves(state, moves) {
+  const complete = countComplete(state.ownSets);
+  PROPERTY_CARDS.forEach(card => {
+    const count = state.hand[card.id] || 0;
+    if (!count) return;
+    const s = PROPERTY_SETS[card.setKey];
+    const cur = state.ownSets[card.setKey] || 0;
+    if (cur >= s.target) return;
+    const missing = s.target - cur;
+    const maxRent = s.rents[s.rents.length - 1];
+    let score = 58;
+    if (missing === 1) score += 65; else score += 30;
+    score += maxRent * 2;
+    if (s.target === 2) score += 8;
+    let reason;
+    if (missing === 1 && complete === 2) {
+      score += 200;
+      reason = `WIN MOVE! Play ${card.name} to complete ${s.name} for your 3rd set!`;
+    } else if (missing === 1) {
+      reason = `One card away from completing ${s.name} ($${maxRent}M rent when complete).`;
+    } else {
+      reason = `Build toward ${s.name} — ${missing} cards needed. Worth $${maxRent}M rent when complete.`;
+    }
+    if (state.opponentSets >= 2 && s.target === 3) { score += 8; }
+    const backups = getMoneyPicks(state, {[card.id]:1}, 2);
+    addMove(moves, { title:`Play ${card.name} Property`, score, strategy:'building',
+      steps: buildPrimary(`${card.name} Property`, 1, backups), reason });
+  });
+}
+
+function scoreBestWildSet(state, eligibleKeys, complete) {
+  let best = null;
+  eligibleKeys.forEach(key => {
+    const s = PROPERTY_SETS[key];
+    const cur = state.ownSets[key] || 0;
+    if (cur >= s.target) return;
+    const missing = s.target - cur;
+    const maxRent = s.rents[s.rents.length - 1];
+    let score = 48;
+    if (missing === 1) score += 65; else score += 25;
+    score += maxRent * 3;
+    if (missing === 1 && complete === 2) score += 200;
+    if (!best || score > best.score) best = {key, score, missing};
+  });
+  return best;
+}
+
+function scoreWildMoves(state, moves) {
+  const complete = countComplete(state.ownSets);
+  // Any-color wild
+  const anyCount = state.hand['wild-any'] || 0;
+  if (anyCount > 0) {
+    const best = scoreBestWildSet(state, Object.keys(PROPERTY_SETS), complete);
+    if (best) {
+      const s = PROPERTY_SETS[best.key];
+      const backups = getMoneyPicks(state, {'wild-any':1}, 2);
+      const isWin = best.missing === 1 && complete === 2;
+      const reason = isWin
+        ? `WIN MOVE! Complete ${s.name} for your 3rd set!`
+        : `Place wild on ${s.name} (→ ${Math.min((state.ownSets[best.key]||0)+1, s.target)}/${s.target}).`;
+      addMove(moves, { title:`Wild → ${s.name}`, score: best.score, strategy:'building',
+        steps: buildPrimary(`Wild Property → ${s.name}`, 1, backups), reason });
+    }
+  }
+  // Two-color wilds
+  WILD_CARDS.filter(w => w.colors).forEach(wild => {
+    const count = state.hand[wild.id] || 0;
+    if (!count) return;
+    const best = scoreBestWildSet(state, wild.colors, complete);
+    if (!best) return;
+    const s = PROPERTY_SETS[best.key];
+    const backups = getMoneyPicks(state, {[wild.id]:1}, 2);
+    const isWin = best.missing === 1 && complete === 2;
+    const reason = isWin
+      ? `WIN MOVE! Complete ${s.name} for your 3rd set with ${wild.name} wild!`
+      : `Place ${wild.name} wild on ${s.name} (→ ${Math.min((state.ownSets[best.key]||0)+1, s.target)}/${s.target}).`;
+    addMove(moves, { title:`Wild (${wild.name}) → ${s.name}`, score: best.score, strategy:'building',
+      steps: buildPrimary(`Wild (${wild.name}) → ${s.name}`, 1, backups), reason });
+  });
+}
+
+function scoreRentMoves(state, moves) {
+  const jd = state.jsnAware ? 0.65 : 1;
+  RENT_CARDS.forEach(card => {
+    const count = state.hand[card.id] || 0;
+    if (!count) return;
+    const eligible = card.colors
+      ? card.colors.filter(k => (state.ownSets[k]||0) > 0)
+      : Object.keys(PROPERTY_SETS).filter(k => (state.ownSets[k]||0) > 0);
+    if (!eligible.length) return;
+    let bestKey = null, bestRent = 0;
+    eligible.forEach(k => {
+      const rent = getRentValue(k, state.ownSets[k]);
+      if (rent > bestRent) { bestRent = rent; bestKey = k; }
+    });
+    if (!bestKey || bestRent === 0) return;
+    const s = PROPERTY_SETS[bestKey];
+    // Regular rent
+    let score = Math.round((90 + bestRent * 12 + (state.opponentMoney > bestRent ? 15 : 0)) * jd);
+    const backups = getMoneyPicks(state, {[card.id]:1}, 2);
+    addMove(moves, { title:`Charge Rent on ${s.name}`, score, strategy:'aggressive',
+      steps: buildPrimary(`Rent (${card.name})`, 1, backups),
+      reason: `Charge $${bestRent}M rent on your ${s.name} set (${Math.min(state.ownSets[bestKey],s.target)}/${s.target}).` });
+    // Double rent combo
+    if (state.hand['action-double-rent'] > 0) {
+      const dr = {[card.id]:1, 'action-double-rent':1};
+      const cb = getMoneyPicks(state, dr, 1);
+      let cs = Math.round((130 + bestRent * 20 + (state.opponentMoney >= bestRent*2 ? 25 : 0)) * jd);
+      addMove(moves, { title:`Double Rent on ${s.name}`, score: cs, strategy:'aggressive',
+        steps: [
+          {name:`Rent (${card.name})`, qty:1, type:'primary'},
+          {name:'Double the Rent', qty:1, type:'primary'},
+          ...cb.map(b => ({...b, type:'backup'}))
+        ],
+        reason: `Charge $${bestRent*2}M doubled rent on ${s.name}!` });
+    }
+  });
+}
+
+function scoreActionMoves(state, moves) {
+  const complete = countComplete(state.ownSets);
+  const jd = state.jsnAware ? 0.6 : 1;
+  const jdMild = state.jsnAware ? 0.75 : 1;
+  const h = state.hand;
+
+  if (h['action-deal-breaker'] > 0 && state.opponentSets > 0) {
+    let score = Math.round(220 * jd);
+    if (complete >= 2) score += 100;
+    const backups = getMoneyPicks(state, {'action-deal-breaker':1}, 2);
+    addMove(moves, { title:'Play Deal Breaker', score, strategy:'aggressive',
+      steps: buildPrimary('Deal Breaker', 1, backups),
+      reason: state.jsnAware
+        ? 'Steal a complete set — but beware Just Say No.'
+        : 'Steal an entire complete set. One of the strongest single plays.' });
+  }
+
+  if (h['action-sly-deal'] > 0 && state.opponentSets > 0) {
+    let score = Math.round((150 + Math.min(25, state.opponentSets * 8)) * jd);
+    const backups = getMoneyPicks(state, {'action-sly-deal':1}, 2);
+    addMove(moves, { title:'Play Sly Deal', score, strategy:'aggressive',
+      steps: buildPrimary('Sly Deal', 1, backups),
+      reason: 'Steal a single property from an opponent. Flexible and less predictable than Deal Breaker.' });
+  }
+
+  if (h['action-forced-deal'] > 0 && state.opponentSets > 0) {
+    let score = Math.round((132 + Math.min(20, state.opponentSets * 7)) * jd);
+    const backups = getMoneyPicks(state, {'action-forced-deal':1}, 2);
+    addMove(moves, { title:'Play Forced Deal', score, strategy:'aggressive',
+      steps: buildPrimary('Forced Deal', 1, backups),
+      reason: 'Swap a property with an opponent — trade something weak for something you need.' });
+  }
+
+  if (h['action-debt-collector'] > 0 && state.opponentMoney >= 5) {
+    let score = Math.round((95 + Math.min(state.opponentMoney * 2, 40)) * jdMild);
+    const backups = getMoneyPicks(state, {'action-debt-collector':1}, 2);
+    addMove(moves, { title:'Play Debt Collector', score, strategy:'aggressive',
+      steps: buildPrimary('Debt Collector', 1, backups),
+      reason: 'Force an opponent to pay you $5M. Strong when they have cash to drain.' });
+  }
+
+  if (h['action-birthday'] > 0 && state.opponents > 0) {
+    let score = Math.round((90 + Math.min(state.opponents * 7, 30)) * jdMild);
+    const backups = getMoneyPicks(state, {'action-birthday':1}, 2);
+    addMove(moves, { title:"Play It's My Birthday", score, strategy:'tempo',
+      steps: buildPrimary("It's My Birthday", 1, backups),
+      reason: `Collect $2M from each opponent (${state.opponents} × $2M = $${state.opponents*2}M total).` });
+  }
+
+  if (h['action-house'] > 0 && complete > 0) {
+    const backups = getMoneyPicks(state, {'action-house':1}, 2);
+    addMove(moves, { title:'Play House', score: 85 + complete * 5, strategy:'building',
+      steps: buildPrimary('House', 1, backups),
+      reason: 'Add a house to a complete set to increase its rent value by $3M.' });
+  }
+
+  if (h['action-hotel'] > 0 && complete > 0) {
+    const backups = getMoneyPicks(state, {'action-hotel':1}, 2);
+    addMove(moves, { title:'Play Hotel', score: 92 + complete * 5, strategy:'building',
+      steps: buildPrimary('Hotel', 1, backups),
+      reason: 'Add a hotel to a complete set with a house to increase rent by $4M more.' });
+  }
+
+  if (h['action-pass-go'] > 0) {
+    const backups = getMoneyPicks(state, {'action-pass-go':1}, 2);
+    addMove(moves, { title:'Play Pass Go', score: 65, strategy:'tempo',
+      steps: buildPrimary('Pass Go', 1, backups),
+      reason: 'Draw 2 extra cards to increase your options next turn.' });
+  }
+}
+
+function scoreMoneyFallback(state, moves) {
+  const picks = getMoneyPicks(state, {}, 3);
+  if (!picks.length) return;
+  const total = picks.reduce((a, c) => a + c.value, 0);
+  addMove(moves, { title:'Bank Money', score: 48 + Math.min(40, total), strategy:'defensive',
+    steps: picks.map(p => ({...p, type:'primary'})),
+    reason: 'No strong tactical play available — bank your highest-value cards to build resources.' });
+}
+
+function generateMoves(state) {
+  const moves = [];
+  scorePropertyMoves(state, moves);
+  scoreWildMoves(state, moves);
+  scoreRentMoves(state, moves);
+  scoreActionMoves(state, moves);
+  scoreMoneyFallback(state, moves);
+  return moves.sort((a, b) => b.score - a.score).slice(0, 3);
+}
+
+/* ── Results Rendering ────────────────────────────────── */
+const STRAT_COLORS = {
+  aggressive: 'var(--s-aggressive)', defensive: 'var(--s-defensive)',
+  building: 'var(--s-building)', tempo: 'var(--s-tempo)',
+};
+const STRAT_LABELS = {
+  aggressive:'Aggressive', defensive:'Defensive', building:'Building', tempo:'Tempo',
+};
+
+function renderMoves(moves, state) {
+  const el = document.getElementById('moves-list');
+  if (!moves.length) {
+    el.innerHTML = '<div class="empty-state">Add cards to your hand and click <strong>Analyze</strong> to get recommendations.</div>';
+    return;
+  }
+  const cs = countComplete(state.ownSets);
+  el.innerHTML = `<p class="summary">${cs}/3 complete sets · $${state.yourBank}M banked · ${state.opponents} opponent${state.opponents !== 1 ? 's' : ''}</p>`
+    + moves.map((m, i) => {
+      const col = STRAT_COLORS[m.strategy] || 'var(--border)';
+      const lab = STRAT_LABELS[m.strategy] || '';
+      const steps = m.steps.map(s =>
+        s.type === 'backup'
+          ? `<li class="step-backup">${s.qty}× ${s.name} (bank)</li>`
+          : `<li>${s.qty}× ${s.name}</li>`
+      ).join('');
+      const winBadge = m.reason.startsWith('WIN') ? '<span class="win-badge">WIN</span>' : '';
+      return `<div class="move-card" style="--strategy-color:${col}">
+        <div class="move-header">
+          <span class="move-rank">${i+1}</span>
+          <h3 class="move-title">${m.title}${winBadge}</h3>
+          ${lab ? `<span class="strategy-tag" style="background:${col}">${lab}</span>` : ''}
+        </div>
+        <p class="move-reason">${m.reason}</p>
+        <ul class="move-steps">${steps}</ul>
+      </div>`;
+    }).join('');
+}
+
+/* ── Actions ──────────────────────────────────────────── */
+function analyze() {
+  const state = readGameState();
+  const moves = generateMoves(state);
+  renderMoves(moves, state);
+  document.getElementById('results-panel').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function fillSample() {
+  document.getElementById('opponents').value = 3;
+  document.getElementById('opponent-money').value = 8;
+  document.getElementById('opponent-sets').value = 2;
+  document.getElementById('your-bank').value = 2;
+  document.getElementById('jsn-toggle').checked = false;
+  const sp = {brown:1,lightblue:2,pink:0,orange:1,red:0,yellow:3,green:1,blue:0,railroad:1,utility:1};
+  Object.entries(sp).forEach(([k,v]) => propState[k] = v);
+  Object.keys(handState).forEach(k => handState[k] = 0);
+  const sh = {'prop-brown':1,'prop-red':1,'wild-any':1,'action-deal-breaker':1,
+    'action-sly-deal':1,'rent-red-yellow':1,'action-double-rent':1,
+    'action-birthday':1,'money-3':1,'money-5':1};
+  Object.entries(sh).forEach(([k,v]) => handState[k] = v);
+  renderPropertyBar(); renderChips(); analyze();
+}
+
+function resetAll() {
+  document.getElementById('opponents').value = 3;
+  document.getElementById('opponent-money').value = 8;
+  document.getElementById('opponent-sets').value = 1;
+  document.getElementById('your-bank').value = 3;
+  document.getElementById('jsn-toggle').checked = false;
+  Object.keys(propState).forEach(k => propState[k] = 0);
+  Object.keys(handState).forEach(k => handState[k] = 0);
+  renderPropertyBar(); renderChips(); renderMoves([], readGameState());
+}
+
+/* ── Event Wiring ─────────────────────────────────────── */
+function init() {
+  renderPropertyBar();
+  renderTabs();
+  renderChips();
+  renderMoves([], readGameState());
+
+  // Property bar clicks
+  const bar = document.getElementById('property-bar');
+  bar.addEventListener('click', e => {
+    const b = e.target.closest('.prop-block');
+    if (!b) return;
+    const k = b.dataset.key;
+    if (propState[k] < PROPERTY_SETS[k].target) { propState[k]++; renderPropertyBar(); }
+  });
+  bar.addEventListener('contextmenu', e => {
+    e.preventDefault();
+    const b = e.target.closest('.prop-block');
+    if (!b) return;
+    const k = b.dataset.key;
+    if (propState[k] > 0) { propState[k]--; renderPropertyBar(); }
+  });
+
+  // Tab clicks
+  document.getElementById('hand-tabs').addEventListener('click', e => {
+    const t = e.target.closest('.tab');
+    if (!t) return;
+    activeTab = t.dataset.tab;
+    renderTabs(); renderChips();
+  });
+
+  // Chip clicks
+  const cc = document.getElementById('chip-container');
+  cc.addEventListener('click', e => {
+    const c = e.target.closest('.chip');
+    if (!c) return;
+    const id = c.dataset.id, max = parseInt(c.dataset.max);
+    if (handState[id] < max) { handState[id]++; renderChips(); }
+  });
+  cc.addEventListener('contextmenu', e => {
+    e.preventDefault();
+    const c = e.target.closest('.chip');
+    if (!c) return;
+    const id = c.dataset.id;
+    if (handState[id] > 0) { handState[id]--; renderChips(); }
+  });
+
+  // Buttons
+  document.getElementById('analyze-btn').addEventListener('click', analyze);
+  document.getElementById('sample-btn').addEventListener('click', fillSample);
+  document.getElementById('reset-btn').addEventListener('click', resetAll);
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

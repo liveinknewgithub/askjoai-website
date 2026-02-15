@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stacked - Stop Renting Your Audience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Colors */
+            --bg-dark: #0a0a0a;
+            --bg-dark-secondary: #121212;
+            --bg-light: #ffffff;
+            --bg-light-secondary: #fafafa;
+            --border-light: #e8e8e8;
+            --text-white: #ffffff;
+            --text-black: #0a0a0a;
+            --text-gray: #666666;
+            --accent: #6366f1;
+            --accent-hover: #4f46e5;
+            --green: #22c55e;
+            --red: #ef4444;
+
+            /* Easing - Emil's recommendations */
+            --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+            --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+            --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+            /* Z-index scale */
+            --z-base: 1;
+            --z-dropdown: 100;
+            --z-sticky: 200;
+            --z-modal: 300;
+
+            /* Hairline border for retina */
+            --border-hairline: 1px;
+
+            /* Font weights */
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+        }
+
+        @media only screen and (min-device-pixel-ratio: 2),
+               only screen and (min-resolution: 192dpi) {
+            :root {
+                --border-hairline: 0.5px;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-white);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography polish */
+        h1, h2, h3 {
+            text-wrap: balance;
+        }
+
+        /* Tabular numbers for stats */
+        .tabular-nums {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ==================== */
+        /* NAVIGATION           */
+        /* ==================== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: var(--z-sticky);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            /* Shadow border instead of regular border */
+            box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-family: 'Cormorant', serif;
+            font-size: 1.75rem;
+            font-weight: var(--font-weight-semibold);
+            letter-spacing: -0.02em;
+            color: var(--text-white);
+            text-decoration: none;
+            transition: opacity 150ms ease;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .logo:hover {
+                opacity: 0.8;
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: var(--font-weight-medium);
+            transition: color 150ms ease;
+            position: relative;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .nav-links a:not(.nav-cta):hover {
+                color: var(--text-white);
+            }
+
+            .nav-links a:not(.nav-cta)::after {
+                content: '';
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: var(--accent);
+                transform: scaleX(0);
+                transform-origin: right;
+                transition: transform 200ms var(--ease-out-quart);
+            }
+
+            .nav-links a:not(.nav-cta):hover::after {
+                transform: scaleX(1);
+                transform-origin: left;
+            }
+        }
+
+        .nav-cta {
+            background: var(--text-white);
+            color: var(--text-black) !important;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: var(--font-weight-semibold);
+            transition: transform 200ms var(--ease-out-quart),
+                        box-shadow 200ms var(--ease-out-quart);
+            will-change: transform;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .nav-cta:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
+            }
+        }
+
+        .nav-cta:active {
+            transform: scale(0.97);
+        }
+
+        /* ==================== */
+        /* BUTTONS              */
+        /* ==================== */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px 32px;
+            background: var(--text-white);
+            color: var(--text-black);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: var(--font-weight-semibold);
+            font-size: 1rem;
+            transition: transform 200ms var(--ease-out-quart),
+                        box-shadow 200ms var(--ease-out-quart),
+                        background 150ms ease;
+            will-change: transform;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+            transform: translateX(-100%);
+            transition: transform 400ms var(--ease-out-expo);
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .btn-primary:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 12px 40px rgba(255, 255, 255, 0.25),
+                            0 4px 12px rgba(255, 255, 255, 0.15);
+            }
+
+            .btn-primary:hover::before {
+                transform: translateX(100%);
+            }
+        }
+
+        .btn-primary:active {
+            transform: scale(0.97);
+            transition: transform 100ms var(--ease-out-quart);
+        }
+
+        .btn-primary svg {
+            transition: transform 200ms var(--ease-out-quart);
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .btn-primary:hover svg {
+                transform: translateX(3px);
+            }
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px 32px;
+            background: transparent;
+            color: var(--text-white);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: var(--font-weight-medium);
+            font-size: 1rem;
+            /* Shadow border */
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+            transition: transform 200ms var(--ease-out-quart),
+                        box-shadow 200ms var(--ease-out-quart),
+                        background 150ms ease;
+            will-change: transform;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .btn-secondary:hover {
+                background: rgba(255, 255, 255, 0.05);
+                box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+                transform: translateY(-2px);
+            }
+        }
+
+        .btn-secondary:active {
+            transform: scale(0.97);
+        }
+
+        /* ==================== */
+        /* HERO SECTION         */
+        /* ==================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 140px 40px 80px;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-dark-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated gradient orb */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle,
+                rgba(99, 102, 241, 0.15) 0%,
+                rgba(99, 102, 241, 0.05) 30%,
+                transparent 70%);
+            pointer-events: none;
+            animation: orb-pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes orb-pulse {
+            0%, 100% {
+                transform: translateX(-50%) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(-50%) scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        /* Noise texture overlay */
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: var(--z-base);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(34, 197, 94, 0.1);
+            box-shadow: inset 0 0 0 1px rgba(34, 197, 94, 0.25);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--green);
+            margin-bottom: 32px;
+            font-weight: var(--font-weight-medium);
+            opacity: 0;
+            animation: fade-in-up 600ms var(--ease-out-expo) forwards;
+        }
+
+        .hero-badge span {
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+            box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(0.9);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant', serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: var(--font-weight-medium);
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            max-width: 900px;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fade-in-up 700ms var(--ease-out-expo) 100ms forwards;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            background: linear-gradient(135deg, var(--accent) 0%, #818cf8 50%, #c084fc 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 6s ease-in-out infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subhead {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin-bottom: 16px;
+            line-height: 1.4;
+            font-weight: var(--font-weight-normal);
+            opacity: 0;
+            animation: fade-in-up 700ms var(--ease-out-expo) 200ms forwards;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.5);
+            max-width: 540px;
+            margin-bottom: 40px;
+            line-height: 1.7;
+            opacity: 0;
+            animation: fade-in-up 700ms var(--ease-out-expo) 300ms forwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fade-in-up 700ms var(--ease-out-expo) 400ms forwards;
+        }
+
+        .hero-guarantee {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            animation: fade-in-up 700ms var(--ease-out-expo) 500ms forwards;
+        }
+
+        .hero-guarantee svg {
+            color: var(--green);
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==================== */
+        /* SOCIAL PROOF BAR     */
+        /* ==================== */
+        .social-proof-bar {
+            padding: 48px 40px;
+            background: var(--bg-dark-secondary);
+            box-shadow: 0 -1px 0 0 rgba(255, 255, 255, 0.05),
+                        0 1px 0 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .proof-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+
+        .proof-stat {
+            text-align: center;
+            opacity: 0;
+            animation: fade-in 500ms var(--ease-out-quart) forwards;
+        }
+
+        .proof-stat:nth-child(1) { animation-delay: 600ms; }
+        .proof-stat:nth-child(3) { animation-delay: 700ms; }
+        .proof-stat:nth-child(5) { animation-delay: 800ms; }
+        .proof-stat:nth-child(7) { animation-delay: 900ms; }
+
+        .proof-stat strong {
+            display: block;
+            font-family: 'Cormorant', serif;
+            font-size: 2.5rem;
+            font-weight: var(--font-weight-medium);
+            margin-bottom: 4px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .proof-stat span {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .proof-divider {
+            width: var(--border-hairline);
+            height: 48px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ==================== */
+        /* PROBLEM SECTION      */
+        /* ==================== */
+        .problem-section {
+            background: var(--bg-light);
+            color: var(--text-black);
+            padding: 120px 40px;
+        }
+
+        .problem-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .problem-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--red);
+            margin-bottom: 16px;
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .problem-content h2 {
+            font-family: 'Cormorant', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: var(--font-weight-medium);
+            line-height: 1.2;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .problem-content > p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .comparison-card {
+            padding: 32px;
+            border-radius: 20px;
+            text-align: left;
+            transition: transform 300ms var(--ease-out-quart),
+                        box-shadow 300ms var(--ease-out-quart);
+            will-change: transform;
+        }
+
+        .comparison-card.bad {
+            background: linear-gradient(135deg, #fef2f2 0%, #fff5f5 100%);
+            box-shadow: inset 0 0 0 1px rgba(239, 68, 68, 0.15);
+        }
+
+        .comparison-card.good {
+            background: linear-gradient(135deg, #f0fdf4 0%, #f5fff8 100%);
+            box-shadow: inset 0 0 0 1px rgba(34, 197, 94, 0.2);
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .comparison-card:hover {
+                transform: translateY(-4px);
+            }
+
+            .comparison-card.bad:hover {
+                box-shadow: inset 0 0 0 1px rgba(239, 68, 68, 0.15),
+                            0 20px 40px rgba(239, 68, 68, 0.1);
+            }
+
+            .comparison-card.good:hover {
+                box-shadow: inset 0 0 0 1px rgba(34, 197, 94, 0.2),
+                            0 20px 40px rgba(34, 197, 94, 0.1);
+            }
+        }
+
+        .comparison-card h3 {
+            font-size: 1.1rem;
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .comparison-card.bad h3 { color: var(--red); }
+        .comparison-card.good h3 { color: var(--green); }
+
+        .comparison-card ul {
+            list-style: none;
+        }
+
+        .comparison-card li {
+            padding: 10px 0;
+            padding-left: 28px;
+            position: relative;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .comparison-card li::before {
+            position: absolute;
+            left: 0;
+            top: 10px;
+            font-weight: var(--font-weight-bold);
+            font-size: 14px;
+        }
+
+        .comparison-card.bad li::before {
+            content: '✕';
+            color: var(--red);
+        }
+
+        .comparison-card.good li::before {
+            content: '✓';
+            color: var(--green);
+        }
+
+        /* ==================== */
+        /* MECHANISM SECTION    */
+        /* ==================== */
+        .mechanism-section {
+            background: var(--bg-dark);
+            padding: 120px 40px;
+        }
+
+        .mechanism-content {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .mechanism-header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+
+        .mechanism-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .mechanism-header h2 {
+            font-family: 'Cormorant', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: var(--font-weight-medium);
+            line-height: 1.1;
+            max-width: 800px;
+            margin: 0 auto 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .mechanism-header p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .mechanism-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .mechanism-card {
+            background: rgba(255, 255, 255, 0.02);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 300ms var(--ease-out-quart),
+                        box-shadow 300ms var(--ease-out-quart),
+                        background 300ms ease;
+            will-change: transform;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .mechanism-card:hover {
+                transform: translateY(-6px);
+                background: rgba(255, 255, 255, 0.04);
+                box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+                            0 24px 48px rgba(0, 0, 0, 0.3);
+            }
+
+            .mechanism-card:hover .mechanism-number {
+                opacity: 0.15;
+                transform: scale(1.1);
+            }
+        }
+
+        .mechanism-number {
+            font-family: 'Cormorant', serif;
+            font-size: 5rem;
+            font-weight: var(--font-weight-normal);
+            color: rgba(255, 255, 255, 0.08);
+            position: absolute;
+            top: 12px;
+            right: 20px;
+            line-height: 1;
+            transition: opacity 300ms ease, transform 300ms var(--ease-out-quart);
+        }
+
+        .mechanism-card h3 {
+            font-size: 1.25rem;
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: 12px;
+        }
+
+        .mechanism-card p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .mechanism-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(99, 102, 241, 0.15);
+            color: #a5b4fc;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: var(--font-weight-medium);
+            box-shadow: inset 0 0 0 1px rgba(99, 102, 241, 0.2);
+        }
+
+        /* ==================== */
+        /* TESTIMONIALS         */
+        /* ==================== */
+        .testimonials-section {
+            background: var(--bg-light);
+            color: var(--text-black);
+            padding: 120px 40px;
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+
+        .testimonials-header h2 {
+            font-family: 'Cormorant', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: var(--font-weight-medium);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .testimonials-header p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--bg-light);
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06),
+                        0 4px 16px rgba(0, 0, 0, 0.04);
+            border-radius: 24px;
+            padding: 36px;
+            transition: transform 300ms var(--ease-out-quart),
+                        box-shadow 300ms var(--ease-out-quart);
+            will-change: transform;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .testimonial-card:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06),
+                            0 24px 48px rgba(0, 0, 0, 0.12);
+            }
+        }
+
+        .testimonial-card blockquote {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
+            color: var(--text-black);
+            position: relative;
+        }
+
+        .testimonial-card blockquote::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: -8px;
+            font-family: 'Cormorant', serif;
+            font-size: 4rem;
+            color: rgba(0, 0, 0, 0.06);
+            line-height: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .testimonial-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent) 0%, #818cf8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: var(--font-weight-semibold);
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .testimonial-info strong {
+            display: block;
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .testimonial-info span {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .testimonial-result {
+            margin-top: 20px;
+            padding-top: 20px;
+            box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--green);
+            font-weight: var(--font-weight-semibold);
+            font-size: 0.95rem;
+        }
+
+        .testimonial-result svg {
+            flex-shrink: 0;
+        }
+
+        /* ==================== */
+        /* CTA SECTION          */
+        /* ==================== */
+        .cta-section {
+            background: var(--bg-dark);
+            padding: 140px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle,
+                rgba(99, 102, 241, 0.2) 0%,
+                rgba(99, 102, 241, 0.05) 40%,
+                transparent 70%);
+            pointer-events: none;
+            animation: orb-pulse 10s ease-in-out infinite;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: var(--z-base);
+        }
+
+        .cta-section h2 {
+            font-family: 'Cormorant', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: var(--font-weight-medium);
+            line-height: 1.1;
+            max-width: 700px;
+            margin: 0 auto 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .cta-section .subhead {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 500px;
+            margin: 0 auto 12px;
+        }
+
+        .cta-section p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.5);
+            max-width: 500px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-features {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 36px;
+            flex-wrap: wrap;
+        }
+
+        .cta-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .cta-feature svg {
+            color: var(--green);
+        }
+
+        /* ==================== */
+        /* URGENCY BANNER       */
+        /* ==================== */
+        .urgency-banner {
+            background: linear-gradient(90deg, var(--accent) 0%, #818cf8 100%);
+            padding: 16px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .urgency-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(255,255,255,0.1) 50%,
+                transparent 100%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .urgency-banner p {
+            font-weight: var(--font-weight-medium);
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .urgency-banner strong {
+            font-weight: var(--font-weight-bold);
+        }
+
+        /* ==================== */
+        /* FOOTER               */
+        /* ==================== */
+        footer {
+            background: var(--bg-dark);
+            box-shadow: 0 -1px 0 0 rgba(255, 255, 255, 0.05);
+            padding: 72px 40px 48px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 48px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            max-width: 280px;
+            line-height: 1.7;
+        }
+
+        .footer-links h4 {
+            font-size: 0.85rem;
+            font-weight: var(--font-weight-semibold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 20px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 150ms ease;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .footer-links a:hover {
+                color: var(--text-white);
+            }
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 56px auto 0;
+            padding-top: 32px;
+            box-shadow: 0 -1px 0 0 rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.85rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-social a {
+            color: rgba(255, 255, 255, 0.5);
+            transition: color 150ms ease, transform 200ms var(--ease-out-quart);
+            display: flex;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .footer-social a:hover {
+                color: var(--text-white);
+                transform: translateY(-2px);
+            }
+        }
+
+        /* ==================== */
+        /* RESPONSIVE           */
+        /* ==================== */
+        @media (max-width: 1024px) {
+            .mechanism-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 16px 24px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 120px 24px 60px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subhead {
+                font-size: 1.2rem;
+            }
+
+            .problem-section,
+            .mechanism-section,
+            .testimonials-section,
+            .cta-section {
+                padding: 80px 24px;
+            }
+
+            .proof-content {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .proof-divider {
+                display: none;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .cta-features {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+            }
+        }
+
+        /* ==================== */
+        /* REDUCED MOTION       */
+        /* ==================== */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .hero-badge,
+            .hero h1,
+            .hero-subhead,
+            .hero p,
+            .hero-buttons,
+            .hero-guarantee,
+            .proof-stat {
+                opacity: 1;
+                transform: none;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Urgency Banner -->
+    <div class="urgency-banner">
+        <p><strong>Limited:</strong> First 100 creators get 0% fees for 6 months. <strong>73 spots left.</strong></p>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">Stacked</a>
+        <div class="nav-links">
+            <a href="#how-it-works">How It Works</a>
+            <a href="#proof">Results</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#" class="nav-cta">Claim Your Spot</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span></span>
+                Backed by Y Combinator
+            </div>
+            <h1>Stop renting your audience from <em>algorithms</em></h1>
+            <p class="hero-subhead">Your fans. Your economy. Your rules.</p>
+            <p>The only platform where your fans get PAID to support you. They earn 2.5% back. You earn 5% on every trade. Everyone builds wealth together.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-primary">
+                    Start Free Today
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#how-it-works" class="btn-secondary">
+                    See How It Works
+                </a>
+            </div>
+            <div class="hero-guarantee">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+                Free to start. No credit card required. Cancel anytime.
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Bar -->
+    <section class="social-proof-bar">
+        <div class="proof-content">
+            <div class="proof-stat">
+                <strong class="tabular-nums">$2.4M+</strong>
+                <span>Paid to Creators</span>
+            </div>
+            <div class="proof-divider"></div>
+            <div class="proof-stat">
+                <strong class="tabular-nums">12,847</strong>
+                <span>Active Creators</span>
+            </div>
+            <div class="proof-divider"></div>
+            <div class="proof-stat">
+                <strong class="tabular-nums">4.3%</strong>
+                <span>Avg. Fee (vs 12% Patreon)</span>
+            </div>
+            <div class="proof-divider"></div>
+            <div class="proof-stat">
+                <strong>Sentinels</strong>
+                <span>Official Partner</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section">
+        <div class="problem-content">
+            <p class="problem-label">The Problem</p>
+            <h2>You're building someone else's empire</h2>
+            <p>Every platform takes their cut. Every algorithm decides who sees your content. Every policy change threatens your income. You have followers, not ownership.</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card bad">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="15" y1="9" x2="9" y2="15"/>
+                            <line x1="9" y1="9" x2="15" y2="15"/>
+                        </svg>
+                        Other Platforms
+                    </h3>
+                    <ul>
+                        <li>Patreon takes 8-12% of everything</li>
+                        <li>YouTube takes 45% of ad revenue</li>
+                        <li>Algorithms decide who sees you</li>
+                        <li>One policy change = income gone</li>
+                        <li>Your fans pay, platform profits</li>
+                    </ul>
+                </div>
+                <div class="comparison-card good">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        With Stacked
+                    </h3>
+                    <ul>
+                        <li>Industry-lowest 4.3% average fee</li>
+                        <li>You keep 95%+ of what you earn</li>
+                        <li>Direct relationship with every fan</li>
+                        <li>Your community, your rules forever</li>
+                        <li>Fans earn too (2.5% cash back)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mechanism Section -->
+    <section class="mechanism-section" id="how-it-works">
+        <div class="mechanism-content">
+            <div class="mechanism-header">
+                <p class="mechanism-label">How It Works</p>
+                <h2>Creator Coins: The economics that align everyone</h2>
+                <p>A breakthrough system where supporting you makes your fans richer too. Here's the simple version:</p>
+            </div>
+
+            <div class="mechanism-grid">
+                <div class="mechanism-card">
+                    <span class="mechanism-number">1</span>
+                    <h3>Launch Your Coin</h3>
+                    <p>Create your Creator Coin in 60 seconds. Your fans can now support you AND invest in your success.</p>
+                    <span class="mechanism-highlight">Takes 60 seconds</span>
+                </div>
+                <div class="mechanism-card">
+                    <span class="mechanism-number">2</span>
+                    <h3>Fans Buy & Earn</h3>
+                    <p>When fans support you, they get 2.5% cash back in your Creator Coin. The more they support, the more they earn.</p>
+                    <span class="mechanism-highlight">2.5% fan rewards</span>
+                </div>
+                <div class="mechanism-card">
+                    <span class="mechanism-number">3</span>
+                    <h3>You Earn on Every Trade</h3>
+                    <p>Every time someone trades your coin, you automatically earn 5% commission. Passive income that grows with your community.</p>
+                    <span class="mechanism-highlight">5% creator commission</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section" id="proof">
+        <div class="testimonials-header">
+            <h2>Creators who made the switch</h2>
+            <p>Real results from real creators. No cherry-picking.</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <blockquote>I was skeptical about another creator platform. But when I saw my fans actually earning money for supporting me? Everything changed. My community engagement is up 340%.</blockquote>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">MK</div>
+                    <div class="testimonial-info">
+                        <strong>Marcus K.</strong>
+                        <span>Gaming Creator, 45K followers</span>
+                    </div>
+                </div>
+                <div class="testimonial-result">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                        <polyline points="17 6 23 6 23 12"/>
+                    </svg>
+                    $8,400/mo → $23,100/mo in 4 months
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <blockquote>Patreon was taking 12% of my income. Here I'm keeping 96%. That's an extra $2,800/month back in my pocket. Math doesn't lie.</blockquote>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">SR</div>
+                    <div class="testimonial-info">
+                        <strong>Sarah R.</strong>
+                        <span>Art & Design, 28K followers</span>
+                    </div>
+                </div>
+                <div class="testimonial-result">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                        <polyline points="17 6 23 6 23 12"/>
+                    </svg>
+                    Saved $2,800/mo in fees alone
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <blockquote>The Discord integration alone saved me hours every week. But the real magic is Creator Coins. My fans are literally invested in my success now.</blockquote>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">JT</div>
+                    <div class="testimonial-info">
+                        <strong>Jake T.</strong>
+                        <span>Esports Pro, Sentinels</span>
+                    </div>
+                </div>
+                <div class="testimonial-result">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                        <polyline points="17 6 23 6 23 12"/>
+                    </svg>
+                    Community engagement up 280%
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to own your audience?</h2>
+            <p class="subhead">Join 12,847 creators who stopped renting and started owning.</p>
+            <p>Free to start. Set up in 60 seconds. Keep 95%+ of what you earn.</p>
+            <a href="#" class="btn-primary">
+                Claim Your Free Account
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+            <div class="cta-features">
+                <div class="cta-feature">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                    No credit card required
+                </div>
+                <div class="cta-feature">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                    60-second setup
+                </div>
+                <div class="cta-feature">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                    Cancel anytime
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="#" class="logo">Stacked</a>
+                <p>Built by a team from MIT, Uber, and Y Combinator. Backed by the best investors in creator economy.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#">Creator Coins</a></li>
+                    <li><a href="#">Discord Integration</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">API</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Outlier Collective, Inc. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="#" aria-label="Twitter">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Discord">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Monopoly Deal Next Best Move</title>
+        <meta
+            name="description"
+            content="A lightweight in-browser helper that suggests a heuristic next move for your Monopoly Deal turn."
+        />
+        <link rel="stylesheet" href="monopoly-deal-assistant.css" />
+    </head>
+    <body>
+        <div class="mdc-shell">
+            <header class="mdc-header">
+                <p class="eyebrow">Monopoly Deal AI Helper</p>
+                <h1>Monopoly Deal — Next Best Move</h1>
+                <p class="subhead">
+                    Enter your hand and board state, then get a tactical move ranking with
+                    quick reasoning for your next turn.
+                </p>
+                <p class="note">
+                    This is a fast heuristic coach for casual play (not a full game solver),
+                    so treat it as a strong suggestion, not a guaranteed win.
+                </p>
+            </header>
+
+            <main>
+                <section class="panel">
+                    <h2>Game state</h2>
+                    <div class="state-grid">
+                        <label>
+                            Opponents in game
+                            <input id="opponents" type="number" min="2" max="5" value="3" />
+                        </label>
+                        <label>
+                            Opponent money cards total
+                            <input id="opponent-money" type="number" min="0" value="8" />
+                        </label>
+                        <label>
+                            Opponent complete sets
+                            <input id="opponent-sets" type="number" min="0" max="5" value="1" />
+                        </label>
+                        <label>
+                            Your banked money
+                            <input id="your-bank" type="number" min="0" value="3" />
+                        </label>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <h2>Your property sets in play</h2>
+                    <p class="hint">
+                        Enter current cards played for each color (including wilds on that set).
+                    </p>
+                    <div id="set-grid" class="set-grid"></div>
+                </section>
+
+                <section class="panel">
+                    <h2>Your hand</h2>
+                    <p class="hint">Pick how many of each card you currently hold.</p>
+                    <div id="hand-grid" class="hand-grid"></div>
+                </section>
+
+                <section class="controls">
+                    <button id="analyze-btn" class="btn btn-primary">Find next best move</button>
+                    <button id="sample-btn" class="btn btn-secondary">
+                        Load sample hand
+                    </button>
+                    <button id="reset-btn" class="btn btn-secondary">Reset</button>
+                </section>
+
+                <section class="panel results" id="results-panel" aria-live="polite">
+                    <h2>Top recommendations</h2>
+                    <div id="moves-list"></div>
+                </section>
+            </main>
+
+            <footer>
+                <small>
+                    Tip: In Monopoly Deal, context matters a lot (especially rent timing and
+                    cards your opponents may hold). Use the suggestions as guidance, then use your
+                    table sense.
+                </small>
+            </footer>
+        </div>
+
+        <script src="monopoly-deal-assistant.js"></script>
+    </body>
+</html>

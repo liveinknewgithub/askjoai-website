@@ -41,6 +41,7 @@ Base URL: `https://askjo.ai/`
 
 | Page | Link |
 |------|------|
+| Monopoly Deal Assistant | [monopoly-deal-assistant.html](https://askjo.ai/monopoly-deal-assistant.html) |
 | Privacy Policy | [privacy.html](https://askjo.ai/privacy.html) |
 | Terms of Service | [terms.html](https://askjo.ai/terms.html) |
 
