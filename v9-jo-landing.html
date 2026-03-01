@@ -491,7 +491,7 @@
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
     </div>
-    <a href="#download" class="btn-bold">Get Beta Access →</a>
+    <a href="https://askjo.fillout.com/beta-waitlist" class="btn-bold" target="_blank">Get Beta Access →</a>
 </nav>
 
 <main>
@@ -513,7 +513,7 @@
                 <span class="app-tag">📝 Notes</span>
             </div>
 
-            <form class="email-form" action="https://forms.fillout.com/t/5ngLz3A5BHus" method="POST" target="_blank" autocomplete="off">
+            <form class="email-form" onsubmit="window.open('https://askjo.fillout.com/beta-waitlist?email='+encodeURIComponent(document.getElementById('hero-email').value),'_blank');return false;" autocomplete="off">
                 <label class="sr-only" for="hero-email">Email address</label>
                 <input id="hero-email" type="email" name="email" inputmode="email" autocomplete="email" class="email-input" placeholder="you@example.com" required>
                 <button type="submit" class="btn-bold">Get Beta Access →</button>
@@ -901,7 +901,7 @@
     <div class="container">
         <h2>10x faster starts now.</h2>
         <p>Your own AI. Your own machine. Free for 30 days.</p>
-        <form class="email-form" action="https://forms.fillout.com/t/5ngLz3A5BHus" method="POST" target="_blank" autocomplete="off">
+        <form class="email-form" onsubmit="window.open('https://askjo.fillout.com/beta-waitlist?email='+encodeURIComponent(document.getElementById('download-email').value),'_blank');return false;" autocomplete="off">
             <label class="sr-only" for="download-email">Email address</label>
             <input id="download-email" type="email" name="email" inputmode="email" autocomplete="email" class="email-input" placeholder="you@example.com" required>
             <button type="submit" class="btn-bold">Get Beta Access →</button>
